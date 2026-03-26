@@ -1,1 +1,2 @@
-# dynamic-portfolio
+Portfolio interactif (React.js / Express.js)
+Développement d’un portfolio web dynamique permettant la présentation de projets via une interface moderne. Mise en place d’un panneau d’administration sécurisé pour ajouter, modifier et gérer les projets (nom, description, contenu HTML). Génération automatique de pages dédiées pour chaque projet avec routage dynamique. Implémentation d’une architecture full-stack avec API REST et gestion des contenus côté serveur.
