@@ -9,7 +9,8 @@ db.serialize(() => {
       name TEXT UNIQUE,
       fileName TEXT,
       description TEXT,
-      image TEXT
+      image TEXT,
+      createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
 });

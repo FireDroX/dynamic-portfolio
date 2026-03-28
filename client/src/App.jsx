@@ -2,6 +2,9 @@ import "./App.css";
 import { Suspense, lazy, useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+
 const Home = lazy(() => import("./pages/Home"));
 const Panel = lazy(() => import("./pages/Panel"));
 const Projects = lazy(() => import("./pages/Projects"));
@@ -45,35 +48,39 @@ function App() {
   if (isAuth === null) return <Loader />;
 
   return (
-    <Routes>
-      <Route path="/" element={Loadable(Home)} />
-      <Route path="/projects" element={Loadable(Projects)} />
-      <Route path="/projects/:project" element={Loadable(Projects)} />
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={Loadable(Home)} />
+        <Route path="/projects" element={Loadable(Projects)} />
+        <Route path="/projects/:project" element={Loadable(Projects)} />
 
-      {/* Login page */}
-      <Route
-        path="/panel/login"
-        element={
-          isAuth ? (
-            <Navigate to="/panel" replace />
-          ) : (
-            Loadable(Login, { onLogin: () => setIsAuth(true) })
-          )
-        }
-      />
+        {/* Login page */}
+        <Route
+          path="/panel/login"
+          element={
+            isAuth ? (
+              <Navigate to="/panel" replace />
+            ) : (
+              Loadable(Login, { onLogin: () => setIsAuth(true) })
+            )
+          }
+        />
 
-      {/* Panel page */}
-      <Route
-        path="/panel/*"
-        element={
-          isAuth ? (
-            Loadable(Panel, { onLogout: () => setIsAuth(false) })
-          ) : (
-            <Navigate to="/panel/login" replace />
-          )
-        }
-      />
-    </Routes>
+        {/* Panel page */}
+        <Route
+          path="/panel/*"
+          element={
+            isAuth ? (
+              Loadable(Panel, { onLogout: () => setIsAuth(false) })
+            ) : (
+              <Navigate to="/panel/login" replace />
+            )
+          }
+        />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 

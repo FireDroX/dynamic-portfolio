@@ -1,0 +1,31 @@
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  border-top: 2px solid #48484833;
+  margin-top: 64px;
+  color: #acabaa;
+}
+
+footer > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+footer a {
+  color: #acabaa;
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  footer > div {
+    gap: 24px;
+  }
+
+  .footer-copyright {
+    display: none;
+  }
+}

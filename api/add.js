@@ -15,6 +15,7 @@ router.post("/", auth, (req, res) => {
 
   let name = "";
   let description = "";
+  let imageBase64 = "";
   let zipFileName = "";
   let zipBuffer = [];
 
@@ -24,13 +25,24 @@ router.post("/", auth, (req, res) => {
   });
 
   busboy.on("file", (fieldname, file, info) => {
-    const { filename } = info;
+    const { filename, mimeType } = info;
 
     if (fieldname === "zip") {
       zipFileName = filename;
 
       file.on("data", (data) => {
         zipBuffer.push(data);
+      });
+    } else if (fieldname === "image") {
+      const imageBuffer = [];
+
+      file.on("data", (data) => {
+        imageBuffer.push(data);
+      });
+
+      file.on("end", () => {
+        const finalBuffer = Buffer.concat(imageBuffer);
+        imageBase64 = `data:${mimeType};base64,${finalBuffer.toString("base64")}`;
       });
     } else {
       file.resume();
@@ -55,8 +67,8 @@ router.post("/", auth, (req, res) => {
       await readable.pipe(unzipper.Extract({ path: extractPath })).promise();
 
       db.run(
-        "INSERT INTO projects (name, description, filename) VALUES (?, ?, ?)",
-        [name, description, folderName],
+        "INSERT INTO projects (name, description, fileName, image) VALUES (?, ?, ?, ?)",
+        [name, description, folderName, imageBase64],
         function () {
           res.json({ success: true });
         },

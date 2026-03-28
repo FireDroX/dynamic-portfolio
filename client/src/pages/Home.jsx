@@ -1,10 +1,12 @@
 const Home = () => {
   return (
-    <section className="App">
-      <div>
-        <h1>Home</h1>
-      </div>
-    </section>
+    <div className="App">
+      <header>
+        <small>portfolio</small>
+        <h1>Adrien</h1>
+        <p>Etudiant en informatique.</p>
+      </header>
+    </div>
   );
 };
 
