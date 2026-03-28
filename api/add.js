@@ -32,10 +32,6 @@ router.post("/", auth, (req, res) => {
       file.on("data", (data) => {
         zipBuffer.push(data);
       });
-
-      file.on("end", () => {
-        // console.log("end");
-      });
     } else {
       file.resume();
     }
@@ -46,6 +42,7 @@ router.post("/", auth, (req, res) => {
       const folderName = zipFileName
         .replace(".zip", "")
         .replace(/[^a-zA-Z0-9_-]/g, "_");
+
       const extractPath = path.join(__dirname, "../projects", folderName);
 
       fs.mkdirSync(extractPath, { recursive: true });
@@ -55,21 +52,21 @@ router.post("/", auth, (req, res) => {
       const readable = new stream.PassThrough();
       readable.end(buffer);
 
-      // 👇 ATTENDRE VRAIMENT la fin
       await readable.pipe(unzipper.Extract({ path: extractPath })).promise();
-
-      console.log("EXTRACTION COMPLETE");
 
       db.run(
         "INSERT INTO projects (name, description, filename) VALUES (?, ?, ?)",
         [name, description, folderName],
-        () => res.redirect("/panel"),
+        function () {
+          res.json({ success: true });
+        },
       );
     } catch (err) {
       console.error(err);
-      res.status(500).send("Erreur extraction ZIP");
+      res.status(500).json({ error: "Erreur extraction ZIP" });
     }
   });
+
   req.pipe(busboy);
 });
 

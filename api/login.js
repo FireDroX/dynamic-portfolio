@@ -1,32 +1,28 @@
-// routes/panel.js
 const express = require("express");
-
 const router = express.Router();
 
-// Middleware pour lire les forms
-router.use(express.urlencoded({ extended: true }));
-
-// LOGIN PAGE
-router.get("/", (req, res) => {
-  res.send(`
-    <h1>Login</h1>
-    <form method="POST">
-      <input type="password" name="password" placeholder="Mot de passe"/>
-      <button>Connexion</button>
-    </form>
-  `);
-});
-
-// LOGIN POST
+// LOGIN
 router.post("/", (req, res) => {
   const { password } = req.body;
 
   if (password === process.env.PANEL_PASSWORD) {
     req.session.authenticated = true;
-    return res.redirect("/panel");
+    return res.json({ success: true });
   }
 
-  res.send("Mot de passe incorrect");
+  res.status(401).json({ error: "Mot de passe incorrect" });
+});
+
+// LOGOUT (bonus)
+router.post("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.json({ success: true });
+  });
+});
+
+// CHECK AUTH
+router.get("/me", (req, res) => {
+  res.json({ authenticated: !!req.session.authenticated });
 });
 
 module.exports = router;

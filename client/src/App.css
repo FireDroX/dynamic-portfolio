@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:700|Poppins:400");
+
+body {
+  font-family: "Poppins";
+  font-weight: 400;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg);
+}
+
+.App {
+  text-align: center;
+  width: calc(100% - 12rem);
+  height: 100%;
+  margin-left: 12rem;
+}
+
+@media (max-width: 625px) {
+  .App {
+    width: calc(100% - 2.5rem);
+    margin-left: 2.5rem;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Poppins";
+  font-weight: 700;
+}
+
+html {
+  font-size: 100%;
+} /* 16px */
+
+h1 {
+  font-size: 4.21rem; /* 67.36px */
+}
+
+h2 {
+  font-size: 3.158rem; /* 50.56px */
+}
+
+h3 {
+  font-size: 2.369rem; /* 37.92px */
+}
+
+h4 {
+  font-size: 1.777rem; /* 28.48px */
+}
+
+h5 {
+  font-size: 1.333rem; /* 21.28px */
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+small {
+  font-size: 0.75rem; /* 12px */
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 5px solid var(--text5);
+  border-top-color: var(--text55);
+  animation: spin 900ms linear infinite;
+  box-sizing: border-box;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-container {
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
