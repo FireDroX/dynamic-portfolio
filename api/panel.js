@@ -21,8 +21,8 @@ router.get("/", auth, (req, res) => {
         <label>Image :</label><br/>
         <input type="file" name="image" accept="image/*"/><br/><br/>
 
-        <label>Fichier HTML :</label><br/>
-        <input required type="file" name="htmlFile" accept=".html"/><br/><br/>
+        <label>Dossier ZIP :</label><br/>
+        <input required type="file" name="zip" accept=".zip"/><br/><br/>
 
         <button>Ajouter</button>
       </form>

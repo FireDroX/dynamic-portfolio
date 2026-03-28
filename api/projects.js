@@ -2,26 +2,43 @@ const express = require("express");
 const fs = require("node:fs");
 const path = require("node:path");
 
+const db = require("../db");
+
 const router = express.Router();
 
-router.get("/:name", (req, res) => {
-  const { name } = req.params;
+const projectsPath = path.join(__dirname, "../", "projects");
 
-  if (!name) {
-    return res.status(400).send("Project name is required !");
+router.get("/", (req, res) => {
+  db.all("SELECT * FROM projects", [], (err, projects) => {
+    if (err) return res.send("Erreur DB");
+
+    res.send(projects);
+  });
+});
+
+router.use("/:project", (req, res, next) => {
+  const projectName = req.params.project.replace(/[^a-zA-Z0-9_-]/g, "");
+
+  const projectDir = path.join(projectsPath, projectName);
+
+  if (!fs.existsSync(projectDir)) {
+    return next();
   }
 
-  if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
-    return res.status(400).send("Invalid project name");
+  express.static(projectDir)(req, res, next);
+});
+
+router.get("/:project", (req, res, next) => {
+  const projectName = req.params.project.replace(/[^a-zA-Z0-9_-]/g, "");
+  const projectDir = path.join(__dirname, "projects", projectName);
+
+  const indexPath = path.join(projectDir, "index.html");
+
+  if (fs.existsSync(indexPath)) {
+    return res.sendFile(indexPath);
   }
 
-  const filePath = path.join(__dirname, "../projects", `${name}.html`);
-
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).send(`Project "${name}" not found`);
-  }
-
-  res.sendFile(filePath);
+  next();
 });
 
 module.exports = router;

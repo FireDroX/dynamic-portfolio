@@ -3,18 +3,20 @@ const fs = require("node:fs");
 const path = require("node:path");
 const db = require("../db");
 const auth = require("../middleware/auth");
-const Busboy = require("busboy");
 
 const router = express.Router();
+
+const Busboy = require("busboy");
+const unzipper = require("unzipper");
+const stream = require("stream");
 
 router.post("/", auth, (req, res) => {
   const busboy = Busboy({ headers: req.headers });
 
   let name = "";
   let description = "";
-  let imageBase64 = "";
-  let htmlContent = "";
-  let htmlFileName = "";
+  let zipFileName = "";
+  let zipBuffer = [];
 
   busboy.on("field", (fieldname, val) => {
     if (fieldname === "name") name = val;
@@ -22,52 +24,52 @@ router.post("/", auth, (req, res) => {
   });
 
   busboy.on("file", (fieldname, file, info) => {
-    const { filename, mimeType } = info;
+    const { filename } = info;
 
-    let buffers = [];
+    if (fieldname === "zip") {
+      zipFileName = filename;
 
-    file.on("data", (data) => {
-      buffers.push(data);
-    });
+      file.on("data", (data) => {
+        zipBuffer.push(data);
+      });
 
-    file.on("end", () => {
-      const fileBuffer = Buffer.concat(buffers);
-
-      if (fieldname === "image") {
-        imageBase64 = `data:${mimeType};base64,${fileBuffer.toString("base64")}`;
-      }
-
-      if (fieldname === "htmlFile") {
-        htmlContent = fileBuffer.toString("utf-8");
-        htmlFileName = filename;
-      }
-    });
+      file.on("end", () => {
+        // console.log("end");
+      });
+    } else {
+      file.resume();
+    }
   });
 
-  busboy.on("finish", () => {
-    if (!name || !htmlContent) {
-      return res.send("Champs manquants");
-    }
+  busboy.on("finish", async () => {
+    try {
+      const folderName = zipFileName
+        .replace(".zip", "")
+        .replace(/[^a-zA-Z0-9_-]/g, "_");
+      const extractPath = path.join(__dirname, "../projects", folderName);
 
-    const safeFileName = htmlFileName.replace(/[^a-zA-Z0-9._-]/g, "_");
+      fs.mkdirSync(extractPath, { recursive: true });
 
-    const filePath = path.join(__dirname, "../projects", safeFileName);
+      const buffer = Buffer.concat(zipBuffer);
 
-    fs.writeFile(filePath, htmlContent, (err) => {
-      if (err) return res.send("Erreur écriture fichier");
+      const readable = new stream.PassThrough();
+      readable.end(buffer);
+
+      // 👇 ATTENDRE VRAIMENT la fin
+      await readable.pipe(unzipper.Extract({ path: extractPath })).promise();
+
+      console.log("EXTRACTION COMPLETE");
 
       db.run(
-        "INSERT INTO projects (name, fileName, description, image) VALUES (?, ?, ?, ?)",
-        [name, safeFileName.split(".html")[0], description, imageBase64],
-        (err) => {
-          if (err) return res.send("Erreur DB");
-
-          res.redirect("/panel");
-        },
+        "INSERT INTO projects (name, description, filename) VALUES (?, ?, ?)",
+        [name, description, folderName],
+        () => res.redirect("/panel"),
       );
-    });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Erreur extraction ZIP");
+    }
   });
-
   req.pipe(busboy);
 });
 
