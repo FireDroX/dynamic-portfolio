@@ -1,0 +1,44 @@
+.preview-container {
+  height: 20rem;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #0e0e0e;
+}
+
+.preview-container div {
+  padding: 2rem 4rem;
+  width: 28rem;
+  min-width: 28rem;
+  height: calc(100% - (2rem * 2));
+}
+
+.preview-container li {
+  list-style: disc;
+  margin-left: 2rem;
+}
+
+.preview-container div:last-child > img {
+  width: 100%;
+}
+
+.preview-var1 {
+  flex-direction: row-reverse;
+}
+
+.preview-var1 > div:first-child {
+  background-color: #b29a80;
+  border-radius: 25px 50px;
+}
+
+.preview-var2 {
+  background-color: #e7e5e5;
+}
+
+.preview-var3 {
+  flex-direction: row;
+  background-color: #acabaa;
+}

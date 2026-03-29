@@ -1,0 +1,31 @@
+import "./styles/Preview.css";
+import { useNavigate } from "react-router-dom";
+
+const Preview = ({ project, variant }) => {
+  const navigate = useNavigate();
+  const variants = ["1", "2", "3"];
+
+  if (!variants.includes(variant)) return;
+
+  return (
+    <article className={"preview-container " + "preview-var" + variant}>
+      <div>
+        <h3>{project.name}</h3>
+        <p>{project.description}</p>
+        <br />
+        <ul>
+          {project.stack &&
+            project.stack.map((tech, index) => <li key={index}>{tech}</li>)}
+        </ul>
+        <button onClick={() => navigate(`/projects/${project.fileName}`)}>
+          En savoir plus
+        </button>
+      </div>
+      <div>
+        <img src={project.image} alt={project.name} />
+      </div>
+    </article>
+  );
+};
+
+export default Preview;

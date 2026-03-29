@@ -1,4 +1,4 @@
-import "../styles/Panel.css";
+import "./styles/Panel.css";
 import { useEffect, useState } from "react";
 
 const Panel = ({ onLogout }) => {

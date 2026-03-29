@@ -55,3 +55,8 @@
     display: none;
   }
 }
+
+.navbar > div > span:hover,
+.navbar > button:hover {
+  cursor: pointer;
+}

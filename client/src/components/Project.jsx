@@ -1,4 +1,4 @@
-import "../styles/Project.css";
+import "./styles/Project.css";
 import { useNavigate } from "react-router-dom";
 
 const Project = ({ p }) => {

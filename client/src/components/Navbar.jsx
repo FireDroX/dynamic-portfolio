@@ -1,4 +1,4 @@
-import "../styles/Navbar.css";
+import "./styles/Navbar.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {

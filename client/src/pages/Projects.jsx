@@ -1,11 +1,12 @@
-import "../styles/Projects.css";
+import "./styles/Projects.css";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import Project from "../components/Project";
 
 const Projects = () => {
-  const { project } = useParams(); // undefined si /projects/
+  const { project } = useParams();
+  const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -13,13 +14,9 @@ const Projects = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        if (project) {
-          setProjects([]); // Reset
-        } else {
-          const res = await fetch("/api/projects", { credentials: "include" });
-          const data = await res.json();
-          setProjects(data);
-        }
+        const res = await fetch("/api/projects", { credentials: "include" });
+        const data = await res.json();
+        setProjects(data);
       } catch (err) {
         console.error(err);
       } finally {
@@ -31,17 +28,26 @@ const Projects = () => {
 
   if (loading) return <p>Loading...</p>;
 
+  // TODO:
   if (project) {
-    // Affiche un projet spécifique dans un iframe
+    const isKnownProject = Array.from(projects.map((p) => p.fileName)).includes(
+      project,
+    );
+
+    if (!isKnownProject) return navigate("/projects");
+
     return (
-      <section className="App">
-        <h1>{project}</h1>
+      <div className="App">
         <iframe
           src={`/api/projects/${project}`}
           title={project}
-          style={{ width: "100%", height: "80vh", border: "1px solid #ccc" }}
+          style={{
+            width: "100%",
+            height: "80vh",
+            backgroundColor: "transparent",
+          }}
         />
-      </section>
+      </div>
     );
   }
 
