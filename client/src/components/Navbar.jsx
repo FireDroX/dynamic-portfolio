@@ -12,12 +12,15 @@ const Navbar = () => {
       <div className="navbar">
         <p>portfolio</p>
         <div>
-          <span onClick={() => navigate("/")}>home</span>
           <span
+            className={path === "" ? "nav-active" : ""}
+            onClick={() => navigate("/")}
+          >
+            home
+          </span>
+          <span
+            className={path === "projects" ? "nav-active" : ""}
             onClick={() => navigate("/projects")}
-            style={
-              path === "projects" ? { textDecoration: "underline 1px" } : {}
-            }
           >
             projects
           </span>

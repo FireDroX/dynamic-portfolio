@@ -22,6 +22,11 @@
   padding: 12px 32px;
 }
 
+.nav-active {
+  text-decoration: underline 1px;
+  text-decoration-line: underline;
+}
+
 .navbar > p {
   font-size: 1.25rem;
   font-weight: 700;

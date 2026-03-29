@@ -1,3 +1,4 @@
+import "../styles/Login.css";
 import { useState } from "react";
 
 const Login = ({ onLogin }) => {
@@ -23,16 +24,21 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h1>Login</h1>
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button>Connexion</button>
-    </form>
+    <div className="App">
+      <header>
+        <small>portfolio</small>
+        <h1>Login</h1>
+      </header>
+      <form className="login-form" onSubmit={handleLogin}>
+        <input
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button>Connexion</button>
+      </form>
+    </div>
   );
 };
 

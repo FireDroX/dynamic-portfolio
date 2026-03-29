@@ -26,7 +26,7 @@ const Loadable = (Component, props = {}) => (
 );
 
 function App() {
-  const [isAuth, setIsAuth] = useState(null);
+  const [isAuth, setIsAuth] = useState(false);
 
   // Vérifie si connecté
   const checkAuth = async () => {
