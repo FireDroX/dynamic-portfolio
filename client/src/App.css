@@ -5,7 +5,7 @@ body {
   font-weight: 400;
   width: 100%;
   background-image: radial-gradient(
-    rgba(123, 123, 123, 0.08) 1px,
+    rgba(123, 123, 123, 0.15) 1px,
     transparent 1px
   );
   background-size: 14px 14px;

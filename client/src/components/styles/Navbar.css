@@ -33,13 +33,22 @@
   color: #e7e5e5;
 }
 
-.navbar > button {
+.navbar > button,
+.login-form > button,
+.preview-container button {
   border: none;
   background-color: #cbc6bd;
   color: #43403a;
   padding: 6px 26px 6px 26px;
   border-radius: 25px;
   text-transform: uppercase;
+  transition: all 0.3s ease-out;
+}
+
+.navbar > button:hover,
+.login-form > button:hover,
+.preview-container button:hover {
+  background-color: #acabaa;
 }
 
 .navbar > div {
@@ -57,6 +66,8 @@
 }
 
 .navbar > div > span:hover,
-.navbar > button:hover {
+.navbar > button:hover,
+.login-form > button:hover,
+.preview-container button:hover {
   cursor: pointer;
 }

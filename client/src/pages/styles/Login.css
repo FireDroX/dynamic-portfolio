@@ -17,12 +17,3 @@
   text-align: center;
   width: auto;
 }
-
-.login-form > button {
-  border: none;
-  background-color: #cbc6bd;
-  color: #43403a;
-  padding: 6px 26px 6px 26px;
-  border-radius: 25px;
-  text-transform: uppercase;
-}

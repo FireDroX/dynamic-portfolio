@@ -11,12 +11,15 @@ const Preview = ({ project, variant }) => {
     <article className={"preview-container " + "preview-var" + variant}>
       <div>
         <h3>{project.name}</h3>
+        <br />
         <p>{project.description}</p>
         <br />
         <ul>
           {project.stack &&
             project.stack.map((tech, index) => <li key={index}>{tech}</li>)}
         </ul>
+        <br />
+        <br />
         <button onClick={() => navigate(`/projects/${project.fileName}`)}>
           En savoir plus
         </button>

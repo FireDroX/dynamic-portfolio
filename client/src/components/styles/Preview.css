@@ -1,18 +1,15 @@
 .preview-container {
-  height: 20rem;
-  overflow: hidden;
-
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   color: #0e0e0e;
 }
 
 .preview-container div {
-  padding: 2rem 4rem;
   width: 28rem;
-  min-width: 28rem;
+  position: relative;
+  padding: 2rem 4rem;
   height: calc(100% - (2rem * 2));
 }
 
@@ -23,6 +20,7 @@
 
 .preview-container div:last-child > img {
   width: 100%;
+  border-radius: 25px;
 }
 
 .preview-var1 {
@@ -34,11 +32,61 @@
   border-radius: 25px 50px;
 }
 
+.preview-var1 button {
+  position: absolute;
+  right: 2rem;
+  bottom: 1.5rem;
+}
+
 .preview-var2 {
+  flex-direction: row;
+}
+
+.preview-var2 > div:first-child {
   background-color: #e7e5e5;
+  border-radius: 50px 25px;
+}
+
+.preview-var2 button {
+  position: absolute;
+  left: 2rem;
+  bottom: 1.5rem;
 }
 
 .preview-var3 {
   flex-direction: row;
   background-color: #acabaa;
+  border-radius: 50px;
+}
+
+.preview-var3 button {
+  position: absolute;
+  right: 2rem;
+  bottom: 1.5rem;
+}
+
+@media (max-width: 1160px) {
+  .preview-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .preview-container div {
+    width: 100%;
+    max-width: 28rem;
+    padding: 1.5rem;
+    height: auto;
+  }
+
+  .preview-container div:last-child {
+    margin-top: 1rem;
+  }
+
+  .preview-var1,
+  .preview-var2,
+  .preview-var3 {
+    flex-direction: column;
+    border-radius: 30px;
+    padding: 1rem;
+  }
 }
