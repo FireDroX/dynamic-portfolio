@@ -92,6 +92,12 @@ git clone https://github.com/FireDroX/dynamic-portfolio.git
 cd portfolio
 ```
 
+### Docker
+```bash
+docker build -t portfolio-app .
+docker run -p 3000:3000 portfolio-app
+```
+
 ### Backend
 
 ```bash
