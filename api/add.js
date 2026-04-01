@@ -70,7 +70,7 @@ router.post("/", auth, (req, res) => {
         "INSERT INTO projects (name, description, fileName, image) VALUES (?, ?, ?, ?)",
         [name, description, folderName, imageBase64],
         function () {
-          res.json({ success: true });
+          res.redirect("/panel");
         },
       );
     } catch (err) {

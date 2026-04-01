@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import Preview from "../components/Preview";
 
+import preview1 from "../assets/preview1.png";
+import preview2 from "../assets/preview2.png";
+import preview3 from "../assets/preview3.png";
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -13,8 +17,7 @@ const Home = () => {
         "Portfolio dynamique permettant d’héberger et afficher des projets web (HTML/CSS/JS) directement via des iframes.",
       stack: ["ReactJS / ExpressJS", "SQLite", "iframes"],
       fileName: "portfolio",
-      image:
-        "https://media.discordapp.net/attachments/1439248006061887619/1464662526347313276/image.png?ex=69caa8c6&is=69c95746&hm=61fc6dd9c2ebb5cd6ff71ff01ceea8566f0911bc489a58f556daab536fae6d23&=&format=webp&quality=lossless",
+      image: preview1,
     },
     {
       name: "LFF – Classements",
@@ -22,8 +25,7 @@ const Home = () => {
         "LFF est une plateforme web connectée à un serveur Discord permettant de gérer et afficher des classements dynamiques  hebdomadaire.",
       stack: ["ReactJS / ExpressJS", "Render / Supabase", "Discord OAuth2"],
       fileName: "lff",
-      image:
-        "https://media.discordapp.net/attachments/1439248006061887619/1464662526347313276/image.png?ex=69caa8c6&is=69c95746&hm=61fc6dd9c2ebb5cd6ff71ff01ceea8566f0911bc489a58f556daab536fae6d23&=&format=webp&quality=lossless",
+      image: preview2,
     },
     {
       name: "Space Invaders",
@@ -31,8 +33,7 @@ const Home = () => {
         "Space Invaders version StarWars. Pilotez un personnage et évitez les ennemis en utilisant différents vaisseaux. La difficulté du jeu évolue en cinq vagues en fonction du le score de l’utilisateur.",
       stack: ["Langage C / ncurses.h", "StarWars"],
       fileName: "space_invader",
-      image:
-        "https://github.com/FireDroX/space-invader_c/blob/main/images/1/fig1.png?raw=true",
+      image: preview3,
     },
   ];
 

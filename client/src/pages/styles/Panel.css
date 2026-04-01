@@ -40,7 +40,6 @@
 
   padding: 6px 26px 6px 26px;
   border-radius: 25px;
-  text-transform: uppercase;
   text-align: center;
 }
 
@@ -127,9 +126,10 @@
   width: 8rem;
   font-weight: 700;
   overflow: hidden;
-  text-transform: uppercase;
   text-overflow: ellipsis;
   text-wrap: nowrap;
+  background-color: transparent;
+  border: none;
 }
 
 .panel-project-description {
@@ -138,10 +138,20 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-wrap: nowrap;
+  background-color: transparent;
+  border: none;
 }
 
 .panel-project-link {
   color: #cbc6bd;
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.panel-project-modify {
+  color: #cbc6bd;
+  background-color: none;
+  border: none;
   height: 1.2rem;
   width: 1.2rem;
 }

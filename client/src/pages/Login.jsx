@@ -38,6 +38,7 @@ const Login = ({ onLogin }) => {
         />
         <button>Connexion</button>
       </form>
+      <div className="blank"></div>
     </div>
   );
 };

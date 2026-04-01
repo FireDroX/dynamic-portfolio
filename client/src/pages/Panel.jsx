@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const Panel = ({ onLogout }) => {
   const [projects, setProjects] = useState([]);
+  const [editedProjects, setEditedProjects] = useState({});
 
   const fetchProjects = async () => {
     const res = await fetch("/api/panel", {
@@ -21,6 +22,44 @@ const Panel = ({ onLogout }) => {
   useEffect(() => {
     fetchProjects();
   }, []);
+
+  const handleChange = (originalName, field, value) => {
+    setEditedProjects((prev) => ({
+      ...prev,
+      [originalName]: {
+        ...prev[originalName],
+        [field]: value,
+      },
+    }));
+  };
+
+  const handleSave = async (originalName) => {
+    const updated = editedProjects[originalName];
+    if (!updated) return;
+
+    await fetch("/api/panel/modify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        originalName,
+        name: updated.name ?? originalName,
+        description:
+          updated.description ??
+          projects.find((p) => p.name === originalName)?.description,
+      }),
+    });
+
+    setEditedProjects((prev) => {
+      const copy = { ...prev };
+      delete copy[originalName];
+      return copy;
+    });
+
+    fetchProjects();
+  };
 
   const handleDelete = async (name) => {
     await fetch("/api/panel/delete", {
@@ -45,15 +84,15 @@ const Panel = ({ onLogout }) => {
       <div className="panel">
         <form
           className="panel-form"
-          ethod="POST"
+          method="POST"
           action="/api/panel/add"
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
         >
           <input
             required
             type="text"
             name="name"
-            placeholder="Nom du projet"
+            placeholder="NOM DU PROJET"
             className="panel-grid1"
           />
 
@@ -61,7 +100,7 @@ const Panel = ({ onLogout }) => {
             required
             type="text"
             name="description"
-            placeholder="Description"
+            placeholder="DESCRIPTION"
             className="panel-grid2"
           />
 
@@ -118,33 +157,79 @@ const Panel = ({ onLogout }) => {
       <div className="panel-projects">
         {projects
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-          .map((p) => (
-            <div key={p.name} className="panel-project">
-              <p className="panel-project-name">{p.name}</p>
-              <p className="panel-project-description">{p.description}</p>
-              <a
-                className="panel-project-link"
-                href={`/projects/${p.fileName}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
+          .map((p) => {
+            const edited = editedProjects[p.name] || {};
+
+            const currentName = edited.name ?? p.name;
+            const currentDescription = edited.description ?? p.description;
+
+            const isModified =
+              edited.name !== undefined || edited.description !== undefined;
+
+            return (
+              <div key={p.name} className="panel-project">
+                <input
+                  className="panel-project-name"
+                  value={currentName}
+                  onChange={(e) => handleChange(p.name, "name", e.target.value)}
+                />
+
+                <input
+                  className="panel-project-description"
+                  value={currentDescription}
+                  onChange={(e) =>
+                    handleChange(p.name, "description", e.target.value)
+                  }
+                />
+
+                <a
+                  className="panel-project-link"
+                  href={`/projects/${p.fileName}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-                  />
-                </svg>
-              </a>
-              <button onClick={() => handleDelete(p.name)}>Supprimer</button>
-            </div>
-          ))}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                    />
+                  </svg>
+                </a>
+
+                {isModified ? (
+                  <div
+                    className="panel-project-modify"
+                    onClick={() => handleSave(p.name)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"
+                      />
+                    </svg>
+                  </div>
+                ) : (
+                  <button onClick={() => handleDelete(p.name)}>
+                    Supprimer
+                  </button>
+                )}
+              </div>
+            );
+          })}
       </div>
 
       <button

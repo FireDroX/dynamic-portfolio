@@ -117,3 +117,9 @@ small {
     --margin: 12px;
   }
 }
+
+.blank {
+  width: 100%;
+  height: 30dvh;
+  min-height: 30vh;
+}
