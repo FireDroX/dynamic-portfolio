@@ -144,6 +144,7 @@ SESSION_SECRET=secret
 - `GET /api/projects`
 - `GET /api/projects/:project`
 - `POST /api/panel/add` (auth)
+- `POST /api/panel/modify` (auth)
 - `DELETE /api/panel/delete` (auth)
 
 ---
