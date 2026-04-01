@@ -8,6 +8,8 @@
   user-select: none;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+
+  transition: all 0.3s ease-out;
 }
 
 html {

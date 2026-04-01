@@ -12,11 +12,11 @@ const Home = () => {
 
   const projects = [
     {
-      name: "Portfolio Dynamique",
+      name: "PokeFlip Online",
       description:
-        "Portfolio dynamique permettant d’héberger et afficher des projets web (HTML/CSS/JS) directement via des iframes.",
-      stack: ["ReactJS / ExpressJS", "SQLite", "iframes"],
-      fileName: "portfolio",
+        'Jeu de mémoire "matching cards" solo et multijoueur temps-reel sur le theme de Pokemon. L\'objectif est de trouver un maximum de paires avant son adversaire.',
+      stack: ["ReactJS / ExpressJS", "Render / Supabase", "Socket.io"],
+      fileName: "pokeflip",
       image: preview1,
     },
     {
@@ -32,7 +32,7 @@ const Home = () => {
       description:
         "Space Invaders version StarWars. Pilotez un personnage et évitez les ennemis en utilisant différents vaisseaux. La difficulté du jeu évolue en cinq vagues en fonction du le score de l’utilisateur.",
       stack: ["Langage C / ncurses.h", "StarWars"],
-      fileName: "space_invader",
+      fileName: "space_invaders",
       image: preview3,
     },
   ];
@@ -42,7 +42,7 @@ const Home = () => {
       <header>
         <small>portfolio</small>
         <h1>Adrien</h1>
-        <p>Etudiant en informatique.</p>
+        <p>Etudiant en informatique à l'ESGI.</p>
       </header>
       <div className="blank"></div>
       <section className="best-projects">

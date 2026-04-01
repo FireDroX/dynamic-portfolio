@@ -12,6 +12,14 @@ body {
   background-color: #0e0e0e;
 }
 
+#Loader {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .App {
   --margin: 96px;
   margin-left: var(--margin);
@@ -34,6 +42,12 @@ header > small {
 
 header > h1 {
   color: #e7e5e5;
+}
+
+header > h1::first-letter {
+  color: #b29a80;
+  font-weight: 700;
+  font-size: 6rem;
 }
 
 header > p {
@@ -84,8 +98,8 @@ small {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 5px solid var(--text5);
-  border-top-color: var(--text55);
+  border: 5px solid #0e0e0e;
+  border-top-color: #e7e5e5;
   animation: spin 900ms linear infinite;
   box-sizing: border-box;
 }

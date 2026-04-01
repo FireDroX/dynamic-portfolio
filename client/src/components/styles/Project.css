@@ -31,10 +31,10 @@
   left: 4px;
   border-radius: 50%;
   background-color: #acabaa66;
-  transition: all 0.3s ease-out;
 }
 
 .project-icon:hover {
   cursor: pointer;
   background-color: #acabaadd;
+  scale: 1.1;
 }
