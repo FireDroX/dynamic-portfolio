@@ -18,6 +18,7 @@ footer > div {
 footer a {
   color: #acabaa;
   text-decoration: none;
+  font-style: italic;
 }
 
 footer a:hover {

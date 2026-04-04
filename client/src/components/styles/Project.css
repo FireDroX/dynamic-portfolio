@@ -12,6 +12,11 @@
   color: #acabaa;
 }
 
+.project-article > p > a {
+  color: #acabaa;
+  font-style: italic;
+}
+
 .project-image,
 .fake-image {
   width: 300px;

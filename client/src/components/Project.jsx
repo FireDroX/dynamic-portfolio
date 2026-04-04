@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 const Project = ({ p }) => {
   const navigate = useNavigate();
 
+  const formatted = p.description.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
+  );
+
   return (
     <article key={p.fileName} className="project-article">
       <img
@@ -34,7 +39,7 @@ const Project = ({ p }) => {
         </svg>
       </div>
       <h3>{p.name}</h3>
-      <p>{p.description}</p>
+      <p dangerouslySetInnerHTML={{ __html: formatted }} />
     </article>
   );
 };
