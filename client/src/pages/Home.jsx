@@ -42,7 +42,9 @@ const Home = () => {
       <header>
         <small>portfolio</small>
         <h1>Adrien</h1>
-        <p>Etudiant en informatique à l'ESGI.</p>
+        <p>
+          Etudiant en informatique à l'<strong>ESGI</strong>.
+        </p>
       </header>
       <div className="blank"></div>
       <section className="best-projects">

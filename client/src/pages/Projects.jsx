@@ -56,7 +56,9 @@ const Projects = () => {
       <header>
         <small>portfolio</small>
         <h1>Projects</h1>
-        <p>Liste des projets créés.</p>
+        <p>
+          Liste des <strong>projets</strong> créés.
+        </p>
       </header>
       <section className="projects-grid">
         {projects.length === 0 ? (

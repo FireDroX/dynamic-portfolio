@@ -19,6 +19,12 @@ const Navbar = () => {
             home
           </span>
           <span
+            className={path === "about" ? "nav-active" : ""}
+            onClick={() => navigate("/about")}
+          >
+            about
+          </span>
+          <span
             className={path === "projects" ? "nav-active" : ""}
             onClick={() => navigate("/projects")}
           >
