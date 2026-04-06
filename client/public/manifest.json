@@ -1,15 +1,17 @@
 {
+  "name": "Portfolio Adrien",
   "short_name": "Portfolio",
-  "name": "Portfolio d'Adrien",
+  "description": "Portfolio de développeur web présentant des projets React et Node.js",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e0e0e",
+  "theme_color": "#0e0e0e",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "favicon.svg",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#b29a80",
-  "background_color": "#0e0e0e"
+  ]
 }

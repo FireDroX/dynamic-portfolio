@@ -1,3 +1,9 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemap
+Sitemap: https://portfolio.addrien.fr/sitemap.xml
+
+# Bloquer endpoints sensibles
+Disallow: /api/
+Disallow: /panel/
