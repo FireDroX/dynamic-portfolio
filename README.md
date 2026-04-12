@@ -94,8 +94,13 @@ cd portfolio
 
 ### Docker
 ```bash
-docker build -t portfolio-app .
-docker run -p 3000:3000 portfolio-app
+docker build -t portfolio-image .
+
+docker run -d \
+  -p 3000:3000 \
+  --name portfolio \
+  -v portfolio_projects:/app/projects \
+  portfolio-image
 ```
 
 ### Backend
@@ -124,6 +129,10 @@ PORT=3000
 
 PANEL_PASSWORD=password
 SESSION_SECRET=secret
+
+SQL_USER=user
+SQL_PASSWORD=password
+SQL_SERVER=url
 ```
 
 ---
