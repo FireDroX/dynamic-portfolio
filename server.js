@@ -4,7 +4,6 @@ const cors = require("cors");
 const path = require("node:path");
 const express = require("express");
 const session = require("express-session");
-const db = require("./db");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,13 +24,13 @@ app.use("/api", routes);
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("/sitemap.xml", (req, res) => {
+app.get("/sitemap.xml", async (req, res) => {
   const baseUrl = "https://portfolio.addrien.fr";
 
-  db.all("SELECT * FROM projects", [], (err, projects) => {
-    if (err) {
-      return res.status(500).send("Erreur sitemap");
-    }
+  try {
+    const pool = await require("./db");
+    const results = await pool.query`SELECT * FROM projects`;
+    const projects = results.recordset;
 
     const projectUrls = projects
       .map(
@@ -79,7 +78,10 @@ app.get("/sitemap.xml", (req, res) => {
 
     res.header("Content-Type", "application/xml");
     res.send(sitemap);
-  });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Erreur sitemap");
+  }
 });
 
 app.use((req, res) => {

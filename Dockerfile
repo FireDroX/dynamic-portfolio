@@ -27,6 +27,8 @@ COPY . .
 # Copier le build React dans un dossier public (à adapter selon ton server.js)
 COPY --from=client-build /app/client/build ./client/build
 
+VOLUME ["/app/projects"]
+
 # Port (à adapter si besoin)
 EXPOSE 3000
 

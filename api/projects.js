@@ -2,18 +2,19 @@ const express = require("express");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const db = require("../db");
-
 const router = express.Router();
 
-const projectsPath = path.join(__dirname, "../", "projects");
+const projectsPath = path.join(process.cwd(), "projects");
 
-router.get("/", (req, res) => {
-  db.all("SELECT * FROM projects", [], (err, projects) => {
-    if (err) return res.send("Erreur DB");
+router.get("/", async (req, res) => {
+  const db = await require("../db");
 
-    res.send(projects);
-  });
+  try {
+    const results = await db.query`SELECT * FROM projects`;
+    res.send(results.recordset);
+  } catch (error) {
+    return res.send("Erreur DB");
+  }
 });
 
 router.use("/:project", (req, res, next) => {
@@ -30,8 +31,8 @@ router.use("/:project", (req, res, next) => {
 
 router.get("/:project", (req, res, next) => {
   const projectName = req.params.project.replace(/[^a-zA-Z0-9_-]/g, "");
-  const projectDir = path.join(__dirname, "projects", projectName);
 
+  const projectDir = path.join(projectsPath, projectName);
   const indexPath = path.join(projectDir, "index.html");
 
   if (fs.existsSync(indexPath)) {

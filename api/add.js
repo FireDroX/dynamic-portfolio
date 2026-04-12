@@ -1,7 +1,6 @@
 const express = require("express");
 const fs = require("node:fs");
 const path = require("node:path");
-const db = require("../db");
 const auth = require("../middleware/auth");
 
 const router = express.Router();
@@ -66,15 +65,14 @@ router.post("/", auth, (req, res) => {
 
       await readable.pipe(unzipper.Extract({ path: extractPath })).promise();
 
-      db.run(
-        "INSERT INTO projects (name, description, fileName, image) VALUES (?, ?, ?, ?)",
-        [name, description, folderName, imageBase64],
-        function () {
-          res.redirect("/panel");
-        },
-      );
+      try {
+        const pool = await require("../db");
+        await pool.query`INSERT INTO projects (name, description, fileName, image) VALUES (${name},${description},${folderName},${imageBase64})`;
+        res.redirect("/panel");
+      } catch (error) {
+        return res.send("Erreur DB");
+      }
     } catch (err) {
-      console.error(err);
       res.status(500).json({ error: "Erreur extraction ZIP" });
     }
   });
