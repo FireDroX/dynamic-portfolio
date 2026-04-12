@@ -22,6 +22,9 @@ const Footer = () => {
         >
           GitHub
         </a>
+        <a href="/mentions-legales" target="_blank" rel="noopener noreferrer">
+          Mentions Légales
+        </a>
       </div>
     </footer>
   );

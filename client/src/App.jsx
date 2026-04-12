@@ -10,6 +10,7 @@ const Panel = lazy(() => import("./pages/Panel"));
 const Projects = lazy(() => import("./pages/Projects"));
 const Login = lazy(() => import("./pages/Login"));
 const About = lazy(() => import("./pages/About"));
+const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 
 const Loader = () => (
   <section id="Loader">
@@ -82,6 +83,9 @@ function App() {
 
         {/* About page */}
         <Route path="/about" element={Loadable(About)} />
+
+        {/* Mentions Legales */}
+        <Route path="/mentions-legales" element={Loadable(MentionsLegales)} />
       </Routes>
       <Footer />
     </>
