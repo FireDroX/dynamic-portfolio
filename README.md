@@ -12,7 +12,7 @@ Il dispose d’un **système d’administration sécurisé** permettant de gére
 
 - **Frontend :** React.js
 - **Backend :** Node.js + Express.js
-- **Base de données :** SQLite
+- **Base de données :** SQL Express
 - **Auth :** Session
 - **Rendering projets :** iframe
 
@@ -78,7 +78,6 @@ Il dispose d’un **système d’administration sécurisé** permettant de gére
 
 /client        → Frontend React
 /api           → Backend Express
-/db.sqlite     → SQLite
 /projects      → Fichiers des projets
 
 ```
@@ -93,6 +92,7 @@ cd portfolio
 ```
 
 ### Docker
+
 ```bash
 docker build -t portfolio-image .
 
@@ -137,7 +137,7 @@ SQL_SERVER=url
 
 ---
 
-## 📊 Base de données (SQLite)
+## 📊 Base de données (SQL EXPRESS)
 
 ### Table `projects`
 
