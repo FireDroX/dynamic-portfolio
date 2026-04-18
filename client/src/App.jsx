@@ -1,10 +1,12 @@
 import "./App.css";
-import { Suspense, lazy, useState, useEffect } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { lazy, useState, useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Loadable from "./components/Loadable";
 
+// Lazy pages
 const Home = lazy(() => import("./pages/Home"));
 const Panel = lazy(() => import("./pages/Panel"));
 const Projects = lazy(() => import("./pages/Projects"));
@@ -12,52 +14,40 @@ const Login = lazy(() => import("./pages/Login"));
 const About = lazy(() => import("./pages/About"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 
-const Loader = () => (
-  <section id="Loader">
-    <div className="spinner-container">
-      <div className="spinner" aria-hidden="true"></div>
-    </div>
-  </section>
-);
-
-// Wrapper pour lazy load
-const Loadable = (Component, props = {}) => (
-  <Suspense fallback={<Loader />}>
-    <Component {...props} />
-  </Suspense>
-);
-
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(null);
+  const location = useLocation();
 
-  // Vérifie si connecté
-  const checkAuth = async () => {
-    try {
-      const res = await fetch("/api/panel/login/me", {
-        credentials: "include",
-      });
-      const data = await res.json();
-      setIsAuth(data.authenticated);
-    } catch {
-      setIsAuth(false);
-    }
-  };
-
+  // Vérification auth
   useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await fetch("/api/panel/login/me", {
+          credentials: "include",
+        });
+        const data = await res.json();
+        setIsAuth(data.authenticated);
+      } catch {
+        setIsAuth(false);
+      }
+    };
+
     checkAuth();
   }, []);
 
-  if (isAuth === null) return <Loader />;
+  // Loader global
+  if (isAuth === null) return <div className="spinner" />;
 
   return (
     <>
       <Navbar />
-      <Routes>
+
+      <Routes location={location}>
         <Route path="/" element={Loadable(Home)} />
+
         <Route path="/projects" element={Loadable(Projects)} />
         <Route path="/projects/:project" element={Loadable(Projects)} />
 
-        {/* Login page */}
         <Route
           path="/panel/login"
           element={
@@ -69,7 +59,6 @@ function App() {
           }
         />
 
-        {/* Panel page */}
         <Route
           path="/panel/*"
           element={
@@ -81,12 +70,10 @@ function App() {
           }
         />
 
-        {/* About page */}
         <Route path="/about" element={Loadable(About)} />
-
-        {/* Mentions Legales */}
         <Route path="/mentions-legales" element={Loadable(MentionsLegales)} />
       </Routes>
+
       <Footer />
     </>
   );
