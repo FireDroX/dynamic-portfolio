@@ -1,3 +1,5 @@
+import "./styles/About.css";
+
 const About = () => {
   const calcDays = () => {
     const birthDate = new Date("2004-12-13");
@@ -16,7 +18,7 @@ const About = () => {
         <h1>Adrien</h1>
         <p>
           Je suis <strong>Adrien</strong>, je suis sur Terre depuis{" "}
-          <strong>{calcDays()}</strong> jours.
+          <mark>{calcDays()}</mark> jours.
         </p>
         <p>
           Je suis développeur <strong>web</strong> et étudiant en informatique à
@@ -27,14 +29,29 @@ const About = () => {
         <p>
           Je conçois et développe des projets en JavaScript, notamment avec{" "}
           <strong>React</strong> et <strong>Node.js</strong>.
+          <br />
         </p>
         <br />
         <p>
           Ce portfolio est un espace où j’expérimente, j’apprends et je
           construis différents projets que tu peux tester directement en ligne.
         </p>
+        <a
+          href="https://github.com/FireDroX"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="snake-svg"
+            alt="github-snake"
+            src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+          />
+        </a>
       </header>
-      <div className="blank"></div>
+      <img
+        className="skills-svg"
+        src="https://skillicons.dev/icons?i=c,html,css,react,nodejs,express,mysql,postgres,docker,aws,git,github,figma&theme=dark"
+      />
     </div>
   );
 };

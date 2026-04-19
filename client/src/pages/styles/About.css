@@ -1,0 +1,6 @@
+@media (max-width: 1000px) {
+  .snake-svg,
+  .skills-svg {
+    width: 100%;
+  }
+}

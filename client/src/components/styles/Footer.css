@@ -25,7 +25,11 @@ footer a:hover {
   scale: 1.1;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 650px) {
+  footer {
+    padding: 24px 24px;
+  }
+
   footer > div {
     gap: 24px;
   }
