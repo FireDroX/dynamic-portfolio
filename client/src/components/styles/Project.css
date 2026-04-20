@@ -4,16 +4,16 @@
 
 .project-article > h3 {
   margin-top: 24px;
-  color: #e7e5e5;
+  color: var(--text);
 }
 
 .project-article > p {
   margin-top: 8px;
-  color: #acabaa;
+  color: var(--accent);
 }
 
 .project-article > p > a {
-  color: #acabaa;
+  color: var(--accent);
   font-style: italic;
 }
 
@@ -35,11 +35,11 @@
   top: 4px;
   left: 4px;
   border-radius: 50%;
-  background-color: #acabaa66;
+  background-color: var(--accent) 66;
 }
 
 .project-icon:hover {
   cursor: pointer;
-  background-color: #acabaadd;
+  background-color: var(--accent) dd;
   scale: 1.1;
 }

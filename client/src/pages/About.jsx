@@ -18,7 +18,7 @@ const About = () => {
         <h1>Adrien</h1>
         <p>
           Je suis <strong>Adrien</strong>, je suis sur Terre depuis{" "}
-          <mark>{calcDays()}</mark> jours.
+          <mark className="mark-daysalive">{calcDays()}</mark> jours.
         </p>
         <p>
           Je suis développeur <strong>web</strong> et étudiant en informatique à
@@ -41,11 +41,21 @@ const About = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            className="snake-svg"
-            alt="github-snake"
-            src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-          />
+          <picture>
+            <source
+              media="(prefers-color-scheme: dark)"
+              srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+            />
+            <source
+              media="(prefers-color-scheme: light)"
+              srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
+            />
+            <img
+              className="snake-svg"
+              alt="github-snake"
+              src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+            />
+          </picture>
         </a>
       </header>
       <img

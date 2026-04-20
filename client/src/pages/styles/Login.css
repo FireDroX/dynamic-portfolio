@@ -9,8 +9,8 @@
   border: none;
   background-color: transparent;
   border: 2px solid #48484833;
-  color: #e7e5e5;
-  
+  color: var(--text);
+
   padding: 6px 26px 6px 26px;
   border-radius: 25px;
   text-transform: uppercase;

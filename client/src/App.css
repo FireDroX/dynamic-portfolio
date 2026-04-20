@@ -9,7 +9,7 @@ body {
     transparent 1px
   );
   background-size: 14px 14px;
-  background-color: #0e0e0e;
+  background-color: var(--bg);
 }
 
 #Loader {
@@ -37,22 +37,22 @@ header {
 header > small {
   text-transform: uppercase;
   letter-spacing: 3.6px;
-  color: #b29a80;
+  color: var(--secondary);
 }
 
-header > h1, 
+header > h1,
 header > h2 {
-  color: #e7e5e5;
+  color: var(--text);
 }
 
 header > h1::first-letter {
-  color: #b29a80;
+  color: var(--secondary);
   font-weight: 700;
   font-size: 6rem;
 }
 
 header > p {
-  color: #acabaa;
+  color: var(--accent);
 }
 
 h1,
@@ -99,8 +99,8 @@ small {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 5px solid #0e0e0e;
-  border-top-color: #e7e5e5;
+  border: 5px solid var(--bg);
+  border-top-color: var(--text);
   animation: spin 900ms linear infinite;
   box-sizing: border-box;
 }

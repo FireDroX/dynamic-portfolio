@@ -5,7 +5,7 @@ footer {
   padding: 24px 48px;
   border-top: 2px solid #48484833;
   margin-top: 64px;
-  color: #acabaa;
+  color: var(--accent);
 }
 
 footer > div {
@@ -16,7 +16,7 @@ footer > div {
 }
 
 footer a {
-  color: #acabaa;
+  color: var(--accent);
   text-decoration: none;
   font-style: italic;
 }

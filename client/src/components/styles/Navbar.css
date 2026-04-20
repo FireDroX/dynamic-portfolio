@@ -17,7 +17,7 @@
   flex-direction: row;
   gap: 48px;
 
-  color: #acabaa;
+  color: var(--accent);
   border-radius: 25px;
   padding: 12px 32px;
 }
@@ -30,7 +30,7 @@
 .navbar > p {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #e7e5e5;
+  color: var(--text);
 }
 
 .navbar > button,
@@ -48,7 +48,7 @@
 .navbar > button:hover,
 .login-form > button:hover,
 .preview-container button:hover {
-  background-color: #acabaa;
+  background-color: var(--accent);
   scale: 1.1;
 }
 
@@ -63,6 +63,13 @@
 @media (max-width: 768px) {
   .navbar > button {
     display: none;
+  }
+  .navbar {
+    padding: 8px 20px;
+  }
+
+  .navbar > p {
+    font-size: 1rem;
   }
 }
 
