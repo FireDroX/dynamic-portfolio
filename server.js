@@ -5,10 +5,22 @@ const path = require("node:path");
 const express = require("express");
 const session = require("express-session");
 
+const {
+  getProjectBySlug,
+  getProjectsCached,
+  getPool,
+} = require("./utils/functions");
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 const routes = require("./api");
+
+const metaCache = {
+  projects: null,
+  lastFetch: 0,
+  ttl: 60 * 1000, // 1 minute
+};
 
 app.use(
   session({
@@ -20,72 +32,56 @@ app.use(
 app.use(cors());
 app.use(express.json());
 
-app.use("/api", routes);
+app.use("/", routes);
 
-app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client/build"), { index: false }));
 
-app.get("/sitemap.xml", async (req, res) => {
-  const baseUrl = "https://portfolio.addrien.fr";
-
+app.use(async (req, res) => {
   try {
-    const pool = await require("./db");
-    const results = await pool.query`SELECT * FROM projects`;
-    const projects = results.recordset;
+    let title = "Portfolio Adrien";
+    let description =
+      "Découvrez le portfolio d'Adrien, développeur web spécialisé en React et Node.js / Express.";
+    let image = "https://portfolio.addrien.fr/favicon.svg";
 
-    const projectUrls = projects
-      .map(
-        (p) => `
-        <url>
-          <loc>${baseUrl}/projects/${p.fileName}</loc>
-          <lastmod>${new Date(p.createdAt).toISOString()}</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>0.8</priority>
-        </url>
-      `,
-      )
-      .join("");
+    // PAGE PROJET
+    if (req.path.startsWith("/projects/")) {
+      const slug = req.path.split("/")[2];
+      const project = await getProjectBySlug(slug);
 
-    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      if (project) {
+        title = `${project.name} | Portfolio Adrien`;
+        description = project.description;
 
-        <url>
-          <loc>${baseUrl}/</loc>
-          <changefreq>weekly</changefreq>
-          <priority>1.0</priority>
-        </url>
+        // Si tu as une image en DB
+        if (project.image) {
+          image = `https://portfolio.addrien.fr/og-image/${slug}`;
+        }
+      } else {
+        title = "Projet introuvable | Portfolio Adrien";
+      }
+    }
 
-        <url>
-          <loc>${baseUrl}/projects</loc>
-          <changefreq>weekly</changefreq>
-          <priority>0.9</priority>
-        </url>
+    // AUTRES PAGES
+    else {
+      const projects = await getProjectsCached(metaCache);
+      description += ` ${projects.length} projets sur le site.`;
+    }
 
-        <url>
-          <loc>${baseUrl}/about</loc>
-          <changefreq>weekly</changefreq>
-          <priority>0.9</priority>
-        </url>
+    const filePath = path.join(__dirname, "client/build/index.html");
+    let html = await require("fs").promises.readFile(filePath, "utf-8");
 
-        <url>
-          <loc>${baseUrl}/mentions-legales</loc>
-          <changefreq>weekly</changefreq>
-          <priority>0.9</priority>
-        </url>
+    html = html
+      .replace(/__TITLE__/g, title)
+      .replace(/__DESCRIPTION__/g, description)
+      .replace(/__IMAGE__/g, image);
 
-        ${projectUrls}
+    res.send(html);
+  } catch (err) {
+    console.error(err);
 
-      </urlset>`;
-
-    res.header("Content-Type", "application/xml");
-    res.send(sitemap);
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send("Erreur sitemap");
+    // fallback safe
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
   }
-});
-
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 app.listen(PORT, () => {

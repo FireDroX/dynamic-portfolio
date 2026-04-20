@@ -1,3 +1,4 @@
+const { getPool } = require("../utils/functions");
 const express = require("express");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -7,7 +8,7 @@ const router = express.Router();
 const projectsPath = path.join(process.cwd(), "projects");
 
 router.get("/", async (req, res) => {
-  const db = await require("../db");
+  const db = await getPool();
 
   try {
     const results = await db.query`SELECT * FROM projects`;

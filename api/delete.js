@@ -1,3 +1,4 @@
+const { getPool } = require("../utils/functions");
 const express = require("express");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -9,7 +10,7 @@ router.post("/", auth, async (req, res) => {
   const { name } = req.body;
 
   try {
-    const pool = await require("../db");
+    const pool = await getPool();
     const results =
       await pool.query`SELECT fileName FROM projects WHERE name = ${name}`;
 

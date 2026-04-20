@@ -1,3 +1,4 @@
+const { getPool } = require("../utils/functions");
 const express = require("express");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -66,7 +67,7 @@ router.post("/", auth, (req, res) => {
       await readable.pipe(unzipper.Extract({ path: extractPath })).promise();
 
       try {
-        const pool = await require("../db");
+        const pool = await getPool();
         await pool.query`INSERT INTO projects (name, description, fileName, image) VALUES (${name},${description},${folderName},${imageBase64})`;
         res.redirect("/panel");
       } catch (error) {

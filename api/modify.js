@@ -1,3 +1,4 @@
+const { getPool } = require("../utils/functions");
 const express = require("express");
 const auth = require("../middleware/auth");
 
@@ -11,7 +12,7 @@ router.post("/", auth, async (req, res) => {
   }
 
   try {
-    const pool = await require("../db");
+    const pool = await getPool();
     await pool.query`SELECT * FROM projects WHERE name = ${originalName}`;
     await pool.query`UPDATE projects SET name = ${name}, description = ${description} WHERE name = ${originalName}`;
     res.json({ success: true });
