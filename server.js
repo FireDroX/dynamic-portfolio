@@ -38,9 +38,8 @@ app.use(express.static(path.join(__dirname, "client/build"), { index: false }));
 
 app.use(async (req, res) => {
   try {
-    let title = "Portfolio Adrien";
-    let description =
-      "Découvrez le portfolio d'Adrien, développeur web spécialisé en React et Node.js / Express.";
+    let title = "Portfolio Adrien | Développeur React & Node.js";
+    let description;
     let image = "https://portfolio.addrien.fr/favicon.svg";
 
     // PAGE PROJET
@@ -58,13 +57,18 @@ app.use(async (req, res) => {
         }
       } else {
         title = "Projet introuvable | Portfolio Adrien";
+        description = "Ce projet n'existe pas ou a été supprimé.";
       }
     }
 
     // AUTRES PAGES
     else {
       const projects = await getProjectsCached(metaCache);
-      description += ` ${projects.length} projets sur le site.`;
+
+      description = `
+Portfolio d’Adrien — Développeur React & Node.js.
+${projects.length} projets web interactifs à découvrir.
+Démonstrations en live, interfaces testables et architecture fullstack moderne.`;
     }
 
     const filePath = path.join(__dirname, "client/build/index.html");
@@ -78,8 +82,6 @@ app.use(async (req, res) => {
     res.send(html);
   } catch (err) {
     console.error(err);
-
-    // fallback safe
     res.sendFile(path.join(__dirname, "client/build/index.html"));
   }
 });
