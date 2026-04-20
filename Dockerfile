@@ -13,7 +13,7 @@ RUN npm run build
 
 
 # ----------- 2. Backend + server -----------
-FROM node:20-alpine
+FROM node:20
 
 WORKDIR /app
 
