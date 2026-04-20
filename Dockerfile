@@ -1,36 +1,46 @@
-# ----------- 1. Build du client React -----------
-FROM node:20-alpine AS client-build
+# ----------- 1. Build React -----------
+FROM node:20-slim AS client-build
 
 WORKDIR /app/client
 
-# Installer dépendances client
 COPY client/package*.json ./
 RUN npm install
 
-# Copier le code et build
-COPY client/ ./
+COPY client/ .
 RUN npm run build
 
 
-# ----------- 2. Backend + server -----------
-FROM node:20
+# ----------- 2. Backend -----------
+FROM node:20-slim
 
 WORKDIR /app
+
+# 🔧 dépendances système nécessaires pour canvas
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    libcairo2-dev \
+    libpango1.0-dev \
+    libjpeg-dev \
+    libgif-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # Installer dépendances backend
 COPY package*.json ./
 RUN npm install
 
-# Copier tout le projet
+# Copier le code backend
 COPY . .
 
-# Copier le build React dans un dossier public (à adapter selon ton server.js)
+# Copier build React
 COPY --from=client-build /app/client/build ./client/build
 
+# Volume persistant
 VOLUME ["/app/projects"]
 
-# Port (à adapter si besoin)
+# Port
 EXPOSE 3000
 
-# Lancer le serveur
+# Lancer serveur
 CMD ["node", "server.js"]
