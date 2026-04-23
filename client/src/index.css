@@ -20,6 +20,14 @@ html {
   display: none;
 }
 
+/* Default Color */
+:root {
+  --bg: #0e0e0e;
+  --text: #e7e5e5;
+  --secondary: #b29a80;
+  --accent: #acabaa;
+}
+
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
