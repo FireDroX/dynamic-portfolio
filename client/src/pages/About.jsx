@@ -62,6 +62,15 @@ const About = () => {
         className="skills-svg"
         src="https://skillicons.dev/icons?i=c,html,css,react,nodejs,express,mysql,postgres,docker,aws,git,github,figma&theme=dark"
       />
+      <br />
+      <a href="https://ko-fi.com/G2G01YFONH" target="_blank">
+        <img
+          style={{ border: "0px", height: "36px" }}
+          src="https://storage.ko-fi.com/cdn/kofi3.png?v=6"
+          border="0"
+          alt="Buy Me a Coffee at ko-fi.com"
+        />
+      </a>
     </div>
   );
 };
