@@ -7,6 +7,9 @@ const Preview = ({ project, variant }) => {
 
   if (!variants.includes(variant)) return;
 
+  const imageSrc = require(`../assets/${project.image}.mp4`);
+  const imagePoster = require(`../assets/${project.image}_loader.png`);
+
   return (
     <article className={"preview-container " + "preview-var" + variant}>
       <div>
@@ -25,7 +28,19 @@ const Preview = ({ project, variant }) => {
         </button>
       </div>
       <div>
-        <img src={project.image} alt={project.name} />
+        <video
+          src={imageSrc}
+          poster={imagePoster}
+          alt={project.name}
+          autoPlay
+          loop
+          muted
+          preload="true"
+          disablePictureInPicture
+          disableRemotePlayback
+          x-webkit-airplay="deny"
+          playsInline
+        />
       </div>
     </article>
   );

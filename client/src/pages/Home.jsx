@@ -3,10 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import Preview from "../components/Preview";
 
-import preview1 from "../assets/preview1.png";
-import preview2 from "../assets/preview2.png";
-import preview3 from "../assets/preview3.png";
-
 const Home = () => {
   const navigate = useNavigate();
 
@@ -17,7 +13,7 @@ const Home = () => {
         'Jeu de mémoire "matching cards" solo et multijoueur temps-reel sur le theme de Pokemon. L\'objectif est de trouver un maximum de paires avant son adversaire.',
       stack: ["ReactJS / ExpressJS", "Render / Supabase", "Socket.io"],
       fileName: "pokeflip",
-      image: preview1,
+      image: "preview1",
     },
     {
       name: "LFF – Classements",
@@ -25,7 +21,7 @@ const Home = () => {
         "LFF est une plateforme web connectée à un serveur Discord permettant de gérer et afficher des classements dynamiques  hebdomadaire.",
       stack: ["ReactJS / ExpressJS", "Render / Supabase", "Discord OAuth2"],
       fileName: "lff",
-      image: preview2,
+      image: "preview2",
     },
     {
       name: "Space Invaders",
@@ -33,7 +29,7 @@ const Home = () => {
         "Space Invaders version StarWars. Pilotez un personnage et évitez les ennemis en utilisant différents vaisseaux. La difficulté du jeu évolue en cinq vagues en fonction du le score de l’utilisateur.",
       stack: ["Langage C / ncurses.h", "StarWars"],
       fileName: "space_invaders",
-      image: preview3,
+      image: "preview3",
     },
   ];
 

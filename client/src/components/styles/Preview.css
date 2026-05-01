@@ -18,7 +18,7 @@
   margin-left: 2rem;
 }
 
-.preview-container div:last-child > img {
+.preview-container div:last-child > video {
   width: 100%;
   border-radius: 25px;
   border: dashed 2px #7b7b7b10;
