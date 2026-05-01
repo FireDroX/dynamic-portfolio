@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Hidden Page",
+    "description": "You found a hidden page!",
+    "emoji": "🕵️‍♂️"
+  },
+  {
+    "name": "Snake Git",
+    "description": "Tssssssssssssssssssss",
+    "emoji": "🐍"
+  },
+  {
+    "name": "Explorer",
+    "description": "You discovered all the accessible pages of this portfolio!",
+    "emoji": "🧭"
+  },
+  {
+    "name": "Wrong Password",
+    "description": "Did you think my password was easy to guess? Think again.",
+    "emoji": "🔒"
+  },
+  {
+    "name": "&cᴏpy;",
+    "description": "Copyright Copyright Copyright",
+    "emoji": "©"
+  },
+  {
+    "name": "Burning Eyes",
+    "description": "AHHHHHHHHHHHH MY EYES",
+    "emoji": "🔥"
+  },
+  {
+    "name": "Portfolio Enjoyer",
+    "description": "You have visited this portfolio 42 times...",
+    "emoji": "🔄"
+  },
+  {
+    "name": "Cheater",
+    "description": "You must cheat to unlock this.",
+    "emoji": "🚫"
+  }
+]

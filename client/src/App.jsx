@@ -13,6 +13,7 @@ const Projects = lazy(() => import("./pages/Projects"));
 const Login = lazy(() => import("./pages/Login"));
 const About = lazy(() => import("./pages/About"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
+const Achievements = lazy(() => import("./pages/Achievements"));
 
 function App() {
   const [isAuth, setIsAuth] = useState(null);
@@ -31,6 +32,13 @@ function App() {
         setIsAuth(false);
       }
     };
+
+    const visited =
+      (parseInt(localStorage.getItem("portfolio_visited")) || 0) + 1;
+    localStorage.setItem("portfolio_visited", visited);
+    if (visited === 42) {
+      window.dispatchEvent(new CustomEvent("portfolio:portfolio-enjoyer"));
+    }
 
     checkAuth();
   }, []);
@@ -72,9 +80,11 @@ function App() {
 
         <Route path="/about" element={Loadable(About)} />
         <Route path="/mentions-legales" element={Loadable(MentionsLegales)} />
+        <Route path="/achievements" element={Loadable(Achievements)} />
       </Routes>
 
       <Footer />
+      <div id="achievement-popup-container"></div>
     </>
   );
 }

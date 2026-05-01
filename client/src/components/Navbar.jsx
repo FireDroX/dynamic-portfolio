@@ -7,6 +7,21 @@ const Navbar = () => {
 
   const path = location.pathname.split("/")[1];
 
+  const handleClick = (path) => {
+    navigate(path);
+
+    const page = path.split("/")[1] || "home";
+    const explorer = JSON.parse(
+      localStorage.getItem("portfolio_explorer") || "{}",
+    );
+    explorer[page] = true;
+    localStorage.setItem("portfolio_explorer", JSON.stringify(explorer));
+
+    if (explorer.home && explorer.about && explorer.projects) {
+      window.dispatchEvent(new CustomEvent("portfolio:explorer"));
+    }
+  };
+
   return (
     <nav className="nav-header">
       <div className="navbar">
@@ -14,19 +29,19 @@ const Navbar = () => {
         <div>
           <span
             className={path === "" ? "nav-active" : ""}
-            onClick={() => navigate("/")}
+            onClick={() => handleClick("/")}
           >
             home
           </span>
           <span
             className={path === "about" ? "nav-active" : ""}
-            onClick={() => navigate("/about")}
+            onClick={() => handleClick("/about")}
           >
             about
           </span>
           <span
             className={path === "projects" ? "nav-active" : ""}
-            onClick={() => navigate("/projects")}
+            onClick={() => handleClick("/projects")}
           >
             projects
           </span>

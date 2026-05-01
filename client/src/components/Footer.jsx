@@ -1,11 +1,24 @@
 import "./styles/Footer.css";
+import { useState } from "react";
 
 const Footer = () => {
+  const [count, setCount] = useState(0);
+
+  const handleCount = () => {
+    setCount((prev) => prev + 1);
+    if (count + 1 === 3) {
+      window.dispatchEvent(new CustomEvent("portfolio:&cᴏpy;"));
+    }
+  };
+
   return (
     <footer>
       <p>
-        &copy; {new Date().getFullYear()}{" "}
-        <span className="footer-copyright">Tous droits réservés.</span>
+        &copy;{" "}
+        <span className="footer-copyright" onClick={handleCount}>
+          {new Date().getFullYear()}
+        </span>{" "}
+        <span>Tous droits réservés.</span>
       </p>
       <div>
         <a

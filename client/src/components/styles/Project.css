@@ -36,6 +36,7 @@
   left: 4px;
   border-radius: 50%;
   background-color: var(--accent) 66;
+  color: var(--text);
 }
 
 .project-icon:hover {

@@ -19,7 +19,9 @@ const Login = ({ onLogin }) => {
     if (res.ok) {
       onLogin();
     } else {
+      setPassword("");
       alert("Mot de passe incorrect");
+      window.dispatchEvent(new CustomEvent("portfolio:wrong-password"));
     }
   };
 

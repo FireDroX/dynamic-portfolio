@@ -1,0 +1,105 @@
+.achievement-popup,
+.achievement {
+  background-color: var(--secondary);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow:
+    0 10px 15px -3px var(--secondary),
+    0 4px 6px -4px var(--secondary);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.achievement {
+  width: 24rem;
+}
+
+.achievement-popup {
+  position: fixed;
+  top: 8rem;
+  right: -50rem;
+  z-index: 1000;
+  animation-name: fadeIn, stay, fadeOut;
+  animation-duration: 0.5s, 3s, 0.5s;
+  animation-delay: 0s, 0.5s, 3.5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.achievement-popup div:first-child,
+.achievement div:first-child {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  border-radius: 0.75rem;
+  width: 4rem;
+  height: 4rem;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.achievement-popup small,
+.achievement small {
+  text-transform: uppercase;
+  line-height: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--bg);
+}
+
+.achievement-popup h3,
+.achievement h3 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--bg);
+}
+
+.achievement-popup p,
+.achievement p {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--bg);
+}
+
+@keyframes fadeIn {
+  from {
+    right: -50rem;
+  }
+  to {
+    right: 1rem;
+  }
+}
+
+@keyframes stay {
+  from {
+    right: 1rem;
+  }
+  to {
+    right: 1rem;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    right: 1rem;
+  }
+  to {
+    right: -50rem;
+  }
+}
+
+.achievements-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}

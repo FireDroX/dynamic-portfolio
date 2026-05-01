@@ -36,27 +36,26 @@ const About = () => {
           Ce portfolio est un espace où j’expérimente, j’apprends et je
           construis différents projets que tu peux tester directement en ligne.
         </p>
-        <a
-          href="https://github.com/FireDroX"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <picture>
-            <source
-              media="(prefers-color-scheme: dark)"
-              srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-            />
-            <source
-              media="(prefers-color-scheme: light)"
-              srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
-            />
-            <img
-              className="snake-svg"
-              alt="github-snake"
-              src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-            />
-          </picture>
-        </a>
+        <picture>
+          <source
+            media="(prefers-color-scheme: dark)"
+            srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+          />
+          <source
+            media="(prefers-color-scheme: light)"
+            srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
+          />
+          <img
+            className="snake-svg"
+            alt="github-snake"
+            src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+            style={{ cursor: "pointer" }}
+            title="Snake - GitHub"
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
+            }}
+          />
+        </picture>
       </header>
       <img
         className="skills-svg"

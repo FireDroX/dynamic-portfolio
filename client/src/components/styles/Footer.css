@@ -25,6 +25,11 @@ footer a:hover {
   scale: 1.1;
 }
 
+.footer-copyright {
+  cursor: pointer;
+  text-decoration: underline 1px;
+}
+
 @media (max-width: 650px) {
   footer {
     padding: 24px 24px;
