@@ -3,6 +3,12 @@ import achievements from "./achievements.json";
 
 new CustomEvent("portfolio");
 
+const STORAGE_KEY = "portfolio_achievements";
+
+function formatName(name) {
+  return name.toLowerCase().trim().replace(/\s+/g, "-");
+}
+
 function getContainer() {
   let el = document.getElementById("achievement-popup-container");
 
@@ -17,21 +23,18 @@ function getContainer() {
 
 document.addEventListener("DOMContentLoaded", () => {
   achievements.forEach((a) => {
-    const name = a.name.toLowerCase().trim().replace(" ", "-");
+    const name = formatName(a.name);
 
     window.addEventListener(`portfolio:${name}`, (e) => {
       const container = getContainer();
 
       const userAchievements = JSON.parse(
-        localStorage.getItem("portfolio_achievements") || "[]",
+        localStorage.getItem(STORAGE_KEY) || "[]",
       );
 
       if (!userAchievements.includes(name)) {
         userAchievements.push(name);
-        localStorage.setItem(
-          "portfolio_achievements",
-          JSON.stringify(userAchievements),
-        );
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(userAchievements));
         window.dispatchEvent(new CustomEvent("portfolio:update"));
 
         const popup = document.createElement("div");
@@ -96,17 +99,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.addEventListener("portfolio:update", () => {
-    const allAchievements = [...achievements];
-    allAchievements.pop(); // Remove the last achievement (achievement hunter)
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-    const hasAllAchievements = allAchievements.every((a) => {
-      const name = a.name.toLowerCase().trim().replace(" ", "-");
-      return JSON.parse(
-        localStorage.getItem("portfolio_achievements") || "[]",
-      )?.includes(name);
-    });
+    const allAchievements = achievements.filter(
+      (a) => formatName(a.name) !== "achievement-hunter",
+    );
 
-    if (hasAllAchievements)
+    const requiredNames = allAchievements.map((a) => formatName(a.name));
+
+    const hasAllAchievements = requiredNames.every((name) =>
+      stored.includes(name),
+    );
+
+    const hunterKey = "achievement-hunter";
+    const hasHunter = stored.includes(hunterKey);
+
+    if (hasAllAchievements && !hasHunter) {
       window.dispatchEvent(new CustomEvent("portfolio:achievement-hunter"));
+    }
+
+    if (!hasAllAchievements && hasHunter) {
+      const updated = stored.filter((a) => a !== hunterKey);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    }
   });
+  window.dispatchEvent(new CustomEvent("portfolio:update"));
 });

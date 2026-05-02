@@ -40,7 +40,7 @@ const Achievements = () => {
       <div className="achievements-list">
         {achievements_list.map((a) => {
           const unlocked = userAchievements.includes(
-            a.name.toLowerCase().trim().replace(" ", "-"),
+            a.name.toLowerCase().trim().replace(/\s+/g, "-"),
           );
 
           return <Popup key={a.name} achievement={a} unlocked={unlocked} />;
