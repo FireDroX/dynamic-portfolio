@@ -12,6 +12,22 @@
   gap: 16px;
 }
 
+.achievement.locked {
+  background-color: var(--bg);
+  box-shadow: none;
+  border: 2px dashed var(--secondary);
+}
+
+.achievement.locked small,
+.achievement.locked h3,
+.achievement.locked p {
+  color: var(--secondary);
+}
+
+.achievement.locked div:first-child {
+  background-color: var(--secondary);
+}
+
 .achievement {
   width: 24rem;
 }

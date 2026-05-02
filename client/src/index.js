@@ -3,7 +3,7 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import "./utils/achievements_setup";
+import "./utils/achievements";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -1,7 +1,7 @@
 import "../components/styles/Popup.css";
-import achievements from "./achievements_list.json";
+import achievements from "./achievements.json";
 
-new Event("portfolio");
+new CustomEvent("portfolio");
 
 function getContainer() {
   let el = document.getElementById("achievement-popup-container");
@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "portfolio_achievements",
           JSON.stringify(userAchievements),
         );
+        window.dispatchEvent(new CustomEvent("portfolio:update"));
 
         const popup = document.createElement("div");
         popup.className = "achievement-popup";
@@ -92,5 +93,20 @@ document.addEventListener("DOMContentLoaded", () => {
       window.dispatchEvent(new CustomEvent("portfolio:thats-me"));
       typed = "";
     }
+  });
+
+  window.addEventListener("portfolio:update", () => {
+    const allAchievements = [...achievements];
+    allAchievements.pop(); // Remove the last achievement (achievement hunter)
+
+    const hasAllAchievements = allAchievements.every((a) => {
+      const name = a.name.toLowerCase().trim().replace(" ", "-");
+      return JSON.parse(
+        localStorage.getItem("portfolio_achievements") || "[]",
+      )?.includes(name);
+    });
+
+    if (hasAllAchievements)
+      window.dispatchEvent(new CustomEvent("portfolio:achievement-hunter"));
   });
 });

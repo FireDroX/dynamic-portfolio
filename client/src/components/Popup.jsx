@@ -1,13 +1,13 @@
 import "./styles/Popup.css";
 
 const Popup = ({ achievement, unlocked }) => {
-  const { name, description, emoji } = achievement;
+  const { name, description, emoji, hint } = achievement;
   return (
-    <div className="achievement">
+    <div className={`achievement ${unlocked ? "" : "locked"}`}>
       <div>{unlocked ? emoji : "❓"}</div>
       <div>
         <h3>{unlocked ? name : "???"}</h3>
-        <p>{unlocked ? description : "???"}</p>
+        <p>{unlocked ? description : hint}</p>
       </div>
     </div>
   );

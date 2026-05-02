@@ -2,56 +2,73 @@
   {
     "name": "Hidden Page",
     "description": "You found a hidden page!",
-    "emoji": "🕵️‍♂️"
+    "emoji": "🕵️‍♂️",
+    "hint": "/achievements"
   },
   {
     "name": "Snake Git",
     "description": "Tssssssssssssssssssss",
-    "emoji": "🐍"
+    "emoji": "🐍",
+    "hint": "Catch the snake !"
   },
   {
     "name": "Explorer",
     "description": "You discovered all the accessible pages of this portfolio!",
-    "emoji": "🧭"
+    "emoji": "🧭",
+    "hint": "Explore every pages."
   },
   {
     "name": "Wrong Password",
     "description": "Did you think my password was easy to guess? Think again.",
-    "emoji": "🔒"
+    "emoji": "🔒",
+    "hint": "Guess the password."
   },
   {
     "name": "&cᴏpy;",
     "description": "Copyright Copyright Copyright",
-    "emoji": "©"
+    "emoji": "©",
+    "hint": "3 times &copy;"
   },
   {
     "name": "Burning Eyes",
     "description": "AHHHHHHHHHHHH MY EYES",
-    "emoji": "🔥"
+    "emoji": "🔥",
+    "hint": "What are you doing in light mode ?"
   },
   {
     "name": "Portfolio Enjoyer",
     "description": "You have visited this portfolio 42 times...",
-    "emoji": "🔄"
+    "emoji": "🔄",
+    "hint": "42 times is the answer."
   },
   {
     "name": "Nerd",
     "description": "Was the source code of this page fun to read ?",
-    "emoji": "🤓"
+    "emoji": "🤓",
+    "hint": "From GitHub"
   },
   {
     "name": "Recruiter",
     "description": "Are you a recruiter ? If so, you got something special !",
-    "emoji": "💼"
+    "emoji": "💼",
+    "hint": "From LinkedIn"
   },
   {
     "name": "Thats me",
     "description": "Yep, that's me.",
-    "emoji": "👤"
+    "emoji": "👤",
+    "hint": "Say my name."
   },
   {
     "name": "Cheater",
     "description": "You must cheat to unlock this.",
-    "emoji": "🚫"
+    "emoji": "🚫",
+    "hint": "window.dispatchEvent()"
+  },
+  {
+    "name": "Achievement Hunter",
+    "description": "You unlocked all the achievements !",
+    "emoji": "🏆",
+    "hint": "Unlock all the achievements."
   }
 ]
