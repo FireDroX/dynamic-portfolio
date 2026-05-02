@@ -59,4 +59,38 @@ document.addEventListener("DOMContentLoaded", () => {
   ) {
     window.dispatchEvent(new CustomEvent("portfolio:burning-eyes"));
   }
+
+  const params = new URLSearchParams(window.location.search);
+  const source = params.get("utm_source");
+
+  switch (source) {
+    case "linkedin":
+      window.dispatchEvent(new CustomEvent("portfolio:recruiter"));
+      break;
+    case "github":
+      window.dispatchEvent(new CustomEvent("portfolio:nerd"));
+      break;
+
+    default:
+      break;
+  }
+
+  let typed = "";
+  const target = "adrien";
+
+  window.addEventListener("keyup", (e) => {
+    const key = e.key.toLowerCase();
+
+    typed += key;
+
+    if (!target.startsWith(typed)) {
+      typed = "";
+      return;
+    }
+
+    if (typed === target) {
+      window.dispatchEvent(new CustomEvent("portfolio:thats-me"));
+      typed = "";
+    }
+  });
 });

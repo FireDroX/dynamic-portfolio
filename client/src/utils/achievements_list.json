@@ -35,6 +35,21 @@
     "emoji": "🔄"
   },
   {
+    "name": "Nerd",
+    "description": "Was the source code of this page fun to read ?",
+    "emoji": "🤓"
+  },
+  {
+    "name": "Recruiter",
+    "description": "Are you a recruiter ? If so, you got something special !",
+    "emoji": "💼"
+  },
+  {
+    "name": "Thats me",
+    "description": "Yep, that's me.",
+    "emoji": "👤"
+  },
+  {
     "name": "Cheater",
     "description": "You must cheat to unlock this.",
     "emoji": "🚫"

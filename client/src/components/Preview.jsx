@@ -40,6 +40,7 @@ const Preview = ({ project, variant }) => {
           disableRemotePlayback
           x-webkit-airplay="deny"
           playsInline
+          title="https://github.com/siddharthvaddem/openscreen"
         />
       </div>
     </article>
