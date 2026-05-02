@@ -18,6 +18,12 @@
     "hint": "Explore every pages."
   },
   {
+    "name": "Very Interesting Portfolio",
+    "description": "So you really like this portfolio...",
+    "emoji": "⏳",
+    "hint": "One minute is all it takes."
+  },
+  {
     "name": "Wrong Password",
     "description": "Did you think my password was easy to guess? Think again.",
     "emoji": "🔒",
@@ -60,10 +66,16 @@
     "hint": "Say my name."
   },
   {
+    "name": "Konami Code",
+    "description": "↑↑↓↓←→←→BA",
+    "emoji": "🎮",
+    "hint": "First cheat code in history."
+  },
+  {
     "name": "Cheater",
     "description": "You must cheat to unlock this.",
     "emoji": "🚫",
-    "hint": "window.dispatchEvent()"
+    "hint": "window.dispatchEvent(new CustomEvent(\"portfolio:cheater\"))"
   },
   {
     "name": "Achievement Hunter",

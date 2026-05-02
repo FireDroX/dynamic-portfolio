@@ -1,5 +1,5 @@
 import "./App.css";
-import { lazy, useState, useEffect } from "react";
+import { lazy, useState, useEffect, useRef } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -15,9 +15,41 @@ const About = lazy(() => import("./pages/About"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const Achievements = lazy(() => import("./pages/Achievements"));
 
+const TIMER = 1 * 60 * 1000;
+
+function useTimerAchievement() {
+  const startTimeRef = useRef(Date.now());
+  const timeoutRef = useRef(null);
+  const triggeredRef = useRef(false);
+
+  useEffect(() => {
+    const check = () => {
+      if (triggeredRef.current) return;
+
+      const elapsed = Date.now() - startTimeRef.current;
+
+      if (elapsed >= TIMER) {
+        triggeredRef.current = true;
+
+        window.dispatchEvent(
+          new CustomEvent("portfolio:very-interesting-portfolio"),
+        );
+      } else {
+        timeoutRef.current = setTimeout(check, TIMER - elapsed);
+      }
+    };
+
+    check();
+
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+}
+
 function App() {
   const [isAuth, setIsAuth] = useState(null);
   const location = useLocation();
+
+  useTimerAchievement();
 
   // Vérification auth
   useEffect(() => {

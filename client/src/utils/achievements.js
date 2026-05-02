@@ -80,20 +80,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let typed = "";
-  const target = "adrien";
+  const targets = [
+    "adrien",
+    "arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba",
+  ];
 
   window.addEventListener("keyup", (e) => {
     const key = e.key.toLowerCase();
 
     typed += key;
 
-    if (!target.startsWith(typed)) {
+    if (!targets.some((t) => t.startsWith(typed))) {
       typed = "";
       return;
     }
 
-    if (typed === target) {
+    if (typed === targets[0]) {
       window.dispatchEvent(new CustomEvent("portfolio:thats-me"));
+      typed = "";
+    }
+    if (typed === targets[1]) {
+      window.dispatchEvent(new CustomEvent("portfolio:konami-code"));
       typed = "";
     }
   });
@@ -124,4 +131,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   window.dispatchEvent(new CustomEvent("portfolio:update"));
+
+  window.addEventListener("portfolio:cheater", () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(["cheater"]));
+    localStorage.removeItem("portfolio_explorer");
+    localStorage.removeItem("portfolio_visited");
+    alert("You cheater !\nEverything got deleted");
+    window.dispatchEvent(new CustomEvent("portfolio:update"));
+  });
 });

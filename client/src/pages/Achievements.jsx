@@ -34,7 +34,7 @@ const Achievements = () => {
     <div className="App">
       <header>
         <small>achievements</small>
-        <h1>Secret</h1>
+        <h1>Secrets</h1>
       </header>
 
       <div className="achievements-list">
