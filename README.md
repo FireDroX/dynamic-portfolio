@@ -64,6 +64,19 @@ Il dispose d’un **système d’administration sécurisé** permettant de gére
 
 ---
 
+### 📚 Page `/about`
+
+- Presentation
+- Snake Git Contributions
+
+---
+
+### 🥚 Page `/achievements`
+
+- Easter eggs custom
+
+---
+
 ### 🔑 Authentification
 
 - Système de login sécurisé
@@ -75,12 +88,19 @@ Il dispose d’un **système d’administration sécurisé** permettant de gére
 ## 🧩 Structure du projet
 
 ```
-
-/client        → Frontend React
-/api           → Backend Express
-/projects      → Fichiers des projets
-
+/client           → Frontend React
+  /src
+    /assets       → Images / Videos
+    /components   → Composents reutilisables
+    /pages        → Pages du site
+    /utils        → Fichiers utiles
+/api              → Backend Express
+/middleware       → Auth
+/projects         → Fichiers des projets
+/utils            → Fichiers utiles
 ```
+
+Voir [TREE.md](./TREE.md)
 
 ---
 
@@ -88,26 +108,21 @@ Il dispose d’un **système d’administration sécurisé** permettant de gére
 
 ```bash
 git clone https://github.com/FireDroX/dynamic-portfolio.git
-cd portfolio
+cd dynamic-portfolio
 ```
 
 ### Docker
 
 ```bash
-docker build -t portfolio-image .
-
-docker run -d \
-  -p 3000:3000 \
-  --name portfolio \
-  -v portfolio_projects:/app/projects \
-  portfolio-image
+./build.sh
+# Ce fichier est fait pour MON utilisation (a modifier)
 ```
 
 ### Backend
 
 ```bash
 npm install
-npm run dev
+npm run start
 ```
 
 ### Frontend
@@ -115,7 +130,7 @@ npm run dev
 ```bash
 cd client
 npm install
-npm start
+npm run start
 ```
 
 ---
