@@ -51,6 +51,12 @@ router.get("/", async (req, res) => {
           <priority>0.9</priority>
         </url>
 
+        <url>
+          <loc>${baseUrl}/achievements</loc>
+          <changefreq>weekly</changefreq>
+          <priority>0.9</priority>
+        </url>
+
         ${projectUrls}
 
       </urlset>`;

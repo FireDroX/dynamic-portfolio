@@ -40,7 +40,7 @@ app.use(async (req, res) => {
   try {
     let title = "Portfolio Adrien | Développeur React & Node.js";
     let description;
-    let image = "https://portfolio.addrien.fr/favicon.svg";
+    let image = "https://portfolio.addrien.fr/preview.png";
 
     // PAGE PROJET
     if (req.path.startsWith("/projects/")) {

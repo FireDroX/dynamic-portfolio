@@ -10,7 +10,7 @@ router.get("/:slug", async (req, res) => {
     const project = await getProjectBySlug(slug);
 
     if (!project || !project.image) {
-      return res.redirect("/favicon.svg");
+      return res.redirect("/preview.png");
     }
 
     const width = 1200;
@@ -91,7 +91,7 @@ router.get("/:slug", async (req, res) => {
     res.send(canvas.toBuffer());
   } catch (err) {
     console.error(err);
-    res.redirect("/favicon.svg");
+    res.redirect("/preview.png");
   }
 });
 
