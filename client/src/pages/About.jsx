@@ -17,24 +17,43 @@ const About = () => {
         <small>portfolio</small>
         <h1>Adrien</h1>
         <p>
-          Je suis <strong>Adrien</strong>, je suis sur Terre depuis{" "}
-          <mark className="mark-daysalive">{calcDays()}</mark> jours.
+          J'ai actuellement <mark className="mark-daysalive">{calcDays()}</mark>{" "}
+          jours.
         </p>
         <p>
-          Je suis développeur <strong>web</strong> et étudiant en informatique à
-          l’
-          <strong>ESGI</strong>.
+          Je suis développeur <strong>web</strong> à mes heures perdu, et
+          étudiant en informatique en première année à l’
+          <strong>ESGI</strong> Paris.
         </p>
         <br />
         <p>
-          Je conçois et développe des projets en JavaScript, notamment avec{" "}
-          <strong>React</strong> et <strong>Node.js</strong>.
+          Je conçois et développe des projets le plus souvent en JavaScript,
+          notamment avec <strong>React.js</strong> en Front et{" "}
+          <strong>Node.js / Express</strong> en Back.
           <br />
         </p>
         <br />
+        <p>Par exemple, ce site est fait avec: </p>
+        <ul className="about-stack">
+          <li>
+            <span>Frontend</span>: React.js
+          </li>
+          <li>
+            <span>Backend</span>: Node.js + Express.js
+          </li>
+          <li>
+            <span>Base de données</span>: SQL Express
+          </li>
+          <li>
+            <span>Hébergement</span>: Docker local + Cloudflare Tunnel
+          </li>
+          <li>
+            <span>Versioning</span>: GitHub
+          </li>
+        </ul>
         <p>
-          Ce portfolio est un espace où j’expérimente, j’apprends et je
-          construis différents projets que tu peux tester directement en ligne.
+          C'est un espace dynamique où j’expérimente, j’apprends et j'affiche
+          différents projets testable directement en ligne.
         </p>
         <picture>
           <source

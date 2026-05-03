@@ -39,7 +39,7 @@ const Home = () => {
         <small>portfolio</small>
         <h1>Adrien</h1>
         <p>
-          Etudiant en informatique à l'<strong>ESGI</strong>.
+          Etudiant en première année à l'<strong>ESGI</strong> Paris.
         </p>
       </header>
       <div className="blank"></div>

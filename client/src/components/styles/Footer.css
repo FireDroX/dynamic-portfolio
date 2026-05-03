@@ -43,3 +43,9 @@ footer a:hover {
     display: none;
   }
 }
+
+@media (max-width: 510px) {
+  footer > p > span:last-child {
+    display: none;
+  }
+}
