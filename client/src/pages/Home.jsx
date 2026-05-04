@@ -30,8 +30,8 @@ const Home = () => {
     {
       name: "Space Invaders",
       description:
-        "Space Invaders version StarWars. Pilotez un personnage et évitez les ennemis en utilisant différents vaisseaux. La difficulté du jeu évolue en cinq vagues en fonction du le score de l’utilisateur.",
-      stack: ["Langage C / ncurses.h", "StarWars"],
+        "Le joueur pilote un vaisseau et doit survivre face à des vagues d’ennemis dont la difficulté augmente progressivement en fonction du score. Le jeu se déroule dans un univers inspiré de la science-fiction, avec des visuels en ASCII.",
+      stack: ["C / ncurses"],
       fileName: "space_invaders",
       image: "preview3",
     },
