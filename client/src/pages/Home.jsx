@@ -11,7 +11,11 @@ const Home = () => {
       name: "PokeFlip Online",
       description:
         'Jeu de mémoire "matching cards" solo et multijoueur temps-reel sur le theme de Pokemon. L\'objectif est de trouver un maximum de paires avant son adversaire.',
-      stack: ["ReactJS / ExpressJS", "Render / Supabase", "Socket.io"],
+      stack: [
+        "React.js / Express.js",
+        "Socket.io",
+        "Docker + Cloudflare Tunnel / SQL Express",
+      ],
       fileName: "pokeflip",
       image: "preview1",
     },
@@ -19,7 +23,7 @@ const Home = () => {
       name: "LFF – Classements",
       description:
         "LFF est une plateforme web connectée à un serveur Discord permettant de gérer et afficher des classements dynamiques  hebdomadaire.",
-      stack: ["ReactJS / ExpressJS", "Render / Supabase", "Discord OAuth2"],
+      stack: ["React.js / Express.js", "Render / Supabase", "Discord OAuth2"],
       fileName: "lff",
       image: "preview2",
     },

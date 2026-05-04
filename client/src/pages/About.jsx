@@ -45,7 +45,7 @@ const About = () => {
             <span>Base de données</span>: SQL Express
           </li>
           <li>
-            <span>Hébergement</span>: Docker local + Cloudflare Tunnel
+            <span>Hébergement</span>: Docker + Cloudflare Tunnel
           </li>
           <li>
             <span>Versioning</span>: GitHub
