@@ -72,6 +72,12 @@
     "hint": "First cheat code in history."
   },
   {
+    "name": "BARCODE",
+    "description": "A great nutriscore",
+    "emoji": "📷",
+    "hint": "Scan a product."
+  },
+  {
     "name": "Cheater",
     "description": "You must cheat to unlock this.",
     "emoji": "🚫",
