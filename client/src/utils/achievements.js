@@ -139,4 +139,15 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("You cheater !\nEverything got deleted");
     window.dispatchEvent(new CustomEvent("portfolio:update"));
   });
+
+  window.addEventListener("message", (event) => {
+    if (
+      !["https://portfolio.addrien.fr", "http://localhost:3000"].includes(
+        event.origin,
+      )
+    )
+      return;
+
+    window.dispatchEvent(new CustomEvent(event.type));
+  });
 });
