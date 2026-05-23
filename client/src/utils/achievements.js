@@ -148,6 +148,6 @@ document.addEventListener("DOMContentLoaded", () => {
     )
       return;
 
-    window.dispatchEvent(new CustomEvent(event.type));
+    window.dispatchEvent(new CustomEvent(event.data.type));
   });
 });
