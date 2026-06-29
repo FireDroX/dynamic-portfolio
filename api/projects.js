@@ -11,8 +11,8 @@ router.get("/", async (req, res) => {
   const db = await getPool();
 
   try {
-    const results = await db.query`SELECT * FROM projects`;
-    res.send(results.recordset);
+    const [rows] = await db.query("SELECT * FROM projects");
+    res.send(rows);
   } catch (error) {
     return res.send("Erreur DB");
   }

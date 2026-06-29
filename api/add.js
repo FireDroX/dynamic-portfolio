@@ -68,7 +68,12 @@ router.post("/", auth, (req, res) => {
 
       try {
         const pool = await getPool();
-        await pool.query`INSERT INTO projects (name, description, fileName, image) VALUES (${name},${description},${folderName},${imageBase64})`;
+
+        await pool.query(
+          "INSERT INTO projects (name, description, fileName, image) VALUES (?, ?, ?, ?)",
+          [name, description, folderName, imageBase64],
+        );
+
         res.redirect("/panel");
       } catch (error) {
         return res.send("Erreur DB");

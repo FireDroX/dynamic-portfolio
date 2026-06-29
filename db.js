@@ -1,13 +1,14 @@
-const sql = require("mssql");
+const mysql = require("mysql2/promise");
 
-const config = {
+const pool = mysql.createPool({
+  host: process.env.SQL_SERVER,
+  port: process.env.SQL_PORT,
   user: process.env.SQL_USER,
   password: process.env.SQL_PASSWORD,
-  server: process.env.SQL_SERVER,
-  database: "portfolio",
-  options: {
-    trustServerCertificate: true,
-  },
-};
+  database: process.env.SQL_DBNAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
 
-module.exports = sql.connect(config);
+module.exports = pool;

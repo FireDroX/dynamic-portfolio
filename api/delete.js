@@ -11,16 +11,16 @@ router.post("/", auth, async (req, res) => {
 
   try {
     const pool = await getPool();
-    const results =
-      await pool.query`SELECT fileName FROM projects WHERE name = ${name}`;
+    const [results] =
+      await pool.query("SELECT fileName FROM projects WHERE name = ?", [name]);
 
     const projectPath = path.join(
       __dirname,
       "../projects",
-      results.recordset[0].fileName,
+      results[0].fileName,
     );
     fs.rm(projectPath, { recursive: true, force: true }, async () => {
-      await pool.query`DELETE FROM projects WHERE name = ${name}`;
+      await pool.query("DELETE FROM projects WHERE name = ?", [name]);
       res.json({ success: true });
     });
   } catch (error) {

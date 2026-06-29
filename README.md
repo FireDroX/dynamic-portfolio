@@ -12,7 +12,7 @@ Il dispose d’un **système d’administration sécurisé** permettant de gére
 
 - **Frontend :** React.js
 - **Backend :** Node.js + Express.js
-- **Base de données :** SQL Express
+- **Base de données :** MySQL 2
 - **Auth :** Session
 - **Rendering projets :** iframe
 
@@ -152,7 +152,7 @@ SQL_SERVER=url
 
 ---
 
-## 📊 Base de données (SQL EXPRESS)
+## 📊 Base de données (MySQL 2)
 
 ### Table `projects`
 

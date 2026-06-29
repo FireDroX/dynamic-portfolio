@@ -13,8 +13,8 @@ router.post("/", auth, async (req, res) => {
 
   try {
     const pool = await getPool();
-    await pool.query`SELECT * FROM projects WHERE name = ${originalName}`;
-    await pool.query`UPDATE projects SET name = ${name}, description = ${description} WHERE name = ${originalName}`;
+    await pool.query("SELECT * FROM projects WHERE name = ?", [originalName]);
+    await pool.query("UPDATE projects SET name = ?, description = ? WHERE name = ?", [name, description, originalName]);
     res.json({ success: true });
   } catch (error) {
     return res.status(404).json({ error: "Projet introuvable" });

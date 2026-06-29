@@ -8,8 +8,7 @@ router.get("/", async (req, res) => {
 
   try {
     const pool = await getPool();
-    const results = await pool.query`SELECT * FROM projects`;
-    const projects = results.recordset;
+    const [projects] = await pool.query("SELECT * FROM projects");
 
     const projectUrls = projects
       .map(

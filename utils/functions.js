@@ -13,8 +13,10 @@ export async function getPool() {
 export async function getProjectsCached(metaCache) {
   if (!metaCache.projects || Date.now() - metaCache.lastFetch > metaCache.ttl) {
     const pool = await getPool();
-    const results = await pool.query`SELECT * FROM projects`;
-    metaCache.projects = results.recordset;
+
+    const [rows] = await pool.query("SELECT * FROM projects");
+
+    metaCache.projects = rows;
     metaCache.lastFetch = Date.now();
   }
 
@@ -23,7 +25,10 @@ export async function getProjectsCached(metaCache) {
 
 export async function getProjectBySlug(slug) {
   const pool = await getPool();
-  const result =
-    await pool.query`SELECT * FROM projects WHERE fileName = ${slug}`;
-  return result.recordset[0];
+
+  const [rows] = await pool.query("SELECT * FROM projects WHERE fileName = ?", [
+    slug,
+  ]);
+
+  return rows[0] || null;
 }
