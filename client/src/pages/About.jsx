@@ -42,7 +42,7 @@ const About = () => {
             <span>Backend</span>: Node.js + Express.js
           </li>
           <li>
-            <span>Base de données</span>: SQL Express
+            <span>Base de données</span>: MySQL
           </li>
           <li>
             <span>Hébergement</span>: Docker + Cloudflare Tunnel

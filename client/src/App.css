@@ -21,7 +21,7 @@ body {
 }
 
 .App {
-  --margin: 96px;
+  --margin: 64px;
   margin-left: var(--margin);
   margin-right: var(--margin);
 
