@@ -11,7 +11,8 @@ docker rm portfolio 2>/dev/null
 
 echo "🚀 Lancement container..."
 docker run -d \
-  -p 127.0.0.1:3000:3000 \
+  -p 127.0.0.1:3333:3000 \
+  --network mariadb-network \
   --name portfolio \
   --restart unless-stopped \
   -v portfolio_projects:/app/projects \
