@@ -1,21 +1,14 @@
 import "./styles/Navbar.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { readObject, writeJson } from "../utils/storage";
 
 const Navbar = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const path = location.pathname.split("/")[1];
-
-  const handleClick = (path) => {
-    navigate(path);
-
-    const page = path.split("/")[1] || "home";
-    const explorer = JSON.parse(
-      localStorage.getItem("portfolio_explorer") || "{}",
-    );
+  const trackPage = (page) => {
+    const explorer = readObject("portfolio_explorer");
     explorer[page] = true;
-    localStorage.setItem("portfolio_explorer", JSON.stringify(explorer));
+    writeJson("portfolio_explorer", explorer);
 
     if (explorer.home && explorer.about && explorer.projects) {
       window.dispatchEvent(new CustomEvent("portfolio:explorer"));
@@ -27,24 +20,28 @@ const Navbar = () => {
       <div className="navbar">
         <p>portfolio</p>
         <div>
-          <span
-            className={path === "" ? "nav-active" : ""}
-            onClick={() => handleClick("/")}
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) => (isActive ? "nav-active" : "")}
+            onClick={() => trackPage("home")}
           >
             home
-          </span>
-          <span
-            className={path === "about" ? "nav-active" : ""}
-            onClick={() => handleClick("/about")}
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) => (isActive ? "nav-active" : "")}
+            onClick={() => trackPage("about")}
           >
             about
-          </span>
-          <span
-            className={path === "projects" ? "nav-active" : ""}
-            onClick={() => handleClick("/projects")}
+          </NavLink>
+          <NavLink
+            to="/projects"
+            className={({ isActive }) => (isActive ? "nav-active" : "")}
+            onClick={() => trackPage("projects")}
           >
             projects
-          </span>
+          </NavLink>
         </div>
         <button onClick={() => navigate("/panel")}>login</button>
       </div>

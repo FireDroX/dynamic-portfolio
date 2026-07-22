@@ -2,22 +2,47 @@
   margin: 0;
   padding: 0;
   border: 0;
-  outline: 0;
   list-style: none;
   text-decoration: none;
   user-select: none;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  transition: all 0.3s ease-out;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar {
-  display: none;
+a,
+button,
+input,
+textarea,
+select {
+  transition:
+    color 0.3s ease-out,
+    background-color 0.3s ease-out,
+    border-color 0.3s ease-out,
+    box-shadow 0.3s ease-out,
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out;
+}
+
+:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *:not(.achievement-popup),
+  *:not(.achievement-popup)::before,
+  *:not(.achievement-popup)::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Default Color */

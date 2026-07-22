@@ -1,15 +1,14 @@
 import "./styles/About.css";
 
+const Jump = ({ br = 1 }) => (
+  <>
+    {Array.from({ length: br }).map((_, index) => (
+      <br key={index} />
+    ))}
+  </>
+);
+
 const MentionsLegales = () => {
-  const Jump = ({ br = 1 }) => {
-    return (
-      <>
-        {Array.from({ length: br }).map((_, i) => (
-          <br key={i} />
-        ))}
-      </>
-    );
-  };
   return (
     <div className="App">
       <header>

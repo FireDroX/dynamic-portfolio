@@ -1,17 +1,17 @@
 # ----------- 1. Build React -----------
-FROM node:20-slim AS client-build
+FROM node:22-slim AS client-build
 
 WORKDIR /app/client
 
 COPY client/package*.json ./
-RUN npm install
+RUN npm ci
 
 COPY client/ .
 RUN npm run build
 
 
 # ----------- 2. Backend -----------
-FROM node:20-slim
+FROM node:22-slim
 
 WORKDIR /app
 
@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y \
 
 # Installer dépendances backend
 COPY package*.json ./
-RUN npm install
+RUN npm ci --omit=dev
 
 # Copier le code backend
 COPY . .

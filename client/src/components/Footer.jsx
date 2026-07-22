@@ -15,9 +15,14 @@ const Footer = () => {
     <footer>
       <p>
         &copy;{" "}
-        <span className="footer-copyright" onClick={handleCount}>
+        <button
+          type="button"
+          className="footer-copyright"
+          onClick={handleCount}
+          aria-label="Copyright"
+        >
           {new Date().getFullYear()}
-        </span>{" "}
+        </button>{" "}
         <span>Tous droits réservés.</span>
       </p>
       <div>

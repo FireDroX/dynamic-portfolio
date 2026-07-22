@@ -1,60 +1,117 @@
 import "./styles/About.css";
+import { Link } from "react-router-dom";
 
-const About = () => {
-  const calcDays = () => {
-    const birthDate = new Date("2004-12-13");
-    const today = new Date();
+const stack = {
+  Frontend: ["React", "JavaScript", "HTML", "CSS", "Figma"],
+  Backend: ["Node.js", "Express", "PHP", "MySQL", "PostgreSQL"],
+  Outils: ["VS Code", "Docker", "Git", "GitHub", "Cloudflare", "AWS"],
+};
 
-    const diffTime = today - birthDate;
-    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+const calcDays = () => {
+  const birthDate = new Date("2004-12-13T00:00:00");
+  return Math.floor((Date.now() - birthDate.getTime()) / 86400000);
+};
 
-    return days;
-  };
+const About = () => (
+  <main className="App about-page">
+    <header className="about-header">
+      <small>portfolio</small>
+      <h1>About</h1>
+      <p>Quelques mots sur mon parcours et ce que j’utilise pour créer.</p>
+    </header>
 
-  return (
-    <div className="App">
-      <header>
-        <small>portfolio</small>
-        <h1>Adrien</h1>
+    <section className="about-summary">
+      <div className="about-summary-copy">
+        <small>présentation</small>
+        <h2>Je construis pour comprendre.</h2>
         <p>
-          J'ai actuellement <mark className="mark-daysalive">{calcDays()}</mark>{" "}
-          jours.
+          Je m’appelle Adrien, je suis étudiant en informatique à l’ESGI Paris.
+          Je développe principalement des projets web avec React et Node.js,
+          mais j’aime aussi sortir de cette stack pour découvrir d’autres
+          manières de programmer.
         </p>
         <p>
-          Je suis développeur <strong>web</strong> à mes heures perdu, et
-          étudiant en informatique en première année à l’
-          <strong>ESGI</strong> Paris.
+          Ce portfolio est mon espace d’expérimentation : les projets ne sont
+          pas seulement présentés, ils peuvent être testés directement.
         </p>
-        <br />
-        <p>
-          Je conçois et développe des projets le plus souvent en JavaScript,
-          notamment avec <strong>React.js</strong> en Front et{" "}
-          <strong>Node.js / Express</strong> en Back.
-          <br />
-        </p>
-        <br />
-        <p>Par exemple, ce site est fait avec: </p>
-        <ul className="about-stack">
-          <li>
-            <span>Frontend</span>: React.js
-          </li>
-          <li>
-            <span>Backend</span>: Node.js + Express.js
-          </li>
-          <li>
-            <span>Base de données</span>: MySQL
-          </li>
-          <li>
-            <span>Hébergement</span>: Docker + Cloudflare Tunnel
-          </li>
-          <li>
-            <span>Versioning</span>: GitHub
-          </li>
-        </ul>
-        <p>
-          C'est un espace dynamique où j’expérimente, j’apprends et j'affiche
-          différents projets testable directement en ligne.
-        </p>
+        <Link to="/projects">Découvrir les projets →</Link>
+      </div>
+
+      <dl className="about-facts">
+        <div>
+          <dt>École</dt>
+          <dd>ESGI Paris</dd>
+        </div>
+        <div>
+          <dt>Focus</dt>
+          <dd>Web et projets interactifs</dd>
+        </div>
+        <div>
+          <dt>Depuis</dt>
+          <dd>{calcDays().toLocaleString("fr-FR")} jours</dd>
+        </div>
+        <div>
+          <dt>GitHub</dt>
+          <dd>
+            <a
+              href="https://github.com/FireDroX"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              FireDroX ↗
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt>LinkedIn</dt>
+          <dd>
+            <a
+              href="https://www.linkedin.com/in/adrien-pourlier/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Moi ↗
+            </a>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section className="about-stack-section">
+      <div className="about-section-title">
+        <small>stack</small>
+        <h2>Ma boîte à outils</h2>
+        <p>Les technologies que j’utilise le plus souvent dans mes projets.</p>
+      </div>
+
+      <div className="about-stack-groups">
+        {Object.entries(stack).map(([category, technologies]) => (
+          <div className="about-stack-group" key={category}>
+            <h3>{category}</h3>
+            <ul>
+              {technologies.map((technology) => (
+                <li key={technology}>{technology}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section className="about-github">
+      <div className="about-github-copy">
+        <small>activité</small>
+        <h2>GitHub</h2>
+        <p>Un aperçu de mon activité — et peut-être un secret à trouver.</p>
+      </div>
+      <button
+        type="button"
+        className="snake-button"
+        onClick={() => {
+          window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
+        }}
+        aria-label="Afficher l’animation des contributions GitHub et découvrir un secret"
+      >
         <picture>
           <source
             media="(prefers-color-scheme: dark)"
@@ -66,31 +123,14 @@ const About = () => {
           />
           <img
             className="snake-svg"
-            alt="github-snake"
+            alt="Animation des contributions GitHub d’Adrien"
             src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-            style={{ cursor: "pointer" }}
-            title="Snake - GitHub"
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
-            }}
+            loading="lazy"
           />
         </picture>
-      </header>
-      <img
-        className="skills-svg"
-        src="https://skillicons.dev/icons?i=c,html,css,react,nodejs,express,mysql,postgres,docker,aws,git,github,figma&theme=dark"
-      />
-      <br />
-      <a href="https://ko-fi.com/G2G01YFONH" target="_blank">
-        <img
-          style={{ border: "0px", height: "36px" }}
-          src="https://storage.ko-fi.com/cdn/kofi3.png?v=6"
-          border="0"
-          alt="Buy Me a Coffee at ko-fi.com"
-        />
-      </a>
-    </div>
-  );
-};
+      </button>
+    </section>
+  </main>
+);
 
 export default About;

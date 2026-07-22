@@ -2,9 +2,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 24px 48px;
-  border-top: 2px solid #48484833;
-  margin-top: 64px;
+  padding: 1.5rem 3rem;
+  border-top: 0.125rem solid #48484833;
+  margin-top: 4rem;
   color: var(--accent);
 }
 
@@ -12,7 +12,7 @@ footer > div {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 3rem;
 }
 
 footer a {
@@ -28,15 +28,18 @@ footer a:hover {
 .footer-copyright {
   cursor: pointer;
   text-decoration: underline 1px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
 }
 
 @media (max-width: 650px) {
   footer {
-    padding: 24px 24px;
+    padding: 1.5rem;
   }
 
   footer > div {
-    gap: 24px;
+    gap: 1.5rem;
   }
 
   .footer-copyright {

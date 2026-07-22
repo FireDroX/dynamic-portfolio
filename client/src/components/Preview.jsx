@@ -1,47 +1,62 @@
 import "./styles/Preview.css";
 import { useNavigate } from "react-router-dom";
 
+import preview1 from "../assets/preview1.mp4";
+import preview1Poster from "../assets/preview1_loader.png";
+import preview2 from "../assets/preview2.mp4";
+import preview2Poster from "../assets/preview2_loader.png";
+import preview3 from "../assets/preview3.mp4";
+import preview3Poster from "../assets/preview3_loader.png";
+
+const previews = {
+  preview1: { video: preview1, poster: preview1Poster },
+  preview2: { video: preview2, poster: preview2Poster },
+  preview3: { video: preview3, poster: preview3Poster },
+};
+
 const Preview = ({ project, variant }) => {
   const navigate = useNavigate();
-  const variants = ["1", "2", "3"];
-
-  if (!variants.includes(variant)) return;
-
-  const imageSrc = require(`../assets/${project.image}.mp4`);
-  const imagePoster = require(`../assets/${project.image}_loader.png`);
+  const preview = previews[project.image];
+  if (!preview || !["1", "2", "3"].includes(variant)) return null;
 
   return (
-    <article className={"preview-container " + "preview-var" + variant}>
-      <div>
+    <article className={`preview-container preview-var${variant}`}>
+      <div className="preview-copy">
+        <div className="preview-meta">
+          <span>Projet sélectionné</span>
+        </div>
         <h3>{project.name}</h3>
-        <br />
         <p>{project.description}</p>
-        <br />
-        <ul>
-          {project.stack &&
-            project.stack.map((tech, index) => <li key={index}>{tech}</li>)}
+        <ul className="preview-stack" aria-label="Technologies utilisées">
+          {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
         </ul>
-        <br />
-        <br />
-        <button onClick={() => navigate(`/projects/${project.fileName}`)}>
-          En savoir plus
+        <button
+          type="button"
+          onClick={() => navigate(`/projects/${project.fileName}`)}
+          aria-label={`Découvrir le projet ${project.name}`}
+        >
+          Découvrir le projet
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </button>
       </div>
-      <div>
+
+      <div className="preview-media">
         <video
-          src={imageSrc}
-          poster={imagePoster}
-          alt={project.name}
+          src={preview.video}
+          poster={preview.poster}
           autoPlay
           loop
           muted
-          preload="true"
+          preload="auto"
           disablePictureInPicture
           disableRemotePlayback
           x-webkit-airplay="deny"
           playsInline
-          title="https://github.com/siddharthvaddem/openscreen"
+          title={`Aperçu vidéo du projet ${project.name}`}
         />
+        <span className="preview-media-label">Aperçu en direct</span>
       </div>
     </article>
   );
