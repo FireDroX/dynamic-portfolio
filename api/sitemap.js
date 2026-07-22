@@ -1,11 +1,11 @@
 const { getPool } = require("../utils/functions");
 const express = require("express");
-const { SITE_URL } = require("../config");
+const { getSiteUrl } = require("../config");
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const baseUrl = SITE_URL;
+  const baseUrl = getSiteUrl(req);
 
   try {
     const pool = await getPool();

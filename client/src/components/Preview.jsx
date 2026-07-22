@@ -16,48 +16,47 @@ const previews = {
 
 const Preview = ({ project, variant }) => {
   const navigate = useNavigate();
-  const variants = ["1", "2", "3"];
-
-  if (!variants.includes(variant)) return;
-
   const preview = previews[project.image];
-  const prefersReducedMotion = window.matchMedia?.(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-
-  if (!preview) return null;
+  if (!preview || !["1", "2", "3"].includes(variant)) return null;
 
   return (
     <article className={`preview-container preview-var${variant}`}>
-      <div>
+      <div className="preview-copy">
+        <div className="preview-meta">
+          <span>Projet sélectionné</span>
+        </div>
         <h3>{project.name}</h3>
-        <br />
         <p>{project.description}</p>
-        <br />
-        <ul>
-          {project.stack &&
-            project.stack.map((tech, index) => <li key={index}>{tech}</li>)}
+        <ul className="preview-stack" aria-label="Technologies utilisées">
+          {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
         </ul>
-        <br />
-        <br />
-        <button onClick={() => navigate(`/projects/${project.fileName}`)}>
-          En savoir plus
+        <button
+          type="button"
+          onClick={() => navigate(`/projects/${project.fileName}`)}
+          aria-label={`Découvrir le projet ${project.name}`}
+        >
+          Découvrir le projet
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
         </button>
       </div>
-      <div>
+
+      <div className="preview-media">
         <video
           src={preview.video}
           poster={preview.poster}
-          autoPlay={!prefersReducedMotion}
+          autoPlay
           loop
           muted
-          preload="true"
+          preload="auto"
           disablePictureInPicture
           disableRemotePlayback
           x-webkit-airplay="deny"
           playsInline
-          title="https://github.com/siddharthvaddem/openscreen"
+          title={`Aperçu vidéo du projet ${project.name}`}
         />
+        <span className="preview-media-label">Aperçu en direct</span>
       </div>
     </article>
   );

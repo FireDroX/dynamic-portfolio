@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const routes = require("./api");
-const { SITE_URL } = require("./config");
+const { getSiteUrl } = require("./config");
 
 app.use(
   session({
@@ -24,6 +24,17 @@ app.use(
 app.use(cors());
 app.use(compression());
 app.use(express.json());
+
+app.get("/robots.txt", (req, res) => {
+  const siteUrl = getSiteUrl(req);
+  res.type("text/plain").send(`User-agent: *
+Allow: /
+
+Sitemap: ${siteUrl}/sitemap.xml
+
+Disallow: /api/
+Disallow: /panel/`);
+});
 
 app.use("/", routes);
 
@@ -40,7 +51,7 @@ app.use(async (req, res) => {
       "/": {
         title: "Adrien | Développeur React & Node.js",
         description:
-          "Portfolio d’Adrien, développeur web React et Node.js. Découvrez et testez ses projets interactifs directement en ligne.",
+          "Adrien conçoit des applications web, des jeux et des expériences interactives avec React et Node.js. Découvrez ses projets directement en ligne.",
       },
       "/projects": {
         title: "Projets web interactifs | Portfolio Adrien",
@@ -50,7 +61,7 @@ app.use(async (req, res) => {
       "/about": {
         title: "À propos d’Adrien | Développeur web",
         description:
-          "Découvrez le parcours, les compétences et les technologies d’Adrien, étudiant à l’ESGI et développeur React et Node.js.",
+          "Découvrez le parcours, la façon de travailler et la boîte à outils d’Adrien, étudiant à l’ESGI Paris et développeur web.",
       },
       "/mentions-legales": {
         title: "Mentions légales | Portfolio Adrien",
@@ -64,9 +75,10 @@ app.use(async (req, res) => {
       },
     };
 
+    const siteUrl = getSiteUrl(req);
     let meta = staticPages[pathWithoutTrailingSlash];
     let status = 200;
-    let image = `${SITE_URL}/preview.png`;
+    let image = `${siteUrl}/preview.png`;
 
     const projectMatch = pathWithoutTrailingSlash.match(/^\/projects\/([^/]+)$/);
     if (projectMatch) {
@@ -79,7 +91,7 @@ app.use(async (req, res) => {
           description: project.description,
         };
         if (project.image) {
-          image = `${SITE_URL}/og-image/${encodeURIComponent(slug)}`;
+          image = `${siteUrl}/og-image/${encodeURIComponent(slug)}`;
         }
       } else {
         status = 404;
@@ -106,7 +118,7 @@ app.use(async (req, res) => {
 
     const filePath = path.join(__dirname, "client/build/index.html");
     let html = await require("fs").promises.readFile(filePath, "utf-8");
-    const canonicalUrl = `${SITE_URL}${pathWithoutTrailingSlash === "/" ? "" : pathWithoutTrailingSlash}`;
+    const canonicalUrl = `${siteUrl}${pathWithoutTrailingSlash === "/" ? "" : pathWithoutTrailingSlash}`;
     const escapeAttribute = (value) =>
       String(value || "")
         .replace(/&/g, "&amp;")
@@ -122,6 +134,7 @@ app.use(async (req, res) => {
     html = replaceToken(html, "__DESCRIPTION__", meta.description);
     html = replaceToken(html, "__IMAGE__", image);
     html = replaceToken(html, "__URL__", canonicalUrl);
+    html = replaceToken(html, "__ORIGIN__", siteUrl);
     html = replaceToken(html, "__ROBOTS__", meta.robots || "index, follow");
 
     res.status(status).send(html);

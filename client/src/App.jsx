@@ -91,14 +91,14 @@ function App() {
       {location.pathname === "/" && (
         <Seo
           title="Adrien | Développeur React & Node.js"
-          description="Portfolio d’Adrien, développeur web React et Node.js. Découvrez et testez ses projets interactifs directement en ligne."
+          description="Adrien conçoit des applications web, des jeux et des expériences interactives avec React et Node.js. Découvrez ses projets directement en ligne."
           path="/"
         />
       )}
       {location.pathname === "/about" && (
         <Seo
           title="À propos d’Adrien | Développeur web"
-          description="Découvrez le parcours, les compétences et les technologies d’Adrien, étudiant à l’ESGI et développeur React et Node.js."
+          description="Découvrez le parcours, la façon de travailler et la boîte à outils d’Adrien, étudiant à l’ESGI Paris et développeur web."
           path="/about"
         />
       )}

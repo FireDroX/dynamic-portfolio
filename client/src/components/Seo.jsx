@@ -30,6 +30,23 @@ const Seo = ({
     const imageUrl = new URL(image, window.location.origin).href;
     setMeta('meta[property="og:image"]', "content", imageUrl);
     setMeta('meta[name="twitter:image"]', "content", imageUrl);
+
+    const schema = document.head.querySelector('script[type="application/ld+json"]');
+    if (schema) {
+      schema.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Adrien",
+        url: window.location.origin,
+        jobTitle: "Développeur Web",
+        sameAs: [
+          "https://addrien.fr",
+          "https://portfolio.addrien.fr",
+          "https://github.com/FireDroX",
+          "https://www.linkedin.com/in/adrien-pourlier/",
+        ],
+      });
+    }
   }, [description, image, noIndex, path, title]);
 
   return null;

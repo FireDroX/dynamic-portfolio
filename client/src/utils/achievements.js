@@ -145,12 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.addEventListener("message", (event) => {
-    if (
-      !["https://portfolio.addrien.fr", "http://localhost:3000"].includes(
-        event.origin,
-      )
-    )
-      return;
+    if (event.origin !== window.location.origin) return;
 
     if (typeof event.data?.type === "string") {
       window.dispatchEvent(new CustomEvent(event.data.type));

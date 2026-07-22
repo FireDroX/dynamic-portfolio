@@ -142,6 +142,7 @@ Créer un fichier `.env` côté backend :
 ```env
 PORT=3000
 SITE_URL=https://portfolio.addrien.fr
+SITE_HOSTNAMES=addrien.fr,portfolio.addrien.fr
 
 PANEL_PASSWORD=password
 SESSION_SECRET=secret
@@ -150,6 +151,11 @@ SQL_USER=user
 SQL_PASSWORD=password
 SQL_SERVER=url
 ```
+
+`SITE_URL` sert de repli pour les requêtes dont le domaine n’est pas reconnu.
+Pour les domaines listés dans `SITE_HOSTNAMES`, les canonicales, images Open
+Graph, fichiers `robots.txt` et sitemaps utilisent automatiquement le domaine
+depuis lequel le site est consulté.
 
 ---
 
