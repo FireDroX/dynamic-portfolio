@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 // GET all projects
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   const db = await getPool();
 
   try {
