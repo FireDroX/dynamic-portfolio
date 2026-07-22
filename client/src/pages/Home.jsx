@@ -1,11 +1,9 @@
 import "./styles/Home.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Preview from "../components/Preview";
 
 const Home = () => {
-  const navigate = useNavigate();
-
   const projects = [
     {
       name: "PokeFlip Online",
@@ -52,10 +50,9 @@ const Home = () => {
         <Preview project={projects[1]} variant="2" />
         <Preview project={projects[2]} variant="3" />
       </section>
-      <div className="see-more">
-        <p onClick={() => navigate("/projects")}>Voir plus de projets.</p>
+      <Link className="see-more" to="/projects">
+        <span>Voir plus de projets.</span>
         <svg
-          onClick={() => navigate("/projects")}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -68,7 +65,7 @@ const Home = () => {
             d="m19.5 8.25-7.5 7.5-7.5-7.5"
           />
         </svg>
-      </div>
+      </Link>
     </div>
   );
 };

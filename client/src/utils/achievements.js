@@ -1,5 +1,6 @@
 import "../components/styles/Popup.css";
 import achievements from "./achievements.json";
+import { readArray, writeJson } from "./storage";
 
 new CustomEvent("portfolio");
 
@@ -28,25 +29,28 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener(`portfolio:${name}`, () => {
       const container = getContainer();
 
-      const userAchievements = JSON.parse(
-        localStorage.getItem(STORAGE_KEY) || "[]",
-      );
+      const userAchievements = readArray(STORAGE_KEY);
 
       if (!userAchievements.includes(name)) {
         userAchievements.push(name);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(userAchievements));
+        writeJson(STORAGE_KEY, userAchievements);
         window.dispatchEvent(new CustomEvent("portfolio:update"));
 
         const popup = document.createElement("div");
         popup.className = "achievement-popup";
-        popup.innerHTML = `
-        <div>${a.emoji}</div>
-        <div>
-          <small>🥚 Easter Egg trouvé !</small>
-          <h3>${a.name}</h3>
-          <p>${a.description}</p>
-        </div>
-      `;
+        popup.setAttribute("role", "status");
+
+        const emoji = document.createElement("div");
+        emoji.textContent = a.emoji;
+        const text = document.createElement("div");
+        const label = document.createElement("small");
+        label.textContent = "🥚 Easter Egg trouvé !";
+        const title = document.createElement("h3");
+        title.textContent = a.name;
+        const description = document.createElement("p");
+        description.textContent = a.description;
+        text.append(label, title, description);
+        popup.append(emoji, text);
 
         container.appendChild(popup);
 
@@ -106,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.addEventListener("portfolio:update", () => {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    const stored = readArray(STORAGE_KEY);
 
     const allAchievements = achievements.filter(
       (a) => formatName(a.name) !== "achievement-hunter",
@@ -127,13 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!hasAllAchievements && hasHunter) {
       const updated = stored.filter((a) => a !== hunterKey);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+      writeJson(STORAGE_KEY, updated);
     }
   });
   window.dispatchEvent(new CustomEvent("portfolio:update"));
 
   window.addEventListener("portfolio:cheater", () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(["cheater"]));
+    writeJson(STORAGE_KEY, ["cheater"]);
     localStorage.removeItem("portfolio_explorer");
     localStorage.removeItem("portfolio_visited");
     alert("You cheater !\nEverything got deleted");
@@ -148,6 +152,8 @@ document.addEventListener("DOMContentLoaded", () => {
     )
       return;
 
-    window.dispatchEvent(new CustomEvent(event.data.type));
+    if (typeof event.data?.type === "string") {
+      window.dispatchEvent(new CustomEvent(event.data.type));
+    }
   });
 });

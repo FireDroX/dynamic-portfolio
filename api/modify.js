@@ -6,6 +6,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const stream = require("node:stream");
 const auth = require("../middleware/auth");
+const { parseImageDataUrl } = require("../utils/images");
 
 const router = express.Router();
 const projectsPath = path.join(__dirname, "../projects");
@@ -71,7 +72,12 @@ router.post("/", auth, (req, res) => {
           uploadError = "Le fichier image n'est pas valide.";
           return;
         }
-        image = `data:${info.mimeType};base64,${buffer.toString("base64")}`;
+        const dataUrl = `data:${info.mimeType};base64,${buffer.toString("base64")}`;
+        if (!parseImageDataUrl(dataUrl)) {
+          uploadError = "Le fichier image est incomplet ou invalide.";
+          return;
+        }
+        image = dataUrl;
       }
 
       if (name === "zip") zip = buffer;

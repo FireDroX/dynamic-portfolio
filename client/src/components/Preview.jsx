@@ -21,6 +21,9 @@ const Preview = ({ project, variant }) => {
   if (!variants.includes(variant)) return;
 
   const preview = previews[project.image];
+  const prefersReducedMotion = window.matchMedia?.(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
 
   if (!preview) return null;
 
@@ -45,7 +48,7 @@ const Preview = ({ project, variant }) => {
         <video
           src={preview.video}
           poster={preview.poster}
-          autoPlay
+          autoPlay={!prefersReducedMotion}
           loop
           muted
           preload="true"

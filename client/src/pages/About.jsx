@@ -55,33 +55,44 @@ const About = () => {
           C'est un espace dynamique où j’expérimente, j’apprends et j'affiche
           différents projets testable directement en ligne.
         </p>
-        <picture>
-          <source
-            media="(prefers-color-scheme: dark)"
-            srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-          />
-          <source
-            media="(prefers-color-scheme: light)"
-            srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
-          />
-          <img
-            className="snake-svg"
-            alt="github-snake"
-            src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-            style={{ cursor: "pointer" }}
-            title="Snake - GitHub"
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
-            }}
-          />
-        </picture>
+        <button
+          type="button"
+          className="snake-button"
+          onClick={() => {
+            window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
+          }}
+        >
+          <picture>
+            <source
+              media="(prefers-color-scheme: dark)"
+              srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+            />
+            <source
+              media="(prefers-color-scheme: light)"
+              srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
+            />
+            <img
+              className="snake-svg"
+              alt="Animation des contributions GitHub d’Adrien"
+              src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+              title="Snake - GitHub"
+              loading="lazy"
+            />
+          </picture>
+        </button>
       </header>
       <img
         className="skills-svg"
         src="https://skillicons.dev/icons?i=c,html,css,react,nodejs,express,mysql,postgres,docker,aws,git,github,figma&theme=dark"
+        alt="Technologies utilisées : C, HTML, CSS, React, Node.js, Express, bases de données, Docker, AWS, GitHub et Figma"
+        loading="lazy"
       />
       <br />
-      <a href="https://ko-fi.com/G2G01YFONH" target="_blank">
+      <a
+        href="https://ko-fi.com/G2G01YFONH"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           style={{ border: "0px", height: "36px" }}
           src="https://storage.ko-fi.com/cdn/kofi3.png?v=6"

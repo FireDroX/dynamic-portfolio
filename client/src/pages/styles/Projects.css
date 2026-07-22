@@ -1,9 +1,14 @@
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 300px);
-  column-gap: 64px;
-  row-gap: 96px;
+  grid-template-columns: repeat(auto-fit, 18.75rem);
+  column-gap: 4rem;
+  row-gap: 6rem;
   justify-content: center;
+}
+
+.projects-error {
+  color: var(--accent);
+  text-align: center;
 }
 
 .projects-loading {
@@ -64,10 +69,6 @@
   background:
     radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--secondary) 24%, transparent), transparent 34%),
     color-mix(in srgb, var(--bg) 90%, var(--text));
-}
-
-.project-hero--no-image {
-  grid-template-columns: minmax(0, 48rem);
 }
 
 .project-hero-copy {

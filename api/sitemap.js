@@ -1,10 +1,11 @@
 const { getPool } = require("../utils/functions");
 const express = require("express");
+const { SITE_URL } = require("../config");
 
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const baseUrl = "https://portfolio.addrien.fr";
+  const baseUrl = SITE_URL;
 
   try {
     const pool = await getPool();
@@ -46,12 +47,6 @@ router.get("/", async (req, res) => {
 
         <url>
           <loc>${baseUrl}/mentions-legales</loc>
-          <changefreq>weekly</changefreq>
-          <priority>0.9</priority>
-        </url>
-
-        <url>
-          <loc>${baseUrl}/achievements</loc>
           <changefreq>weekly</changefreq>
           <priority>0.9</priority>
         </url>

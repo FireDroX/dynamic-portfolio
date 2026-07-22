@@ -1,6 +1,7 @@
 const express = require("express");
 const { createCanvas, loadImage } = require("canvas");
 const { getProjectBySlug } = require("../utils/functions");
+const { parseImageDataUrl } = require("../utils/images");
 
 const router = express.Router();
 
@@ -9,7 +10,9 @@ router.get("/:slug", async (req, res) => {
     const { slug } = req.params;
     const project = await getProjectBySlug(slug);
 
-    if (!project || !project.image) {
+    const projectImage = parseImageDataUrl(project?.image);
+
+    if (!project || !projectImage) {
       return res.redirect("/preview.png");
     }
 
@@ -32,10 +35,7 @@ router.get("/:slug", async (req, res) => {
 
     // 📸 Image projet (verticale à gauche)
     if (project?.image) {
-      const base64 = project.image.split(",")[1];
-      const buffer = Buffer.from(base64, "base64");
-
-      const img = await loadImage(buffer);
+      const img = await loadImage(projectImage.buffer);
 
       const imgWidth = 300;
       const imgHeight = 450;
@@ -88,6 +88,7 @@ router.get("/:slug", async (req, res) => {
 
     // 📤 Output
     res.set("Content-Type", "image/png");
+    res.set("Cache-Control", "public, max-age=3600");
     res.send(canvas.toBuffer());
   } catch (err) {
     console.error(err);

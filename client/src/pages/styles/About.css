@@ -12,6 +12,13 @@
   color: var(--bg);
 }
 
+.snake-button {
+  width: 100%;
+  display: block;
+  background: transparent;
+  cursor: pointer;
+}
+
 .about-stack {
   margin-left: 2rem;
   color: var(--accent);

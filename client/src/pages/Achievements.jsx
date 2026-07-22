@@ -3,17 +3,16 @@ import achievements_list from "../utils/achievements.json";
 import { useEffect, useState } from "react";
 
 import Popup from "../components/Popup";
+import { readArray } from "../utils/storage";
 
 const Achievements = () => {
   const [userAchievements, setUserAchievements] = useState(() => {
-    return JSON.parse(localStorage.getItem("portfolio_achievements") || "[]");
+    return readArray("portfolio_achievements");
   });
 
   useEffect(() => {
     const handleStorage = () => {
-      const updated = JSON.parse(
-        localStorage.getItem("portfolio_achievements") || "[]",
-      );
+      const updated = readArray("portfolio_achievements");
       setUserAchievements(updated);
     };
 

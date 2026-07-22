@@ -20,7 +20,7 @@
   height: 1.5rem;
 }
 
-.see-more > p:hover,
-.see-more > svg:hover {
-  cursor: pointer;
+.see-more:hover {
+  color: var(--text);
+  transform: translateY(3px);
 }

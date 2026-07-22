@@ -5,6 +5,8 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Loadable from "./components/Loadable";
+import Seo from "./components/Seo";
+import { readNumber, writeNumber } from "./utils/storage";
 
 // Lazy pages
 const Home = lazy(() => import("./pages/Home"));
@@ -67,9 +69,8 @@ function App() {
       }
     };
 
-    const visited =
-      (parseInt(localStorage.getItem("portfolio_visited")) || 0) + 1;
-    localStorage.setItem("portfolio_visited", visited);
+    const visited = readNumber("portfolio_visited") + 1;
+    writeNumber("portfolio_visited", visited);
     if (visited === 42) {
       window.dispatchEvent(new CustomEvent("portfolio:portfolio-enjoyer"));
     }
@@ -77,12 +78,53 @@ function App() {
     checkAuth();
   }, []);
 
-  // Loader global
-  if (isAuth === null) return <div className="spinner" />;
+  const authLoader = (
+    <main id="Loader" aria-label="Vérification de la session">
+      <div className="spinner" />
+    </main>
+  );
 
   return (
     <>
       <Navbar />
+
+      {location.pathname === "/" && (
+        <Seo
+          title="Adrien | Développeur React & Node.js"
+          description="Portfolio d’Adrien, développeur web React et Node.js. Découvrez et testez ses projets interactifs directement en ligne."
+          path="/"
+        />
+      )}
+      {location.pathname === "/about" && (
+        <Seo
+          title="À propos d’Adrien | Développeur web"
+          description="Découvrez le parcours, les compétences et les technologies d’Adrien, étudiant à l’ESGI et développeur React et Node.js."
+          path="/about"
+        />
+      )}
+      {location.pathname === "/mentions-legales" && (
+        <Seo
+          title="Mentions légales | Portfolio Adrien"
+          description="Mentions légales et politique de confidentialité du portfolio d’Adrien."
+          path="/mentions-legales"
+        />
+      )}
+      {location.pathname === "/achievements" && (
+        <Seo
+          title="Secrets et achievements | Portfolio Adrien"
+          description="Les secrets cachés dans le portfolio d’Adrien."
+          path="/achievements"
+          noIndex
+        />
+      )}
+      {location.pathname.startsWith("/panel") && (
+        <Seo
+          title="Administration | Portfolio Adrien"
+          description="Espace d’administration du portfolio."
+          path={location.pathname}
+          noIndex
+        />
+      )}
 
       <Routes location={location}>
         <Route path="/" element={Loadable(Home)} />
@@ -93,7 +135,9 @@ function App() {
         <Route
           path="/panel/login"
           element={
-            isAuth ? (
+            isAuth === null ? (
+              authLoader
+            ) : isAuth ? (
               <Navigate to="/panel" replace />
             ) : (
               Loadable(Login, { onLogin: () => setIsAuth(true) })
@@ -104,7 +148,9 @@ function App() {
         <Route
           path="/panel/*"
           element={
-            isAuth ? (
+            isAuth === null ? (
+              authLoader
+            ) : isAuth ? (
               Loadable(Panel, { onLogout: () => setIsAuth(false) })
             ) : (
               <Navigate to="/panel/login" replace />
@@ -115,10 +161,16 @@ function App() {
         <Route path="/about" element={Loadable(About)} />
         <Route path="/mentions-legales" element={Loadable(MentionsLegales)} />
         <Route path="/achievements" element={Loadable(Achievements)} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       <Footer />
-      <div id="achievement-popup-container"></div>
+      <div
+        id="achievement-popup-container"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
     </>
   );
 }

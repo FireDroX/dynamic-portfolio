@@ -141,6 +141,7 @@ Créer un fichier `.env` côté backend :
 
 ```env
 PORT=3000
+SITE_URL=https://portfolio.addrien.fr
 
 PANEL_PASSWORD=password
 SESSION_SECRET=secret

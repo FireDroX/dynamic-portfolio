@@ -2,32 +2,56 @@ import "./styles/Projects.css";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
+import FormattedDescription from "../components/FormattedDescription";
 import Project from "../components/Project";
+import Seo from "../components/Seo";
+import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
 
 const Projects = () => {
   const { project } = useParams();
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
+  const [currentProject, setCurrentProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [previewLoading, setPreviewLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [loadedRoute, setLoadedRoute] = useState(null);
+  const routeKey = project || "projects-list";
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchData = async () => {
       setLoading(true);
+      setError(false);
+      setPreviewLoading(true);
       try {
-        const res = await fetch("/api/projects", { credentials: "include" });
+        const endpoint = project
+          ? `/api/projects/${encodeURIComponent(project)}/meta`
+          : "/api/projects";
+        const res = await fetch(endpoint, {
+          credentials: "include",
+          signal: controller.signal,
+        });
+        if (!res.ok) throw new Error(String(res.status));
         const data = await res.json();
-        setProjects(data);
+        if (project) setCurrentProject(data);
+        else setProjects(data);
       } catch (err) {
-        console.error(err);
+        if (err.name !== "AbortError") setError(true);
       } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) {
+          setLoadedRoute(routeKey);
+          setLoading(false);
+        }
       }
     };
     fetchData();
-  }, [project]);
 
-  if (loading) {
+    return () => controller.abort();
+  }, [project, routeKey]);
+
+  if (loading || loadedRoute !== routeKey) {
     return (
       <main className="App projects-loading" aria-live="polite">
         <div className="spinner" />
@@ -37,19 +61,18 @@ const Projects = () => {
   }
 
   if (project) {
-    const currentProject = projects.find((p) => p.fileName === project);
+    if (error || !currentProject) return <Navigate to="/projects" replace />;
 
-    if (!currentProject) return <Navigate to="/projects" replace />;
-
-    const formattedDescription = currentProject.description?.replace(
-      /\[([^\]]+)\]\(([^)]+)\)/g,
-      '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
-    );
-
-    const hasImage = currentProject.image?.length > 37;
+    const hasImage = Boolean(currentProject.hasImage);
 
     return (
       <main className="App project-detail">
+        <Seo
+          title={`${currentProject.name} | Portfolio Adrien`}
+          description={currentProject.description}
+          path={`/projects/${currentProject.fileName}`}
+          image={hasImage ? `/og-image/${currentProject.fileName}` : undefined}
+        />
         <button className="project-back" onClick={() => navigate("/projects")}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="m15 18-6-6 6-6" />
@@ -57,11 +80,13 @@ const Projects = () => {
           Tous les projets
         </button>
 
-        <section className={`project-hero ${hasImage ? "" : "project-hero--no-image"}`}>
+        <section className="project-hero">
           <div className="project-hero-copy">
             <small>Projet interactif</small>
             <h1>{currentProject.name}</h1>
-            <p dangerouslySetInnerHTML={{ __html: formattedDescription }} />
+            <p>
+              <FormattedDescription>{currentProject.description}</FormattedDescription>
+            </p>
             <a
               className="project-open"
               href={`/api/projects/${project}`}
@@ -75,12 +100,20 @@ const Projects = () => {
             </a>
           </div>
 
-          {hasImage && (
-            <figure className="project-hero-visual">
-              <img src={currentProject.image} alt={`Aperçu de ${currentProject.name}`} />
-              <figcaption>aperçu / {currentProject.fileName}</figcaption>
-            </figure>
-          )}
+          <figure className="project-hero-visual">
+            <img
+              src={
+                hasImage
+                  ? `/api/projects/${currentProject.fileName}/image`
+                  : DEFAULT_PROJECT_IMAGE
+              }
+              alt={`Aperçu de ${currentProject.name}`}
+              onError={(event) => {
+                event.currentTarget.src = DEFAULT_PROJECT_IMAGE;
+              }}
+            />
+            <figcaption>aperçu / {currentProject.fileName}</figcaption>
+          </figure>
         </section>
 
         <section className="project-preview" aria-label={`Démo de ${currentProject.name}`}>
@@ -109,6 +142,11 @@ const Projects = () => {
 
   return (
     <div className="App">
+      <Seo
+        title="Projets web interactifs | Portfolio Adrien"
+        description="Découvrez les projets web d’Adrien : applications React, expériences interactives et créations full-stack testables en ligne."
+        path="/projects"
+      />
       <header>
         <small>portfolio</small>
         <h1>Projects</h1>
@@ -117,7 +155,9 @@ const Projects = () => {
         </p>
       </header>
       <section className="projects-grid">
-        {projects.length === 0 ? (
+        {error ? (
+          <p className="projects-error">Impossible de charger les projets pour le moment.</p>
+        ) : projects.length === 0 ? (
           <Project
             p={{
               name: "No projects !",

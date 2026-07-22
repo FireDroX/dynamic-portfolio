@@ -8,7 +8,7 @@ body {
     rgba(123, 123, 123, 0.15) 1px,
     transparent 1px
   );
-  background-size: 14px 14px;
+  background-size: 0.875rem 0.875rem;
   background-color: var(--bg);
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 .App {
-  --margin: 64px;
+  --margin: 6rem;
   margin-left: var(--margin);
   margin-right: var(--margin);
 
@@ -30,13 +30,13 @@ body {
 }
 
 header {
-  margin-top: 78px;
-  margin-bottom: 78px;
+  margin-top: 4.875rem;
+  margin-bottom: 4.875rem;
 }
 
 header > small {
   text-transform: uppercase;
-  letter-spacing: 3.6px;
+  letter-spacing: 0.225rem;
   color: var(--secondary);
 }
 
@@ -64,8 +64,8 @@ h5 {
 }
 
 html {
-  font-size: 100%;
-} /* 16px */
+  font-size: 80%;
+}
 
 h1 {
   font-size: 4.21rem; /* 67.36px */
@@ -96,10 +96,10 @@ small {
 }
 
 .spinner {
-  width: 48px;
-  height: 48px;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  border: 5px solid var(--bg);
+  border: 0.3125rem solid var(--bg);
   border-top-color: var(--text);
   animation: spin 900ms linear infinite;
   box-sizing: border-box;
@@ -122,14 +122,18 @@ small {
 }
 
 @media (max-width: 768px) {
+  html {
+    font-size: 100%;
+  }
+
   .App {
-    --margin: 24px;
+    --margin: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .App {
-    --margin: 12px;
+    --margin: 0.75rem;
   }
 }
 
