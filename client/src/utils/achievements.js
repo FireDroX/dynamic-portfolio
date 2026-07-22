@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   achievements.forEach((a) => {
     const name = formatName(a.name);
 
-    window.addEventListener(`portfolio:${name}`, (e) => {
+    window.addEventListener(`portfolio:${name}`, () => {
       const container = getContainer();
 
       const userAchievements = JSON.parse(

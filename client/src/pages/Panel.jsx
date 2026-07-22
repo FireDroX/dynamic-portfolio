@@ -34,6 +34,8 @@ const Panel = ({ onLogout }) => {
   }, [onLogout]);
 
   useEffect(() => {
+    // Initial synchronization with the administration API.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProjects();
   }, [fetchProjects]);
 

@@ -1,17 +1,31 @@
 import "./styles/Preview.css";
 import { useNavigate } from "react-router-dom";
 
+import preview1 from "../assets/preview1.mp4";
+import preview1Poster from "../assets/preview1_loader.png";
+import preview2 from "../assets/preview2.mp4";
+import preview2Poster from "../assets/preview2_loader.png";
+import preview3 from "../assets/preview3.mp4";
+import preview3Poster from "../assets/preview3_loader.png";
+
+const previews = {
+  preview1: { video: preview1, poster: preview1Poster },
+  preview2: { video: preview2, poster: preview2Poster },
+  preview3: { video: preview3, poster: preview3Poster },
+};
+
 const Preview = ({ project, variant }) => {
   const navigate = useNavigate();
   const variants = ["1", "2", "3"];
 
   if (!variants.includes(variant)) return;
 
-  const imageSrc = require(`../assets/${project.image}.mp4`);
-  const imagePoster = require(`../assets/${project.image}_loader.png`);
+  const preview = previews[project.image];
+
+  if (!preview) return null;
 
   return (
-    <article className={"preview-container " + "preview-var" + variant}>
+    <article className={`preview-container preview-var${variant}`}>
       <div>
         <h3>{project.name}</h3>
         <br />
@@ -29,9 +43,8 @@ const Preview = ({ project, variant }) => {
       </div>
       <div>
         <video
-          src={imageSrc}
-          poster={imagePoster}
-          alt={project.name}
+          src={preview.video}
+          poster={preview.poster}
           autoPlay
           loop
           muted

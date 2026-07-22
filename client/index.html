@@ -7,7 +7,6 @@
     <title>__TITLE__</title>
     <meta name="description" content="__DESCRIPTION__" />
 
-    <!-- Open Graph -->
     <meta property="og:title" content="__TITLE__" />
     <meta property="og:description" content="__DESCRIPTION__" />
     <meta property="og:image" content="__IMAGE__" />
@@ -15,8 +14,8 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="addrien.fr" />
+    <meta property="og:url" content="https://portfolio.addrien.fr/" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="__TITLE__" />
     <meta name="twitter:description" content="__DESCRIPTION__" />
@@ -27,29 +26,16 @@
       content="portfolio, développeur web, React, Node.js, JavaScript, projets web, Adrien"
     />
     <meta name="author" content="Adrien" />
-
-    <!-- Indexation -->
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <meta name="google" content="notranslate" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://portfolio.addrien.fr/" />
-
-    <!-- Performance / UX -->
     <meta name="theme-color" content="#b29a80" />
 
-    <!-- Favicon -->
-    <link rel="icon" href="%PUBLIC_URL%/favicon.svg" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.svg" />
-
-    <!-- Manifest -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
-    <!-- Canonical URL -->
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href="https://portfolio.addrien.fr/" />
 
-    <!-- Données structurées -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -68,14 +54,7 @@
 
   <body>
     <noscript>Vous devez activer JavaScript pour utiliser ce site.</noscript>
-
-    <!-- Contenu SEO fallback -->
-    <h1 style="display: none">Portfolio développeur web Adrien</h1>
-    <p style="display: none">
-      Portfolio présentant des projets web réalisés en React, Node.js et
-      JavaScript.
-    </p>
-
     <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

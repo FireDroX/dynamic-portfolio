@@ -18,11 +18,13 @@ const Achievements = lazy(() => import("./pages/Achievements"));
 const TIMER = 1 * 60 * 1000;
 
 function useTimerAchievement() {
-  const startTimeRef = useRef(Date.now());
+  const startTimeRef = useRef(null);
   const timeoutRef = useRef(null);
   const triggeredRef = useRef(false);
 
   useEffect(() => {
+    startTimeRef.current = Date.now();
+
     const check = () => {
       if (triggeredRef.current) return;
 
