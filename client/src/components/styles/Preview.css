@@ -9,6 +9,10 @@
   background: color-mix(in srgb, var(--bg) 94%, var(--text));
 }
 
+.preview-var2 {
+  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+}
+
 .preview-var2 .preview-copy {
   order: 2;
 }
@@ -87,6 +91,7 @@
 .preview-media {
   min-width: 0;
   margin: 0.65rem;
+  align-self: center;
   overflow: hidden;
   border-radius: 0.9rem;
   background: #090909;
@@ -94,9 +99,9 @@
 
 .preview-media video {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .preview-media-label {
@@ -112,9 +117,6 @@
     order: initial;
   }
 
-  .preview-media {
-    min-height: 24rem;
-  }
 }
 
 @media (max-width: 520px) {
@@ -124,9 +126,5 @@
 
   .preview-copy {
     padding: 2rem 1.5rem;
-  }
-
-  .preview-media {
-    min-height: 18rem;
   }
 }
