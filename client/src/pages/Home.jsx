@@ -6,25 +6,25 @@ import Preview from "../components/Preview";
 
 const projects = [
   {
-    name: "PokeFlip Online",
+    name: "PokeFlip V2",
     description:
-      "Jeu de mémoire jouable en solo ou en multijoueur en temps réel dans l’univers Pokémon.",
+      "Une nouvelle version de PokeFlip avec une interface responsive, du multijoueur en temps réel et des profils personnalisables.",
     stack: ["React", "Express", "Socket.io", "Docker"],
-    fileName: "pokeflip",
+    fileName: "pokeflip_v2",
     image: "preview1",
   },
   {
-    name: "LFF - Classements",
+    name: "Monsters Energy",
     description:
-      "Plateforme connectée à Discord pour gérer et afficher des classements hebdomadaires dynamiques.",
-    stack: ["React", "Express", "Supabase", "Discord OAuth2"],
-    fileName: "lff",
+      "Une plateforme communautaire autour de Monster Energy avec catalogue, classements, messagerie et achievements.",
+    stack: ["HTML", "CSS", "PHP", "Bootstrap"],
+    fileName: "monster-energy",
     image: "preview2",
   },
   {
     name: "Space Invaders",
     description:
-      "Réinterprétation en ASCII du classique arcade, développée en C avec une difficulté progressive.",
+      "Une réinterprétation de Space Invaders en ASCII, développée en C avec ncurses et une difficulté progressive.",
     stack: ["C", "ncurses"],
     fileName: "space_invaders",
     image: "preview3",
@@ -77,87 +77,96 @@ const Home = () => {
 
   return (
     <main className="App home-page">
-    <header className="home-header">
-      <small>portfolio</small>
-      <h1>Adrien</h1>
-      <p>
-        Étudiant à l’<strong>ESGI</strong> Paris et développeur web.
-      </p>
-      <p className="home-online">
-        <span aria-hidden="true" />
-        Disponible en ligne
-      </p>
-    </header>
-
-    <section className="home-intro" aria-label="Introduction">
-      <div className="home-intro-copy">
-        <small>Ce que je fais</small>
-        <h2>Des projets faits pour être utilisés.</h2>
+      <header className="home-header">
+        <small>portfolio</small>
+        <h1>Adrien</h1>
         <p>
-          J’aime transformer une idée en quelque chose de concret : une
-          interface, un jeu ou un outil que l’on peut directement essayer.
+          Étudiant à l’<strong>ESGI</strong> Paris et développeur web.
         </p>
-        <Link to="/about">En savoir plus sur moi →</Link>
-      </div>
+        <p className="home-online">
+          <span aria-hidden="true" />
+          Disponible en ligne
+        </p>
+      </header>
 
-      <div className="home-terminal" aria-label="Terminal des projets">
-        <div className="home-terminal-title">adrien@portfolio: ~/projects</div>
-        <div className="home-terminal-content">
-          <p className="home-terminal-command"><span>$</span> ls -lah</p>
-          {terminalLoading ? (
-            <p className="home-terminal-message">lecture du dossier...</p>
-          ) : terminalError ? (
-            <p className="home-terminal-message home-terminal-error">
-              ls: impossible de lire ~/projects
-            </p>
-          ) : (
-            <div className="home-terminal-list">
-              <p className="home-terminal-total">
-                total {terminalProjects.length} projet{terminalProjects.length > 1 ? "s" : ""}
-              </p>
-              {terminalProjects.map((terminalProject) => (
-                <Link
-                  className="home-terminal-row"
-                  to={`/projects/${terminalProject.fileName}`}
-                  key={terminalProject.fileName}
-                  aria-label={`Ouvrir le projet ${terminalProject.name}`}
-                >
-                  <span>drwxr-xr-x</span>
-                  <span>1</span>
-                  <span>adrien</span>
-                  <span>4.0K</span>
-                  <time dateTime={terminalProject.createdAt}>
-                    {formatProjectDate(terminalProject.createdAt)}
-                  </time>
-                  <strong>{terminalProject.fileName}/</strong>
-                </Link>
-              ))}
-            </div>
-          )}
-          <p className="home-terminal-command"><span>$</span> <i aria-hidden="true" /></p>
+      <section className="home-intro" aria-label="Introduction">
+        <div className="home-intro-copy">
+          <small>Ce que je fais</small>
+          <h2>Des projets faits pour être utilisés.</h2>
+          <p>
+            J’aime transformer une idée en quelque chose de concret : une
+            interface, un jeu ou un outil que l’on peut directement essayer.
+          </p>
+          <Link to="/about">En savoir plus sur moi →</Link>
         </div>
-      </div>
-    </section>
 
-    <section className="home-projects-title">
-      <small>sélection</small>
-      <h2>Quelques projets</h2>
-      <p>Trois projets, trois univers, tous accessibles directement en ligne.</p>
-    </section>
+        <div className="home-terminal" aria-label="Terminal des projets">
+          <div className="home-terminal-title">
+            adrien@portfolio: ~/projects
+          </div>
+          <div className="home-terminal-content">
+            <p className="home-terminal-command">
+              <span>$</span> ls -lah
+            </p>
+            {terminalLoading ? (
+              <p className="home-terminal-message">lecture du dossier...</p>
+            ) : terminalError ? (
+              <p className="home-terminal-message home-terminal-error">
+                ls: impossible de lire ~/projects
+              </p>
+            ) : (
+              <div className="home-terminal-list">
+                <p className="home-terminal-total">
+                  total {terminalProjects.length} projet
+                  {terminalProjects.length > 1 ? "s" : ""}
+                </p>
+                {terminalProjects.map((terminalProject) => (
+                  <Link
+                    className="home-terminal-row"
+                    to={`/projects/${terminalProject.fileName}`}
+                    key={terminalProject.fileName}
+                    aria-label={`Ouvrir le projet ${terminalProject.name}`}
+                  >
+                    <span>drwxr-xr-x</span>
+                    <span>1</span>
+                    <span>adrien</span>
+                    <span>4.0K</span>
+                    <time dateTime={terminalProject.createdAt}>
+                      {formatProjectDate(terminalProject.createdAt)}
+                    </time>
+                    <strong>{terminalProject.fileName}/</strong>
+                  </Link>
+                ))}
+              </div>
+            )}
+            <p className="home-terminal-command">
+              <span>$</span> <i aria-hidden="true" />
+            </p>
+          </div>
+        </div>
+      </section>
 
-    <section className="best-projects" aria-label="Projets sélectionnés">
-      {projects.map((project, index) => (
-        <Preview
-          key={project.fileName}
-          project={project}
-          variant={String(index + 1)}
-        />
-      ))}
-    </section>
+      <section className="home-projects-title">
+        <small>sélection</small>
+        <h2>Quelques projets</h2>
+        <p>
+          Trois projets, trois univers, tous accessibles directement en ligne.
+        </p>
+      </section>
 
-    <Link className="see-more" to="/projects">
-      Voir tous les projets →
-    </Link>
+      <section className="best-projects" aria-label="Projets sélectionnés">
+        {projects.map((project, index) => (
+          <Preview
+            key={project.fileName}
+            project={project}
+            variant={String(index + 1)}
+          />
+        ))}
+      </section>
+
+      <Link className="see-more" to="/projects">
+        Voir tous les projets →
+      </Link>
     </main>
   );
 };
