@@ -51,6 +51,16 @@ const Projects = () => {
     return () => controller.abort();
   }, [project, routeKey]);
 
+  useEffect(() => {
+    if (!project || currentProject?.fileName !== project) return;
+
+    window.dispatchEvent(
+      new CustomEvent("portfolio:project-viewed", {
+        detail: { fileName: currentProject.fileName },
+      }),
+    );
+  }, [currentProject, project]);
+
   if (loading || loadedRoute !== routeKey) {
     return (
       <main className="App projects-loading" aria-live="polite">

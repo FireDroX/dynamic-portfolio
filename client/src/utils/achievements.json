@@ -6,34 +6,10 @@
     "hint": "/achievements"
   },
   {
-    "name": "Snake Git",
-    "description": "Tssssssssssssssssssss",
-    "emoji": "🐍",
-    "hint": "Catch the snake !"
-  },
-  {
-    "name": "Explorer",
-    "description": "You discovered all the accessible pages of this portfolio!",
-    "emoji": "🧭",
-    "hint": "Explore every pages."
-  },
-  {
     "name": "Very Interesting Portfolio",
     "description": "So you really like this portfolio...",
     "emoji": "⏳",
     "hint": "One minute is all it takes."
-  },
-  {
-    "name": "Wrong Password",
-    "description": "Did you think my password was easy to guess? Think again.",
-    "emoji": "🔒",
-    "hint": "Guess the password."
-  },
-  {
-    "name": "&cᴏpy;",
-    "description": "Copyright Copyright Copyright",
-    "emoji": "©",
-    "hint": "3 times &copy;"
   },
   {
     "name": "Burning Eyes",
@@ -42,10 +18,46 @@
     "hint": "What are you doing in light mode ?"
   },
   {
-    "name": "Portfolio Enjoyer",
-    "description": "You have visited this portfolio 42 times...",
-    "emoji": "🔄",
-    "hint": "42 times is the answer."
+    "name": "Explorer",
+    "description": "You discovered all the accessible pages of this portfolio!",
+    "emoji": "🧭",
+    "hint": "Explore every pages."
+  },
+  {
+    "name": "Snake Git",
+    "description": "Tssssssssssssssssssss",
+    "emoji": "🐍",
+    "hint": "Catch the snake !"
+  },
+  {
+    "name": "&cᴏpy;",
+    "description": "Copyright Copyright Copyright",
+    "emoji": "©",
+    "hint": "3 times &copy;"
+  },
+  {
+    "name": "Wrong Password",
+    "description": "Did you think my password was easy to guess? Think again.",
+    "emoji": "🔒",
+    "hint": "Guess the password."
+  },
+  {
+    "name": "Thats me",
+    "description": "Yep, that's me.",
+    "emoji": "👤",
+    "hint": "Say my name."
+  },
+  {
+    "name": "Project Hopper",
+    "description": "One project is never enough.",
+    "emoji": "🐇",
+    "hint": "Visit three different projects."
+  },
+  {
+    "name": "Back for More",
+    "description": "You came back another day.",
+    "emoji": "🎟️",
+    "hint": "See you tomorrow."
   },
   {
     "name": "Nerd",
@@ -60,12 +72,6 @@
     "hint": "From LinkedIn"
   },
   {
-    "name": "Thats me",
-    "description": "Yep, that's me.",
-    "emoji": "👤",
-    "hint": "Say my name."
-  },
-  {
     "name": "Konami Code",
     "description": "↑↑↓↓←→←→BA",
     "emoji": "🎮",
@@ -76,6 +82,24 @@
     "description": "A great nutriscore",
     "emoji": "📷",
     "hint": "Scan a product."
+  },
+  {
+    "name": "The Curator",
+    "description": "You explored every project in the collection.",
+    "emoji": "🗂️",
+    "hint": "Complete the collection."
+  },
+  {
+    "name": "Portfolio Enjoyer",
+    "description": "You have visited this portfolio 42 times...",
+    "emoji": "🔄",
+    "hint": "42 times is the answer."
+  },
+  {
+    "name": "Regular Visitor",
+    "description": "Consistency is key.",
+    "emoji": "📅",
+    "hint": "Come back on three different days."
   },
   {
     "name": "Cheater",

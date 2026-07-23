@@ -1,26 +1,25 @@
-import "../components/styles/Popup.css";
-import achievements_list from "../utils/achievements.json";
+import "./styles/Achievements.css";
+import achievementsList from "../utils/achievements.json";
 import { useEffect, useState } from "react";
 
 import Popup from "../components/Popup";
 import { readArray } from "../utils/storage";
 
+const formatAchievementName = (name) =>
+  name.toLowerCase().trim().replace(/\s+/g, "-");
+
 const Achievements = () => {
-  const [userAchievements, setUserAchievements] = useState(() => {
-    return readArray("portfolio_achievements");
-  });
+  const [userAchievements, setUserAchievements] = useState(() =>
+    readArray("portfolio_achievements"),
+  );
 
   useEffect(() => {
     const handleStorage = () => {
-      const updated = readArray("portfolio_achievements");
-      setUserAchievements(updated);
+      setUserAchievements(readArray("portfolio_achievements"));
     };
 
     window.addEventListener("portfolio:update", handleStorage);
-
-    return () => {
-      window.removeEventListener("portfolio:update", handleStorage);
-    };
+    return () => window.removeEventListener("portfolio:update", handleStorage);
   }, []);
 
   useEffect(() => {
@@ -29,23 +28,75 @@ const Achievements = () => {
     }
   }, [userAchievements]);
 
+  const unlockedCount = achievementsList.filter((achievement) =>
+    userAchievements.includes(formatAchievementName(achievement.name)),
+  ).length;
+  const completion = Math.round((unlockedCount / achievementsList.length) * 100);
+
   return (
-    <div className="App">
-      <header>
+    <main className="App achievements-page">
+      <header className="achievements-header">
         <small>achievements</small>
         <h1>Secrets</h1>
+        <p>
+          Des détails sont cachés un peu partout dans le portfolio. Explore,
+          expérimente et garde l’œil ouvert.
+        </p>
       </header>
 
-      <div className="achievements-list">
-        {achievements_list.map((a) => {
-          const unlocked = userAchievements.includes(
-            a.name.toLowerCase().trim().replace(/\s+/g, "-"),
-          );
+      <section className="achievements-progress" aria-label="Progression des achievements">
+        <div className="achievements-progress-copy">
+          <small>progression</small>
+          <p>
+            <strong>{unlockedCount}</strong>
+            <span> / {achievementsList.length} débloqués</span>
+          </p>
+        </div>
 
-          return <Popup key={a.name} achievement={a} unlocked={unlocked} />;
-        })}
-      </div>
-    </div>
+        <div className="achievements-progress-track">
+          <div className="achievements-progress-label">
+            <span>{completion === 100 ? "Collection terminée" : "Collection en cours"}</span>
+            <span>{completion}%</span>
+          </div>
+          <div
+            className="achievements-progress-bar"
+            role="progressbar"
+            aria-label="Achievements débloqués"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow={completion}
+          >
+            <span style={{ width: `${completion}%` }} />
+          </div>
+        </div>
+      </section>
+
+      <section className="achievements-collection">
+        <div className="achievements-collection-title">
+          <div>
+            <small>collection</small>
+            <h2>À toi de les trouver</h2>
+          </div>
+          <p>Les cartes verrouillées révèlent un indice, jamais la solution.</p>
+        </div>
+
+        <div className="achievements-list">
+          {achievementsList.map((achievement) => {
+            const unlocked = userAchievements.includes(
+              formatAchievementName(achievement.name),
+            );
+
+            return (
+              <Popup
+                key={achievement.name}
+                achievement={achievement}
+                unlocked={unlocked}
+              />
+            );
+          })}
+        </div>
+      </section>
+    </main>
   );
 };
 
