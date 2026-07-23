@@ -1,0 +1,141 @@
+.achievements-header > p {
+  max-width: 42rem;
+  line-height: 1.7;
+}
+
+.achievements-progress,
+.achievements-collection {
+  max-width: 78rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.achievements-progress {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  border: 1px solid #7b7b7b38;
+  border-radius: 0.85rem;
+}
+
+.achievements-progress-copy > small,
+.achievements-collection-title small {
+  color: var(--secondary);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.achievements-progress-copy > p {
+  margin-top: 0.25rem;
+  color: var(--accent);
+}
+
+.achievements-progress-copy strong {
+  color: var(--text);
+  font-size: 1.65rem;
+  line-height: 1;
+}
+
+.achievements-progress-track {
+  width: min(100%, 34rem);
+}
+
+.achievements-progress-label {
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--accent);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.achievements-progress-bar {
+  height: 0.35rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.achievements-progress-bar > span {
+  height: 100%;
+  min-width: 0.25rem;
+  display: block;
+  border-radius: inherit;
+  background: var(--secondary);
+  transition: width 0.6s ease-out;
+}
+
+.achievements-collection {
+  margin-top: 5rem;
+}
+
+.achievements-collection-title {
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.achievements-collection-title h2 {
+  margin-top: 0.35rem;
+  color: var(--text);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.achievements-collection-title > p {
+  max-width: 28rem;
+  padding-bottom: 0.25rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.achievements-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (max-width: 1100px) {
+  .achievements-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .achievements-progress {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .achievements-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .achievements-collection-title {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .achievements-collection-title > p {
+    text-align: left;
+  }
+}
+
+@media (max-width: 560px) {
+  .achievements-progress {
+    padding: 1rem;
+  }
+
+  .achievements-list {
+    grid-template-columns: 1fr;
+  }
+}
