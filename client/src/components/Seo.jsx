@@ -10,7 +10,7 @@ const Seo = ({
   description,
   path,
   noIndex = false,
-  image = "/preview.png",
+  image = "/og-image",
 }) => {
   useEffect(() => {
     const url = new URL(path || window.location.pathname, window.location.origin).href;

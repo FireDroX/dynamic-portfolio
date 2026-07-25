@@ -78,7 +78,7 @@ app.use(async (req, res) => {
     const siteUrl = getSiteUrl(req);
     let meta = staticPages[pathWithoutTrailingSlash];
     let status = 200;
-    let image = `${siteUrl}/preview.png`;
+    let image = `${siteUrl}/og-image`;
 
     const projectMatch = pathWithoutTrailingSlash.match(/^\/projects\/([^/]+)$/);
     if (projectMatch) {
