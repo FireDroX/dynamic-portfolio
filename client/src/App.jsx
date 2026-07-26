@@ -12,6 +12,7 @@ import { readNumber, writeNumber } from "./utils/storage";
 const Home = lazy(() => import("./pages/Home"));
 const Panel = lazy(() => import("./pages/Panel"));
 const Projects = lazy(() => import("./pages/Projects"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const Login = lazy(() => import("./pages/Login"));
 const About = lazy(() => import("./pages/About"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
@@ -130,7 +131,7 @@ function App() {
         <Route path="/" element={Loadable(Home)} />
 
         <Route path="/projects" element={Loadable(Projects)} />
-        <Route path="/projects/:project" element={Loadable(Projects)} />
+        <Route path="/projects/:project" element={Loadable(ProjectDetail)} />
 
         <Route
           path="/panel/login"
