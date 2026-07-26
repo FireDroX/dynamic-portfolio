@@ -128,7 +128,10 @@ const Projects = () => {
 
         <section className="project-preview" aria-label={`Démo de ${currentProject.name}`}>
           <div className="project-preview-bar">
-            <p>{currentProject.name}</p>
+            <p>
+              <span>adrien@portfolio</span>: ~/projects/
+              <strong>{currentProject.fileName}</strong>
+            </p>
             <span className="project-preview-status">Live</span>
           </div>
           <div className="project-preview-frame">

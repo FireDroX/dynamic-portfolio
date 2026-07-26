@@ -78,12 +78,6 @@
     "hint": "First cheat code in history."
   },
   {
-    "name": "BARCODE",
-    "description": "A great nutriscore",
-    "emoji": "📷",
-    "hint": "Scan a product."
-  },
-  {
     "name": "The Curator",
     "description": "You explored every project in the collection.",
     "emoji": "🗂️",

@@ -153,33 +153,44 @@
 
 .project-preview {
   overflow: hidden;
-  border: 1px solid #7b7b7b3d;
-  border-radius: 18px;
+  border: 1px solid #34312e;
+  border-radius: 1rem;
   background: transparent;
-  box-shadow: 0 14px 40px #00000025;
+  box-shadow: 0 14px 40px #0000001f;
 }
 
 .project-preview-bar {
-  height: 3.4rem;
+  height: 3rem;
   padding: 0 1.25rem;
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
   align-items: center;
-  border-bottom: 1px solid #7b7b7b2b;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #34312e;
   color: var(--accent);
-  background: color-mix(in srgb, var(--bg) 88%, var(--text));
+  background: color-mix(in srgb, var(--bg) 90%, var(--text));
 }
 
 .project-preview-bar > p {
-  max-width: 50vw;
+  max-width: 100%;
   overflow: hidden;
-  font-size: 0.8rem;
+  font-family: monospace;
+  font-size: 0.75rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.project-preview-bar > p > span {
+  color: var(--text);
+}
+
+.project-preview-bar > p > strong {
+  color: var(--secondary);
+  font-weight: 400;
+}
+
 .project-preview-status {
-  justify-self: end;
+  flex: 0 0 auto;
   color: var(--secondary);
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -254,15 +265,11 @@
   }
 
   .project-preview {
-    border-radius: 16px;
+    border-radius: 0.85rem;
   }
 
   .project-preview-bar {
     padding: 0 0.8rem;
-  }
-
-  .project-preview-bar > p {
-    display: none;
   }
 
   .project-preview-frame,
