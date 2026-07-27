@@ -1,4 +1,4 @@
-FROM node:22-slim AS client-build
+FROM node:22-bookworm-slim AS client-build
 
 WORKDIR /build/client
 
@@ -9,7 +9,7 @@ COPY client/ ./
 RUN npm run build
 
 
-FROM node:22-slim AS backend-deps
+FROM node:22-bookworm-slim AS backend-deps
 
 WORKDIR /build/backend
 
@@ -29,7 +29,7 @@ RUN npm ci --omit=dev \
     && npm cache clean --force
 
 
-FROM node:22-slim AS runtime
+FROM node:22-bookworm-slim AS runtime
 
 ENV NODE_ENV=production
 
@@ -41,6 +41,7 @@ RUN apt-get update \
       libgif7 \
       libjpeg62-turbo \
       libpango-1.0-0 \
+      libpangocairo-1.0-0 \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /app/projects \
     && chown -R node:node /app
