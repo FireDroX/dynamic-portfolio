@@ -18,7 +18,7 @@ const projects = [
     description:
       "Une plateforme communautaire autour de Monster Energy avec catalogue, classements, messagerie et achievements.",
     stack: ["HTML", "CSS", "PHP", "Bootstrap"],
-    fileName: "monster-energy",
+    fileName: "monster_energy",
     image: "preview2",
   },
   {
