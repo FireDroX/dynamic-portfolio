@@ -96,6 +96,12 @@
     "hint": "Come back on three different days."
   },
   {
+    "name": "Space Invader",
+    "description": "The Death Star never stood a chance.",
+    "emoji": "🚀",
+    "hint": "Destroy the Death Star."
+  },
+  {
     "name": "Cheater",
     "description": "You must cheat to unlock this.",
     "emoji": "🚫",
