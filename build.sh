@@ -1,18 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e
+set -Eeuo pipefail
 
-echo "📦 Build image..."
-DOCKER_BUILDKIT=1 docker build -t portfolio-image .
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ENV_FILE="${SCRIPT_DIR}/.env"
 
-echo "🛑 Stop container si existant..."
-docker stop portfolio 2>/dev/null || true
+cd "${SCRIPT_DIR}"
 
-echo "🗑️ Suppression container..."
-docker rm portfolio 2>/dev/null || true
+if [[ ! -f "${ENV_FILE}" ]]; then
+  echo "Erreur : fichier .env introuvable (${ENV_FILE})." >&2
+  exit 1
+fi
 
-echo "🚀 Lancement container..."
+echo "Build de l'image..."
+DOCKER_BUILDKIT=1 docker build -t portfolio-image:latest .
+
+echo "Remplacement du conteneur existant..."
+docker rm -f portfolio 2>/dev/null || true
+
+echo "Lancement du conteneur..."
 docker run -d \
+  --init \
+  --env-file "${ENV_FILE}" \
   -p 127.0.0.1:3333:3000 \
   --network mariadb-network \
   --name portfolio \
@@ -20,7 +29,7 @@ docker run -d \
   -v portfolio_projects:/app/projects \
   portfolio-image:latest
 
-echo "📋 Logs du container..."
+echo "Logs du conteneur..."
 docker logs --tail 50 portfolio
 
-echo "✅ Done ! Portfolio restarted."
+echo "Portfolio redémarré."

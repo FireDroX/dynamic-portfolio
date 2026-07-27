@@ -1,46 +1,61 @@
-# ----------- 1. Build React -----------
 FROM node:22-slim AS client-build
 
-WORKDIR /app/client
+WORKDIR /build/client
 
 COPY client/package*.json ./
 RUN npm ci
 
-COPY client/ .
+COPY client/ ./
 RUN npm run build
 
 
-# ----------- 2. Backend -----------
-FROM node:22-slim
+FROM node:22-slim AS backend-deps
+
+WORKDIR /build/backend
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+      g++ \
+      libcairo2-dev \
+      libgif-dev \
+      libjpeg-dev \
+      libpango1.0-dev \
+      make \
+      python3 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY package*.json ./
+RUN npm ci --omit=dev \
+    && npm cache clean --force
+
+
+FROM node:22-slim AS runtime
+
+ENV NODE_ENV=production
 
 WORKDIR /app
 
-# 🔧 dépendances système nécessaires pour canvas
-RUN apt-get update && apt-get install -y \
-    python3 \
-    make \
-    g++ \
-    libcairo2-dev \
-    libpango1.0-dev \
-    libjpeg-dev \
-    libgif-dev \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+      libcairo2 \
+      libgif7 \
+      libjpeg62-turbo \
+      libpango-1.0-0 \
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /app/projects \
+    && chown -R node:node /app
 
-# Installer dépendances backend
-COPY package*.json ./
-RUN npm ci --omit=dev
+COPY --from=backend-deps --chown=node:node /build/backend/node_modules ./node_modules
+COPY --from=client-build --chown=node:node /build/client/build ./client/build
 
-# Copier le code backend
-COPY . .
+COPY --chown=node:node server.js config.js db.js ./
+COPY --chown=node:node api ./api
+COPY --chown=node:node middleware ./middleware
+COPY --chown=node:node utils ./utils
 
-# Copier build React
-COPY --from=client-build /app/client/build ./client/build
+USER node
 
-# Volume persistant
 VOLUME ["/app/projects"]
-
-# Port
 EXPOSE 3000
 
-# Lancer serveur
 CMD ["node", "server.js"]
