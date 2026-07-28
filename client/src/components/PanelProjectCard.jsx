@@ -1,8 +1,5 @@
-export const UploadIcon = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 16.5v-9m0 0-3.5 3.5M12 7.5l3.5 3.5M5 15.75v2A2.25 2.25 0 0 0 7.25 20h9.5A2.25 2.25 0 0 0 19 17.75v-2" />
-  </svg>
-);
+import PanelUploadIcon from "./PanelUploadIcon";
+import "./styles/PanelProjectCard.css";
 
 const PanelProjectCard = ({
   project,
@@ -47,14 +44,14 @@ const PanelProjectCard = ({
             <span>{project.fileName}</span>
             <span>{new Date(project.createdAt).toLocaleDateString("fr-FR")}</span>
           </div>
-          <label>
+          <label className="panel-field">
             Nom
             <input
               value={edited.name ?? project.name}
               onChange={(event) => onChange(project.fileName, "name", event.target.value)}
             />
           </label>
-          <label>
+          <label className="panel-field">
             Description
             <textarea
               rows="4"
@@ -65,7 +62,7 @@ const PanelProjectCard = ({
 
           <div className="panel-project-assets">
             <label className={edited.zip ? "has-file" : ""}>
-              <UploadIcon />
+              <PanelUploadIcon />
               <span>{edited.zip?.name || "Remplacer le ZIP du projet"}</span>
               <input
                 type="file"
