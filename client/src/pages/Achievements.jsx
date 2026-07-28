@@ -3,10 +3,8 @@ import achievementsList from "../utils/achievements.json";
 import { useEffect, useState } from "react";
 
 import Popup from "../components/Popup";
+import { formatAchievementName } from "../utils/achievements/config";
 import { readArray } from "../utils/storage";
-
-const formatAchievementName = (name) =>
-  name.toLowerCase().trim().replace(/\s+/g, "-");
 
 const Achievements = () => {
   const [userAchievements, setUserAchievements] = useState(() =>
