@@ -1,89 +1,52 @@
-const { getPool } = require("../utils/functions");
 const express = require("express");
-const fs = require("node:fs");
-const path = require("node:path");
 const auth = require("../middleware/auth");
+const { getPool } = require("../utils/functions");
+const { parseProjectUpload } = require("../services/projectUpload");
+const {
+  getProjectSlug,
+  installProjectArchive,
+} = require("../services/projectArchive");
 
 const router = express.Router();
 
-const Busboy = require("busboy");
-const unzipper = require("unzipper");
-const stream = require("stream");
+router.post("/", auth, async (req, res) => {
+  let archiveTransaction = null;
 
-router.post("/", auth, (req, res) => {
-  const busboy = Busboy({ headers: req.headers });
+  try {
+    const { fields, image, zip } = await parseProjectUpload(req);
+    const name = fields.name?.trim();
+    const description = fields.description?.trim();
 
-  let name = "";
-  let description = "";
-  let imageBase64 = "";
-  let zipFileName = "";
-  let zipBuffer = [];
-
-  busboy.on("field", (fieldname, val) => {
-    if (fieldname === "name") name = val;
-    if (fieldname === "description") description = val;
-  });
-
-  busboy.on("file", (fieldname, file, info) => {
-    const { filename, mimeType } = info;
-
-    if (fieldname === "zip") {
-      zipFileName = filename;
-
-      file.on("data", (data) => {
-        zipBuffer.push(data);
-      });
-    } else if (fieldname === "image") {
-      const imageBuffer = [];
-
-      file.on("data", (data) => {
-        imageBuffer.push(data);
-      });
-
-      file.on("end", () => {
-        const finalBuffer = Buffer.concat(imageBuffer);
-        imageBase64 = `data:${mimeType};base64,${finalBuffer.toString("base64")}`;
-      });
-    } else {
-      file.resume();
+    if (!name || !description || !zip) {
+      return res.status(400).json({ error: "Champs manquants." });
     }
-  });
 
-  busboy.on("finish", async () => {
-    try {
-      const folderName = zipFileName
-        .replace(".zip", "")
-        .replace(/[^a-zA-Z0-9_-]/g, "_");
+    const projectSlug = getProjectSlug(zip.fileName);
+    archiveTransaction = await installProjectArchive(zip.buffer, projectSlug);
 
-      const extractPath = path.join(__dirname, "../projects", folderName);
+    const pool = await getPool();
+    await pool.query(
+      "INSERT INTO projects (name, description, fileName, image) VALUES (?, ?, ?, ?)",
+      [name, description, projectSlug, image || ""],
+    );
 
-      fs.mkdirSync(extractPath, { recursive: true });
-
-      const buffer = Buffer.concat(zipBuffer);
-
-      const readable = new stream.PassThrough();
-      readable.end(buffer);
-
-      await readable.pipe(unzipper.Extract({ path: extractPath })).promise();
-
+    await archiveTransaction.commit();
+    archiveTransaction = null;
+    return res.redirect("/panel");
+  } catch (error) {
+    if (archiveTransaction) {
       try {
-        const pool = await getPool();
-
-        await pool.query(
-          "INSERT INTO projects (name, description, fileName, image) VALUES (?, ?, ?, ?)",
-          [name, description, folderName, imageBase64],
-        );
-
-        res.redirect("/panel");
-      } catch (error) {
-        return res.send("Erreur DB");
+        await archiveTransaction.rollback();
+      } catch (rollbackError) {
+        console.error("Project creation rollback failed:", rollbackError);
       }
-    } catch (err) {
-      res.status(500).json({ error: "Erreur extraction ZIP" });
     }
-  });
 
-  req.pipe(busboy);
+    console.error("Project creation failed:", error);
+    return res.status(error.statusCode || 500).json({
+      error: error.message || "Impossible d'ajouter le projet.",
+    });
+  }
 });
 
 module.exports = router;
