@@ -263,6 +263,7 @@ const Panel = ({ onLogout }) => {
               const isPreviewOpen = openPreviews[project.fileName];
               const imageSrc = edited.imagePreview || project.image;
 
+              // TODO: Separate panel project card in a composent
               return (
                 <article key={project.fileName} className="panel-project-card">
                   <div className="panel-project-main">
@@ -337,6 +338,12 @@ const Panel = ({ onLogout }) => {
                     </button>
                     <a href={`/projects/${project.fileName}`} target="_blank" rel="noopener noreferrer">
                       Voir la page ↗
+                    </a>
+                    <a
+                      href={`/api/panel/download/${encodeURIComponent(project.fileName)}`}
+                      download={`${project.fileName}.zip`}
+                    >
+                      Télécharger le ZIP
                     </a>
                     <div className="panel-project-actions-spacer" />
                     <button className="panel-delete-button" onClick={() => handleDelete(project)}>
