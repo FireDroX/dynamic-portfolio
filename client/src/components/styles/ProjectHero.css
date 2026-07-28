@@ -1,0 +1,134 @@
+.project-hero {
+  min-height: 30rem;
+  margin: 1.5rem 0 3rem;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 6vw, 5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.72fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #7b7b7b25;
+  border-radius: 24px;
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      color-mix(in srgb, var(--secondary) 24%, transparent),
+      transparent 34%
+    ),
+    color-mix(in srgb, var(--bg) 90%, var(--text));
+}
+
+.project-hero-copy {
+  z-index: 1;
+}
+
+.project-hero-copy small {
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+}
+
+.project-hero-copy h1 {
+  margin: 0.55rem 0 1.25rem;
+  color: var(--text);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  line-height: 0.98;
+  overflow-wrap: anywhere;
+}
+
+.project-hero-copy p {
+  max-width: 40rem;
+  color: var(--accent);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.project-hero-copy p a {
+  color: var(--secondary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.project-open {
+  width: fit-content;
+  margin-top: 1.75rem;
+  padding: 0.75rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 999px;
+  background: var(--secondary);
+  color: var(--bg);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.project-open svg {
+  width: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.project-open:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px #00000035;
+}
+
+.project-hero-visual {
+  width: min(100%, 22rem);
+  justify-self: end;
+  z-index: 1;
+  padding: 0.65rem;
+  border: 1px solid #ffffff18;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--bg) 75%, transparent);
+  box-shadow: 0 16px 40px #00000030;
+}
+
+.project-hero-visual img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 7 / 10;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.project-hero-visual figcaption {
+  padding: 0.75rem 0.5rem 0.25rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+@media (max-width: 900px) {
+  .project-hero {
+    margin-bottom: 2.5rem;
+    grid-template-columns: 1fr;
+    border-radius: 20px;
+  }
+
+  .project-hero-visual {
+    width: min(100%, 20rem);
+    justify-self: start;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-hero {
+    margin-top: 1rem;
+    padding: 2rem 1.25rem;
+    gap: 2rem;
+  }
+
+  .project-hero-copy h1 {
+    font-size: clamp(2.6rem, 14vw, 4rem);
+  }
+}

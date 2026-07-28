@@ -1,0 +1,98 @@
+.home-terminal {
+  min-height: 21rem;
+  overflow: hidden;
+  border: 1px solid #7b7b7b3b;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--bg) 91%, var(--text));
+  box-shadow: 0 1.25rem 4rem #00000020;
+}
+
+.home-terminal-title {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #7b7b7b30;
+  color: var(--accent);
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.home-terminal-content {
+  min-height: 17.5rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  box-sizing: border-box;
+  color: var(--text);
+  font-family: monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.home-terminal-command > span {
+  margin-right: 0.7rem;
+  color: var(--secondary);
+}
+
+.home-terminal-message {
+  margin: 0.3rem 0 0.6rem;
+  padding-left: 1.55rem;
+  color: var(--accent);
+}
+
+.home-terminal-error {
+  color: #c98383;
+}
+
+.home-terminal-list {
+  min-width: 34rem;
+  margin: 0.25rem 0 0.55rem;
+}
+
+.home-terminal-total {
+  margin-bottom: 0.15rem;
+  color: var(--accent);
+}
+
+.home-terminal-row {
+  padding: 0.1rem 0.25rem;
+  display: grid;
+  grid-template-columns: 6.8rem 0.8rem 3.6rem 2.8rem 6.8rem minmax(7rem, 1fr);
+  gap: 0.45rem;
+  border-radius: 0.25rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.home-terminal-row time {
+  color: var(--accent);
+}
+
+.home-terminal-row strong {
+  color: var(--secondary);
+  font-weight: 400;
+}
+
+.home-terminal-row:hover {
+  background: color-mix(in srgb, var(--secondary) 10%, transparent);
+  color: var(--text);
+}
+
+.home-terminal-command i {
+  width: 0.5rem;
+  height: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  background: var(--secondary);
+  animation: terminal-cursor 1s steps(1) infinite;
+}
+
+@keyframes terminal-cursor {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .home-terminal-content {
+    padding: 1.1rem 1rem;
+    font-size: 0.72rem;
+  }
+}
