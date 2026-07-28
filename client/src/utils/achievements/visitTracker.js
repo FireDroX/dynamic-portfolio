@@ -1,4 +1,9 @@
-import { readArray, writeJson } from "../storage";
+import {
+  readArray,
+  readNumber,
+  writeJson,
+  writeNumber,
+} from "../storage";
 import { STORAGE_KEYS } from "./config";
 
 function getLocalDayKey(date = new Date()) {
@@ -9,6 +14,12 @@ function getLocalDayKey(date = new Date()) {
 }
 
 export function trackVisitAchievements() {
+  const visitCount = readNumber(STORAGE_KEYS.visits) + 1;
+  writeNumber(STORAGE_KEYS.visits, visitCount);
+  if (visitCount === 42) {
+    window.dispatchEvent(new CustomEvent("portfolio:portfolio-enjoyer"));
+  }
+
   const today = getLocalDayKey();
   const storedVisitDays = readArray(STORAGE_KEYS.visitDays).filter(
     (day) => typeof day === "string",
