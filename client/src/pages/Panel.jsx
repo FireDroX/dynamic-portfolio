@@ -1,11 +1,6 @@
 import "./styles/Panel.css";
 import { useCallback, useEffect, useState } from "react";
-
-const UploadIcon = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 16.5v-9m0 0-3.5 3.5M12 7.5l3.5 3.5M5 15.75v2A2.25 2.25 0 0 0 7.25 20h9.5A2.25 2.25 0 0 0 19 17.75v-2" />
-  </svg>
-);
+import PanelProjectCard, { UploadIcon } from "../components/PanelProjectCard";
 
 const Panel = ({ onLogout }) => {
   const [projects, setProjects] = useState([]);
@@ -257,123 +252,24 @@ const Panel = ({ onLogout }) => {
         <div className="panel-projects">
           {[...projects]
             .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .map((project) => {
-              const edited = editedProjects[project.fileName] || {};
-              const isModified = Object.keys(edited).length > 0;
-              const isPreviewOpen = openPreviews[project.fileName];
-              const imageSrc = edited.imagePreview || project.image;
-
-              // TODO: Separate panel project card in a composent
-              return (
-                <article key={project.fileName} className="panel-project-card">
-                  <div className="panel-project-main">
-                    <div className="panel-project-image">
-                      {imageSrc ? (
-                        <img src={imageSrc} alt={`Aperçu de ${project.name}`} />
-                      ) : (
-                        <span>Aucune image</span>
-                      )}
-                      <label>
-                        Remplacer
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={(event) => handleProjectFile(
-                            project.fileName,
-                            "image",
-                            event.target.files[0],
-                          )}
-                        />
-                      </label>
-                    </div>
-
-                    <div className="panel-project-editor">
-                      <div className="panel-project-meta">
-                        <span>{project.fileName}</span>
-                        <span>{new Date(project.createdAt).toLocaleDateString("fr-FR")}</span>
-                      </div>
-                      <label>
-                        Nom
-                        <input
-                          value={edited.name ?? project.name}
-                          onChange={(event) => handleChange(project.fileName, "name", event.target.value)}
-                        />
-                      </label>
-                      <label>
-                        Description
-                        <textarea
-                          rows="4"
-                          value={edited.description ?? project.description}
-                          onChange={(event) => handleChange(project.fileName, "description", event.target.value)}
-                        />
-                      </label>
-
-                      <div className="panel-project-assets">
-                        <label className={edited.zip ? "has-file" : ""}>
-                          <UploadIcon />
-                          <span>{edited.zip?.name || "Remplacer le ZIP du projet"}</span>
-                          <input
-                            type="file"
-                            accept=".zip,application/zip"
-                            onChange={(event) => handleProjectFile(
-                              project.fileName,
-                              "zip",
-                              event.target.files[0],
-                            )}
-                          />
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="panel-project-actions">
-                    <button
-                      className="panel-preview-button"
-                      onClick={() => setOpenPreviews((previous) => ({
-                        ...previous,
-                        [project.fileName]: !previous[project.fileName],
-                      }))}
-                    >
-                      {isPreviewOpen ? "Fermer l'aperçu" : "Prévisualiser les fichiers"}
-                    </button>
-                    <a href={`/projects/${project.fileName}`} target="_blank" rel="noopener noreferrer">
-                      Voir la page ↗
-                    </a>
-                    <a
-                      href={`/api/panel/download/${encodeURIComponent(project.fileName)}`}
-                      download={`${project.fileName}.zip`}
-                    >
-                      Télécharger le ZIP
-                    </a>
-                    <div className="panel-project-actions-spacer" />
-                    <button className="panel-delete-button" onClick={() => handleDelete(project)}>
-                      Supprimer
-                    </button>
-                    <button
-                      className="panel-save-button"
-                      disabled={!isModified || saving === project.fileName}
-                      onClick={() => handleSave(project)}
-                    >
-                      {saving === project.fileName ? "Enregistrement..." : "Enregistrer"}
-                    </button>
-                  </div>
-
-                  {isPreviewOpen && (
-                    <div className="panel-live-preview">
-                      <div>
-                        <span>Aperçu live</span>
-                        <strong>{project.name}</strong>
-                      </div>
-                      <iframe
-                        key={previewVersions[project.fileName] || 0}
-                        src={`/api/projects/${project.fileName}?preview=${previewVersions[project.fileName] || 0}`}
-                        title={`Aperçu de ${project.name}`}
-                      />
-                    </div>
-                  )}
-                </article>
-              );
-            })}
+            .map((project) => (
+              <PanelProjectCard
+                key={project.fileName}
+                project={project}
+                edited={editedProjects[project.fileName] || {}}
+                isPreviewOpen={openPreviews[project.fileName]}
+                previewVersion={previewVersions[project.fileName] || 0}
+                isSaving={saving === project.fileName}
+                onChange={handleChange}
+                onProjectFile={handleProjectFile}
+                onTogglePreview={() => setOpenPreviews((previous) => ({
+                  ...previous,
+                  [project.fileName]: !previous[project.fileName],
+                }))}
+                onDelete={handleDelete}
+                onSave={handleSave}
+              />
+            ))}
         </div>
       </section>
     </main>
