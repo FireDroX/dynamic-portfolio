@@ -5,20 +5,44 @@ const compression = require("compression");
 const path = require("node:path");
 const express = require("express");
 const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
 
 const { getProjectBySlug } = require("./utils/functions");
+const db = require("./db");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const isProduction = process.env.NODE_ENV === "production";
 
 const routes = require("./api");
 const { getSiteUrl } = require("./config");
 
+const sessionStore = new MySQLStore(
+  {
+    clearExpired: true,
+    checkExpirationInterval: 15 * 60 * 1000,
+    expiration: 24 * 60 * 60 * 1000,
+    createDatabaseTable: true,
+  },
+  db,
+);
+
+if (isProduction) {
+  app.set("trust proxy", 1);
+}
+
 app.use(
   session({
+    store: sessionStore,
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    proxy: isProduction,
+    cookie: {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: isProduction,
+    },
   }),
 );
 app.use(cors());
@@ -144,6 +168,14 @@ app.use(async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Running on port ${PORT}`);
-});
+sessionStore
+  .onReady()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error("MySQL session store initialization failed:", error);
+    process.exitCode = 1;
+  });

@@ -26,6 +26,7 @@ RUN apt-get update \
 
 COPY package*.json ./
 RUN npm ci --omit=dev \
+    && node -e "require('express-mysql-session')" \
     && npm cache clean --force
 
 
