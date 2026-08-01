@@ -2,9 +2,9 @@ import "./styles/About.css";
 import { Link } from "react-router-dom";
 
 const stack = {
-  Frontend: ["React", "JavaScript", "HTML", "CSS", "Figma"],
-  Backend: ["Node.js", "Express", "PHP", "MySQL", "PostgreSQL"],
-  Outils: ["VS Code", "Docker", "Git", "GitHub", "Cloudflare", "AWS"],
+  Frontend: ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind", "Bootstrap"],
+  Backend: ["Node", "Express", "Nest", "PHP", "MySQL", "PostgreSQL"],
+  Outils: ["VS Code", "Docker", "Git", "GitHub", "Cloudflare", "AWS", "Figma"],
 };
 
 const calcDays = () => {
