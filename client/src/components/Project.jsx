@@ -1,5 +1,5 @@
 import "./styles/Project.css";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 import FormattedDescription from "./FormattedDescription";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";

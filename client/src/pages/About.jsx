@@ -1,5 +1,5 @@
 import "./styles/About.css";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const stack = {
   Frontend: ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind", "Bootstrap"],

@@ -1,5 +1,5 @@
 import "./styles/Home.css";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import HomeProjectTerminal from "../components/HomeProjectTerminal";
 import Preview from "../components/Preview";
 import featuredProjects from "../utils/featuredProjects";

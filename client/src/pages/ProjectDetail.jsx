@@ -1,5 +1,5 @@
 import "./styles/ProjectDetail.css";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router";
 import ProjectHero from "../components/ProjectHero";
 import ProjectLivePreview from "../components/ProjectLivePreview";
 import Seo from "../components/Seo";

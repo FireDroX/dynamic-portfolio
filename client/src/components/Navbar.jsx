@@ -1,5 +1,5 @@
 import "./styles/Navbar.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router";
 import { readObject, writeJson } from "../utils/storage";
 
 const Navbar = () => {

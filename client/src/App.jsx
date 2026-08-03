@@ -1,5 +1,5 @@
 import "./App.css";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import RouteSeo from "./components/RouteSeo";

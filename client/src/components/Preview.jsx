@@ -1,5 +1,5 @@
 import "./styles/Preview.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import preview1 from "../assets/preview1.mp4";
 import preview1Poster from "../assets/preview1_loader.png";
