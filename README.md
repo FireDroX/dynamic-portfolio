@@ -137,19 +137,23 @@ npm run start
 
 ## ⚙️ Configuration
 
-Créer un fichier `.env` côté backend :
+Copier le fichier `.env.example` vers `.env`, puis remplacer les valeurs
+d'exemple :
 
 ```env
+NODE_ENV=development
 PORT=3000
-SITE_URL=https://portfolio.addrien.fr
-SITE_HOSTNAMES=addrien.fr,portfolio.addrien.fr
+SITE_URL=http://localhost:3000
+SITE_HOSTNAMES=localhost,127.0.0.1
 
-PANEL_PASSWORD=password
-SESSION_SECRET=secret
+PANEL_PASSWORD=change_me
+SESSION_SECRET=change_me_with_a_long_random_value
 
+SQL_SERVER=localhost
+SQL_PORT=3306
 SQL_USER=user
 SQL_PASSWORD=password
-SQL_SERVER=url
+SQL_DBNAME=portfolio
 ```
 
 `SITE_URL` sert de repli pour les requêtes dont le domaine n’est pas reconnu.
@@ -214,4 +218,11 @@ Créer une plateforme simple pour :
 
 ## 👑 Auteur
 
-Projet développé avec ❤️
+Projet développé par [FireDroX](https://github.com/FireDroX).
+
+---
+
+## 📄 Licence
+
+Ce projet est distribué sous licence MIT. Voir le fichier
+[LICENSE](./LICENSE) pour les conditions complètes et la mention de copyright.

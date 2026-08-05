@@ -2,6 +2,8 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "author": "FireDroX",
+  "license": "MIT",
   "type": "module",
   "dependencies": {
     "react": "^19.2.8",
