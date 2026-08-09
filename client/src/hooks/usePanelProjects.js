@@ -73,7 +73,14 @@ const usePanelProjects = (onLogout) => {
     const formData = new FormData();
     formData.append("originalFileName", project.fileName);
     formData.append("name", updated.name ?? project.name);
-    formData.append("description", updated.description ?? project.description);
+    formData.append(
+      "descriptionFr",
+      updated.descriptionFr ?? project.descriptionFr ?? "",
+    );
+    formData.append(
+      "descriptionEn",
+      updated.descriptionEn ?? project.descriptionEn ?? "",
+    );
     if (updated.image) formData.append("image", updated.image);
     if (updated.zip) formData.append("zip", updated.zip);
 

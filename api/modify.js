@@ -16,9 +16,10 @@ router.post("/", auth, async (req, res) => {
       "",
     );
     const name = fields.name?.trim();
-    const description = fields.description?.trim();
+    const descriptionFr = fields.descriptionFr?.trim();
+    const descriptionEn = fields.descriptionEn?.trim();
 
-    if (!originalFileName || !name || !description) {
+    if (!originalFileName || !name || !descriptionFr || !descriptionEn) {
       return res.status(400).json({ error: "Champs manquants." });
     }
 
@@ -40,13 +41,17 @@ router.post("/", auth, async (req, res) => {
 
     if (image) {
       await pool.query(
-        "UPDATE projects SET name = ?, description = ?, image = ? WHERE fileName = ?",
-        [name, description, image, originalFileName],
+        `UPDATE projects
+         SET name = ?, descriptionFr = ?, descriptionEn = ?, image = ?
+         WHERE fileName = ?`,
+        [name, descriptionFr, descriptionEn, image, originalFileName],
       );
     } else {
       await pool.query(
-        "UPDATE projects SET name = ?, description = ? WHERE fileName = ?",
-        [name, description, originalFileName],
+        `UPDATE projects
+         SET name = ?, descriptionFr = ?, descriptionEn = ?
+         WHERE fileName = ?`,
+        [name, descriptionFr, descriptionEn, originalFileName],
       );
     }
 

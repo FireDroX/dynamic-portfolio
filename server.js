@@ -8,6 +8,7 @@ const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 
 const { getProjectBySlug } = require("./utils/functions");
+const { getProjectDescription } = require("./utils/projectDescription");
 const db = require("./db");
 
 const app = express();
@@ -114,7 +115,7 @@ app.use(async (req, res) => {
       if (project) {
         meta = {
           title: `${project.name} | Portfolio Adrien`,
-          description: project.description,
+          description: getProjectDescription(project),
         };
         if (project.image) {
           image = `${siteUrl}/og-image/${encodeURIComponent(slug)}`;

@@ -5,9 +5,10 @@ import ProjectHero from "../components/ProjectHero";
 import ProjectLivePreview from "../components/ProjectLivePreview";
 import Seo from "../components/Seo";
 import useProjectDetails from "../hooks/useProjectDetails";
+import getProjectDescription from "../utils/projectDescription";
 
 const ProjectDetail = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { project: projectSlug } = useParams();
   const navigate = useNavigate();
   const { project, hasError, isLoading } = useProjectDetails(projectSlug);
@@ -25,11 +26,13 @@ const ProjectDetail = () => {
     return <Navigate to="/projects" replace />;
   }
 
+  const description = getProjectDescription(project, i18n.resolvedLanguage);
+
   return (
     <main className="App project-detail">
       <Seo
         title={`${project.name} | Portfolio Adrien`}
-        description={project.description}
+        description={description}
         path={`/projects/${project.fileName}`}
         image={project.hasImage ? `/og-image/${project.fileName}` : undefined}
       />

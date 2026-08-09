@@ -15,9 +15,10 @@ router.post("/", auth, async (req, res) => {
   try {
     const { fields, image, zip } = await parseProjectUpload(req);
     const name = fields.name?.trim();
-    const description = fields.description?.trim();
+    const descriptionFr = fields.descriptionFr?.trim();
+    const descriptionEn = fields.descriptionEn?.trim();
 
-    if (!name || !description || !zip) {
+    if (!name || !descriptionFr || !descriptionEn || !zip) {
       return res.status(400).json({ error: "Champs manquants." });
     }
 
@@ -26,8 +27,10 @@ router.post("/", auth, async (req, res) => {
 
     const pool = await getPool();
     await pool.query(
-      "INSERT INTO projects (name, description, fileName, image) VALUES (?, ?, ?, ?)",
-      [name, description, projectSlug, image || ""],
+      `INSERT INTO projects
+        (name, descriptionFr, descriptionEn, fileName, image)
+       VALUES (?, ?, ?, ?, ?)`,
+      [name, descriptionFr, descriptionEn, projectSlug, image || ""],
     );
 
     await archiveTransaction.commit();

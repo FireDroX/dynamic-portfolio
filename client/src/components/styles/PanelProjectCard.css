@@ -65,6 +65,11 @@
   letter-spacing: 0.12em;
 }
 
+.panel-project-name,
+.panel-project-descriptions {
+  grid-column: 1 / -1;
+}
+
 .panel-project-assets {
   grid-column: 1 / -1;
 }

@@ -17,6 +17,12 @@ const PanelProjectCard = ({
   const { t, i18n } = useTranslation();
   const isModified = Object.keys(edited).length > 0;
   const imageSrc = edited.imagePreview || project.image;
+  const projectName = edited.name ?? project.name;
+  const descriptionFr = edited.descriptionFr ?? project.descriptionFr ?? "";
+  const descriptionEn = edited.descriptionEn ?? project.descriptionEn ?? "";
+  const hasRequiredFields = [projectName, descriptionFr, descriptionEn].every(
+    (value) => value.trim(),
+  );
 
   return (
     <article className="panel-project-card">
@@ -51,25 +57,45 @@ const PanelProjectCard = ({
               )}
             </span>
           </div>
-          <label className="panel-field">
+          <label className="panel-field panel-project-name">
             {t("panel.name")}
             <input
-              value={edited.name ?? project.name}
+              value={projectName}
               onChange={(event) =>
                 onChange(project.fileName, "name", event.target.value)
               }
             />
           </label>
-          <label className="panel-field">
-            {t("panel.descriptionLabel")}
-            <textarea
-              rows="4"
-              value={edited.description ?? project.description}
-              onChange={(event) =>
-                onChange(project.fileName, "description", event.target.value)
-              }
-            />
-          </label>
+          <div className="panel-description-fields panel-project-descriptions">
+            <label className="panel-field">
+              {t("panel.descriptionFrLabel")}
+              <textarea
+                rows="4"
+                value={descriptionFr}
+                onChange={(event) =>
+                  onChange(
+                    project.fileName,
+                    "descriptionFr",
+                    event.target.value,
+                  )
+                }
+              />
+            </label>
+            <label className="panel-field">
+              {t("panel.descriptionEnLabel")}
+              <textarea
+                rows="4"
+                value={descriptionEn}
+                onChange={(event) =>
+                  onChange(
+                    project.fileName,
+                    "descriptionEn",
+                    event.target.value,
+                  )
+                }
+              />
+            </label>
+          </div>
 
           <div className="panel-project-assets">
             <label className={edited.zip ? "has-file" : ""}>
@@ -113,7 +139,7 @@ const PanelProjectCard = ({
         </button>
         <button
           className="panel-save-button"
-          disabled={!isModified || isSaving}
+          disabled={!isModified || !hasRequiredFields || isSaving}
           onClick={() => onSave(project)}
         >
           {t(isSaving ? "panel.saving" : "panel.save")}

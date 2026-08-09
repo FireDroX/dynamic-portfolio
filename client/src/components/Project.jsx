@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next";
 
 import FormattedDescription from "./FormattedDescription";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
+import getProjectDescription from "../utils/projectDescription";
 
 const Project = ({ p }) => {
   const { t, i18n } = useTranslation();
   const projectPath = `/projects/${p.fileName}`;
+  const description = getProjectDescription(p, i18n.resolvedLanguage);
   const createdAt = new Date(p.createdAt);
   const formattedDate = Number.isNaN(createdAt.getTime())
     ? t("projects.unknownDate")
@@ -51,7 +53,7 @@ const Project = ({ p }) => {
           <Link to={projectPath}>{p.name}</Link>
         </h2>
         <p>
-          <FormattedDescription>{p.description}</FormattedDescription>
+          <FormattedDescription>{description}</FormattedDescription>
         </p>
       </div>
 

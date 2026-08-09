@@ -1,11 +1,13 @@
 import FormattedDescription from "./FormattedDescription";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
 import { useTranslation } from "react-i18next";
+import getProjectDescription from "../utils/projectDescription";
 import "./styles/ProjectHero.css";
 
 const ProjectHero = ({ project }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const hasImage = Boolean(project.hasImage);
+  const description = getProjectDescription(project, i18n.resolvedLanguage);
 
   return (
     <section className="project-hero">
@@ -13,7 +15,7 @@ const ProjectHero = ({ project }) => {
         <small>{t("project.interactive")}</small>
         <h1>{project.name}</h1>
         <p>
-          <FormattedDescription>{project.description}</FormattedDescription>
+          <FormattedDescription>{description}</FormattedDescription>
         </p>
         <a
           className="project-open"

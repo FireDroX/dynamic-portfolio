@@ -135,6 +135,16 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary) 10%, transparent);
 }
 
+.panel-description-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.panel-description-fields > .panel-field {
+  min-width: 0;
+}
+
 .panel-projects {
   display: flex;
   flex-direction: column;
@@ -154,5 +164,9 @@
 
   .panel-section-heading > p {
     display: none;
+  }
+
+  .panel-description-fields {
+    grid-template-columns: 1fr;
   }
 }

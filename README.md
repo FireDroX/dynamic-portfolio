@@ -167,14 +167,15 @@ depuis lequel le site est consulté.
 
 ### Table `projects`
 
-| Champ       | Type    | Description   |
-| ----------- | ------- | ------------- |
-| id          | INTEGER | ID unique     |
-| name        | TEXT    | Nom du projet |
-| description | TEXT    | Description   |
-| fileName    | TEXT    | Nom du ZIP    |
-| image       | TEXT    | Image Base64  |
-| createdAt   | DATE    | Date          |
+| Champ         | Type    | Description           |
+| ------------- | ------- | --------------------- |
+| id            | INTEGER | ID unique             |
+| name          | TEXT    | Nom du projet         |
+| descriptionFr | TEXT    | Description française |
+| descriptionEn | TEXT    | Description anglaise  |
+| fileName      | TEXT    | Nom du ZIP            |
+| image         | TEXT    | Image Base64          |
+| createdAt     | DATE    | Date                  |
 
 ---
 

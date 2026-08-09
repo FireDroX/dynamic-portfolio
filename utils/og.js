@@ -1,4 +1,5 @@
 const { createCanvas, loadImage } = require("canvas");
+const { getProjectDescription } = require("./projectDescription");
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -283,7 +284,7 @@ async function renderProjectOg(project, imageBuffer) {
   ctx.font = "24px sans-serif";
   const descriptionBottom = wrapText(
     ctx,
-    project?.description || "Découvrez ce projet sur mon portfolio.",
+    getProjectDescription(project) || "Découvrez ce projet sur mon portfolio.",
     70,
     titleBottom + 5,
     630,

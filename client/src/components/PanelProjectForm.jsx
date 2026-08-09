@@ -68,15 +68,26 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
               placeholder={t("panel.projectNamePlaceholder")}
             />
           </label>
-          <label className="panel-field">
-            {t("panel.descriptionLabel")}
-            <textarea
-              required
-              name="description"
-              placeholder={t("panel.descriptionPlaceholder")}
-              rows="5"
-            />
-          </label>
+          <div className="panel-description-fields">
+            <label className="panel-field">
+              {t("panel.descriptionFrLabel")}
+              <textarea
+                required
+                name="descriptionFr"
+                placeholder={t("panel.descriptionFrPlaceholder")}
+                rows="5"
+              />
+            </label>
+            <label className="panel-field">
+              {t("panel.descriptionEnLabel")}
+              <textarea
+                required
+                name="descriptionEn"
+                placeholder={t("panel.descriptionEnPlaceholder")}
+                rows="5"
+              />
+            </label>
+          </div>
         </div>
 
         <div className="panel-new-assets">
