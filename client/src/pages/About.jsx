@@ -1,5 +1,7 @@
 import "./styles/About.css";
 import { Link } from "react-router";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SiFiverr, SiKofi } from "react-icons/si";
 
 const stack = {
   Frontend: ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind", "Bootstrap"],
@@ -58,7 +60,8 @@ const About = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              FireDroX ↗
+              FireDroX
+              <FaGithub aria-hidden="true" />
             </a>
           </dd>
         </div>
@@ -70,7 +73,34 @@ const About = () => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              Moi ↗
+              Moi
+              <FaLinkedin aria-hidden="true" />
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt>Fiverr</dt>
+          <dd>
+            <a
+              href="https://fr.fiverr.com/s/GzV441Z"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Mes services
+              <SiFiverr aria-hidden="true" />
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt>Ko-fi</dt>
+          <dd>
+            <a
+              href="https://ko-fi.com/addrien"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Me soutenir
+              <SiKofi aria-hidden="true" />
             </a>
           </dd>
         </div>

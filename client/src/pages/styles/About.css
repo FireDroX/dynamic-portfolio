@@ -81,6 +81,18 @@
   color: var(--text);
 }
 
+.about-facts a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.about-facts a svg {
+  flex: 0 0 auto;
+  color: currentColor;
+  font-size: 1rem;
+}
+
 .about-facts a:hover {
   color: var(--secondary);
 }
