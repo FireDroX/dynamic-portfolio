@@ -1,5 +1,6 @@
 import PanelUploadIcon from "./PanelUploadIcon";
 import { useTranslation } from "react-i18next";
+import { FiArrowUpRight } from "react-icons/fi";
 import "./styles/PanelProjectCard.css";
 
 const PanelProjectCard = ({
@@ -118,11 +119,13 @@ const PanelProjectCard = ({
           {t(isPreviewOpen ? "panel.closePreview" : "panel.previewFiles")}
         </button>
         <a
+          className="panel-view-page-link"
           href={`/projects/${project.fileName}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          {t("panel.viewPage")}
+          <span>{t("panel.viewPage")}</span>
+          <FiArrowUpRight aria-hidden="true" />
         </a>
         <a
           href={`/api/panel/download/${encodeURIComponent(project.fileName)}`}

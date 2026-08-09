@@ -127,6 +127,12 @@
   background: #7b7b7b18;
 }
 
+.panel-view-page-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
 .panel-project-actions-spacer {
   flex: 1;
 }

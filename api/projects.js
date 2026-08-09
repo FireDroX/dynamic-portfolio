@@ -12,8 +12,7 @@ router.get("/", async (req, res) => {
   try {
     const db = await getPool();
     const [rows] = await db.query(`
-      SELECT id, name, descriptionFr, descriptionEn,
-        descriptionFr AS description, fileName, createdAt,
+      SELECT id, name, descriptionFr, descriptionEn, fileName, createdAt,
         (image LIKE 'data:image/%;base64,%'
           AND MOD(CHAR_LENGTH(SUBSTRING_INDEX(image, ',', -1)), 4) = 0) AS hasImage
       FROM projects
@@ -31,8 +30,7 @@ router.get("/:project/meta", async (req, res) => {
   try {
     const db = await getPool();
     const [rows] = await db.query(
-      `SELECT id, name, descriptionFr, descriptionEn,
-        descriptionFr AS description, fileName, createdAt,
+      `SELECT id, name, descriptionFr, descriptionEn, fileName, createdAt,
         (image LIKE 'data:image/%;base64,%'
           AND MOD(CHAR_LENGTH(SUBSTRING_INDEX(image, ',', -1)), 4) = 0) AS hasImage
        FROM projects WHERE fileName = ?`,
