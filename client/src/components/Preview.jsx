@@ -1,5 +1,17 @@
 import "./styles/Preview.css";
 import { useNavigate } from "react-router";
+import { FaTerminal } from "react-icons/fa";
+import {
+  SiBootstrap,
+  SiC,
+  SiCss,
+  SiDocker,
+  SiExpress,
+  SiHtml5,
+  SiPhp,
+  SiReact,
+  SiSocketdotio,
+} from "react-icons/si";
 
 import preview1 from "../assets/preview1.mp4";
 import preview1Poster from "../assets/preview1_loader.png";
@@ -12,6 +24,19 @@ const previews = {
   preview1: { video: preview1, poster: preview1Poster },
   preview2: { video: preview2, poster: preview2Poster },
   preview3: { video: preview3, poster: preview3Poster },
+};
+
+const stackIcons = {
+  React: SiReact,
+  Express: SiExpress,
+  "Socket.io": SiSocketdotio,
+  Docker: SiDocker,
+  HTML: SiHtml5,
+  CSS: SiCss,
+  PHP: SiPhp,
+  Bootstrap: SiBootstrap,
+  C: SiC,
+  ncurses: FaTerminal,
 };
 
 const Preview = ({ project, variant }) => {
@@ -28,7 +53,16 @@ const Preview = ({ project, variant }) => {
         <h3>{project.name}</h3>
         <p>{project.description}</p>
         <ul className="preview-stack" aria-label="Technologies utilisées">
-          {project.stack.map((tech) => <li key={tech}>{tech}</li>)}
+          {project.stack.map((tech) => {
+            const Icon = stackIcons[tech];
+
+            return (
+              <li key={tech}>
+                {Icon && <Icon aria-hidden="true" />}
+                <span>{tech}</span>
+              </li>
+            );
+          })}
         </ul>
         <button
           type="button"

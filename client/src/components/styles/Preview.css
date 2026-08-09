@@ -54,10 +54,19 @@
 
 .preview-stack li {
   padding: 0.4rem 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   border: 1px solid #7b7b7b38;
   border-radius: 999px;
   color: var(--accent);
   font-size: 0.68rem;
+}
+
+.preview-stack li svg {
+  flex: 0 0 auto;
+  color: currentColor;
+  font-size: 0.9rem;
 }
 
 .preview-copy button {
