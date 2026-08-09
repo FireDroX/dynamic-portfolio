@@ -76,7 +76,11 @@
 .achievement.unlocked {
   border-color: color-mix(in srgb, var(--secondary) 38%, transparent);
   background:
-    linear-gradient(145deg, color-mix(in srgb, var(--secondary) 7%, transparent), transparent 58%),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--secondary) 7%, transparent),
+      transparent 58%
+    ),
     color-mix(in srgb, var(--bg) 97%, var(--text));
 }
 
@@ -151,7 +155,8 @@
 
 .achievement.unlocked .achievement-state i {
   background: var(--secondary);
-  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--secondary) 12%, transparent);
+  box-shadow: 0 0 0 0.25rem
+    color-mix(in srgb, var(--secondary) 12%, transparent);
 }
 
 .achievement-content {

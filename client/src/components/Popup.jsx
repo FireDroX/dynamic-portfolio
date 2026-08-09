@@ -1,7 +1,11 @@
 import "./styles/Popup.css";
+import { useTranslation } from "react-i18next";
+import { formatAchievementName } from "../utils/achievements/config";
 
 const Popup = ({ achievement, unlocked }) => {
-  const { name, description, emoji, hint } = achievement;
+  const { t } = useTranslation();
+  const { name, emoji } = achievement;
+  const translationKey = `achievements.items.${formatAchievementName(name)}`;
 
   return (
     <article className={`achievement ${unlocked ? "unlocked" : "locked"}`}>
@@ -11,14 +15,18 @@ const Popup = ({ achievement, unlocked }) => {
         </div>
         <span className="achievement-state">
           <i aria-hidden="true" />
-          {unlocked ? "Débloqué" : "Verrouillé"}
+          {t(unlocked ? "achievements.unlocked" : "achievements.locked")}
         </span>
       </div>
 
       <div className="achievement-content">
-        <small>{unlocked ? "Achievement" : "Indice"}</small>
-        <h3>{unlocked ? name : "Secret inconnu"}</h3>
-        <p>{unlocked ? description : hint}</p>
+        <small>
+          {t(unlocked ? "achievements.achievement" : "achievements.hint")}
+        </small>
+        <h3>
+          {unlocked ? t(`${translationKey}.name`) : t("achievements.unknown")}
+        </h3>
+        <p>{t(`${translationKey}.${unlocked ? "description" : "hint"}`)}</p>
       </div>
     </article>
   );

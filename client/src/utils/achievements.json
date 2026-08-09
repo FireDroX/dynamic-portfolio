@@ -1,116 +1,78 @@
 [
   {
     "name": "Hidden Page",
-    "description": "You found a hidden page!",
-    "emoji": "🕵️‍♂️",
-    "hint": "/achievements"
+    "emoji": "🕵️‍♂️"
   },
   {
     "name": "Very Interesting Portfolio",
-    "description": "So you really like this portfolio...",
-    "emoji": "⏳",
-    "hint": "One minute is all it takes."
+    "emoji": "⏳"
   },
   {
     "name": "Burning Eyes",
-    "description": "AHHHHHHHHHHHH MY EYES",
-    "emoji": "🔥",
-    "hint": "What are you doing in light mode ?"
+    "emoji": "🔥"
   },
   {
     "name": "Explorer",
-    "description": "You discovered all the accessible pages of this portfolio!",
-    "emoji": "🧭",
-    "hint": "Explore every pages."
+    "emoji": "🧭"
   },
   {
     "name": "Snake Git",
-    "description": "Tssssssssssssssssssss",
-    "emoji": "🐍",
-    "hint": "Catch the snake !"
+    "emoji": "🐍"
   },
   {
     "name": "&cᴏpy;",
-    "description": "Copyright Copyright Copyright",
-    "emoji": "©",
-    "hint": "3 times &copy;"
+    "emoji": "©"
   },
   {
     "name": "Wrong Password",
-    "description": "Did you think my password was easy to guess? Think again.",
-    "emoji": "🔒",
-    "hint": "Guess the password."
+    "emoji": "🔒"
   },
   {
     "name": "Thats me",
-    "description": "Yep, that's me.",
-    "emoji": "👤",
-    "hint": "Say my name."
+    "emoji": "👤"
   },
   {
     "name": "Project Hopper",
-    "description": "One project is never enough.",
-    "emoji": "🐇",
-    "hint": "Visit three different projects."
+    "emoji": "🐇"
   },
   {
     "name": "Back for More",
-    "description": "You came back another day.",
-    "emoji": "🎟️",
-    "hint": "See you tomorrow."
+    "emoji": "🎟️"
   },
   {
     "name": "Nerd",
-    "description": "Was the source code of this page fun to read ?",
-    "emoji": "🤓",
-    "hint": "From GitHub"
+    "emoji": "🤓"
   },
   {
     "name": "Recruiter",
-    "description": "Are you a recruiter ? If so, you got something special !",
-    "emoji": "💼",
-    "hint": "From LinkedIn"
+    "emoji": "💼"
   },
   {
     "name": "Konami Code",
-    "description": "↑↑↓↓←→←→BA",
-    "emoji": "🎮",
-    "hint": "First cheat code in history."
+    "emoji": "🎮"
   },
   {
     "name": "The Curator",
-    "description": "You explored every project in the collection.",
-    "emoji": "🗂️",
-    "hint": "Complete the collection."
+    "emoji": "🗂️"
   },
   {
     "name": "Portfolio Enjoyer",
-    "description": "You have visited this portfolio 42 times...",
-    "emoji": "🔄",
-    "hint": "42 times is the answer."
+    "emoji": "🔄"
   },
   {
     "name": "Regular Visitor",
-    "description": "Consistency is key.",
-    "emoji": "📅",
-    "hint": "Come back on three different days."
+    "emoji": "📅"
   },
   {
     "name": "Space Invader",
-    "description": "The Death Star never stood a chance.",
-    "emoji": "🚀",
-    "hint": "Destroy the Death Star."
+    "emoji": "🚀"
   },
   {
     "name": "Cheater",
-    "description": "You must cheat to unlock this.",
-    "emoji": "🚫",
-    "hint": "window.dispatchEvent(new CustomEvent(\"portfolio:cheater\"))"
+    "emoji": "🚫"
   },
   {
     "name": "Achievement Hunter",
-    "description": "You unlocked all the achievements !",
-    "emoji": "🏆",
-    "hint": "Unlock all the achievements."
+    "emoji": "🏆"
   }
 ]

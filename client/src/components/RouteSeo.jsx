@@ -1,42 +1,48 @@
 import Seo from "./Seo";
+import { useTranslation } from "react-i18next";
 
-const ROUTE_SEO = {
+const ROUTE_SEO_KEYS = {
   "/": {
-    title: "Adrien | Développeur React & Node.js",
-    description:
-      "Adrien conçoit des applications web, des jeux et des expériences interactives avec React et Node.js. Découvrez ses projets directement en ligne.",
+    title: "seo.homeTitle",
+    description: "seo.homeDescription",
   },
   "/about": {
-    title: "À propos d’Adrien | Développeur web",
-    description:
-      "Découvrez le parcours, la façon de travailler et la boîte à outils d’Adrien, étudiant à l’ESGI Paris et développeur web.",
+    title: "seo.aboutTitle",
+    description: "seo.aboutDescription",
   },
   "/mentions-legales": {
-    title: "Mentions légales | Portfolio Adrien",
-    description:
-      "Mentions légales et politique de confidentialité du portfolio d’Adrien.",
+    title: "seo.legalTitle",
+    description: "seo.legalDescription",
   },
   "/achievements": {
-    title: "Secrets et achievements | Portfolio Adrien",
-    description: "Les secrets cachés dans le portfolio d’Adrien.",
+    title: "seo.achievementsTitle",
+    description: "seo.achievementsDescription",
     noIndex: true,
   },
 };
 
-const PANEL_SEO = {
-  title: "Administration | Portfolio Adrien",
-  description: "Espace d’administration du portfolio.",
+const PANEL_SEO_KEYS = {
+  title: "seo.panelTitle",
+  description: "seo.panelDescription",
   noIndex: true,
 };
 
 const RouteSeo = ({ pathname }) => {
+  const { t } = useTranslation();
   const seo = pathname.startsWith("/panel")
-    ? PANEL_SEO
-    : ROUTE_SEO[pathname];
+    ? PANEL_SEO_KEYS
+    : ROUTE_SEO_KEYS[pathname];
 
   if (!seo) return null;
 
-  return <Seo {...seo} path={pathname} />;
+  return (
+    <Seo
+      title={t(seo.title)}
+      description={t(seo.description)}
+      noIndex={seo.noIndex}
+      path={pathname}
+    />
+  );
 };
 
 export default RouteSeo;

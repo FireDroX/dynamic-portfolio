@@ -1,0 +1,371 @@
+{
+  "nav": {
+    "home": "accueil",
+    "about": "à propos",
+    "projects": "projets",
+    "login": "connexion",
+    "switchToEnglish": "Passer en anglais",
+    "switchToFrench": "Passer en français"
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "legal": "Mentions légales"
+  },
+  "home": {
+    "student": "Étudiant à l’<school>ESGI</school> Paris et développeur web.",
+    "online": "Disponible en ligne",
+    "introLabel": "Introduction",
+    "whatIDo": "Ce que je fais",
+    "title": "Des projets faits pour être utilisés.",
+    "description": "J’aime transformer une idée en quelque chose de concret : une interface, un jeu ou un outil que l’on peut directement essayer.",
+    "aboutLink": "En savoir plus sur moi →",
+    "selection": "sélection",
+    "projectsTitle": "Quelques projets",
+    "projectsDescription": "Trois projets, trois univers, tous accessibles directement en ligne.",
+    "selectedProjectsLabel": "Projets sélectionnés",
+    "allProjects": "Voir tous les projets →",
+    "terminalLabel": "Terminal des projets",
+    "terminalUnknownDate": "date inconnue",
+    "terminalReading": "lecture du dossier...",
+    "terminalError": "ls: impossible de lire ~/projects",
+    "terminalTotal_one": "total {{count}} projet",
+    "terminalTotal_other": "total {{count}} projets",
+    "terminalOpenProject": "Ouvrir le projet {{name}}"
+  },
+  "about": {
+    "title": "À propos",
+    "header": "Quelques mots sur mon parcours et ce que j’utilise pour créer.",
+    "presentation": "présentation",
+    "summaryTitle": "Je construis pour comprendre.",
+    "summaryFirst": "Je m’appelle Adrien, je suis étudiant en informatique à l’ESGI Paris. Je développe principalement des projets web avec React et Node.js, mais j’aime aussi sortir de cette stack pour découvrir d’autres manières de programmer.",
+    "summarySecond": "Ce portfolio est mon espace d’expérimentation : les projets ne sont pas seulement présentés, ils peuvent être testés directement.",
+    "discoverProjects": "Découvrir les projets →",
+    "school": "École",
+    "focus": "Focus",
+    "focusValue": "Web et projets interactifs",
+    "since": "Depuis",
+    "days_one": "{{formattedCount}} jour",
+    "days_other": "{{formattedCount}} jours",
+    "me": "Moi",
+    "services": "Mes services",
+    "support": "Me soutenir",
+    "toolsTitle": "Ma boîte à outils",
+    "toolsDescription": "Les technologies que j’utilise le plus souvent dans mes projets.",
+    "toolsCategory": "Outils",
+    "activity": "activité",
+    "githubDescription": "Un aperçu de mon activité — et peut-être un secret à trouver.",
+    "githubButtonLabel": "Afficher l’animation des contributions GitHub et découvrir un secret",
+    "githubImageAlt": "Animation des contributions GitHub d’Adrien"
+  },
+  "projects": {
+    "loading": "Chargement des projets...",
+    "title": "Projets",
+    "description": "Applications, jeux et expériences interactives. Chaque projet peut être ouvert et testé directement depuis le portfolio.",
+    "listLabel": "Liste des projets",
+    "all": "Tous les projets",
+    "count_one": "{{count}} projet",
+    "count_other": "{{count}} projets",
+    "loadError": "Impossible de charger les projets pour le moment.",
+    "empty": "Aucun projet disponible.",
+    "unknownDate": "date inconnue",
+    "view": "Voir le projet {{name}}",
+    "open": "Ouvrir le projet {{name}}",
+    "fileInfo": "Informations du fichier"
+  },
+  "project": {
+    "loading": "Chargement du projet...",
+    "back": "Tous les projets",
+    "interactive": "Projet interactif",
+    "fullscreen": "Ouvrir en plein écran",
+    "previewAlt": "Aperçu de {{name}}",
+    "previewCaption": "aperçu / {{fileName}}",
+    "demoLabel": "Démo de {{name}}",
+    "live": "En direct",
+    "opening": "Ouverture de l’expérience...",
+    "iframeTitle": "Démo interactive — {{name}}"
+  },
+  "preview": {
+    "selected": "Projet sélectionné",
+    "technologies": "Technologies utilisées",
+    "discover": "Découvrir le projet",
+    "discoverLabel": "Découvrir le projet {{name}}",
+    "videoTitle": "Aperçu vidéo du projet {{name}}",
+    "live": "Aperçu en direct"
+  },
+  "featured": {
+    "pokeflip": "Une nouvelle version de PokeFlip avec une interface responsive, du multijoueur en temps réel et des profils personnalisables.",
+    "monstersEnergy": "Une plateforme communautaire autour de Monster Energy avec catalogue, classements, messagerie et achievements.",
+    "spaceInvaders": "Une réinterprétation de Space Invaders en ASCII, développée en C avec ncurses et une difficulté progressive."
+  },
+  "achievements": {
+    "header": "Des détails sont cachés un peu partout dans le portfolio. Explore, expérimente et garde l’œil ouvert.",
+    "progress": "progression",
+    "progressLabel": "Progression des achievements",
+    "unlockedCount": "{{unlocked}} / {{total}} débloqués",
+    "complete": "Collection terminée",
+    "inProgress": "Collection en cours",
+    "unlockedLabel": "Achievements débloqués",
+    "collection": "collection",
+    "findThem": "À toi de les trouver",
+    "hintExplanation": "Les cartes verrouillées révèlent un indice, jamais la solution.",
+    "unlocked": "Débloqué",
+    "locked": "Verrouillé",
+    "achievement": "Achievement",
+    "hint": "Indice",
+    "unknown": "Secret inconnu",
+    "popupLabel": "🥚 Easter Egg trouvé !",
+    "cheaterAlert": "Tricheur !\nToute ta progression a été supprimée.",
+    "items": {
+      "hidden-page": {
+        "name": "Page cachée",
+        "description": "Tu as trouvé une page cachée !",
+        "hint": "/achievements"
+      },
+      "very-interesting-portfolio": {
+        "name": "Portfolio très intéressant",
+        "description": "Alors comme ça, tu aimes vraiment ce portfolio...",
+        "hint": "Une minute suffit."
+      },
+      "burning-eyes": {
+        "name": "Yeux en feu",
+        "description": "AAAAAAAH MES YEUX",
+        "hint": "Que fais-tu en mode clair ?"
+      },
+      "explorer": {
+        "name": "Explorateur",
+        "description": "Tu as découvert toutes les pages accessibles de ce portfolio !",
+        "hint": "Explore toutes les pages."
+      },
+      "snake-git": {
+        "name": "Serpent Git",
+        "description": "Tssssssssssssssssssss",
+        "hint": "Attrape le serpent !"
+      },
+      "&cᴏpy;": {
+        "name": "&cᴏpy;",
+        "description": "Copyright Copyright Copyright",
+        "hint": "3 fois &copy;"
+      },
+      "wrong-password": {
+        "name": "Mauvais mot de passe",
+        "description": "Tu pensais que mon mot de passe serait facile à deviner ? Raté.",
+        "hint": "Devine le mot de passe."
+      },
+      "thats-me": {
+        "name": "C’est moi",
+        "description": "Oui, c’est bien moi.",
+        "hint": "Dis mon nom."
+      },
+      "project-hopper": {
+        "name": "Sauteur de projets",
+        "description": "Un seul projet ne suffit jamais.",
+        "hint": "Visite trois projets différents."
+      },
+      "back-for-more": {
+        "name": "De retour",
+        "description": "Tu es revenu un autre jour.",
+        "hint": "À demain."
+      },
+      "nerd": {
+        "name": "Nerd",
+        "description": "Le code source de cette page était sympa à lire ?",
+        "hint": "Depuis GitHub"
+      },
+      "recruiter": {
+        "name": "Recruteur",
+        "description": "Tu es recruteur ? Alors tu as droit à quelque chose de spécial !",
+        "hint": "Depuis LinkedIn"
+      },
+      "konami-code": {
+        "name": "Code Konami",
+        "description": "↑↑↓↓←→←→BA",
+        "hint": "Le premier code de triche de l’histoire."
+      },
+      "the-curator": {
+        "name": "Le conservateur",
+        "description": "Tu as exploré chaque projet de la collection.",
+        "hint": "Complète la collection."
+      },
+      "portfolio-enjoyer": {
+        "name": "Amateur du portfolio",
+        "description": "Tu as visité ce portfolio 42 fois...",
+        "hint": "42 est la réponse."
+      },
+      "regular-visitor": {
+        "name": "Visiteur régulier",
+        "description": "La régularité est la clé.",
+        "hint": "Reviens pendant trois jours différents."
+      },
+      "space-invader": {
+        "name": "Space Invader",
+        "description": "L’Étoile de la mort n’avait aucune chance.",
+        "hint": "Détruis l’Étoile de la mort."
+      },
+      "cheater": {
+        "name": "Tricheur",
+        "description": "Tu dois tricher pour débloquer ceci.",
+        "hint": "window.dispatchEvent(new CustomEvent(\"portfolio:cheater\"))"
+      },
+      "achievement-hunter": {
+        "name": "Chasseur d’achievements",
+        "description": "Tu as débloqué tous les achievements !",
+        "hint": "Débloque tous les achievements."
+      }
+    }
+  },
+  "login": {
+    "wrongPassword": "Mot de passe incorrect. Réessaie.",
+    "serverError": "Impossible de contacter le serveur.",
+    "privateArea": "espace privé",
+    "title": "Administration",
+    "description": "Connecte-toi pour publier, prévisualiser et mettre à jour les projets du portfolio.",
+    "adminAccess": "Accès administrateur",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Ton mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "showPassword": "Afficher le mot de passe",
+    "hide": "Masquer",
+    "show": "Afficher",
+    "loading": "Connexion...",
+    "submit": "Entrer dans le panel"
+  },
+  "panel": {
+    "privateArea": "espace privé",
+    "description": "Publie et maintiens les expériences visibles sur le portfolio.",
+    "logout": "Déconnexion",
+    "close": "Fermer",
+    "library": "Bibliothèque",
+    "publishedProjects": "Projets publiés",
+    "projectCount_one": "{{count}} projet",
+    "projectCount_other": "{{count}} projets",
+    "newContent": "Nouveau contenu",
+    "addProject": "Ajouter un projet",
+    "projectName": "Nom du projet",
+    "projectNamePlaceholder": "Mon nouveau projet",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Une courte description du projet",
+    "newPreview": "Nouvel aperçu",
+    "chooseImage": "Choisir l’image",
+    "chooseFiles": "Choisir les fichiers",
+    "zipHelp": "Archive ZIP avec index.html",
+    "publishing": "Publication...",
+    "publish": "Publier le projet",
+    "previewAlt": "Aperçu de {{name}}",
+    "noImage": "Aucune image",
+    "replace": "Remplacer",
+    "name": "Nom",
+    "replaceZip": "Remplacer le ZIP du projet",
+    "closePreview": "Fermer l’aperçu",
+    "previewFiles": "Prévisualiser les fichiers",
+    "viewPage": "Voir la page ↗",
+    "downloadZip": "Télécharger le ZIP",
+    "delete": "Supprimer",
+    "saving": "Enregistrement...",
+    "save": "Enregistrer",
+    "livePreview": "Aperçu en direct",
+    "loadError": "Impossible de charger les projets.",
+    "modifyError": "Modification impossible",
+    "updated": "{{name}} a bien été mis à jour.",
+    "deleteConfirm": "Supprimer définitivement « {{name}} » ?",
+    "deleteError": "La suppression a échoué.",
+    "deleted": "{{name}} a été supprimé.",
+    "addError": "Impossible d’ajouter le projet.",
+    "added": "Le projet a bien été ajouté."
+  },
+  "legal": {
+    "eyebrow": "mentions & confidentialité",
+    "title": "Informations légales",
+    "intro": "Informations relatives à l’édition du portfolio, à son hébergement et aux données utilisées pour son fonctionnement.",
+    "updated": "Mise à jour le 23 juillet 2026",
+    "navLabel": "Sommaire des mentions légales",
+    "nav": {
+      "edition": "Édition",
+      "hosting": "Hébergement",
+      "privacy": "Confidentialité",
+      "storage": "Stockage local",
+      "services": "Services externes",
+      "rights": "Vos droits"
+    },
+    "edition": {
+      "eyebrow": "identification",
+      "title": "Édition du site",
+      "text": "Ce portfolio est édité à titre personnel et non professionnel par Adrien POURLIER, également directeur de la publication.",
+      "publisher": "Éditeur",
+      "contact": "Contact",
+      "sites": "Sites concernés"
+    },
+    "hosting": {
+      "eyebrow": "infrastructure",
+      "title": "Hébergement",
+      "first": "Le site, son API et les projets présentés sont hébergés en France sur une infrastructure personnelle administrée par l’éditeur. Docker assure l’exécution des services et Cloudflare Tunnel leur mise à disposition sécurisée sur Internet.",
+      "second": "La disponibilité, la maintenance et la sauvegarde de cette infrastructure relèvent directement de l’éditeur."
+    },
+    "privacy": {
+      "eyebrow": "données",
+      "title": "Confidentialité",
+      "first": "Le portfolio ne propose pas de compte visiteur, de formulaire de contact, de publicité ou d’outil de mesure d’audience. Aucune donnée n’est vendue ni utilisée pour établir un profil publicitaire.",
+      "second": "Comme pour tout service web, des informations techniques telles que l’adresse IP, la date de connexion, la ressource demandée ou le type de navigateur peuvent être traitées temporairement par le serveur et les intermédiaires réseau pour acheminer les requêtes, maintenir le service et assurer sa sécurité.",
+      "note": "Les messages envoyés à l’adresse de contact sont traités uniquement afin de répondre à leur auteur."
+    },
+    "storage": {
+      "eyebrow": "navigateur",
+      "title": "Cookies et stockage local",
+      "first": "Le système d’achievements utilise le <storage>localStorage</storage> du navigateur. Ces informations restent sur l’appareil utilisé et ne sont pas envoyées au serveur.",
+      "retention": "Ces entrées sont conservées jusqu’à leur suppression depuis les paramètres du navigateur. Leur suppression réinitialise tout ou partie de la progression des achievements.",
+      "session": "Un cookie de session strictement fonctionnel peut également être utilisé pour authentifier l’espace d’administration. Il n’est pas destiné au suivi des visiteurs et expire avec la session du navigateur.",
+      "entries": {
+        "achievements": "Mémorise les achievements débloqués.",
+        "visited": "Compte les visites nécessaires à certains achievements.",
+        "explorer": "Mémorise les pages déjà explorées.",
+        "projects": "Mémorise les projets consultés sans enregistrer leur contenu.",
+        "days": "Mémorise les jours de visite pour les achievements de retour."
+      }
+    },
+    "services": {
+      "eyebrow": "tiers",
+      "title": "Services externes",
+      "intro": "Selon la page consultée, le navigateur peut contacter :",
+      "cloudflare": "pour l’accès sécurisé au site ;",
+      "fonts": "pour charger la police Manrope ;",
+      "github": "pour afficher l’animation des contributions ;",
+      "iframes": "les services nécessaires aux projets interactifs intégrés dans les iframes.",
+      "links": "Les liens vers GitHub, LinkedIn ou Ko-fi ouvrent des sites distincts disposant de leurs propres politiques de confidentialité."
+    },
+    "property": {
+      "eyebrow": "contenus",
+      "title": "Propriété intellectuelle",
+      "first": "Sauf indication contraire, les textes, interfaces, éléments graphiques et projets présentés sur ce portfolio sont la propriété de leur auteur. Toute reproduction ou réutilisation substantielle nécessite son autorisation préalable.",
+      "second": "Les marques, bibliothèques, ressources et services tiers restent la propriété de leurs titulaires respectifs."
+    },
+    "liability": {
+      "eyebrow": "utilisation",
+      "title": "Responsabilité",
+      "text": "Les informations et démonstrations sont fournies à titre informatif. Malgré le soin apporté au portfolio, l’éditeur ne peut garantir une disponibilité permanente ni l’absence totale d’erreurs. Les liens externes et leurs contenus ne relèvent pas de sa responsabilité."
+    },
+    "rights": {
+      "eyebrow": "contact",
+      "title": "Vos droits",
+      "beforeEmail": "Pour toute question relative à ces informations, à une donnée personnelle ou à un contenu publié, vous pouvez écrire à l’adresse suivante :",
+      "digitalLaw": "Loi pour la confiance dans l’économie numérique ↗",
+      "cnil": "Informations de la CNIL sur les traceurs ↗"
+    }
+  },
+  "seo": {
+    "homeTitle": "Adrien | Développeur React & Node.js",
+    "homeDescription": "Adrien conçoit des applications web, des jeux et des expériences interactives avec React et Node.js. Découvrez ses projets directement en ligne.",
+    "aboutTitle": "À propos d’Adrien | Développeur web",
+    "aboutDescription": "Découvrez le parcours, la façon de travailler et la boîte à outils d’Adrien, étudiant à l’ESGI Paris et développeur web.",
+    "projectsTitle": "Projets web interactifs | Portfolio Adrien",
+    "projectsDescription": "Découvrez les projets web d’Adrien : applications React, expériences interactives et créations full-stack testables en ligne.",
+    "legalTitle": "Mentions légales | Portfolio Adrien",
+    "legalDescription": "Mentions légales et politique de confidentialité du portfolio d’Adrien.",
+    "achievementsTitle": "Secrets et achievements | Portfolio Adrien",
+    "achievementsDescription": "Les secrets cachés dans le portfolio d’Adrien.",
+    "panelTitle": "Administration | Portfolio Adrien",
+    "panelDescription": "Espace d’administration du portfolio.",
+    "jobTitle": "Développeur Web"
+  },
+  "system": {
+    "sessionCheck": "Vérification de la session"
+  }
+}

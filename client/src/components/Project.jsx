@@ -1,19 +1,24 @@
 import "./styles/Project.css";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 
 import FormattedDescription from "./FormattedDescription";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
 
 const Project = ({ p }) => {
+  const { t, i18n } = useTranslation();
   const projectPath = `/projects/${p.fileName}`;
   const createdAt = new Date(p.createdAt);
   const formattedDate = Number.isNaN(createdAt.getTime())
-    ? "date inconnue"
-    : new Intl.DateTimeFormat("fr-FR", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
+    ? t("projects.unknownDate")
+    : new Intl.DateTimeFormat(
+        i18n.resolvedLanguage === "en" ? "en-GB" : "fr-FR",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        },
+      )
         .format(createdAt)
         .replace(".", "");
 
@@ -22,7 +27,7 @@ const Project = ({ p }) => {
       <Link
         className="project-row-visual"
         to={projectPath}
-        aria-label={`Voir le projet ${p.name}`}
+        aria-label={t("projects.view", { name: p.name })}
       >
         <img
           src={
@@ -39,7 +44,7 @@ const Project = ({ p }) => {
       </Link>
 
       <div className="project-row-copy">
-        <div className="project-row-meta" aria-label="Informations du fichier">
+        <div className="project-row-meta" aria-label={t("projects.fileInfo")}>
           <time dateTime={p.createdAt}>{formattedDate}</time>
         </div>
         <h2>
@@ -52,7 +57,10 @@ const Project = ({ p }) => {
 
       <div className="project-row-open">
         <code>{p.fileName}/</code>
-        <Link to={projectPath} aria-label={`Ouvrir le projet ${p.name}`}>
+        <Link
+          to={projectPath}
+          aria-label={t("projects.open", { name: p.name })}
+        >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>

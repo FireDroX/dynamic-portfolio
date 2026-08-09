@@ -1,9 +1,7 @@
 import { readArray, writeJson } from "../storage";
-import achievements, {
-  formatAchievementName,
-  STORAGE_KEYS,
-} from "./config";
+import achievements, { formatAchievementName, STORAGE_KEYS } from "./config";
 import { showAchievementPopup } from "./popup";
+import i18n from "../../i18n";
 
 const SPECIAL_ACHIEVEMENTS = new Set(["cheater", "achievement-hunter"]);
 
@@ -37,9 +35,7 @@ export function registerCompletionTracker() {
       unlockedAchievements.includes("achievement-hunter");
 
     if (hasCompletedCollection && !hasHunterAchievement) {
-      window.dispatchEvent(
-        new CustomEvent("portfolio:achievement-hunter"),
-      );
+      window.dispatchEvent(new CustomEvent("portfolio:achievement-hunter"));
     }
 
     if (!hasCompletedCollection && hasHunterAchievement) {
@@ -60,7 +56,7 @@ export function registerCheaterAchievement() {
     localStorage.removeItem(STORAGE_KEYS.visits);
     localStorage.removeItem(STORAGE_KEYS.viewedProjects);
     localStorage.removeItem(STORAGE_KEYS.visitDays);
-    alert("You cheater !\nEverything got deleted");
+    alert(i18n.t("achievements.cheaterAlert"));
     window.dispatchEvent(new CustomEvent("portfolio:update"));
   });
 }

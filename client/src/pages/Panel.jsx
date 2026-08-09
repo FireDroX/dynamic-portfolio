@@ -1,9 +1,11 @@
 import "./styles/Panel.css";
+import { useTranslation } from "react-i18next";
 import PanelProjectCard from "../components/PanelProjectCard";
 import PanelProjectForm from "../components/PanelProjectForm";
 import usePanelProjects from "../hooks/usePanelProjects";
 
 const Panel = ({ onLogout }) => {
+  const { t } = useTranslation();
   const {
     projects,
     editedProjects,
@@ -21,8 +23,7 @@ const Panel = ({ onLogout }) => {
   } = usePanelProjects(onLogout);
 
   const sortedProjects = [...projects].sort(
-    (first, second) =>
-      new Date(second.createdAt) - new Date(first.createdAt),
+    (first, second) => new Date(second.createdAt) - new Date(first.createdAt),
   );
 
   const handleLogout = async () => {
@@ -37,12 +38,12 @@ const Panel = ({ onLogout }) => {
     <main className="App panel-page">
       <header className="panel-header">
         <div>
-          <small>espace privé</small>
+          <small>{t("panel.privateArea")}</small>
           <h1>Panel</h1>
-          <p>Publie et maintiens les expériences visibles sur le portfolio.</p>
+          <p>{t("panel.description")}</p>
         </div>
         <button className="panel-logout" onClick={handleLogout}>
-          Déconnexion
+          {t("panel.logout")}
         </button>
       </header>
 
@@ -52,26 +53,21 @@ const Panel = ({ onLogout }) => {
           role="status"
         >
           {notice.text}
-          <button onClick={dismissNotice} aria-label="Fermer">
+          <button onClick={dismissNotice} aria-label={t("panel.close")}>
             ×
           </button>
         </div>
       )}
 
-      <PanelProjectForm
-        isSaving={saving === "new"}
-        onSubmit={addProject}
-      />
+      <PanelProjectForm isSaving={saving === "new"} onSubmit={addProject} />
 
       <section className="panel-projects-section">
         <div className="panel-section-heading">
           <div>
-            <small>Bibliothèque</small>
-            <h2>Projets publiés</h2>
+            <small>{t("panel.library")}</small>
+            <h2>{t("panel.publishedProjects")}</h2>
           </div>
-          <p>
-            {projects.length} projet{projects.length > 1 ? "s" : ""}
-          </p>
+          <p>{t("panel.projectCount", { count: projects.length })}</p>
         </div>
 
         <div className="panel-projects">

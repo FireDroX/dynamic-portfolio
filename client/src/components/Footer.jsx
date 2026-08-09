@@ -1,7 +1,9 @@
 import "./styles/Footer.css";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const [count, setCount] = useState(0);
 
   const handleCount = () => {
@@ -23,7 +25,7 @@ const Footer = () => {
         >
           {new Date().getFullYear()}
         </button>{" "}
-        <span>Tous droits réservés.</span>
+        <span>{t("footer.rights")}</span>
       </p>
       <div>
         <a
@@ -41,7 +43,7 @@ const Footer = () => {
           GitHub
         </a>
         <a href="/mentions-legales" target="_blank" rel="noopener noreferrer">
-          Mentions Légales
+          {t("footer.legal")}
         </a>
       </div>
     </footer>

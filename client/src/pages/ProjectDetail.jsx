@@ -1,24 +1,22 @@
 import "./styles/ProjectDetail.css";
 import { Navigate, useNavigate, useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import ProjectHero from "../components/ProjectHero";
 import ProjectLivePreview from "../components/ProjectLivePreview";
 import Seo from "../components/Seo";
 import useProjectDetails from "../hooks/useProjectDetails";
 
 const ProjectDetail = () => {
+  const { t } = useTranslation();
   const { project: projectSlug } = useParams();
   const navigate = useNavigate();
-  const {
-    project,
-    hasError,
-    isLoading,
-  } = useProjectDetails(projectSlug);
+  const { project, hasError, isLoading } = useProjectDetails(projectSlug);
 
   if (isLoading) {
     return (
       <main className="App project-detail-loading" aria-live="polite">
         <div className="spinner" />
-        <p>Chargement du projet...</p>
+        <p>{t("project.loading")}</p>
       </main>
     );
   }
@@ -33,9 +31,7 @@ const ProjectDetail = () => {
         title={`${project.name} | Portfolio Adrien`}
         description={project.description}
         path={`/projects/${project.fileName}`}
-        image={
-          project.hasImage ? `/og-image/${project.fileName}` : undefined
-        }
+        image={project.hasImage ? `/og-image/${project.fileName}` : undefined}
       />
 
       <button
@@ -46,7 +42,7 @@ const ProjectDetail = () => {
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="m15 18-6-6 6-6" />
         </svg>
-        Tous les projets
+        {t("project.back")}
       </button>
 
       <ProjectHero project={project} />

@@ -1,9 +1,4 @@
-import {
-  readArray,
-  readNumber,
-  writeJson,
-  writeNumber,
-} from "../storage";
+import { readArray, readNumber, writeJson, writeNumber } from "../storage";
 import { STORAGE_KEYS } from "./config";
 
 function getLocalDayKey(date = new Date()) {

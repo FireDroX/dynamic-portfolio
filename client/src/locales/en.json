@@ -1,0 +1,371 @@
+{
+  "nav": {
+    "home": "home",
+    "about": "about",
+    "projects": "projects",
+    "login": "login",
+    "switchToEnglish": "Switch to English",
+    "switchToFrench": "Switch to French"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "legal": "Legal notice"
+  },
+  "home": {
+    "student": "Computer science student at <school>ESGI</school> Paris and web developer.",
+    "online": "Available online",
+    "introLabel": "Introduction",
+    "whatIDo": "What I do",
+    "title": "Projects made to be used.",
+    "description": "I like turning an idea into something tangible: an interface, a game or a tool you can try right away.",
+    "aboutLink": "Learn more about me →",
+    "selection": "selection",
+    "projectsTitle": "Selected projects",
+    "projectsDescription": "Three projects, three different worlds, all available online.",
+    "selectedProjectsLabel": "Selected projects",
+    "allProjects": "View all projects →",
+    "terminalLabel": "Project terminal",
+    "terminalUnknownDate": "unknown date",
+    "terminalReading": "reading directory...",
+    "terminalError": "ls: cannot read ~/projects",
+    "terminalTotal_one": "total {{count}} project",
+    "terminalTotal_other": "total {{count}} projects",
+    "terminalOpenProject": "Open project {{name}}"
+  },
+  "about": {
+    "title": "About",
+    "header": "A few words about my background and the tools I use to create.",
+    "presentation": "introduction",
+    "summaryTitle": "I build to understand.",
+    "summaryFirst": "My name is Adrien and I study computer science at ESGI Paris. I mainly develop web projects with React and Node.js, but I also enjoy stepping outside this stack to discover other ways of programming.",
+    "summarySecond": "This portfolio is my experimentation space: projects are not just showcased, they can be tried directly.",
+    "discoverProjects": "Discover the projects →",
+    "school": "School",
+    "focus": "Focus",
+    "focusValue": "Web and interactive projects",
+    "since": "Since",
+    "days_one": "{{formattedCount}} day",
+    "days_other": "{{formattedCount}} days",
+    "me": "Me",
+    "services": "My services",
+    "support": "Support me",
+    "toolsTitle": "My toolbox",
+    "toolsDescription": "The technologies I use most often in my projects.",
+    "toolsCategory": "Tools",
+    "activity": "activity",
+    "githubDescription": "A glimpse of my activity — and perhaps a secret to uncover.",
+    "githubButtonLabel": "Show Adrien’s GitHub contribution animation and uncover a secret",
+    "githubImageAlt": "Adrien’s GitHub contribution animation"
+  },
+  "projects": {
+    "loading": "Loading projects...",
+    "title": "Projects",
+    "description": "Applications, games and interactive experiences. Every project can be opened and tested directly from the portfolio.",
+    "listLabel": "Project list",
+    "all": "All projects",
+    "count_one": "{{count}} project",
+    "count_other": "{{count}} projects",
+    "loadError": "Unable to load projects right now.",
+    "empty": "No projects available.",
+    "unknownDate": "unknown date",
+    "view": "View project {{name}}",
+    "open": "Open project {{name}}",
+    "fileInfo": "File information"
+  },
+  "project": {
+    "loading": "Loading project...",
+    "back": "All projects",
+    "interactive": "Interactive project",
+    "fullscreen": "Open in full screen",
+    "previewAlt": "Preview of {{name}}",
+    "previewCaption": "preview / {{fileName}}",
+    "demoLabel": "Demo of {{name}}",
+    "live": "Live",
+    "opening": "Opening the experience...",
+    "iframeTitle": "Interactive demo — {{name}}"
+  },
+  "preview": {
+    "selected": "Selected project",
+    "technologies": "Technologies used",
+    "discover": "Discover the project",
+    "discoverLabel": "Discover project {{name}}",
+    "videoTitle": "Video preview of project {{name}}",
+    "live": "Live preview"
+  },
+  "featured": {
+    "pokeflip": "A new version of PokeFlip with a responsive interface, real-time multiplayer and customizable profiles.",
+    "monstersEnergy": "A Monster Energy community platform featuring a catalogue, rankings, messaging and achievements.",
+    "spaceInvaders": "An ASCII reimagining of Space Invaders, developed in C with ncurses and progressive difficulty."
+  },
+  "achievements": {
+    "header": "Details are hidden throughout the portfolio. Explore, experiment and keep your eyes open.",
+    "progress": "progress",
+    "progressLabel": "Achievement progress",
+    "unlockedCount": "{{unlocked}} / {{total}} unlocked",
+    "complete": "Collection complete",
+    "inProgress": "Collection in progress",
+    "unlockedLabel": "Unlocked achievements",
+    "collection": "collection",
+    "findThem": "Find them all",
+    "hintExplanation": "Locked cards reveal a hint, never the solution.",
+    "unlocked": "Unlocked",
+    "locked": "Locked",
+    "achievement": "Achievement",
+    "hint": "Hint",
+    "unknown": "Unknown secret",
+    "popupLabel": "🥚 Easter egg found!",
+    "cheaterAlert": "You cheater!\nAll your progress has been deleted.",
+    "items": {
+      "hidden-page": {
+        "name": "Hidden Page",
+        "description": "You found a hidden page!",
+        "hint": "/achievements"
+      },
+      "very-interesting-portfolio": {
+        "name": "Very Interesting Portfolio",
+        "description": "So you really like this portfolio...",
+        "hint": "One minute is all it takes."
+      },
+      "burning-eyes": {
+        "name": "Burning Eyes",
+        "description": "AHHHHHHHHHHHH MY EYES",
+        "hint": "What are you doing in light mode?"
+      },
+      "explorer": {
+        "name": "Explorer",
+        "description": "You discovered all the accessible pages of this portfolio!",
+        "hint": "Explore every page."
+      },
+      "snake-git": {
+        "name": "Snake Git",
+        "description": "Tssssssssssssssssssss",
+        "hint": "Catch the snake!"
+      },
+      "&cᴏpy;": {
+        "name": "&cᴏpy;",
+        "description": "Copyright Copyright Copyright",
+        "hint": "3 times &copy;"
+      },
+      "wrong-password": {
+        "name": "Wrong Password",
+        "description": "Did you think my password was easy to guess? Think again.",
+        "hint": "Guess the password."
+      },
+      "thats-me": {
+        "name": "That’s me",
+        "description": "Yep, that’s me.",
+        "hint": "Say my name."
+      },
+      "project-hopper": {
+        "name": "Project Hopper",
+        "description": "One project is never enough.",
+        "hint": "Visit three different projects."
+      },
+      "back-for-more": {
+        "name": "Back for More",
+        "description": "You came back another day.",
+        "hint": "See you tomorrow."
+      },
+      "nerd": {
+        "name": "Nerd",
+        "description": "Was the source code of this page fun to read?",
+        "hint": "From GitHub"
+      },
+      "recruiter": {
+        "name": "Recruiter",
+        "description": "Are you a recruiter? If so, you get something special!",
+        "hint": "From LinkedIn"
+      },
+      "konami-code": {
+        "name": "Konami Code",
+        "description": "↑↑↓↓←→←→BA",
+        "hint": "The first cheat code in history."
+      },
+      "the-curator": {
+        "name": "The Curator",
+        "description": "You explored every project in the collection.",
+        "hint": "Complete the collection."
+      },
+      "portfolio-enjoyer": {
+        "name": "Portfolio Enjoyer",
+        "description": "You have visited this portfolio 42 times...",
+        "hint": "42 is the answer."
+      },
+      "regular-visitor": {
+        "name": "Regular Visitor",
+        "description": "Consistency is key.",
+        "hint": "Come back on three different days."
+      },
+      "space-invader": {
+        "name": "Space Invader",
+        "description": "The Death Star never stood a chance.",
+        "hint": "Destroy the Death Star."
+      },
+      "cheater": {
+        "name": "Cheater",
+        "description": "You must cheat to unlock this.",
+        "hint": "window.dispatchEvent(new CustomEvent(\"portfolio:cheater\"))"
+      },
+      "achievement-hunter": {
+        "name": "Achievement Hunter",
+        "description": "You unlocked all the achievements!",
+        "hint": "Unlock all the achievements."
+      }
+    }
+  },
+  "login": {
+    "wrongPassword": "Incorrect password. Try again.",
+    "serverError": "Unable to contact the server.",
+    "privateArea": "private area",
+    "title": "Administration",
+    "description": "Log in to publish, preview and update the portfolio projects.",
+    "adminAccess": "Administrator access",
+    "password": "Password",
+    "passwordPlaceholder": "Your password",
+    "hidePassword": "Hide password",
+    "showPassword": "Show password",
+    "hide": "Hide",
+    "show": "Show",
+    "loading": "Logging in...",
+    "submit": "Enter the panel"
+  },
+  "panel": {
+    "privateArea": "private area",
+    "description": "Publish and maintain the experiences shown on the portfolio.",
+    "logout": "Log out",
+    "close": "Close",
+    "library": "Library",
+    "publishedProjects": "Published projects",
+    "projectCount_one": "{{count}} project",
+    "projectCount_other": "{{count}} projects",
+    "newContent": "New content",
+    "addProject": "Add a project",
+    "projectName": "Project name",
+    "projectNamePlaceholder": "My new project",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "A short project description",
+    "newPreview": "New preview",
+    "chooseImage": "Choose an image",
+    "chooseFiles": "Choose files",
+    "zipHelp": "ZIP archive containing index.html",
+    "publishing": "Publishing...",
+    "publish": "Publish project",
+    "previewAlt": "Preview of {{name}}",
+    "noImage": "No image",
+    "replace": "Replace",
+    "name": "Name",
+    "replaceZip": "Replace the project ZIP",
+    "closePreview": "Close preview",
+    "previewFiles": "Preview files",
+    "viewPage": "View page ↗",
+    "downloadZip": "Download ZIP",
+    "delete": "Delete",
+    "saving": "Saving...",
+    "save": "Save",
+    "livePreview": "Live preview",
+    "loadError": "Unable to load projects.",
+    "modifyError": "Unable to update the project",
+    "updated": "{{name}} was successfully updated.",
+    "deleteConfirm": "Permanently delete “{{name}}”?",
+    "deleteError": "Unable to delete the project.",
+    "deleted": "{{name}} was deleted.",
+    "addError": "Unable to add the project.",
+    "added": "The project was successfully added."
+  },
+  "legal": {
+    "eyebrow": "legal & privacy",
+    "title": "Legal information",
+    "intro": "Information about the portfolio’s publisher, hosting and the data used for its operation.",
+    "updated": "Updated July 23, 2026",
+    "navLabel": "Legal information table of contents",
+    "nav": {
+      "edition": "Publisher",
+      "hosting": "Hosting",
+      "privacy": "Privacy",
+      "storage": "Local storage",
+      "services": "External services",
+      "rights": "Your rights"
+    },
+    "edition": {
+      "eyebrow": "identification",
+      "title": "Website publisher",
+      "text": "This portfolio is published on a personal, non-professional basis by Adrien POURLIER, who is also the publication director.",
+      "publisher": "Publisher",
+      "contact": "Contact",
+      "sites": "Websites concerned"
+    },
+    "hosting": {
+      "eyebrow": "infrastructure",
+      "title": "Hosting",
+      "first": "The website, its API and the featured projects are hosted in France on personal infrastructure managed by the publisher. Docker runs the services and Cloudflare Tunnel makes them securely available on the Internet.",
+      "second": "The publisher is directly responsible for the availability, maintenance and backup of this infrastructure."
+    },
+    "privacy": {
+      "eyebrow": "data",
+      "title": "Privacy",
+      "first": "The portfolio does not provide visitor accounts, a contact form, advertising or audience measurement tools. No data is sold or used to build advertising profiles.",
+      "second": "As with any web service, technical information such as the IP address, connection date, requested resource or browser type may be processed temporarily by the server and network intermediaries to route requests, maintain the service and keep it secure.",
+      "note": "Messages sent to the contact address are processed solely to reply to their sender."
+    },
+    "storage": {
+      "eyebrow": "browser",
+      "title": "Cookies and local storage",
+      "first": "The achievement system uses the browser’s <storage>localStorage</storage>. This information remains on the device and is not sent to the server.",
+      "retention": "These entries are retained until they are removed through the browser settings. Removing them resets all or part of the achievement progress.",
+      "session": "A strictly functional session cookie may also be used to authenticate the administration area. It is not intended to track visitors and expires with the browser session.",
+      "entries": {
+        "achievements": "Stores unlocked achievements.",
+        "visited": "Counts the visits required for certain achievements.",
+        "explorer": "Stores the pages that have already been explored.",
+        "projects": "Stores viewed projects without recording their content.",
+        "days": "Stores visit days for return achievements."
+      }
+    },
+    "services": {
+      "eyebrow": "third parties",
+      "title": "External services",
+      "intro": "Depending on the page viewed, the browser may contact:",
+      "cloudflare": "for secure access to the website;",
+      "fonts": "to load the Manrope font;",
+      "github": "to display the contribution animation;",
+      "iframes": "services required by interactive projects embedded in iframes.",
+      "links": "Links to GitHub, LinkedIn or Ko-fi open separate websites with their own privacy policies."
+    },
+    "property": {
+      "eyebrow": "content",
+      "title": "Intellectual property",
+      "first": "Unless otherwise stated, the text, interfaces, graphic elements and projects presented on this portfolio are the property of their author. Any substantial reproduction or reuse requires prior permission.",
+      "second": "Third-party trademarks, libraries, resources and services remain the property of their respective owners."
+    },
+    "liability": {
+      "eyebrow": "use",
+      "title": "Liability",
+      "text": "The information and demonstrations are provided for informational purposes. Despite the care taken with the portfolio, the publisher cannot guarantee permanent availability or the complete absence of errors. The publisher is not responsible for external links or their content."
+    },
+    "rights": {
+      "eyebrow": "contact",
+      "title": "Your rights",
+      "beforeEmail": "For any question about this information, personal data or published content, you can write to:",
+      "digitalLaw": "French Digital Economy Act ↗",
+      "cnil": "CNIL information about trackers ↗"
+    }
+  },
+  "seo": {
+    "homeTitle": "Adrien | React & Node.js Developer",
+    "homeDescription": "Adrien creates web applications, games and interactive experiences with React and Node.js. Discover his projects directly online.",
+    "aboutTitle": "About Adrien | Web Developer",
+    "aboutDescription": "Discover Adrien’s background, working approach and toolbox as an ESGI Paris student and web developer.",
+    "projectsTitle": "Interactive web projects | Adrien’s Portfolio",
+    "projectsDescription": "Discover Adrien’s web projects: React applications, interactive experiences and full-stack creations you can try online.",
+    "legalTitle": "Legal notice | Adrien’s Portfolio",
+    "legalDescription": "Legal notice and privacy policy for Adrien’s portfolio.",
+    "achievementsTitle": "Secrets and achievements | Adrien’s Portfolio",
+    "achievementsDescription": "The secrets hidden in Adrien’s portfolio.",
+    "panelTitle": "Administration | Adrien’s Portfolio",
+    "panelDescription": "Portfolio administration area.",
+    "jobTitle": "Web Developer"
+  },
+  "system": {
+    "sessionCheck": "Checking the session"
+  }
+}

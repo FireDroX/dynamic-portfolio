@@ -27,7 +27,11 @@
   flex-direction: column;
   justify-content: center;
   background:
-    radial-gradient(circle at 15% 85%, color-mix(in srgb, var(--secondary) 30%, transparent), transparent 34%),
+    radial-gradient(
+      circle at 15% 85%,
+      color-mix(in srgb, var(--secondary) 30%, transparent),
+      transparent 34%
+    ),
     var(--secondary);
   color: var(--bg);
 }

@@ -9,11 +9,7 @@ import AppRoutes from "./routes/AppRoutes";
 
 const App = () => {
   const location = useLocation();
-  const {
-    isAuthenticated,
-    markAuthenticated,
-    markLoggedOut,
-  } = usePanelAuth();
+  const { isAuthenticated, markAuthenticated, markLoggedOut } = usePanelAuth();
 
   useTimerAchievement();
 

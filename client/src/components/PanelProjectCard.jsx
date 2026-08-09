@@ -1,4 +1,5 @@
 import PanelUploadIcon from "./PanelUploadIcon";
+import { useTranslation } from "react-i18next";
 import "./styles/PanelProjectCard.css";
 
 const PanelProjectCard = ({
@@ -13,6 +14,7 @@ const PanelProjectCard = ({
   onDelete,
   onSave,
 }) => {
+  const { t, i18n } = useTranslation();
   const isModified = Object.keys(edited).length > 0;
   const imageSrc = edited.imagePreview || project.image;
 
@@ -21,20 +23,21 @@ const PanelProjectCard = ({
       <div className="panel-project-main">
         <div className="panel-project-image">
           {imageSrc ? (
-            <img src={imageSrc} alt={`Aperçu de ${project.name}`} />
+            <img
+              src={imageSrc}
+              alt={t("panel.previewAlt", { name: project.name })}
+            />
           ) : (
-            <span>Aucune image</span>
+            <span>{t("panel.noImage")}</span>
           )}
           <label>
-            Remplacer
+            {t("panel.replace")}
             <input
               type="file"
               accept="image/*"
-              onChange={(event) => onProjectFile(
-                project.fileName,
-                "image",
-                event.target.files[0],
-              )}
+              onChange={(event) =>
+                onProjectFile(project.fileName, "image", event.target.files[0])
+              }
             />
           </label>
         </div>
@@ -42,36 +45,42 @@ const PanelProjectCard = ({
         <div className="panel-project-editor">
           <div className="panel-project-meta">
             <span>{project.fileName}</span>
-            <span>{new Date(project.createdAt).toLocaleDateString("fr-FR")}</span>
+            <span>
+              {new Date(project.createdAt).toLocaleDateString(
+                i18n.resolvedLanguage === "en" ? "en-GB" : "fr-FR",
+              )}
+            </span>
           </div>
           <label className="panel-field">
-            Nom
+            {t("panel.name")}
             <input
               value={edited.name ?? project.name}
-              onChange={(event) => onChange(project.fileName, "name", event.target.value)}
+              onChange={(event) =>
+                onChange(project.fileName, "name", event.target.value)
+              }
             />
           </label>
           <label className="panel-field">
-            Description
+            {t("panel.descriptionLabel")}
             <textarea
               rows="4"
               value={edited.description ?? project.description}
-              onChange={(event) => onChange(project.fileName, "description", event.target.value)}
+              onChange={(event) =>
+                onChange(project.fileName, "description", event.target.value)
+              }
             />
           </label>
 
           <div className="panel-project-assets">
             <label className={edited.zip ? "has-file" : ""}>
               <PanelUploadIcon />
-              <span>{edited.zip?.name || "Remplacer le ZIP du projet"}</span>
+              <span>{edited.zip?.name || t("panel.replaceZip")}</span>
               <input
                 type="file"
                 accept=".zip,application/zip"
-                onChange={(event) => onProjectFile(
-                  project.fileName,
-                  "zip",
-                  event.target.files[0],
-                )}
+                onChange={(event) =>
+                  onProjectFile(project.fileName, "zip", event.target.files[0])
+                }
               />
             </label>
           </div>
@@ -80,40 +89,47 @@ const PanelProjectCard = ({
 
       <div className="panel-project-actions">
         <button className="panel-preview-button" onClick={onTogglePreview}>
-          {isPreviewOpen ? "Fermer l'aperçu" : "Prévisualiser les fichiers"}
+          {t(isPreviewOpen ? "panel.closePreview" : "panel.previewFiles")}
         </button>
-        <a href={`/projects/${project.fileName}`} target="_blank" rel="noopener noreferrer">
-          Voir la page ↗
+        <a
+          href={`/projects/${project.fileName}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t("panel.viewPage")}
         </a>
         <a
           href={`/api/panel/download/${encodeURIComponent(project.fileName)}`}
           download={`${project.fileName}.zip`}
         >
-          Télécharger le ZIP
+          {t("panel.downloadZip")}
         </a>
         <div className="panel-project-actions-spacer" />
-        <button className="panel-delete-button" onClick={() => onDelete(project)}>
-          Supprimer
+        <button
+          className="panel-delete-button"
+          onClick={() => onDelete(project)}
+        >
+          {t("panel.delete")}
         </button>
         <button
           className="panel-save-button"
           disabled={!isModified || isSaving}
           onClick={() => onSave(project)}
         >
-          {isSaving ? "Enregistrement..." : "Enregistrer"}
+          {t(isSaving ? "panel.saving" : "panel.save")}
         </button>
       </div>
 
       {isPreviewOpen && (
         <div className="panel-live-preview">
           <div>
-            <span>Aperçu live</span>
+            <span>{t("panel.livePreview")}</span>
             <strong>{project.name}</strong>
           </div>
           <iframe
             key={previewVersion}
             src={`/api/projects/${project.fileName}?preview=${previewVersion}`}
-            title={`Aperçu de ${project.name}`}
+            title={t("panel.previewAlt", { name: project.name })}
           />
         </div>
       )}

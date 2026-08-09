@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { useTranslation } from "react-i18next";
 import "./styles/HomeProjectTerminal.css";
 
-const formatProjectDate = (value) => {
+const formatProjectDate = (value, locale, unknownDate) => {
   const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "date inconnue";
+  if (Number.isNaN(date.getTime())) return unknownDate;
 
-  return new Intl.DateTimeFormat("fr-FR", {
+  return new Intl.DateTimeFormat(locale, {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -16,6 +17,7 @@ const formatProjectDate = (value) => {
 };
 
 const HomeProjectTerminal = () => {
+  const { t, i18n } = useTranslation();
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -49,7 +51,7 @@ const HomeProjectTerminal = () => {
   }, []);
 
   return (
-    <div className="home-terminal" aria-label="Terminal des projets">
+    <div className="home-terminal" aria-label={t("home.terminalLabel")}>
       <div className="home-terminal-title">adrien@portfolio: ~/projects</div>
       <div className="home-terminal-content">
         <p className="home-terminal-command">
@@ -57,29 +59,35 @@ const HomeProjectTerminal = () => {
         </p>
 
         {isLoading ? (
-          <p className="home-terminal-message">lecture du dossier...</p>
+          <p className="home-terminal-message">{t("home.terminalReading")}</p>
         ) : hasError ? (
           <p className="home-terminal-message home-terminal-error">
-            ls: impossible de lire ~/projects
+            {t("home.terminalError")}
           </p>
         ) : (
           <div className="home-terminal-list">
             <p className="home-terminal-total">
-              total {projects.length} projet{projects.length > 1 ? "s" : ""}
+              {t("home.terminalTotal", { count: projects.length })}
             </p>
             {projects.map((project) => (
               <Link
                 className="home-terminal-row"
                 to={`/projects/${project.fileName}`}
                 key={project.fileName}
-                aria-label={`Ouvrir le projet ${project.name}`}
+                aria-label={t("home.terminalOpenProject", {
+                  name: project.name,
+                })}
               >
                 <span>drwxr-xr-x</span>
                 <span>1</span>
                 <span>adrien</span>
                 <span>4.0K</span>
                 <time dateTime={project.createdAt}>
-                  {formatProjectDate(project.createdAt)}
+                  {formatProjectDate(
+                    project.createdAt,
+                    i18n.resolvedLanguage === "en" ? "en-GB" : "fr-FR",
+                    t("home.terminalUnknownDate"),
+                  )}
                 </time>
                 <strong>{project.fileName}/</strong>
               </Link>

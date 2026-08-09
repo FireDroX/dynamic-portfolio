@@ -1,9 +1,17 @@
 import "./styles/Navbar.css";
 import { NavLink, useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
+import LanguageFlag from "./LanguageFlag";
 import { readObject, writeJson } from "../utils/storage";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.resolvedLanguage === "en" ? "en" : "fr";
+  const nextLanguage = currentLanguage === "fr" ? "en" : "fr";
+  const languageLabel = t(
+    nextLanguage === "en" ? "nav.switchToEnglish" : "nav.switchToFrench",
+  );
 
   const trackPage = (page) => {
     const explorer = readObject("portfolio_explorer");
@@ -26,24 +34,33 @@ const Navbar = () => {
             className={({ isActive }) => (isActive ? "nav-active" : "")}
             onClick={() => trackPage("home")}
           >
-            home
+            {t("nav.home")}
           </NavLink>
           <NavLink
             to="/about"
             className={({ isActive }) => (isActive ? "nav-active" : "")}
             onClick={() => trackPage("about")}
           >
-            about
+            {t("nav.about")}
           </NavLink>
           <NavLink
             to="/projects"
             className={({ isActive }) => (isActive ? "nav-active" : "")}
             onClick={() => trackPage("projects")}
           >
-            projects
+            {t("nav.projects")}
           </NavLink>
+          <button
+            type="button"
+            className="language-switch"
+            onClick={() => i18n.changeLanguage(nextLanguage)}
+            aria-label={languageLabel}
+            title={languageLabel}
+          >
+            <LanguageFlag language={nextLanguage} />
+          </button>
         </div>
-        <button onClick={() => navigate("/panel")}>login</button>
+        <button onClick={() => navigate("/panel")}>{t("nav.login")}</button>
       </div>
     </nav>
   );

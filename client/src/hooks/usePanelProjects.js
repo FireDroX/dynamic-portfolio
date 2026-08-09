@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const usePanelProjects = (onLogout) => {
+  const { t } = useTranslation();
   const [projects, setProjects] = useState([]);
   const [editedProjects, setEditedProjects] = useState({});
   const [openPreviews, setOpenPreviews] = useState({});
@@ -18,16 +20,16 @@ const usePanelProjects = (onLogout) => {
         onLogout();
         return;
       }
-      if (!response.ok) throw new Error("Chargement impossible");
+      if (!response.ok) throw new Error(t("panel.loadError"));
 
       setProjects(await response.json());
     } catch {
       setNotice({
         type: "error",
-        text: "Impossible de charger les projets.",
+        text: t("panel.loadError"),
       });
     }
-  }, [onLogout]);
+  }, [onLogout, t]);
 
   useEffect(() => {
     // Initial synchronization with the administration API.
@@ -71,10 +73,7 @@ const usePanelProjects = (onLogout) => {
     const formData = new FormData();
     formData.append("originalFileName", project.fileName);
     formData.append("name", updated.name ?? project.name);
-    formData.append(
-      "description",
-      updated.description ?? project.description,
-    );
+    formData.append("description", updated.description ?? project.description);
     if (updated.image) formData.append("image", updated.image);
     if (updated.zip) formData.append("zip", updated.zip);
 
@@ -89,7 +88,7 @@ const usePanelProjects = (onLogout) => {
       });
       const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.error || "Modification impossible");
+        throw new Error(data.error || t("panel.modifyError"));
       }
 
       if (updated.imagePreview) {
@@ -106,7 +105,7 @@ const usePanelProjects = (onLogout) => {
       }));
       setNotice({
         type: "success",
-        text: `${project.name} a bien été mis à jour.`,
+        text: t("panel.updated", { name: project.name }),
       });
       await fetchProjects();
     } catch (error) {
@@ -117,7 +116,7 @@ const usePanelProjects = (onLogout) => {
   };
 
   const deleteProject = async (project) => {
-    if (!window.confirm(`Supprimer définitivement « ${project.name} » ?`)) {
+    if (!window.confirm(t("panel.deleteConfirm", { name: project.name }))) {
       return;
     }
 
@@ -128,11 +127,11 @@ const usePanelProjects = (onLogout) => {
         body: JSON.stringify({ name: project.name }),
         credentials: "include",
       });
-      if (!response.ok) throw new Error("La suppression a échoué.");
+      if (!response.ok) throw new Error(t("panel.deleteError"));
 
       setNotice({
         type: "success",
-        text: `${project.name} a été supprimé.`,
+        text: t("panel.deleted", { name: project.name }),
       });
       await fetchProjects();
     } catch (error) {
@@ -151,12 +150,12 @@ const usePanelProjects = (onLogout) => {
         body: formData,
       });
       if (!response.ok) {
-        throw new Error("Impossible d'ajouter le projet.");
+        throw new Error(t("panel.addError"));
       }
 
       setNotice({
         type: "success",
-        text: "Le projet a bien été ajouté.",
+        text: t("panel.added"),
       });
       await fetchProjects();
       return true;

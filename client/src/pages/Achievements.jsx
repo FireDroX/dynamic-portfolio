@@ -1,12 +1,14 @@
 import "./styles/Achievements.css";
 import achievementsList from "../utils/achievements.json";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import Popup from "../components/Popup";
 import { formatAchievementName } from "../utils/achievements/config";
 import { readArray } from "../utils/storage";
 
 const Achievements = () => {
+  const { t } = useTranslation();
   const [userAchievements, setUserAchievements] = useState(() =>
     readArray("portfolio_achievements"),
   );
@@ -29,37 +31,47 @@ const Achievements = () => {
   const unlockedCount = achievementsList.filter((achievement) =>
     userAchievements.includes(formatAchievementName(achievement.name)),
   ).length;
-  const completion = Math.round((unlockedCount / achievementsList.length) * 100);
+  const completion = Math.round(
+    (unlockedCount / achievementsList.length) * 100,
+  );
 
   return (
     <main className="App achievements-page">
       <header className="achievements-header">
         <small>achievements</small>
         <h1>Secrets</h1>
-        <p>
-          Des détails sont cachés un peu partout dans le portfolio. Explore,
-          expérimente et garde l’œil ouvert.
-        </p>
+        <p>{t("achievements.header")}</p>
       </header>
 
-      <section className="achievements-progress" aria-label="Progression des achievements">
+      <section
+        className="achievements-progress"
+        aria-label={t("achievements.progressLabel")}
+      >
         <div className="achievements-progress-copy">
-          <small>progression</small>
+          <small>{t("achievements.progress")}</small>
           <p>
-            <strong>{unlockedCount}</strong>
-            <span> / {achievementsList.length} débloqués</span>
+            {t("achievements.unlockedCount", {
+              unlocked: unlockedCount,
+              total: achievementsList.length,
+            })}
           </p>
         </div>
 
         <div className="achievements-progress-track">
           <div className="achievements-progress-label">
-            <span>{completion === 100 ? "Collection terminée" : "Collection en cours"}</span>
+            <span>
+              {t(
+                completion === 100
+                  ? "achievements.complete"
+                  : "achievements.inProgress",
+              )}
+            </span>
             <span>{completion}%</span>
           </div>
           <div
             className="achievements-progress-bar"
             role="progressbar"
-            aria-label="Achievements débloqués"
+            aria-label={t("achievements.unlockedLabel")}
             aria-valuemin="0"
             aria-valuemax="100"
             aria-valuenow={completion}
@@ -72,10 +84,10 @@ const Achievements = () => {
       <section className="achievements-collection">
         <div className="achievements-collection-title">
           <div>
-            <small>collection</small>
-            <h2>À toi de les trouver</h2>
+            <small>{t("achievements.collection")}</small>
+            <h2>{t("achievements.findThem")}</h2>
           </div>
-          <p>Les cartes verrouillées révèlent un indice, jamais la solution.</p>
+          <p>{t("achievements.hintExplanation")}</p>
         </div>
 
         <div className="achievements-list">

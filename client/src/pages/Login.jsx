@@ -1,7 +1,9 @@
 import "./styles/Login.css";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Login = ({ onLogin }) => {
+  const { t } = useTranslation();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,10 +28,10 @@ const Login = ({ onLogin }) => {
       }
 
       setPassword("");
-      setError("Mot de passe incorrect. Réessaie.");
+      setError(t("login.wrongPassword"));
       window.dispatchEvent(new CustomEvent("portfolio:wrong-password"));
     } catch {
-      setError("Impossible de contacter le serveur.");
+      setError(t("login.serverError"));
     } finally {
       setLoading(false);
     }
@@ -39,12 +41,9 @@ const Login = ({ onLogin }) => {
     <main className="App login-page">
       <section className="login-card">
         <div className="login-intro">
-          <small>espace privé</small>
-          <h1>Administration</h1>
-          <p>
-            Connecte-toi pour publier, prévisualiser et mettre à jour les
-            projets du portfolio.
-          </p>
+          <small>{t("login.privateArea")}</small>
+          <h1>{t("login.title")}</h1>
+          <p>{t("login.description")}</p>
           <div className="login-decoration" aria-hidden="true">
             <span>01</span>
             <div />
@@ -55,15 +54,15 @@ const Login = ({ onLogin }) => {
         <form className="login-form" onSubmit={handleLogin}>
           <div className="login-form-heading">
             <span className="login-status-dot" />
-            <p>Accès administrateur</p>
+            <p>{t("login.adminAccess")}</p>
           </div>
 
-          <label htmlFor="admin-password">Mot de passe</label>
+          <label htmlFor="admin-password">{t("login.password")}</label>
           <div className="login-password-field">
             <input
               id="admin-password"
               type={showPassword ? "text" : "password"}
-              placeholder="Ton mot de passe"
+              placeholder={t("login.passwordPlaceholder")}
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               autoComplete="current-password"
@@ -73,16 +72,22 @@ const Login = ({ onLogin }) => {
             <button
               type="button"
               onClick={() => setShowPassword((visible) => !visible)}
-              aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+              aria-label={t(
+                showPassword ? "login.hidePassword" : "login.showPassword",
+              )}
             >
-              {showPassword ? "Masquer" : "Afficher"}
+              {t(showPassword ? "login.hide" : "login.show")}
             </button>
           </div>
 
-          {error && <p className="login-error" role="alert">{error}</p>}
+          {error && (
+            <p className="login-error" role="alert">
+              {error}
+            </p>
+          )}
 
           <button className="login-submit" disabled={loading}>
-            {loading ? "Connexion..." : "Entrer dans le panel"}
+            {t(loading ? "login.loading" : "login.submit")}
             <span aria-hidden="true">→</span>
           </button>
         </form>

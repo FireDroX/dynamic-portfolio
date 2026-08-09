@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import PanelUploadIcon from "./PanelUploadIcon";
 import "./styles/PanelProjectForm.css";
 
 const EMPTY_FILES = { image: "", zip: "" };
 
 const PanelProjectForm = ({ isSaving, onSubmit }) => {
+  const { t } = useTranslation();
   const [imagePreview, setImagePreview] = useState("");
   const [files, setFiles] = useState(EMPTY_FILES);
 
@@ -46,8 +48,8 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
     <section className="panel-add-section">
       <div className="panel-section-heading">
         <div>
-          <small>Nouveau contenu</small>
-          <h2>Ajouter un projet</h2>
+          <small>{t("panel.newContent")}</small>
+          <h2>{t("panel.addProject")}</h2>
         </div>
       </div>
 
@@ -58,20 +60,20 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
       >
         <div className="panel-form-fields">
           <label className="panel-field">
-            Nom du projet
+            {t("panel.projectName")}
             <input
               required
               type="text"
               name="name"
-              placeholder="Mon nouveau projet"
+              placeholder={t("panel.projectNamePlaceholder")}
             />
           </label>
           <label className="panel-field">
-            Description
+            {t("panel.descriptionLabel")}
             <textarea
               required
               name="description"
-              placeholder="Une courte description du projet"
+              placeholder={t("panel.descriptionPlaceholder")}
               rows="5"
             />
           </label>
@@ -80,11 +82,11 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
         <div className="panel-new-assets">
           <label className="panel-upload panel-upload--image">
             {imagePreview ? (
-              <img src={imagePreview} alt="Nouvel aperçu" />
+              <img src={imagePreview} alt={t("panel.newPreview")} />
             ) : (
               <PanelUploadIcon />
             )}
-            <strong>{files.image || "Choisir l'image"}</strong>
+            <strong>{files.image || t("panel.chooseImage")}</strong>
             <span>PNG, JPG, WEBP</span>
             <input
               type="file"
@@ -96,8 +98,8 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
 
           <label className="panel-upload">
             <PanelUploadIcon />
-            <strong>{files.zip || "Choisir les fichiers"}</strong>
-            <span>Archive ZIP avec index.html</span>
+            <strong>{files.zip || t("panel.chooseFiles")}</strong>
+            <span>{t("panel.zipHelp")}</span>
             <input
               required
               type="file"
@@ -109,7 +111,7 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
         </div>
 
         <button className="panel-primary-button" disabled={isSaving}>
-          {isSaving ? "Publication..." : "Publier le projet"}
+          {t(isSaving ? "panel.publishing" : "panel.publish")}
           <span>→</span>
         </button>
       </form>

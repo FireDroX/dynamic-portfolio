@@ -18,7 +18,9 @@ const FormattedDescription = ({ children }) => {
         <a
           key={`${match.index}-${href}`}
           href={href}
-          target={href.startsWith("/") || href.startsWith("#") ? undefined : "_blank"}
+          target={
+            href.startsWith("/") || href.startsWith("#") ? undefined : "_blank"
+          }
           rel="noopener noreferrer"
         >
           {label}

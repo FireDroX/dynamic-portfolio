@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router";
+import { useTranslation } from "react-i18next";
 import Loadable from "../components/Loadable";
 
 const Home = lazy(() => import("../pages/Home"));
@@ -11,11 +12,15 @@ const About = lazy(() => import("../pages/About"));
 const MentionsLegales = lazy(() => import("../pages/MentionsLegales"));
 const Achievements = lazy(() => import("../pages/Achievements"));
 
-const AuthLoader = () => (
-  <main id="Loader" aria-label="Vérification de la session">
-    <div className="spinner" />
-  </main>
-);
+const AuthLoader = () => {
+  const { t } = useTranslation();
+
+  return (
+    <main id="Loader" aria-label={t("system.sessionCheck")}>
+      <div className="spinner" />
+    </main>
+  );
+};
 
 const PanelLoginRoute = ({ isAuthenticated, onLogin }) => {
   if (isAuthenticated === null) return <AuthLoader />;
@@ -31,12 +36,7 @@ const ProtectedPanelRoute = ({ isAuthenticated, onLogout }) => {
   return Loadable(Panel, { onLogout });
 };
 
-const AppRoutes = ({
-  location,
-  isAuthenticated,
-  onLogin,
-  onLogout,
-}) => (
+const AppRoutes = ({ location, isAuthenticated, onLogin, onLogout }) => (
   <Routes location={location}>
     <Route path="/" element={Loadable(Home)} />
     <Route path="/projects" element={Loadable(Projects)} />
@@ -44,10 +44,7 @@ const AppRoutes = ({
     <Route
       path="/panel/login"
       element={
-        <PanelLoginRoute
-          isAuthenticated={isAuthenticated}
-          onLogin={onLogin}
-        />
+        <PanelLoginRoute isAuthenticated={isAuthenticated} onLogin={onLogin} />
       }
     />
     <Route
