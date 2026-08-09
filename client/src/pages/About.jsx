@@ -1,12 +1,53 @@
 import "./styles/About.css";
 import { Link } from "react-router";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { SiFiverr, SiKofi } from "react-icons/si";
+import { FaAws, FaGithub, FaLinkedin } from "react-icons/fa";
+import {
+  SiCloudflare,
+  SiCss,
+  SiDocker,
+  SiExpress,
+  SiFiverr,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiKofi,
+  SiMysql,
+  SiNestjs,
+  SiNodedotjs,
+  SiPhp,
+  SiPostgresql,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 
 const stack = {
-  Frontend: ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind", "Bootstrap"],
-  Backend: ["Node", "Express", "Nest", "PHP", "MySQL", "PostgreSQL"],
-  Outils: ["VS Code", "Docker", "Git", "GitHub", "Cloudflare", "AWS", "Figma"],
+  Frontend: [
+    { name: "React", Icon: SiReact },
+    { name: "JavaScript", Icon: SiJavascript },
+    { name: "TypeScript", Icon: SiTypescript },
+    { name: "HTML", Icon: SiHtml5 },
+    { name: "CSS", Icon: SiCss },
+    { name: "Tailwind", Icon: SiTailwindcss },
+  ],
+  Backend: [
+    { name: "Node", Icon: SiNodedotjs },
+    { name: "Express", Icon: SiExpress },
+    { name: "Nest", Icon: SiNestjs },
+    { name: "PHP", Icon: SiPhp },
+    { name: "MySQL", Icon: SiMysql },
+    { name: "PostgreSQL", Icon: SiPostgresql },
+  ],
+  Outils: [
+    { name: "VS Code", Icon: VscVscode },
+    { name: "Docker", Icon: SiDocker },
+    { name: "Git", Icon: SiGit },
+    { name: "GitHub", Icon: SiGithub },
+    { name: "Cloudflare", Icon: SiCloudflare },
+    { name: "AWS", Icon: FaAws },
+  ],
 };
 
 const calcDays = () => {
@@ -119,8 +160,11 @@ const About = () => (
           <div className="about-stack-group" key={category}>
             <h3>{category}</h3>
             <ul>
-              {technologies.map((technology) => (
-                <li key={technology}>{technology}</li>
+              {technologies.map(({ name, Icon }) => (
+                <li key={name}>
+                  <Icon aria-hidden="true" />
+                  <span>{name}</span>
+                </li>
               ))}
             </ul>
           </div>

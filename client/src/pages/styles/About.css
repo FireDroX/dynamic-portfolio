@@ -135,10 +135,19 @@
 
 .about-stack-group li {
   padding: 0.45rem 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   border: 1px solid #7b7b7b35;
   border-radius: 999px;
   color: var(--accent);
   font-size: 0.72rem;
+}
+
+.about-stack-group li svg {
+  flex: 0 0 auto;
+  color: currentColor;
+  font-size: 0.9rem;
 }
 
 .about-github {
