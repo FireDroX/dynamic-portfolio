@@ -66,15 +66,7 @@ function drawBrand(ctx, label = "ADRIEN · PORTFOLIO") {
   ctx.textAlign = "left";
 }
 
-function wrapText(
-  ctx,
-  text,
-  x,
-  y,
-  maxWidth,
-  lineHeight,
-  maxLines = Infinity,
-) {
+function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines = Infinity) {
   const words = String(text || "")
     .trim()
     .split(/\s+/)
@@ -98,10 +90,7 @@ function wrapText(
   const visibleLines = lines.slice(0, maxLines);
   if (lines.length > maxLines && visibleLines.length) {
     let lastLine = `${visibleLines.at(-1)}…`;
-    while (
-      ctx.measureText(lastLine).width > maxWidth &&
-      lastLine.length > 2
-    ) {
+    while (ctx.measureText(lastLine).width > maxWidth && lastLine.length > 2) {
       lastLine = `${lastLine.slice(0, -2).trimEnd()}…`;
     }
     visibleLines[visibleLines.length - 1] = lastLine;
@@ -192,7 +181,11 @@ function drawTerminal(ctx, projects = []) {
     const rowY = y + 134 + visibleProjects.length * 20;
     ctx.fillStyle = COLORS.accent;
     ctx.font = "12px monospace";
-    ctx.fillText(`… ${hiddenCount} autre${hiddenCount > 1 ? "s" : ""}`, x + 24, rowY);
+    ctx.fillText(
+      `… ${hiddenCount} autre${hiddenCount > 1 ? "s" : ""}`,
+      x + 24,
+      rowY,
+    );
   }
 
   ctx.fillStyle = COLORS.secondary;
@@ -214,15 +207,7 @@ function renderPortfolioOg(projects = []) {
 
   ctx.fillStyle = COLORS.text;
   ctx.font = "600 32px sans-serif";
-  wrapText(
-    ctx,
-    "Des projets faits pour être utilisés.",
-    70,
-    278,
-    510,
-    40,
-    2,
-  );
+  wrapText(ctx, "Des projets faits pour être utilisés.", 70, 278, 510, 40, 2);
 
   ctx.fillStyle = COLORS.accent;
   ctx.font = "22px sans-serif";
@@ -273,13 +258,7 @@ function drawImageContain(ctx, image, x, y, width, height) {
 
   ctx.fillStyle = COLORS.surfaceSoft;
   ctx.fillRect(x, y, width, height);
-  ctx.drawImage(
-    image,
-    imageX,
-    imageY,
-    renderedWidth,
-    renderedHeight,
-  );
+  ctx.drawImage(image, imageX, imageY, renderedWidth, renderedHeight);
 }
 
 async function renderProjectOg(project, imageBuffer) {

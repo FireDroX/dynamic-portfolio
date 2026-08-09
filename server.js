@@ -104,7 +104,9 @@ app.use(async (req, res) => {
     let status = 200;
     let image = `${siteUrl}/og-image`;
 
-    const projectMatch = pathWithoutTrailingSlash.match(/^\/projects\/([^/]+)$/);
+    const projectMatch = pathWithoutTrailingSlash.match(
+      /^\/projects\/([^/]+)$/,
+    );
     if (projectMatch) {
       const slug = projectMatch[1];
       const project = await getProjectBySlug(slug);

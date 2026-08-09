@@ -1,7 +1,6 @@
-const SITE_URL = (process.env.SITE_URL || "https://portfolio.addrien.fr").replace(
-  /\/$/,
-  "",
-);
+const SITE_URL = (
+  process.env.SITE_URL || "https://portfolio.addrien.fr"
+).replace(/\/$/, "");
 
 const allowedHostnames = new Set(
   (
