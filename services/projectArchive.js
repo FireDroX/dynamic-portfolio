@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const stream = require("node:stream");
+const { pipeline } = require("node:stream/promises");
 const unzipper = require("unzipper");
 
 const projectsPath = path.join(__dirname, "../projects");
@@ -63,9 +63,21 @@ async function extractProjectArchive(buffer, destination) {
     );
   }
 
-  const readable = new stream.PassThrough();
-  readable.end(buffer);
-  await readable.pipe(unzipper.Extract({ path: destination })).promise();
+  for (const entry of archive.files) {
+    const normalizedPath = entry.path.replace(/\\/g, "/");
+    const destinationPath = path.join(
+      destination,
+      ...normalizedPath.split("/"),
+    );
+
+    if (entry.type === "Directory") {
+      await fs.promises.mkdir(destinationPath, { recursive: true });
+      continue;
+    }
+
+    await fs.promises.mkdir(path.dirname(destinationPath), { recursive: true });
+    await pipeline(entry.stream(), fs.createWriteStream(destinationPath));
+  }
 }
 
 async function installProjectArchive(buffer, projectSlug) {
