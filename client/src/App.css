@@ -9,6 +9,7 @@ body {
     transparent 1px
   );
   background-size: 0.875rem 0.875rem;
+  background-attachment: fixed;
   background-color: var(--bg);
 }
 
