@@ -30,7 +30,11 @@
     "terminalError": "ls: impossible de lire ~/projects",
     "terminalTotal_one": "total {{count}} projet",
     "terminalTotal_other": "total {{count}} projets",
-    "terminalOpenProject": "Ouvrir le projet {{name}}"
+    "terminalOpenProject": "Ouvrir le projet {{name}}",
+    "terminalCommandLabel": "Nom du projet à exécuter",
+    "terminalCommandHint": "Tab ou → pour compléter, Entrée pour ouvrir.",
+    "terminalProjectRequired": "Saisissez le nom d’un projet.",
+    "terminalProjectNotFound": "run : le projet « {{name}} » n’existe pas."
   },
   "about": {
     "title": "À propos",

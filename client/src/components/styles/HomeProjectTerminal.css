@@ -1,5 +1,5 @@
 .home-terminal {
-  min-height: 21rem;
+  min-height: 18.75rem;
   overflow: hidden;
   border: 1px solid #7b7b7b3b;
   border-radius: 1rem;
@@ -16,8 +16,8 @@
 }
 
 .home-terminal-content {
-  min-height: 17.5rem;
-  padding: 1.25rem 1.5rem;
+  min-height: 15.25rem;
+  padding: 1.25rem 1.5rem 0.5rem;
   overflow-x: auto;
   box-sizing: border-box;
   color: var(--text);
@@ -26,7 +26,7 @@
   line-height: 1.45;
 }
 
-.home-terminal-command > span {
+.home-terminal-command > span:first-child {
   margin-right: 0.7rem;
   color: var(--secondary);
 }
@@ -75,13 +75,105 @@
   color: var(--text);
 }
 
-.home-terminal-command i {
+.home-terminal-runner {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 0;
+}
+
+.home-terminal-run-prefix {
+  flex: none;
+  margin-right: 0.55rem;
+  color: var(--secondary);
+}
+
+.home-terminal-command-field {
+  min-width: 8rem;
+  position: relative;
+  display: grid;
+  flex: 1;
+  border-bottom: 1px solid transparent;
+}
+
+.home-terminal-command-field:focus-within {
+  border-color: color-mix(in srgb, var(--secondary) 45%, transparent);
+}
+
+.home-terminal-prediction,
+.home-terminal-input {
+  width: 100%;
+  min-width: 0;
+  grid-area: 1 / 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  white-space: pre;
+}
+
+.home-terminal-prediction {
+  overflow: hidden;
+  color: transparent;
+  pointer-events: none;
+}
+
+.home-terminal-prediction strong {
+  color: color-mix(in srgb, var(--accent) 55%, transparent);
+  font-weight: 400;
+}
+
+.home-terminal-input {
+  position: relative;
+  outline: 0;
+  color: var(--text);
+  caret-color: transparent;
+}
+
+.home-terminal-input:disabled {
+  cursor: not-allowed;
+}
+
+.home-terminal-cursor {
   width: 0.5rem;
   height: 1rem;
-  display: inline-block;
-  vertical-align: middle;
+  position: absolute;
+  top: 50%;
+  left: calc(var(--terminal-cursor-position) * 1ch);
+  z-index: 2;
+  display: block;
+  transform: translateY(-50%);
   background: var(--secondary);
+  pointer-events: none;
   animation: terminal-cursor 1s steps(1) infinite;
+}
+
+.home-terminal-input:disabled + .home-terminal-cursor {
+  display: none;
+}
+
+.home-terminal-command-feedback {
+  min-height: 1rem;
+  margin: 0.2rem 0 0;
+  padding-left: 1.55rem;
+  color: color-mix(in srgb, var(--accent) 65%, transparent);
+  font-size: 0.68rem;
+}
+
+.home-terminal-command-error {
+  color: #d66565;
+}
+
+.home-terminal-sr-only {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 @keyframes terminal-cursor {
@@ -91,8 +183,19 @@
 }
 
 @media (max-width: 520px) {
+  .home-terminal {
+    min-height: 17rem;
+  }
+
   .home-terminal-content {
-    padding: 1.1rem 1rem;
+    min-height: 13.75rem;
+    padding: 1.1rem 1rem 0.5rem;
     font-size: 0.72rem;
+    scrollbar-width: none;
+  }
+
+  .home-terminal-content::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 }
