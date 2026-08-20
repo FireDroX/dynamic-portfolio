@@ -118,7 +118,7 @@ const HomeProjectTerminal = () => {
       <div className="home-terminal-title">adrien@portfolio: ~/projects</div>
       <div className="home-terminal-content">
         <p className="home-terminal-command">
-          <span>$</span> ls -lah
+          <span>$</span>ls -lah
         </p>
 
         {isLoading ? (
