@@ -22,7 +22,19 @@
   height: 0.5rem;
   border-radius: 50%;
   background: #78ad77;
-  box-shadow: 0 0 0 0.3rem #78ad7718;
+  animation: home-online-pulse 2.2s ease-out infinite;
+}
+
+@keyframes home-online-pulse {
+  0% {
+    box-shadow: 0 0 0 0 #78ad7745;
+  }
+  70% {
+    box-shadow: 0 0 0 0.55rem #78ad7700;
+  }
+  100% {
+    box-shadow: 0 0 0 0 #78ad7700;
+  }
 }
 
 .home-intro {

@@ -1,7 +1,6 @@
 import "./styles/Navbar.css";
 import { NavLink, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import LanguageFlag from "./LanguageFlag";
 import { readObject, writeJson } from "../utils/storage";
 
 const Navbar = () => {
@@ -27,7 +26,7 @@ const Navbar = () => {
     <nav className="nav-header">
       <div className="navbar">
         <p>portfolio</p>
-        <div>
+        <div className="navbar-links">
           <NavLink
             to="/"
             end
@@ -50,6 +49,8 @@ const Navbar = () => {
           >
             {t("nav.projects")}
           </NavLink>
+        </div>
+        <div className="navbar-actions">
           <button
             type="button"
             className="language-switch"
@@ -57,10 +58,34 @@ const Navbar = () => {
             aria-label={languageLabel}
             title={languageLabel}
           >
-            <LanguageFlag language={nextLanguage} />
+            <span className={currentLanguage === "fr" ? "lang-active" : ""}>
+              FR
+            </span>
+            <span className={currentLanguage === "en" ? "lang-active" : ""}>
+              EN
+            </span>
+          </button>
+          <button
+            type="button"
+            className="navbar-panel"
+            onClick={() => navigate("/panel")}
+            aria-label={t("nav.login")}
+            title={t("nav.login")}
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
+              <rect x="4" y="11" width="16" height="9" rx="2" />
+              <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+            </svg>
           </button>
         </div>
-        <button onClick={() => navigate("/panel")}>{t("nav.login")}</button>
       </div>
     </nav>
   );

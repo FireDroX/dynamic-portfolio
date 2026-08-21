@@ -115,7 +115,14 @@ const HomeProjectTerminal = () => {
 
   return (
     <div className="home-terminal" aria-label={t("home.terminalLabel")}>
-      <div className="home-terminal-title">adrien@portfolio: ~/projects</div>
+      <div className="home-terminal-title">
+        <span className="home-terminal-dots" aria-hidden="true">
+          <span className="home-terminal-dot home-terminal-dot-red" />
+          <span className="home-terminal-dot home-terminal-dot-yellow" />
+          <span className="home-terminal-dot home-terminal-dot-green" />
+        </span>
+        adrien@portfolio: ~/projects
+      </div>
       <div className="home-terminal-content">
         <p className="home-terminal-command">
           <span>$</span>ls -lah

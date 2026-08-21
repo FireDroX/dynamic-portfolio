@@ -8,11 +8,38 @@
 }
 
 .home-terminal-title {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
   padding: 0.9rem 1.2rem;
   border-bottom: 1px solid #7b7b7b30;
   color: var(--accent);
   font-family: monospace;
   font-size: 0.75rem;
+}
+
+.home-terminal-dots {
+  display: inline-flex;
+  flex: none;
+  gap: 0.4rem;
+}
+
+.home-terminal-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+}
+
+.home-terminal-dot-red {
+  background: #ff5f57;
+}
+
+.home-terminal-dot-yellow {
+  background: #febc2e;
+}
+
+.home-terminal-dot-green {
+  background: #28c840;
 }
 
 .home-terminal-content {
