@@ -4,3 +4,6 @@ projects/*
 .vscode
 /tmp
 graphify-out/
+.claude
+CLAUDE.md
+.agents
