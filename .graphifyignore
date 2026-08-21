@@ -1,0 +1,7 @@
+# .graphifyignore
+node_modules/
+dist/
+tmp/
+*.generated.py
+client/build/
+client/node_modules/

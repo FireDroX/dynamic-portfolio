@@ -3,3 +3,4 @@
 projects/*
 .vscode
 /tmp
+graphify-out/
