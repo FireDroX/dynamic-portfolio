@@ -221,8 +221,6 @@ Créer une plateforme simple pour :
 
 Projet développé par [FireDroX](https://github.com/FireDroX).
 
----
-
 ## 📄 Licence
 
 Ce projet est distribué sous licence MIT. Voir le fichier
