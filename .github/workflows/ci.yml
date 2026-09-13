@@ -90,7 +90,7 @@ jobs:
       # Single Dockerfile at the repo root builds the client (vite build)
       # and the Express backend into one runtime image — see Dockerfile.
       - name: Build and push portfolio-image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: Dockerfile
