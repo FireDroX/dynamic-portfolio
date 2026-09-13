@@ -19,11 +19,6 @@ jobs:
     permissions:
       packages: read
     steps:
-      - name: Compute image reference
-        id: image
-        run: |
-          echo "name=${REGISTRY}/$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/portfolio-image:latest" >> "$GITHUB_OUTPUT"
-
       - name: Install cloudflared
         run: |
           curl -fsSL -o cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
@@ -54,23 +49,13 @@ jobs:
         run: |
           ssh deploy-target "echo '${{ secrets.GITHUB_TOKEN }}' | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin"
 
-      # Mirrors build.sh (the author's own manual deploy script): same
-      # container name, network, published port and named volume, but
-      # pulling the image CI already built and pushed instead of
-      # building it on the server. DEPLOY_PATH points at the directory
-      # on the server that holds the .env file build.sh also reads —
-      # it's intentionally unquoted below so a leading `~` still
-      # expands remotely (quoted, bash treats `~` as a literal char).
-      - name: docker pull && recreate the portfolio container
+      # build.sh (repo root) pulls ghcr.io/firedrox/portfolio-image:latest
+      # and recreates the `portfolio` container with it — see that file
+      # for the exact docker run flags (network, volume, port, env-file).
+      # `git pull` first so the server always runs the build.sh version
+      # committed on main. DEPLOY_PATH is intentionally unquoted below so
+      # a leading `~` in it still expands remotely (quoted, bash treats
+      # `~` as a literal char).
+      - name: git pull && ./build.sh
         run: |
-          ssh deploy-target "docker pull ${{ steps.image.outputs.name }} && \
-            docker rm -f portfolio 2>/dev/null; \
-            docker run -d \
-              --init \
-              --env-file ${{ secrets.DEPLOY_PATH }}/.env \
-              -p 127.0.0.1:3333:3000 \
-              --network mariadb-network \
-              --name portfolio \
-              --restart unless-stopped \
-              -v portfolio_projects:/app/projects \
-              ${{ steps.image.outputs.name }}"
+          ssh deploy-target "cd ${{ secrets.DEPLOY_PATH }} && git pull && ./build.sh"
