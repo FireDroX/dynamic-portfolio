@@ -53,9 +53,11 @@ jobs:
       # and recreates the `portfolio` container with it — see that file
       # for the exact docker run flags (network, volume, port, env-file).
       # `git pull` first so the server always runs the build.sh version
-      # committed on main. DEPLOY_PATH is intentionally unquoted below so
-      # a leading `~` in it still expands remotely (quoted, bash treats
-      # `~` as a literal char).
+      # committed on main; `chmod +x` in case the exec bit was lost (git
+      # only preserves the mode it tracked at checkout/clone time).
+      # DEPLOY_PATH is intentionally unquoted below so a leading `~` in
+      # it still expands remotely (quoted, bash treats `~` as a literal
+      # char).
       - name: git pull && ./build.sh
         run: |
-          ssh deploy-target "cd ${{ secrets.DEPLOY_PATH }} && git pull && ./build.sh"
+          ssh deploy-target "cd ${{ secrets.DEPLOY_PATH }} && git pull && chmod +x build.sh && ./build.sh"
