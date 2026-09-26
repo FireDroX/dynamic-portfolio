@@ -73,9 +73,17 @@
   cursor: pointer;
 }
 
-.panel-add-section,
-.panel-projects-section {
+.panel-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  align-items: start;
+  gap: 2rem;
   margin-bottom: 6rem;
+}
+
+.panel-add-section {
+  position: sticky;
+  top: 1.5rem;
 }
 
 .panel-section-heading {
@@ -149,6 +157,16 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+}
+
+@media (max-width: 1000px) {
+  .panel-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-add-section {
+    position: static;
+  }
 }
 
 @media (max-width: 650px) {

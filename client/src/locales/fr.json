@@ -71,10 +71,15 @@
     "count_other": "{{count}} projets",
     "loadError": "Impossible de charger les projets pour le moment.",
     "empty": "Aucun projet disponible.",
+    "noMatches": "Aucun projet ne correspond à vos filtres.",
     "unknownDate": "date inconnue",
     "view": "Voir le projet {{name}}",
     "open": "Ouvrir le projet {{name}}",
-    "fileInfo": "Informations du fichier"
+    "fileInfo": "Informations du fichier",
+    "filterByYear": "Filtrer par année",
+    "filterAll": "Tous",
+    "searchLabel": "Rechercher un projet",
+    "searchPlaceholder": "Rechercher un projet"
   },
   "project": {
     "loading": "Chargement du projet...",

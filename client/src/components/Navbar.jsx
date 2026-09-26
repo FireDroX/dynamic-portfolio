@@ -1,5 +1,5 @@
 import "./styles/Navbar.css";
-import { NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { readObject, writeJson } from "../utils/storage";
 
@@ -25,7 +25,13 @@ const Navbar = () => {
   return (
     <nav className="nav-header">
       <div className="navbar">
-        <p>portfolio</p>
+        <Link
+          to="/"
+          className="navbar-title"
+          onClick={() => trackPage("home")}
+        >
+          portfolio
+        </Link>
         <div className="navbar-links">
           <NavLink
             to="/"

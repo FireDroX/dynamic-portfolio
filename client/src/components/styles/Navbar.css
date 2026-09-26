@@ -1,31 +1,36 @@
 .nav-header {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 0 clamp(1.25rem, 5vw, 3.5rem);
+  height: 4.75rem;
 
   display: flex;
-  justify-content: center;
+  align-items: center;
   border-bottom: 0.125rem solid #48484833;
 }
 
 .navbar {
-  width: min-content;
+  position: relative;
+  width: 100%;
   text-transform: uppercase;
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   flex-direction: row;
-  gap: 3rem;
 
   color: var(--accent);
-  border-radius: 1.5625rem;
-  padding: 0.75rem 2rem;
 }
 
-.navbar > p {
-  font-size: 1.25rem;
+.navbar-title {
+  margin-right: auto;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text);
+  transition: color 150ms ease;
+}
+
+.navbar-title:hover {
+  cursor: pointer;
+  color: var(--secondary);
 }
 
 .login-form > button,
@@ -46,18 +51,35 @@
   scale: 1.1;
 }
 
-/* Navbar — middle: nav links */
+/* Navbar — middle: nav links, centered on the header regardless of the
+   right-hand actions width (there is no left-hand title any more) */
 .navbar-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 0;
+
+  border: 1px solid #7b7b7b30;
+  border-radius: 999px;
+  background: transparent;
+  padding: 0.2rem;
+  font-family: monospace;
 }
 
 .navbar-links > a {
-  position: relative;
-  padding-bottom: 0.3rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
   color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   white-space: nowrap;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
 }
 
 .navbar-links > a:hover {
@@ -66,31 +88,24 @@
 }
 
 .navbar-links > a.nav-active {
+  background: color-mix(in srgb, var(--text) 12%, transparent);
   color: var(--text);
-}
-
-.navbar-links > a.nav-active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: var(--secondary);
 }
 
 /* Navbar — right: language pill + panel access */
 .navbar-actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 0.75rem;
   text-transform: none;
 }
 
 .navbar-actions .language-switch {
   display: inline-flex;
-  padding: 0;
-  border: 1px solid #48484855;
+  padding: 0.2rem;
+  border: 1px solid #7b7b7b30;
   border-radius: 999px;
   background: transparent;
   font-family: monospace;
@@ -101,7 +116,8 @@
 }
 
 .navbar-actions .language-switch span {
-  padding: 0.35rem 0.6rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
   color: var(--accent);
   transition:
     color 150ms ease,
@@ -109,8 +125,8 @@
 }
 
 .navbar-actions .language-switch span.lang-active {
-  background: color-mix(in srgb, var(--secondary) 18%, transparent);
-  color: var(--secondary);
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text);
 }
 
 .navbar-actions .language-switch:hover span.lang-active {
@@ -126,9 +142,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid #48484855;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid #7b7b7b30;
   border-radius: 50%;
   background: transparent;
   color: var(--accent);
@@ -158,10 +174,16 @@
 
 @media (max-width: 768px) {
   .navbar-actions .navbar-panel,
-  .navbar > p {
+  .navbar-title {
     display: none;
   }
-  .navbar {
-    padding: 0.5rem 1.25rem;
+
+  .navbar-links {
+    gap: 0;
+  }
+
+  .navbar-links > a {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.68rem;
   }
 }
