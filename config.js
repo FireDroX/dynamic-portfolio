@@ -1,6 +1,8 @@
 const SITE_URL = (
-  process.env.SITE_URL || "https://portfolio.addrien.fr"
+  process.env.SITE_URL || "https://addrien.fr"
 ).replace(/\/$/, "");
+
+const canonicalHostname = new URL(SITE_URL).hostname.toLowerCase();
 
 const allowedHostnames = new Set(
   (
@@ -12,9 +14,16 @@ const allowedHostnames = new Set(
     .filter(Boolean),
 );
 
-const getSiteUrl = (req) => {
+const getRequestHost = (req) => {
   const forwardedHost = req.get("x-forwarded-host")?.split(",")[0].trim();
-  const requestHost = forwardedHost || req.get("host") || "";
+  return forwardedHost || req.get("host") || "";
+};
+
+const getRequestHostname = (req) =>
+  getRequestHost(req).replace(/:\d+$/, "").toLowerCase();
+
+const getSiteUrl = (req) => {
+  const requestHost = getRequestHost(req);
   const hostname = requestHost.replace(/:\d+$/, "").toLowerCase();
 
   if (!allowedHostnames.has(hostname)) return SITE_URL;
@@ -32,4 +41,17 @@ const getSiteUrl = (req) => {
   return `${protocol}://${authority}`;
 };
 
-module.exports = { SITE_URL, getSiteUrl };
+// Consolidates duplicate-content domains (e.g. portfolio.addrien.fr) onto the
+// single canonical host from SITE_URL, so Google indexes one domain instead
+// of splitting authority across several that serve the same content.
+const getCanonicalRedirectUrl = (req) => {
+  const hostname = getRequestHostname(req);
+  const isLocal = hostname === "localhost" || hostname === "127.0.0.1";
+
+  if (hostname === canonicalHostname || isLocal) return null;
+  if (!allowedHostnames.has(hostname)) return null;
+
+  return `https://${canonicalHostname}${req.originalUrl}`;
+};
+
+module.exports = { SITE_URL, getSiteUrl, getCanonicalRedirectUrl };
