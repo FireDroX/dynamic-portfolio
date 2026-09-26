@@ -1,4 +1,5 @@
 .projects-header,
+.projects-toolbar,
 .projects-collection {
   max-width: 78rem;
   margin-right: auto;
@@ -12,6 +13,106 @@
 .projects-header > p {
   max-width: 43rem;
   line-height: 1.7;
+}
+
+.projects-toolbar {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.projects-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.projects-filters button {
+  padding: 0.6rem 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #7b7b7b3d;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font-family: monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.projects-filters button:hover {
+  border-color: var(--secondary);
+  color: var(--text);
+}
+
+.projects-filters button.is-active {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+
+.projects-filters button span {
+  color: inherit;
+  opacity: 0.6;
+  font-size: 0.68rem;
+}
+
+.projects-search {
+  width: min(100%, 18rem);
+  height: 2.75rem;
+  padding: 0 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 0 0 auto;
+  border: 1px solid #7b7b7b3d;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 92%, var(--text));
+  color: var(--accent);
+}
+
+.projects-search:focus-within {
+  border-color: var(--secondary);
+}
+
+.projects-search svg {
+  width: 1rem;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.projects-search-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.projects-search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+}
+
+.projects-search input::placeholder {
+  color: var(--accent);
+}
+
+@media (max-width: 650px) {
+  .projects-search {
+    width: 100%;
+  }
 }
 
 .projects-collection {

@@ -71,10 +71,15 @@
     "count_other": "{{count}} projects",
     "loadError": "Unable to load projects right now.",
     "empty": "No projects available.",
+    "noMatches": "No projects match your filters.",
     "unknownDate": "unknown date",
     "view": "View project {{name}}",
     "open": "Open project {{name}}",
-    "fileInfo": "File information"
+    "fileInfo": "File information",
+    "filterByYear": "Filter by year",
+    "filterAll": "All",
+    "searchLabel": "Search projects",
+    "searchPlaceholder": "Search projects"
   },
   "project": {
     "loading": "Loading project...",

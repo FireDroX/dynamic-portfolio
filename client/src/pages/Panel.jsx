@@ -59,35 +59,37 @@ const Panel = ({ onLogout }) => {
         </div>
       )}
 
-      <PanelProjectForm isSaving={saving === "new"} onSubmit={addProject} />
+      <div className="panel-columns">
+        <PanelProjectForm isSaving={saving === "new"} onSubmit={addProject} />
 
-      <section className="panel-projects-section">
-        <div className="panel-section-heading">
-          <div>
-            <small>{t("panel.library")}</small>
-            <h2>{t("panel.publishedProjects")}</h2>
+        <section className="panel-projects-section">
+          <div className="panel-section-heading">
+            <div>
+              <small>{t("panel.library")}</small>
+              <h2>{t("panel.publishedProjects")}</h2>
+            </div>
+            <p>{t("panel.projectCount", { count: projects.length })}</p>
           </div>
-          <p>{t("panel.projectCount", { count: projects.length })}</p>
-        </div>
 
-        <div className="panel-projects">
-          {sortedProjects.map((project) => (
-            <PanelProjectCard
-              key={project.fileName}
-              project={project}
-              edited={editedProjects[project.fileName] || {}}
-              isPreviewOpen={openPreviews[project.fileName]}
-              previewVersion={previewVersions[project.fileName] || 0}
-              isSaving={saving === project.fileName}
-              onChange={changeProject}
-              onProjectFile={changeProjectFile}
-              onTogglePreview={() => togglePreview(project.fileName)}
-              onDelete={deleteProject}
-              onSave={saveProject}
-            />
-          ))}
-        </div>
-      </section>
+          <div className="panel-projects">
+            {sortedProjects.map((project) => (
+              <PanelProjectCard
+                key={project.fileName}
+                project={project}
+                edited={editedProjects[project.fileName] || {}}
+                isPreviewOpen={openPreviews[project.fileName]}
+                previewVersion={previewVersions[project.fileName] || 0}
+                isSaving={saving === project.fileName}
+                onChange={changeProject}
+                onProjectFile={changeProjectFile}
+                onTogglePreview={() => togglePreview(project.fileName)}
+                onDelete={deleteProject}
+                onSave={saveProject}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
     </main>
   );
 };
