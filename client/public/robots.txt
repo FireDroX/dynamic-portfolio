@@ -1,9 +1,8 @@
 User-agent: *
 Allow: /
+Allow: /api/projects
 
-# Sitemaps des deux domaines publics
 Sitemap: https://addrien.fr/sitemap.xml
-Sitemap: https://portfolio.addrien.fr/sitemap.xml
 
 # Bloquer endpoints sensibles
 Disallow: /api/

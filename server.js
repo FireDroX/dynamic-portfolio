@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 const isProduction = process.env.NODE_ENV === "production";
 
 const routes = require("./api");
-const { getSiteUrl } = require("./config");
+const { getSiteUrl, getCanonicalRedirectUrl } = require("./config");
 
 const sessionStore = new MySQLStore(
   {
@@ -31,6 +31,12 @@ const sessionStore = new MySQLStore(
 if (isProduction) {
   app.set("trust proxy", 1);
 }
+
+app.use((req, res, next) => {
+  const redirectUrl = getCanonicalRedirectUrl(req);
+  if (redirectUrl) return res.redirect(301, redirectUrl);
+  next();
+});
 
 app.use(
   session({
@@ -54,6 +60,7 @@ app.get("/robots.txt", (req, res) => {
   const siteUrl = getSiteUrl(req);
   res.type("text/plain").send(`User-agent: *
 Allow: /
+Allow: /api/projects
 
 Sitemap: ${siteUrl}/sitemap.xml
 
@@ -74,12 +81,12 @@ app.use(async (req, res) => {
     const pathWithoutTrailingSlash = req.path.replace(/\/$/, "") || "/";
     const staticPages = {
       "/": {
-        title: "Adrien | Développeur React & Node.js",
+        title: "Portfolio d’Adrien | Développeur React & Node.js — ESGI Paris",
         description:
           "Adrien conçoit des applications web, des jeux et des expériences interactives avec React et Node.js. Découvrez ses projets directement en ligne.",
       },
       "/projects": {
-        title: "Projets web interactifs | Portfolio Adrien",
+        title: "Projets web d’Adrien | Portfolio ESGI",
         description:
           "Découvrez les projets web d’Adrien : applications React, expériences interactives et créations full-stack testables en ligne.",
       },
