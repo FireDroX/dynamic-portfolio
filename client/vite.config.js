@@ -8,6 +8,7 @@ const devHtmlDefaults = {
   __IMAGE__: "/preview.png",
   __URL__: "http://localhost:5173/",
   __ROBOTS__: "noindex, nofollow",
+  __DISCORD_EMBED__: "{}",
 };
 
 export default defineConfig(({ command }) => ({
