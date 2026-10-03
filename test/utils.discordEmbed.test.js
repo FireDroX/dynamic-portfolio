@@ -17,7 +17,7 @@ const base = {
 
 describe("discord embed", () => {
   it("builds a container with image and the 3 default links", () => {
-    const [container] = buildDiscordEmbed(base).components;
+    const container = buildDiscordEmbed(base).component;
     expect(container.type).toBe(17);
     const row = container.components.find((c) => c.type === 1);
     expect(row.components.map((b) => b.url)).toEqual([
@@ -35,6 +35,6 @@ describe("discord embed", () => {
       buildDiscordEmbed({ ...base, description: "</script><b>" }),
     );
     expect(json).not.toMatch(/[<>]/);
-    expect(JSON.parse(json).components).toHaveLength(1);
+    expect(JSON.parse(json).component.type).toBe(17);
   });
 });
