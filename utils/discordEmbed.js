@@ -17,27 +17,25 @@ function buildDiscordEmbed({ title, description, image, url, siteUrl, links }) {
   ];
 
   return {
-    components: [
-      {
-        type: 17,
-        accent_color: ACCENT_COLOR,
-        components: [
-          {
-            type: 9,
-            components: [
-              {
-                type: 10,
-                content: `## [${truncate(title, 120).replace(/[[\]]/g, "")}](${url})\n${truncate(description, 300)}`,
-              },
-            ],
-            accessory: { type: 11, media: { url: `${siteUrl}/icon.png` } },
-          },
-          { type: 12, items: [{ media: { url: image } }] },
-          { type: 1, components: buttons },
-          { type: 10, content: `-# ${siteUrl.replace(/^https?:\/\//, "")}` },
-        ],
-      },
-    ],
+    component: {
+      type: 17,
+      accent_color: ACCENT_COLOR,
+      components: [
+        {
+          type: 9,
+          components: [
+            {
+              type: 10,
+              content: `## [${truncate(title, 120).replace(/[[\]]/g, "")}](${url})\n${truncate(description, 300)}`,
+            },
+          ],
+          accessory: { type: 11, media: { url: `${siteUrl}/icon.png` } },
+        },
+        { type: 12, items: [{ media: { url: image } }] },
+        { type: 1, components: buttons },
+        { type: 10, content: `-# ${siteUrl.replace(/^https?:\/\//, "")}` },
+      ],
+    },
   };
 }
 
