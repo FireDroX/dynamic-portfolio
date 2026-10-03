@@ -9,6 +9,11 @@ const MySQLStore = require("express-mysql-session")(session);
 
 const { getProjectBySlug } = require("./utils/functions");
 const { getProjectDescription } = require("./utils/projectDescription");
+const {
+  buildDiscordEmbed,
+  serializeDiscordEmbed,
+  linkButton,
+} = require("./utils/discordEmbed");
 const db = require("./db");
 
 const app = express();
@@ -83,7 +88,7 @@ app.use(async (req, res) => {
       "/": {
         title: "Portfolio d’Adrien | Développeur React & Node.js — ESGI Paris",
         description:
-          "Adrien conçoit des applications web, des jeux et des expériences interactives avec React et Node.js. Découvrez ses projets directement en ligne.",
+          "Développeur React & Node.js, je crée des apps web, des jeux et des expériences interactives. Essayez mes projets en un clic, sans rien installer.",
       },
       "/projects": {
         title: "Projets web d’Adrien | Portfolio ESGI",
@@ -123,6 +128,11 @@ app.use(async (req, res) => {
         meta = {
           title: `${project.name} | Portfolio Adrien`,
           description: getProjectDescription(project),
+          discordLinks: [
+            linkButton("🎮 Voir le projet", `${siteUrl}/projects/${slug}`),
+            linkButton("🚀 Tous les projets", `${siteUrl}/projects`),
+            linkButton("🌐 Portfolio", siteUrl),
+          ],
         };
         if (project.image) {
           image = `${siteUrl}/og-image/${encodeURIComponent(slug)}`;
@@ -163,6 +173,18 @@ app.use(async (req, res) => {
         .trim();
     const replaceToken = (source, token, value) =>
       source.replace(new RegExp(token, "g"), () => escapeAttribute(value));
+
+    const discordEmbed = buildDiscordEmbed({
+      title: meta.title.split(" | ")[0],
+      description: meta.description,
+      image,
+      url: canonicalUrl,
+      siteUrl,
+      links: meta.discordLinks,
+    });
+    html = html.replace("__DISCORD_EMBED__", () =>
+      serializeDiscordEmbed(discordEmbed),
+    );
 
     html = replaceToken(html, "__TITLE__", meta.title);
     html = replaceToken(html, "__DESCRIPTION__", meta.description);
