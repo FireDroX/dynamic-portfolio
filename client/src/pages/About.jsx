@@ -1,7 +1,7 @@
 import "./styles/About.css";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import { FaAws, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import {
   SiCloudflare,
   SiCss,
@@ -21,6 +21,7 @@ import {
   SiReact,
   SiTailwindcss,
   SiTypescript,
+  SiWebstorm
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 
@@ -47,7 +48,7 @@ const stack = {
     { name: "Git", Icon: SiGit },
     { name: "GitHub", Icon: SiGithub },
     { name: "Cloudflare", Icon: SiCloudflare },
-    { name: "AWS", Icon: FaAws },
+    { name: "WebStorm", Icon: SiWebstorm },
   ],
 };
 
