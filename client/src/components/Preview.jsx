@@ -1,30 +1,31 @@
 import "./styles/Preview.css";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { FaTerminal } from "react-icons/fa";
 import {
   SiBootstrap,
-  SiC,
   SiCss,
   SiDocker,
   SiExpress,
   SiHtml5,
+  SiMysql,
+  SiNestjs,
   SiPhp,
   SiReact,
   SiSocketdotio,
+  SiTypescript,
 } from "react-icons/si";
 
 import preview1 from "../assets/preview1.mp4";
 import preview1Poster from "../assets/preview1_loader.png";
 import preview2 from "../assets/preview2.mp4";
 import preview2Poster from "../assets/preview2_loader.png";
-import preview3 from "../assets/preview3.mp4";
-import preview3Poster from "../assets/preview3_loader.png";
+import preview4Poster from "../assets/preview4.jpg";
 
+// An entry without a video is shown as a still image.
 const previews = {
   preview1: { video: preview1, poster: preview1Poster },
   preview2: { video: preview2, poster: preview2Poster },
-  preview3: { video: preview3, poster: preview3Poster },
+  preview4: { poster: preview4Poster },
 };
 
 const stackIcons = {
@@ -36,8 +37,9 @@ const stackIcons = {
   CSS: SiCss,
   PHP: SiPhp,
   Bootstrap: SiBootstrap,
-  C: SiC,
-  ncurses: FaTerminal,
+  NestJS: SiNestjs,
+  TypeScript: SiTypescript,
+  MySQL: SiMysql,
 };
 
 const Preview = ({ project, variant }) => {
@@ -79,19 +81,28 @@ const Preview = ({ project, variant }) => {
       </div>
 
       <div className="preview-media">
-        <video
-          src={preview.video}
-          poster={preview.poster}
-          autoPlay
-          loop
-          muted
-          preload="auto"
-          disablePictureInPicture
-          disableRemotePlayback
-          x-webkit-airplay="deny"
-          playsInline
-          title={t("preview.videoTitle", { name: project.name })}
-        />
+        {preview.video ? (
+          <video
+            src={preview.video}
+            poster={preview.poster}
+            autoPlay
+            loop
+            muted
+            preload="auto"
+            disablePictureInPicture
+            disableRemotePlayback
+            x-webkit-airplay="deny"
+            playsInline
+            title={t("preview.videoTitle", { name: project.name })}
+          />
+        ) : (
+          <img
+            src={preview.poster}
+            alt={t("preview.imageAlt", { name: project.name })}
+            loading="lazy"
+            decoding="async"
+          />
+        )}
         <span className="preview-media-label">{t("preview.live")}</span>
       </div>
     </article>
