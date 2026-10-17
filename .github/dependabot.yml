@@ -24,3 +24,11 @@ updates:
     directory: /
     schedule:
       interval: monthly
+
+  # The Dockerfile pins node:22-bookworm-slim by digest so the deploy
+  # target only re-pulls the base layers when this PR is merged, not
+  # every time Docker Hub refreshes the tag.
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: monthly
