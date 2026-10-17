@@ -8,3 +8,5 @@ graphify-out/
 CLAUDE.md
 .agents
 .idea
+deploy.log
+.deploy-exit

@@ -87,8 +87,16 @@ jobs:
             type=raw,value=latest
             type=sha,format=long
 
+      # The gha cache driver needs a buildx builder (the default `docker`
+      # driver can't export a cache).
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
       # Single Dockerfile at the repo root builds the client (vite build)
       # and the Express backend into one runtime image — see Dockerfile.
+      # The layer cache keeps unchanged layers (apt libs, node_modules)
+      # byte-identical between builds, so the deploy target only pulls
+      # the layers that actually changed instead of ~25MB+ every time.
       - name: Build and push portfolio-image
         uses: docker/build-push-action@v7
         with:
@@ -97,3 +105,5 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
