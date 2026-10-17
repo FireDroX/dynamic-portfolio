@@ -99,7 +99,6 @@
     "discover": "Discover the project",
     "discoverLabel": "Discover project {{name}}",
     "videoTitle": "Video preview of project {{name}}",
-    "imageAlt": "Screenshot of project {{name}}",
     "live": "Live preview"
   },
   "featured": {
