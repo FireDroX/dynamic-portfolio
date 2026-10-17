@@ -99,12 +99,13 @@
     "discover": "Discover the project",
     "discoverLabel": "Discover project {{name}}",
     "videoTitle": "Video preview of project {{name}}",
+    "imageAlt": "Screenshot of project {{name}}",
     "live": "Live preview"
   },
   "featured": {
+    "nestwiki": "A self-hosted collaborative wiki with a page tree, full version history, granular permissions and an MCP server for AI assistants.",
     "pokeflip": "A new version of PokeFlip with a responsive interface, real-time multiplayer and customizable profiles.",
-    "monstersEnergy": "A Monster Energy community platform featuring a catalogue, rankings, messaging and achievements.",
-    "spaceInvaders": "An ASCII reimagining of Space Invaders, developed in C with ncurses and progressive difficulty."
+    "monstersEnergy": "A Monster Energy community platform featuring a catalogue, rankings, messaging and achievements."
   },
   "achievements": {
     "header": "Details are hidden throughout the portfolio. Explore, experiment and keep your eyes open.",
