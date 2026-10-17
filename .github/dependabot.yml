@@ -32,3 +32,9 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    # Node majors (e.g. 22 -> 25, an odd non-LTS line) are a deliberate
+    # upgrade: CI's NODE_VERSION has to move with them. Digest and
+    # patch bumps of the pinned tag still come through.
+    ignore:
+      - dependency-name: node
+        update-types: ['version-update:semver-major']
