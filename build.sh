@@ -33,6 +33,11 @@ docker run -d \
   -v portfolio_projects:/app/projects \
   "${IMAGE}"
 
+# Chaque déploiement laisse l'image précédente orpheline (<none>) :
+# sans nettoyage elles s'accumulent sur le disque.
+echo "Nettoyage des anciennes images..."
+docker image prune -f
+
 echo "Logs du conteneur..."
 docker logs --tail 50 portfolio
 
