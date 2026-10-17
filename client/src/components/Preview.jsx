@@ -19,13 +19,13 @@ import preview1 from "../assets/preview1.mp4";
 import preview1Poster from "../assets/preview1_loader.png";
 import preview2 from "../assets/preview2.mp4";
 import preview2Poster from "../assets/preview2_loader.png";
-import preview4Poster from "../assets/preview4.jpg";
+import preview4 from "../assets/preview4.mp4";
+import preview4Poster from "../assets/preview4_loader.png";
 
-// An entry without a video is shown as a still image.
 const previews = {
   preview1: { video: preview1, poster: preview1Poster },
   preview2: { video: preview2, poster: preview2Poster },
-  preview4: { poster: preview4Poster },
+  preview4: { video: preview4, poster: preview4Poster },
 };
 
 const stackIcons = {
@@ -81,28 +81,19 @@ const Preview = ({ project, variant }) => {
       </div>
 
       <div className="preview-media">
-        {preview.video ? (
-          <video
-            src={preview.video}
-            poster={preview.poster}
-            autoPlay
-            loop
-            muted
-            preload="auto"
-            disablePictureInPicture
-            disableRemotePlayback
-            x-webkit-airplay="deny"
-            playsInline
-            title={t("preview.videoTitle", { name: project.name })}
-          />
-        ) : (
-          <img
-            src={preview.poster}
-            alt={t("preview.imageAlt", { name: project.name })}
-            loading="lazy"
-            decoding="async"
-          />
-        )}
+        <video
+          src={preview.video}
+          poster={preview.poster}
+          autoPlay
+          loop
+          muted
+          preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
+          x-webkit-airplay="deny"
+          playsInline
+          title={t("preview.videoTitle", { name: project.name })}
+        />
         <span className="preview-media-label">{t("preview.live")}</span>
       </div>
     </article>

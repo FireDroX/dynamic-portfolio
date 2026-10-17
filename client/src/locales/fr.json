@@ -99,7 +99,6 @@
     "discover": "Découvrir le projet",
     "discoverLabel": "Découvrir le projet {{name}}",
     "videoTitle": "Aperçu vidéo du projet {{name}}",
-    "imageAlt": "Capture d’écran du projet {{name}}",
     "live": "Aperçu en direct"
   },
   "featured": {
