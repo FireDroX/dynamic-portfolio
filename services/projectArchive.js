@@ -159,8 +159,32 @@ async function replaceProjectArchive(buffer, projectSlug) {
   };
 }
 
+async function removeProjectArchive(projectSlug) {
+  const projectPath = path.join(projectsPath, projectSlug);
+  const trashPath = path.join(
+    projectsPath,
+    `.delete-${projectSlug}-${Date.now()}`,
+  );
+
+  try {
+    await fs.promises.rename(projectPath, trashPath);
+  } catch (error) {
+    // No files on disk: the database row can still be removed.
+    if (error.code === "ENOENT") {
+      return { commit: async () => {}, rollback: async () => {} };
+    }
+    throw error;
+  }
+
+  return {
+    commit: () => fs.promises.rm(trashPath, { recursive: true, force: true }),
+    rollback: () => fs.promises.rename(trashPath, projectPath),
+  };
+}
+
 module.exports = {
   getProjectSlug,
   installProjectArchive,
+  removeProjectArchive,
   replaceProjectArchive,
 };

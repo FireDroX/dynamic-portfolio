@@ -20,6 +20,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const isProduction = process.env.NODE_ENV === "production";
 
+// Fail closed: without these, the panel login would accept a missing password.
+for (const name of ["PANEL_PASSWORD", "SESSION_SECRET"]) {
+  if (!process.env[name]) {
+    console.error(`${name} doit être défini dans l'environnement.`);
+    process.exit(1);
+  }
+}
+
 const routes = require("./api");
 const { getSiteUrl, getCanonicalRedirectUrl } = require("./config");
 

@@ -1,6 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+const readError = async (response, fallback) => {
+  try {
+    const data = await response.json();
+    return data.error || fallback;
+  } catch {
+    return fallback;
+  }
+};
+
 const usePanelProjects = (onLogout) => {
   const { t } = useTranslation();
   const [projects, setProjects] = useState([]);
@@ -93,9 +102,12 @@ const usePanelProjects = (onLogout) => {
         credentials: "include",
         body: formData,
       });
-      const data = await response.json();
+      if (response.status === 401) {
+        onLogout();
+        return;
+      }
       if (!response.ok) {
-        throw new Error(data.error || t("panel.modifyError"));
+        throw new Error(await readError(response, t("panel.modifyError")));
       }
 
       if (updated.imagePreview) {
@@ -131,10 +143,16 @@ const usePanelProjects = (onLogout) => {
       const response = await fetch("/api/panel/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: project.name }),
+        body: JSON.stringify({ fileName: project.fileName }),
         credentials: "include",
       });
-      if (!response.ok) throw new Error(t("panel.deleteError"));
+      if (response.status === 401) {
+        onLogout();
+        return;
+      }
+      if (!response.ok) {
+        throw new Error(await readError(response, t("panel.deleteError")));
+      }
 
       setNotice({
         type: "success",
@@ -156,8 +174,12 @@ const usePanelProjects = (onLogout) => {
         credentials: "include",
         body: formData,
       });
+      if (response.status === 401) {
+        onLogout();
+        return false;
+      }
       if (!response.ok) {
-        throw new Error(t("panel.addError"));
+        throw new Error(await readError(response, t("panel.addError")));
       }
 
       setNotice({

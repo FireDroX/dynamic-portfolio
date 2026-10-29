@@ -1,3 +1,8 @@
+import achievements, {
+  formatAchievementName,
+  SPECIAL_ACHIEVEMENTS,
+} from "./config";
+
 const KEYBOARD_TARGETS = [
   "adrien",
   "arrowuparrowuparrowdownarrowdownarrowleftarrowrightarrowleftarrowrightba",
@@ -42,11 +47,30 @@ function trackEnvironmentAchievements() {
   }
 }
 
+// Only achievement events can come from a project: internal ones such as
+// "portfolio:cheater" (wipes progress) or "portfolio:update" are never forwarded.
+const IFRAME_EVENTS = new Set(
+  achievements
+    .map((achievement) => formatAchievementName(achievement.name))
+    .filter((name) => !SPECIAL_ACHIEVEMENTS.has(name))
+    .map((name) => `portfolio:${name}`),
+);
+
+const isProjectFrame = (source) =>
+  Array.from(document.querySelectorAll("iframe")).some(
+    (frame) => frame.contentWindow === source,
+  );
+
 function registerIframeBridge() {
   window.addEventListener("message", (event) => {
+    // "null" is the origin of the sandboxed panel preview.
+    const isTrustedOrigin =
+      event.origin === window.location.origin || event.origin === "null";
+
     if (
-      event.origin === window.location.origin &&
-      typeof event.data?.type === "string"
+      isTrustedOrigin &&
+      IFRAME_EVENTS.has(event.data?.type) &&
+      isProjectFrame(event.source)
     ) {
       window.dispatchEvent(new CustomEvent(event.data.type));
     }
