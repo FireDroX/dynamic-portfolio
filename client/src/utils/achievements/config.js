@@ -8,6 +8,8 @@ export const STORAGE_KEYS = {
   visitDays: "portfolio_visit_days",
 };
 
+export const SPECIAL_ACHIEVEMENTS = new Set(["cheater", "achievement-hunter"]);
+
 export const formatAchievementName = (name) =>
   name.toLowerCase().trim().replace(/\s+/g, "-");
 

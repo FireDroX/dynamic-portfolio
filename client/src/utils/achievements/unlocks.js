@@ -1,9 +1,11 @@
 import { readArray, writeJson } from "../storage";
-import achievements, { formatAchievementName, STORAGE_KEYS } from "./config";
+import achievements, {
+  formatAchievementName,
+  SPECIAL_ACHIEVEMENTS,
+  STORAGE_KEYS,
+} from "./config";
 import { showAchievementPopup } from "./popup";
 import i18n from "../../i18n";
-
-const SPECIAL_ACHIEVEMENTS = new Set(["cheater", "achievement-hunter"]);
 
 export function registerAchievementUnlocks() {
   achievements.forEach((achievement) => {

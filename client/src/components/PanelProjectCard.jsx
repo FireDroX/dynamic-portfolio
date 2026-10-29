@@ -155,10 +155,14 @@ const PanelProjectCard = ({
             <span>{t("panel.livePreview")}</span>
             <strong>{project.name}</strong>
           </div>
+          {/* Sandboxed without allow-same-origin: the project gets an opaque
+              origin, so its scripts cannot use the admin session open here. */}
           <iframe
             key={previewVersion}
             src={`/api/projects/${project.fileName}?preview=${previewVersion}`}
             title={t("panel.previewAlt", { name: project.name })}
+            sandbox="allow-scripts allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-pointer-lock allow-downloads"
+            allow="fullscreen"
           />
         </div>
       )}
