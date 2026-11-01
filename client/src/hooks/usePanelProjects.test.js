@@ -79,6 +79,21 @@ describe("usePanelProjects", () => {
     expect(onLogout).toHaveBeenCalled();
   });
 
+  it("sends the edited contributors as a JSON list", async () => {
+    routes["/api/panel/modify"] = () => json(200, { success: true });
+    const { result } = await renderPanel();
+
+    act(() =>
+      result.current.changeProject("probe_one", "contributors", ["FireDroX"]),
+    );
+    await act(() => result.current.saveProject(PROJECT));
+
+    const [, options] = fetch.mock.calls.find(
+      ([url]) => url === "/api/panel/modify",
+    );
+    expect(options.body.get("contributors")).toBe('["FireDroX"]');
+  });
+
   it("shows the server's message when adding fails", async () => {
     routes["/api/panel/add"] = () =>
       json(409, { error: "Un projet utilisant ce nom de fichier existe déjà." });

@@ -176,6 +176,9 @@ depuis lequel le site est consulté.
 | fileName      | TEXT    | Nom du ZIP            |
 | image         | TEXT    | Image Base64          |
 | createdAt     | DATE    | Date                  |
+| contributors  | TEXT    | Logins GitHub (JSON)  |
+
+> La colonne `contributors` est ajoutée automatiquement au démarrage du serveur si elle n'existe pas.
 
 ---
 

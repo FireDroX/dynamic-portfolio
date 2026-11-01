@@ -2,6 +2,7 @@ const express = require("express");
 const auth = require("../middleware/auth");
 const { getPool } = require("../utils/functions");
 const { parseProjectUpload } = require("../services/projectUpload");
+const { parseContributors } = require("../utils/contributors");
 const {
   getProjectSlug,
   installProjectArchive,
@@ -18,8 +19,13 @@ router.post("/", auth, async (req, res) => {
     const descriptionFr = fields.descriptionFr?.trim();
     const descriptionEn = fields.descriptionEn?.trim();
 
+    const contributors = parseContributors(fields.contributors);
+
     if (!name || !descriptionFr || !descriptionEn || !zip) {
       return res.status(400).json({ error: "Champs manquants." });
+    }
+    if (!contributors) {
+      return res.status(400).json({ error: "Contributeurs invalides." });
     }
 
     const projectSlug = getProjectSlug(zip.fileName);
@@ -28,9 +34,16 @@ router.post("/", auth, async (req, res) => {
     const pool = await getPool();
     await pool.query(
       `INSERT INTO projects
-        (name, descriptionFr, descriptionEn, fileName, image)
-       VALUES (?, ?, ?, ?, ?)`,
-      [name, descriptionFr, descriptionEn, projectSlug, image || ""],
+        (name, descriptionFr, descriptionEn, fileName, image, contributors)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [
+        name,
+        descriptionFr,
+        descriptionEn,
+        projectSlug,
+        image || "",
+        JSON.stringify(contributors),
+      ],
     );
 
     await archiveTransaction.commit();

@@ -1,0 +1,53 @@
+.contributor-avatars {
+  --avatar-size: 1.9rem;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  list-style: none;
+}
+
+.contributor-avatars--end {
+  justify-content: flex-end;
+}
+
+.contributor-avatars--start {
+  justify-content: flex-start;
+}
+
+.contributor-avatars li {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+/* 30% overlap between neighbours. */
+.contributor-avatars li + li {
+  margin-left: calc(var(--avatar-size) * -0.3);
+}
+
+.contributor-avatars a {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg) 80%, var(--text));
+  color: var(--secondary);
+  font-size: calc(var(--avatar-size) * 0.42);
+  font-weight: 700;
+  transition: transform 0.2s ease-out;
+}
+
+.contributor-avatars a:hover,
+.contributor-avatars a:focus-visible {
+  transform: translateY(-3px);
+}
+
+.contributor-avatars img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}

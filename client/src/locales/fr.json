@@ -93,6 +93,10 @@
     "opening": "Ouverture de l’expérience...",
     "iframeTitle": "Démo interactive — {{name}}"
   },
+  "contributors": {
+    "label": "Contributeurs",
+    "profile": "Profil GitHub de @{{login}}"
+  },
   "preview": {
     "selected": "Projet sélectionné",
     "technologies": "Technologies utilisées",
@@ -281,7 +285,13 @@
     "deleteError": "La suppression a échoué.",
     "deleted": "{{name}} a été supprimé.",
     "addError": "Impossible d’ajouter le projet.",
-    "added": "Le projet a bien été ajouté."
+    "added": "Le projet a bien été ajouté.",
+    "contributorsLabel": "Contributeurs GitHub",
+    "contributorsPlaceholder": "@FireDroX puis Entrée",
+    "contributorsHelp": "Tape un identifiant GitHub puis Entrée pour l’ajouter.",
+    "contributorsInvalid": "« {{login}} » n’est pas un identifiant GitHub valide.",
+    "contributorsLimit": "{{count}} contributeurs maximum.",
+    "removeContributor": "Retirer @{{login}}"
   },
   "legal": {
     "eyebrow": "mentions & confidentialité",
@@ -338,7 +348,7 @@
       "intro": "Selon la page consultée, le navigateur peut contacter :",
       "cloudflare": "pour l’accès sécurisé au site ;",
       "fonts": "pour charger la police Manrope ;",
-      "github": "pour afficher l’animation des contributions ;",
+      "github": "pour afficher l’animation des contributions et les photos de profil des contributeurs ;",
       "iframes": "les services nécessaires aux projets interactifs intégrés dans les iframes.",
       "links": "Les liens vers GitHub, LinkedIn ou Ko-fi ouvrent des sites distincts disposant de leurs propres politiques de confidentialité."
     },

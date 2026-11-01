@@ -43,7 +43,7 @@
 }
 
 .panel-project-image input,
-.panel-project-assets input {
+.panel-project-assets > label input {
   display: none;
 }
 
@@ -72,9 +72,11 @@
 
 .panel-project-assets {
   grid-column: 1 / -1;
+  display: grid;
+  gap: 1rem;
 }
 
-.panel-project-assets label {
+.panel-project-assets > label {
   padding: 0.75rem 0.9rem;
   display: flex;
   align-items: center;
@@ -86,13 +88,13 @@
   cursor: pointer;
 }
 
-.panel-project-assets label:hover,
-.panel-project-assets label.has-file {
+.panel-project-assets > label:hover,
+.panel-project-assets > label.has-file {
   border-color: var(--secondary);
   color: var(--text);
 }
 
-.panel-project-assets svg {
+.panel-project-assets > label svg {
   width: 1.25rem;
   flex: 0 0 auto;
   fill: none;
