@@ -1,13 +1,9 @@
 import { readArray, writeJson } from "../storage";
 import { STORAGE_KEYS } from "./config";
+import { fetchAllProjects } from "../projectsApi";
 
 async function getProjectSlugs() {
-  const response = await fetch("/api/projects", {
-    credentials: "include",
-  });
-  if (!response.ok) return [];
-
-  const projects = await response.json();
+  const projects = await fetchAllProjects();
   return projects
     .map((project) => project.fileName)
     .filter((slug) => typeof slug === "string" && slug.trim());

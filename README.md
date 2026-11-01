@@ -30,9 +30,9 @@ Il dispose d’un **système d’administration sécurisé** permettant de gére
 
 ### 📁 Page `/projects`
 
-- Liste complète de tous les projets
-- Affichage sous forme de grille
-- Triéé par data de création
+- Liste des projets publiés, 10 par page (`?page=2`)
+- Filtre par année et recherche (côté serveur)
+- Triée par date de création
 
 ---
 
@@ -177,8 +177,10 @@ depuis lequel le site est consulté.
 | image         | TEXT    | Image Base64          |
 | createdAt     | DATE    | Date                  |
 | contributors  | TEXT    | Logins GitHub (JSON)  |
+| published     | TINYINT | 1 = visible sur le site, 0 = masqué |
 
-> La colonne `contributors` est ajoutée automatiquement au démarrage du serveur si elle n'existe pas.
+> Les colonnes `contributors` et `published` (défaut `1`) sont ajoutées automatiquement au démarrage du serveur si elles n'existent pas.
+> Un projet non publié reste modifiable dans le panel, mais disparaît de `/projects`, de la console de l'accueil, du sitemap, et ses URL (`/projects/:project`, `/api/projects/:project/...`) répondent 404.
 
 ---
 
@@ -186,7 +188,7 @@ depuis lequel le site est consulté.
 
 ### 📁 Projects
 
-- `GET /api/projects`
+- `GET /api/projects?page=1&size=10&year=2025&q=texte` → `{ items, page, size, total, totalPages, years }` (projets publiés, `size` max 100)
 - `GET /api/projects/:project`
 - `POST /api/panel/add` (auth)
 - `POST /api/panel/modify` (auth)

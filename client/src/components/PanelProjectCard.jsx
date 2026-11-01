@@ -23,6 +23,7 @@ const PanelProjectCard = ({
   const descriptionFr = edited.descriptionFr ?? project.descriptionFr ?? "";
   const descriptionEn = edited.descriptionEn ?? project.descriptionEn ?? "";
   const contributors = edited.contributors ?? project.contributors ?? [];
+  const published = edited.published ?? project.published;
   const hasRequiredFields = [projectName, descriptionFr, descriptionEn].every(
     (value) => value.trim(),
   );
@@ -60,6 +61,22 @@ const PanelProjectCard = ({
               )}
             </span>
           </div>
+          <label className="panel-field panel-project-status">
+            {t("panel.status")}
+            <select
+              value={published ? "1" : "0"}
+              onChange={(event) =>
+                onChange(
+                  project.fileName,
+                  "published",
+                  event.target.value === "1",
+                )
+              }
+            >
+              <option value="1">{t("panel.statusPublished")}</option>
+              <option value="0">{t("panel.statusUnpublished")}</option>
+            </select>
+          </label>
           <label className="panel-field panel-project-name">
             {t("panel.name")}
             <input
@@ -69,6 +86,9 @@ const PanelProjectCard = ({
               }
             />
           </label>
+          {!published && (
+            <p className="panel-project-hint">{t("panel.unpublishedHint")}</p>
+          )}
           <div className="panel-description-fields panel-project-descriptions">
             <label className="panel-field">
               {t("panel.descriptionFrLabel")}
@@ -126,15 +146,18 @@ const PanelProjectCard = ({
         <button className="panel-preview-button" onClick={onTogglePreview}>
           {t(isPreviewOpen ? "panel.closePreview" : "panel.previewFiles")}
         </button>
-        <a
-          className="panel-view-page-link"
-          href={`/projects/${project.fileName}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span>{t("panel.viewPage")}</span>
-          <FiArrowUpRight aria-hidden="true" />
-        </a>
+        {/* Unpublished pages answer 404: no link until it is published. */}
+        {project.published && (
+          <a
+            className="panel-view-page-link"
+            href={`/projects/${project.fileName}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>{t("panel.viewPage")}</span>
+            <FiArrowUpRight aria-hidden="true" />
+          </a>
+        )}
         <a
           href={`/api/panel/download/${encodeURIComponent(project.fileName)}`}
           download={`${project.fileName}.zip`}
@@ -167,7 +190,7 @@ const PanelProjectCard = ({
               origin, so its scripts cannot use the admin session open here. */}
           <iframe
             key={previewVersion}
-            src={`/api/projects/${project.fileName}?preview=${previewVersion}`}
+            src={`${project.previewUrl}?preview=${previewVersion}`}
             title={t("panel.previewAlt", { name: project.name })}
             sandbox="allow-scripts allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-pointer-lock allow-downloads"
             allow="fullscreen"

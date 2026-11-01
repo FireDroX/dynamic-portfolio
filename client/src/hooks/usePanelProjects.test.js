@@ -94,6 +94,24 @@ describe("usePanelProjects", () => {
     expect(options.body.get("contributors")).toBe('["FireDroX"]');
   });
 
+  it("sends the publication status, edited or stored", async () => {
+    routes["/api/panel/modify"] = () => json(200, { success: true });
+    const { result } = await renderPanel();
+    const sentStatus = () =>
+      fetch.mock.calls
+        .filter(([url]) => url === "/api/panel/modify")
+        .at(-1)[1]
+        .body.get("published");
+
+    act(() => result.current.changeProject("probe_one", "published", false));
+    await act(() => result.current.saveProject({ ...PROJECT, published: true }));
+    expect(sentStatus()).toBe("0");
+
+    act(() => result.current.changeProject("probe_one", "name", "Renamed"));
+    await act(() => result.current.saveProject({ ...PROJECT, published: true }));
+    expect(sentStatus()).toBe("1");
+  });
+
   it("shows the server's message when adding fails", async () => {
     routes["/api/panel/add"] = () =>
       json(409, { error: "Un projet utilisant ce nom de fichier existe déjà." });

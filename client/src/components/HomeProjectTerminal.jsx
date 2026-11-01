@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import { fetchAllProjects } from "../utils/projectsApi";
 import "./styles/HomeProjectTerminal.css";
 
 const formatProjectDate = (value, locale, unknownDate) => {
@@ -31,13 +32,7 @@ const HomeProjectTerminal = () => {
 
     const loadProjects = async () => {
       try {
-        const response = await fetch("/api/projects", {
-          credentials: "include",
-          signal: controller.signal,
-        });
-        if (!response.ok) throw new Error(String(response.status));
-
-        const data = await response.json();
+        const data = await fetchAllProjects({ signal: controller.signal });
         setProjects(
           [...data].sort((first, second) =>
             first.fileName.localeCompare(second.fileName),

@@ -123,7 +123,8 @@
 }
 
 .panel-field input,
-.panel-field textarea {
+.panel-field textarea,
+.panel-field select {
   padding: 0.85rem 0.9rem;
   border: 1px solid #7b7b7b3d;
   border-radius: 10px;
@@ -137,8 +138,18 @@
   user-select: text;
 }
 
+.panel-field select {
+  cursor: pointer;
+}
+
+.panel-field select option {
+  background: var(--bg);
+  color: var(--text);
+}
+
 .panel-field input:focus,
-.panel-field textarea:focus {
+.panel-field textarea:focus,
+.panel-field select:focus {
   border-color: var(--secondary);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary) 10%, transparent);
 }
@@ -157,6 +168,14 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+}
+
+.panel-empty {
+  padding: 2rem 1rem;
+  border: 1px dashed #7b7b7b55;
+  border-radius: 18px;
+  color: var(--accent);
+  text-align: center;
 }
 
 @media (max-width: 1000px) {

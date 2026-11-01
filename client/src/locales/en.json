@@ -79,7 +79,12 @@
     "filterByYear": "Filter by year",
     "filterAll": "All",
     "searchLabel": "Search projects",
-    "searchPlaceholder": "Search projects"
+    "searchPlaceholder": "Search projects",
+    "pagination": "Projects pagination",
+    "range": "{{from}}–{{to}} of {{total}}",
+    "previousPage": "Previous page",
+    "nextPage": "Next page",
+    "goToPage": "Page {{page}}"
   },
   "project": {
     "loading": "Loading project...",
@@ -248,7 +253,7 @@
     "logout": "Log out",
     "close": "Close",
     "library": "Library",
-    "publishedProjects": "Published projects",
+    "publishedProjects": "Projects",
     "projectCount_one": "{{count}} project",
     "projectCount_other": "{{count}} projects",
     "newContent": "New content",
@@ -291,7 +296,18 @@
     "contributorsHelp": "Type a GitHub username then press Enter to add it.",
     "contributorsInvalid": "“{{login}}” is not a valid GitHub username.",
     "contributorsLimit": "{{count}} contributors maximum.",
-    "removeContributor": "Remove @{{login}}"
+    "removeContributor": "Remove @{{login}}",
+    "pickProject": "Project to edit",
+    "latestProject": "latest",
+    "unpublishedOption": "unpublished",
+    "modifiedOption": "modified",
+    "status": "Status",
+    "statusPublished": "Published",
+    "statusUnpublished": "Unpublished",
+    "unpublishedHint": "Hidden from the site: not in /projects, not in the console and not reachable by its URL.",
+    "noProjects": "No projects yet.",
+    "unpublishedCount_one": "{{count}} unpublished",
+    "unpublishedCount_other": "{{count}} unpublished"
   },
   "legal": {
     "eyebrow": "legal & privacy",

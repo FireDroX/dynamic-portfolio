@@ -94,6 +94,10 @@ const usePanelProjects = (onLogout) => {
       "contributors",
       JSON.stringify(updated.contributors ?? project.contributors ?? []),
     );
+    formData.append(
+      "published",
+      (updated.published ?? project.published) ? "1" : "0",
+    );
     if (updated.image) formData.append("image", updated.image);
     if (updated.zip) formData.append("zip", updated.zip);
 

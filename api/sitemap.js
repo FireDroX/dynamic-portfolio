@@ -9,7 +9,9 @@ router.get("/", async (req, res) => {
 
   try {
     const pool = await getPool();
-    const [projects] = await pool.query("SELECT * FROM projects");
+    const [projects] = await pool.query(
+      "SELECT fileName, createdAt FROM projects WHERE published = 1",
+    );
 
     const projectUrls = projects
       .map(
