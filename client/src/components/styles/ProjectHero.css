@@ -80,6 +80,11 @@
   box-shadow: 0 10px 30px #00000035;
 }
 
+.contributor-avatars.project-hero-contributors {
+  --avatar-size: 2.4rem;
+  margin-top: 1.5rem;
+}
+
 .project-hero-visual {
   width: min(100%, 22rem);
   justify-self: end;

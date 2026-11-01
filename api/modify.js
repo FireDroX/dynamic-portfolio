@@ -3,6 +3,7 @@ const auth = require("../middleware/auth");
 const { getPool } = require("../utils/functions");
 const { parseProjectUpload } = require("../services/projectUpload");
 const { replaceProjectArchive } = require("../services/projectArchive");
+const { parseContributors } = require("../utils/contributors");
 
 const router = express.Router();
 
@@ -19,8 +20,17 @@ router.post("/", auth, async (req, res) => {
     const descriptionFr = fields.descriptionFr?.trim();
     const descriptionEn = fields.descriptionEn?.trim();
 
+    // Optional: when the field is absent the stored contributors are kept.
+    const contributors =
+      fields.contributors === undefined
+        ? undefined
+        : parseContributors(fields.contributors);
+
     if (!originalFileName || !name || !descriptionFr || !descriptionEn) {
       return res.status(400).json({ error: "Champs manquants." });
+    }
+    if (contributors === null) {
+      return res.status(400).json({ error: "Contributeurs invalides." });
     }
 
     const pool = await getPool();
@@ -39,21 +49,17 @@ router.post("/", auth, async (req, res) => {
       );
     }
 
-    if (image) {
-      await pool.query(
-        `UPDATE projects
-         SET name = ?, descriptionFr = ?, descriptionEn = ?, image = ?
-         WHERE fileName = ?`,
-        [name, descriptionFr, descriptionEn, image, originalFileName],
-      );
-    } else {
-      await pool.query(
-        `UPDATE projects
-         SET name = ?, descriptionFr = ?, descriptionEn = ?
-         WHERE fileName = ?`,
-        [name, descriptionFr, descriptionEn, originalFileName],
-      );
-    }
+    const updates = { name, descriptionFr, descriptionEn };
+    if (image) updates.image = image;
+    if (contributors) updates.contributors = JSON.stringify(contributors);
+
+    const columns = Object.keys(updates);
+    await pool.query(
+      `UPDATE projects
+       SET ${columns.map((column) => `${column} = ?`).join(", ")}
+       WHERE fileName = ?`,
+      [...Object.values(updates), originalFileName],
+    );
 
     if (archiveTransaction) {
       await archiveTransaction.commit();

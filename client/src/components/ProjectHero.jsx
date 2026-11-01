@@ -1,4 +1,6 @@
+import ContributorAvatars from "./ContributorAvatars";
 import FormattedDescription from "./FormattedDescription";
+import { getContributors } from "../utils/contributors";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
 import { useTranslation } from "react-i18next";
 import getProjectDescription from "../utils/projectDescription";
@@ -28,6 +30,11 @@ const ProjectHero = ({ project }) => {
             <path d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5M13.5 3H21m0 0v7.5M21 3l-9.75 9.75" />
           </svg>
         </a>
+        <ContributorAvatars
+          contributors={getContributors(project)}
+          align="start"
+          className="project-hero-contributors"
+        />
       </div>
 
       <figure className="project-hero-visual">

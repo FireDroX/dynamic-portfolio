@@ -5,6 +5,7 @@ const path = require("path");
 const zlib = require("zlib");
 const auth = require("../middleware/auth");
 const { parseImageDataUrl } = require("../utils/images");
+const { readStoredContributors } = require("../utils/contributors");
 
 const router = express.Router();
 const projectsPath = path.join(__dirname, "../projects");
@@ -101,6 +102,7 @@ router.get("/", auth, async (req, res) => {
       rows.map((project) => ({
         ...project,
         image: parseImageDataUrl(project.image) ? project.image : "",
+        contributors: readStoredContributors(project.contributors),
       })),
     );
   } catch (error) {

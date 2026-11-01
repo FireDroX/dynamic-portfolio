@@ -15,6 +15,7 @@ const {
   linkButton,
 } = require("./utils/discordEmbed");
 const db = require("./db");
+const { ensureProjectsSchema } = require("./services/projectSchema");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -210,12 +211,13 @@ app.use(async (req, res) => {
 
 sessionStore
   .onReady()
+  .then(() => ensureProjectsSchema(db))
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Running on port ${PORT}`);
     });
   })
   .catch((error) => {
-    console.error("MySQL session store initialization failed:", error);
+    console.error("MySQL initialization failed:", error);
     process.exitCode = 1;
   });

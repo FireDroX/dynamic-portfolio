@@ -3,6 +3,12 @@ const express = require("express");
 const fs = require("node:fs");
 const path = require("node:path");
 const { parseImageDataUrl } = require("../utils/images");
+const { readStoredContributors } = require("../utils/contributors");
+
+const withContributors = (project) => ({
+  ...project,
+  contributors: readStoredContributors(project.contributors),
+});
 
 const router = express.Router();
 
@@ -12,12 +18,12 @@ router.get("/", async (req, res) => {
   try {
     const db = await getPool();
     const [rows] = await db.query(`
-      SELECT id, name, descriptionFr, descriptionEn, fileName, createdAt,
+      SELECT id, name, descriptionFr, descriptionEn, fileName, createdAt, contributors,
         (image LIKE 'data:image/%;base64,%'
           AND MOD(CHAR_LENGTH(SUBSTRING_INDEX(image, ',', -1)), 4) = 0) AS hasImage
       FROM projects
     `);
-    res.json(rows);
+    res.json(rows.map(withContributors));
   } catch (error) {
     console.error("Projects list failed:", error);
     return res.status(500).json({ error: "Erreur DB" });
@@ -30,7 +36,7 @@ router.get("/:project/meta", async (req, res) => {
   try {
     const db = await getPool();
     const [rows] = await db.query(
-      `SELECT id, name, descriptionFr, descriptionEn, fileName, createdAt,
+      `SELECT id, name, descriptionFr, descriptionEn, fileName, createdAt, contributors,
         (image LIKE 'data:image/%;base64,%'
           AND MOD(CHAR_LENGTH(SUBSTRING_INDEX(image, ',', -1)), 4) = 0) AS hasImage
        FROM projects WHERE fileName = ?`,
@@ -40,7 +46,7 @@ router.get("/:project/meta", async (req, res) => {
     if (!rows.length) {
       return res.status(404).json({ error: "Projet introuvable" });
     }
-    res.json(rows[0]);
+    res.json(withContributors(rows[0]));
   } catch (error) {
     console.error("Project metadata failed:", error);
     res.status(500).json({ error: "Erreur DB" });

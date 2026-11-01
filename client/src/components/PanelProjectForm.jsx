@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import ContributorsInput from "./ContributorsInput";
 import PanelUploadIcon from "./PanelUploadIcon";
 import "./styles/PanelProjectForm.css";
 
@@ -9,6 +10,7 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
   const { t } = useTranslation();
   const [imagePreview, setImagePreview] = useState("");
   const [files, setFiles] = useState(EMPTY_FILES);
+  const [contributors, setContributors] = useState([]);
 
   useEffect(
     () => () => {
@@ -27,6 +29,7 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
     form.reset();
     setImagePreview("");
     setFiles(EMPTY_FILES);
+    setContributors([]);
   };
 
   const handleImageChange = (event) => {
@@ -88,6 +91,11 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
               />
             </label>
           </div>
+          <ContributorsInput
+            name="contributors"
+            value={contributors}
+            onChange={setContributors}
+          />
         </div>
 
         <div className="panel-new-assets">
