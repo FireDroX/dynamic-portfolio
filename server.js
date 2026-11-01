@@ -7,7 +7,7 @@ const express = require("express");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 
-const { getProjectBySlug } = require("./utils/functions");
+const { getPublishedProjectBySlug } = require("./utils/functions");
 const { getProjectDescription } = require("./utils/projectDescription");
 const {
   buildDiscordEmbed,
@@ -131,7 +131,7 @@ app.use(async (req, res) => {
     );
     if (projectMatch) {
       const slug = projectMatch[1];
-      const project = await getProjectBySlug(slug);
+      const project = await getPublishedProjectBySlug(slug);
 
       if (project) {
         meta = {

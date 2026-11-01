@@ -3,6 +3,7 @@ const auth = require("../middleware/auth");
 const { getPool } = require("../utils/functions");
 const { parseProjectUpload } = require("../services/projectUpload");
 const { parseContributors } = require("../utils/contributors");
+const { parsePublished } = require("../utils/publication");
 const {
   getProjectSlug,
   installProjectArchive,
@@ -27,6 +28,11 @@ router.post("/", auth, async (req, res) => {
     if (!contributors) {
       return res.status(400).json({ error: "Contributeurs invalides." });
     }
+    // New projects are published unless the form says otherwise.
+    const published = parsePublished(fields.published);
+    if (published === null) {
+      return res.status(400).json({ error: "Statut de publication invalide." });
+    }
 
     const projectSlug = getProjectSlug(zip.fileName);
     archiveTransaction = await installProjectArchive(zip.buffer, projectSlug);
@@ -34,8 +40,8 @@ router.post("/", auth, async (req, res) => {
     const pool = await getPool();
     await pool.query(
       `INSERT INTO projects
-        (name, descriptionFr, descriptionEn, fileName, image, contributors)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+        (name, descriptionFr, descriptionEn, fileName, image, contributors, published)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
         name,
         descriptionFr,
@@ -43,6 +49,7 @@ router.post("/", auth, async (req, res) => {
         projectSlug,
         image || "",
         JSON.stringify(contributors),
+        published ?? 1,
       ],
     );
 

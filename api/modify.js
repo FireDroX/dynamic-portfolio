@@ -4,6 +4,7 @@ const { getPool } = require("../utils/functions");
 const { parseProjectUpload } = require("../services/projectUpload");
 const { replaceProjectArchive } = require("../services/projectArchive");
 const { parseContributors } = require("../utils/contributors");
+const { parsePublished } = require("../utils/publication");
 
 const router = express.Router();
 
@@ -32,6 +33,11 @@ router.post("/", auth, async (req, res) => {
     if (contributors === null) {
       return res.status(400).json({ error: "Contributeurs invalides." });
     }
+    // Optional too: absent keeps the current visibility.
+    const published = parsePublished(fields.published);
+    if (published === null) {
+      return res.status(400).json({ error: "Statut de publication invalide." });
+    }
 
     const pool = await getPool();
     const [projects] = await pool.query(
@@ -52,6 +58,7 @@ router.post("/", auth, async (req, res) => {
     const updates = { name, descriptionFr, descriptionEn };
     if (image) updates.image = image;
     if (contributors) updates.contributors = JSON.stringify(contributors);
+    if (published !== undefined) updates.published = published;
 
     const columns = Object.keys(updates);
     await pool.query(

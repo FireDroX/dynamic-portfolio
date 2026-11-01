@@ -6,6 +6,7 @@ const zlib = require("zlib");
 const auth = require("../middleware/auth");
 const { parseImageDataUrl } = require("../utils/images");
 const { readStoredContributors } = require("../utils/contributors");
+const { getPreviewUrl, verifyPreviewToken } = require("../utils/previewToken");
 
 const router = express.Router();
 const projectsPath = path.join(__dirname, "../projects");
@@ -103,11 +104,34 @@ router.get("/", auth, async (req, res) => {
         ...project,
         image: parseImageDataUrl(project.image) ? project.image : "",
         contributors: readStoredContributors(project.contributors),
+        published: Boolean(project.published),
+        previewUrl: getPreviewUrl(project.fileName),
       })),
     );
   } catch (error) {
     return res.send("Erreur DB");
   }
+});
+
+// Panel live preview, published or not. Authorized by the signed token in the
+// path rather than the session: see utils/previewToken.js.
+router.use("/preview/:token/:project", (req, res, next) => {
+  const projectName = req.params.project.replace(/[^a-zA-Z0-9_-]/g, "");
+  if (
+    projectName !== req.params.project ||
+    !verifyPreviewToken(req.params.token, projectName)
+  ) {
+    return res.status(404).json({ error: "Aperçu introuvable" });
+  }
+
+  res.set({
+    "Referrer-Policy": "no-referrer",
+    "X-Robots-Tag": "noindex, nofollow",
+    "Cache-Control": "no-store",
+  });
+  express.static(path.join(projectsPath, projectName), {
+    cacheControl: false,
+  })(req, res, next);
 });
 
 router.get("/download/:project", auth, async (req, res) => {

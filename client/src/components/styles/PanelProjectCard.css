@@ -65,9 +65,18 @@
   letter-spacing: 0.12em;
 }
 
-.panel-project-name,
-.panel-project-descriptions {
+.panel-project-descriptions,
+.panel-project-hint {
   grid-column: 1 / -1;
+}
+
+.panel-project-hint {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #d8a35f55;
+  border-radius: 10px;
+  background: #d8a35f14;
+  color: var(--text);
+  font-size: 0.78rem;
 }
 
 .panel-project-assets {

@@ -96,6 +96,13 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
             value={contributors}
             onChange={setContributors}
           />
+          <label className="panel-field">
+            {t("panel.status")}
+            <select name="published" defaultValue="1">
+              <option value="1">{t("panel.statusPublished")}</option>
+              <option value="0">{t("panel.statusUnpublished")}</option>
+            </select>
+          </label>
         </div>
 
         <div className="panel-new-assets">

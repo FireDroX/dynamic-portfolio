@@ -1,5 +1,5 @@
 const express = require("express");
-const { getPool, getProjectBySlug } = require("../utils/functions");
+const { getPool, getPublishedProjectBySlug } = require("../utils/functions");
 const { parseImageDataUrl } = require("../utils/images");
 const { renderPortfolioOg, renderProjectOg } = require("../utils/og");
 
@@ -11,6 +11,7 @@ router.get("/", async (req, res) => {
     const [projects] = await db.query(`
       SELECT fileName, createdAt
       FROM projects
+      WHERE published = 1
       ORDER BY fileName
     `);
 
@@ -29,7 +30,7 @@ router.get("/", async (req, res) => {
 router.get("/:slug", async (req, res) => {
   try {
     const { slug } = req.params;
-    const project = await getProjectBySlug(slug);
+    const project = await getPublishedProjectBySlug(slug);
 
     const projectImage = parseImageDataUrl(project?.image);
 

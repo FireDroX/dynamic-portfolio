@@ -176,3 +176,71 @@
   gap: 1rem;
   color: var(--accent);
 }
+
+.projects-list.is-fetching {
+  opacity: 0.55;
+  transition: opacity 0.2s ease;
+}
+
+.projects-pagination {
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-top: 1px solid #7b7b7b30;
+}
+
+.projects-pagination p {
+  color: var(--accent);
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.projects-pages {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.projects-pages button {
+  min-width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0.6rem;
+  border: 1px solid #7b7b7b3d;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font-family: monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.projects-pages button:hover:not(:disabled) {
+  border-color: var(--secondary);
+  color: var(--text);
+}
+
+.projects-pages button.is-active {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+
+.projects-pages button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.projects-pages span {
+  padding: 0 0.25rem;
+  color: var(--accent);
+}
+
+@media (max-width: 650px) {
+  .projects-pagination {
+    justify-content: center;
+  }
+}
