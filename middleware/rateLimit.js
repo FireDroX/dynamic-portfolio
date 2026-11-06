@@ -3,6 +3,11 @@ const { ipKeyGenerator, rateLimit } = require("express-rate-limit");
 const GLOBAL_THROTTLE_TTL_MS = 60000;
 const GLOBAL_THROTTLE_LIMIT = 100;
 
+// Each hit is a canvas render, and Cloudflare does not cache these routes. Only
+// social crawlers call them: pages merely reference them in their meta tags.
+const OG_IMAGE_THROTTLE_TTL_MS = 60000;
+const OG_IMAGE_THROTTLE_LIMIT = 10;
+
 // Loading one page or one game pulls many files, so only the routes doing real
 // work are counted. A project's `meta` and `image` routes are not static files.
 const STATIC_FILE_PATHS = [
@@ -21,19 +26,32 @@ const isStaticFileRequest = (req) =>
 const getClientKey = (req) =>
   ipKeyGenerator(req.get("cf-connecting-ip") || req.ip);
 
-const globalLimiter = rateLimit({
-  windowMs: GLOBAL_THROTTLE_TTL_MS,
-  limit: GLOBAL_THROTTLE_LIMIT,
-  skip: isStaticFileRequest,
+const sharedOptions = {
   keyGenerator: getClientKey,
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: { error: "Trop de requêtes, réessayez plus tard." },
+};
+
+const globalLimiter = rateLimit({
+  ...sharedOptions,
+  windowMs: GLOBAL_THROTTLE_TTL_MS,
+  limit: GLOBAL_THROTTLE_LIMIT,
+  skip: isStaticFileRequest,
+});
+
+const ogImageLimiter = rateLimit({
+  ...sharedOptions,
+  windowMs: OG_IMAGE_THROTTLE_TTL_MS,
+  limit: OG_IMAGE_THROTTLE_LIMIT,
 });
 
 module.exports = {
   GLOBAL_THROTTLE_LIMIT,
   GLOBAL_THROTTLE_TTL_MS,
+  OG_IMAGE_THROTTLE_LIMIT,
+  OG_IMAGE_THROTTLE_TTL_MS,
   getClientKey,
   globalLimiter,
+  ogImageLimiter,
 };

@@ -2,8 +2,14 @@ import { afterAll, beforeAll, describe, it, expect } from "vitest";
 import express from "express";
 import rateLimitModule from "../middleware/rateLimit.js";
 
-const { GLOBAL_THROTTLE_LIMIT, GLOBAL_THROTTLE_TTL_MS, globalLimiter } =
-  rateLimitModule;
+const {
+  GLOBAL_THROTTLE_LIMIT,
+  GLOBAL_THROTTLE_TTL_MS,
+  OG_IMAGE_THROTTLE_LIMIT,
+  OG_IMAGE_THROTTLE_TTL_MS,
+  globalLimiter,
+  ogImageLimiter,
+} = rateLimitModule;
 
 let server;
 let baseUrl;
@@ -11,6 +17,7 @@ let baseUrl;
 beforeAll(async () => {
   const app = express();
   app.use(globalLimiter);
+  app.use("/render", ogImageLimiter);
   app.use((req, res) => res.json({ ok: true }));
 
   await new Promise((resolve) => {
@@ -83,5 +90,25 @@ describe("globalLimiter", () => {
     const response = await get(path, "203.0.113.5");
 
     expect(response.headers.get("ratelimit")).not.toBeNull();
+  });
+});
+
+describe("ogImageLimiter", () => {
+  it("allows 10 renders per minute", () => {
+    expect(OG_IMAGE_THROTTLE_TTL_MS).toBe(60000);
+    expect(OG_IMAGE_THROTTLE_LIMIT).toBe(10);
+  });
+
+  it("blocks renders long before the global limit, and only renders", async () => {
+    for (let count = 0; count < OG_IMAGE_THROTTLE_LIMIT; count += 1) {
+      const response = await get("/render/pokedex", "203.0.113.6");
+      expect(response.status).toBe(200);
+    }
+
+    const blocked = await get("/render", "203.0.113.6");
+    const otherRoute = await get("/projects", "203.0.113.6");
+
+    expect(blocked.status).toBe(429);
+    expect(otherRoute.status).toBe(200);
   });
 });
