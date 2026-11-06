@@ -2,8 +2,11 @@ const express = require("express");
 const { getPool, getPublishedProjectBySlug } = require("../utils/functions");
 const { parseImageDataUrl } = require("../utils/images");
 const { renderPortfolioOg, renderProjectOg } = require("../utils/og");
+const { ogImageLimiter } = require("../middleware/rateLimit");
 
 const router = express.Router();
+
+router.use(ogImageLimiter);
 
 router.get("/", async (req, res) => {
   try {
