@@ -1,6 +1,7 @@
 const crypto = require("node:crypto");
 const express = require("express");
 const { rateLimit } = require("express-rate-limit");
+const { getClientKey } = require("../middleware/rateLimit");
 const router = express.Router();
 
 // Brute-force guard: only failed attempts count, per client IP.
@@ -8,6 +9,7 @@ const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 10,
   skipSuccessfulRequests: true,
+  keyGenerator: getClientKey,
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: { error: "Trop de tentatives, réessayez plus tard." },
