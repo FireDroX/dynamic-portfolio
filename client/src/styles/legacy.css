@@ -97,3 +97,23 @@ html {
   height: 30dvh;
   min-height: 30vh;
 }
+
+/* the kit sizes every `main > section` to whole screens (system.css); legacy pages flow naturally */
+main.App.App > section {
+  height: auto;
+  min-height: 0;
+  padding: 0;
+}
+
+main.App.App > section.login-card {
+  min-height: 31rem;
+}
+
+main.App.App > section.achievements-progress {
+  padding: 1.25rem 1.5rem;
+}
+
+/* zero weight like the kit's own display rules, so the page classes keep their flex/grid */
+:where(main.App > section) {
+  display: block;
+}
