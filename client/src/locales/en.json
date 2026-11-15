@@ -5,11 +5,21 @@
     "projects": "projects",
     "login": "login",
     "switchToEnglish": "Switch to English",
-    "switchToFrench": "Switch to French"
+    "switchToFrench": "Switch to French",
+    "contact": "contact",
+    "label": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "footer": {
     "rights": "All rights reserved.",
-    "legal": "Legal notice"
+    "legal": "Legal notice",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "legalTitle": "Legal",
+    "email": "Email",
+    "lede": "Web developer: projects made to be used.",
+    "credits": "Photo credits:"
   },
   "home": {
     "student": "Computer science student at <school>ESGI</school> Paris and web developer.",

@@ -63,7 +63,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border: 1px solid #7b7b7b38;
+  border: 1px solid var(--legacy-line);
   border-radius: 0.85rem;
   background: color-mix(in srgb, var(--bg) 97%, var(--text));
   transition:
@@ -85,12 +85,12 @@
 }
 
 .achievement.locked {
-  border-color: #7b7b7b28;
+  border-color: var(--legacy-line-soft);
 }
 
 .achievement:hover {
   border-color: var(--secondary);
-  box-shadow: 0 1rem 3rem #00000020;
+  box-shadow: 0 1rem 3rem var(--legacy-shadow-soft);
   transform: translateY(-3px);
 }
 
@@ -126,7 +126,7 @@
 }
 
 .achievement.locked .achievement-icon {
-  border: 1px solid #7b7b7b38;
+  border: 1px solid var(--legacy-line);
   background: transparent;
   color: var(--accent);
   font-family: monospace;

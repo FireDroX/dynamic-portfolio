@@ -7,7 +7,7 @@
   align-content: flex-start;
   align-items: center;
   gap: 0.45rem;
-  border: 1px solid #7b7b7b3d;
+  border: 1px solid var(--legacy-line);
   border-radius: 10px;
   background: color-mix(in srgb, var(--bg) 84%, transparent);
   cursor: text;
@@ -21,7 +21,7 @@
 }
 
 .contributors-input.has-error {
-  border-color: #e5484d;
+  border-color: var(--danger);
 }
 
 .panel-field .contributors-input input {
@@ -99,5 +99,5 @@
 }
 
 .contributors-input.has-error + .contributors-help {
-  color: #e5484d;
+  color: var(--danger);
 }

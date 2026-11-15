@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 3rem;
-  border: 1px solid #7b7b7b38;
+  border: 1px solid var(--legacy-line);
   border-radius: 0.85rem;
 }
 

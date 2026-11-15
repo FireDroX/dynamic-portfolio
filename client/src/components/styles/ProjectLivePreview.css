@@ -1,9 +1,9 @@
 .project-preview {
   overflow: hidden;
-  border: 1px solid #34312e;
+  border: 1px solid var(--border);
   border-radius: 1rem;
   background: transparent;
-  box-shadow: 0 14px 40px #0000001f;
+  box-shadow: 0 14px 40px var(--legacy-shadow-soft);
 }
 
 .project-preview-bar {
@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid #34312e;
+  border-bottom: 1px solid var(--border);
   color: var(--accent);
   background: color-mix(in srgb, var(--bg) 90%, var(--text));
 }
