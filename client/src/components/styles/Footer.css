@@ -10,8 +10,6 @@
   text-underline-offset: 3px;
 }
 
-/* the kit's footer expects a padded section above it; legacy pages end flush
-   on their content, so give the footer a step of room above its top rule */
 /* tighter than the kit's section rhythm: the footer is a closing strip, not a section */
 .footer {
   margin-top: var(--s-6);

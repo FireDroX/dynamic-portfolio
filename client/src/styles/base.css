@@ -1,3 +1,14 @@
+/* Root type scale: rem sizes are tuned for an 80% root on desktop, full size on small screens. */
+html {
+  font-size: 80%;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 100%;
+  }
+}
+
 /* The site ground: the kit's --bg plus the dotted grid, in tokens. */
 body {
   background-image: radial-gradient(
