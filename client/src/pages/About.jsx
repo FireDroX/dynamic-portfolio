@@ -64,6 +64,14 @@ const links = [
   },
 ];
 
+const PATH_STEPS = [
+  { id: "bac", kind: "education" },
+  { id: "but", kind: "education" },
+  { id: "esgi", kind: "education" },
+  { id: "internship", kind: "experience", stack: true },
+  { id: "work", kind: "next" },
+];
+
 const calcDays = () => {
   const birthDate = new Date("2004-12-13T00:00:00");
   return Math.floor((Date.now() - birthDate.getTime()) / 86400000);
@@ -105,14 +113,26 @@ const About = () => {
               <p>{t("about.pathText")}</p>
             </div>
             <ol className="about-path">
-              <li>
-                <p className="about-path__title">{t("about.pathSchool")}</p>
-                <p>{t("about.pathSchoolText")}</p>
-              </li>
-              <li>
-                <p className="about-path__title">{t("about.pathWork")}</p>
-                <p>{t("about.pathWorkText")}</p>
-              </li>
+              {PATH_STEPS.map(({ id, kind, stack: hasStack }) => (
+                <li key={id} className={`about-path__step about-path__step--${kind}`}>
+                  <p className="about-path__meta">
+                    <span className="about-path__kind">
+                      {t(`about.pathKinds.${kind}`)}
+                    </span>
+                    <span>{t(`about.path.${id}.place`)}</span>
+                    <span>{t(`about.path.${id}.period`)}</span>
+                  </p>
+                  <p className="about-path__title">
+                    {t(`about.path.${id}.title`)}
+                  </p>
+                  <p>{t(`about.path.${id}.text`)}</p>
+                  {hasStack && (
+                    <p className="about-path__stack">
+                      {t(`about.path.${id}.stack`)}
+                    </p>
+                  )}
+                </li>
+              ))}
             </ol>
             <p className="about-days">
               {t("about.since")}{" "}
