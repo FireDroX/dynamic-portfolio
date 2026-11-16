@@ -1,56 +1,68 @@
 import "./styles/About.css";
-import { Link } from "react-router";
+import "../styles/icons.css";
 import { useTranslation } from "react-i18next";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import {
-  SiCloudflare,
-  SiCss,
-  SiDocker,
-  SiExpress,
-  SiFiverr,
-  SiGit,
-  SiGithub,
-  SiHtml5,
-  SiJavascript,
-  SiKofi,
-  SiMysql,
-  SiNestjs,
-  SiNodedotjs,
-  SiPhp,
-  SiPostgresql,
-  SiReact,
-  SiTailwindcss,
-  SiTypescript,
-  SiWebstorm
-} from "react-icons/si";
-import { VscVscode } from "react-icons/vsc";
+import Button from "../components/ui/Button";
+import Card from "../components/ui/Card";
+import Section from "../components/ui/Section";
+import CvButton from "../components/CvButton";
+import PortfolioDiagram from "../components/PortfolioDiagram";
 
 const stack = {
   Frontend: [
-    { name: "React", Icon: SiReact },
-    { name: "JavaScript", Icon: SiJavascript },
-    { name: "TypeScript", Icon: SiTypescript },
-    { name: "HTML", Icon: SiHtml5 },
-    { name: "CSS", Icon: SiCss },
-    { name: "Tailwind", Icon: SiTailwindcss },
+    { name: "React", icon: "react" },
+    { name: "JavaScript", icon: "javascript" },
+    { name: "TypeScript", icon: "typescript" },
+    { name: "HTML", icon: "html-5", extra: "ic-tall" },
+    { name: "CSS", icon: "css" },
+    { name: "Tailwind", icon: "tailwindcss", extra: "ic-land" },
   ],
   Backend: [
-    { name: "Node", Icon: SiNodedotjs },
-    { name: "Express", Icon: SiExpress },
-    { name: "Nest", Icon: SiNestjs },
-    { name: "PHP", Icon: SiPhp },
-    { name: "MySQL", Icon: SiMysql },
-    { name: "PostgreSQL", Icon: SiPostgresql },
+    { name: "Node", icon: "nodejs" },
+    { name: "Express", icon: "si-express", extra: "ic-land ic-ink" },
+    { name: "Nest", icon: "nestjs" },
+    { name: "PHP", icon: "php", extra: "ic-wide" },
+    { name: "MySQL", icon: "si-mysql", extra: "ic-land" },
+    { name: "PostgreSQL", icon: "postgres" },
   ],
   Outils: [
-    { name: "VS Code", Icon: VscVscode },
-    { name: "Docker", Icon: SiDocker },
-    { name: "Git", Icon: SiGit },
-    { name: "GitHub", Icon: SiGithub },
-    { name: "Cloudflare", Icon: SiCloudflare },
-    { name: "WebStorm", Icon: SiWebstorm },
+    { name: "VS Code", icon: "visual-studio-code" },
+    { name: "Docker", icon: "docker", extra: "ic-land" },
+    { name: "Git", icon: "git" },
+    { name: "GitHub", icon: "github", extra: "ic-ink" },
+    { name: "Cloudflare", icon: "cloudflare", extra: "ic-wide" },
+    { name: "WebStorm", icon: "webstorm" },
   ],
 };
+
+const links = [
+  {
+    name: "GitHub",
+    label: "FireDroX",
+    href: "https://github.com/FireDroX",
+    icon: "github",
+    extra: "ic-ink",
+  },
+  {
+    name: "LinkedIn",
+    labelKey: "about.me",
+    href: "https://www.linkedin.com/in/adrien-pourlier/",
+    icon: "linkedin",
+  },
+  {
+    name: "Fiverr",
+    labelKey: "about.services",
+    href: "https://fr.fiverr.com/s/GzV441Z",
+    icon: "fiverr",
+    extra: "ic-wide",
+  },
+  {
+    name: "Ko-fi",
+    labelKey: "about.support",
+    href: "https://ko-fi.com/addrien",
+    icon: "kofi",
+    extra: "ic-land",
+  },
+];
 
 const calcDays = () => {
   const birthDate = new Date("2004-12-13T00:00:00");
@@ -63,153 +75,166 @@ const About = () => {
   const locale = i18n.resolvedLanguage === "en" ? "en-GB" : "fr-FR";
 
   return (
-    <main className="App about-page">
-      <header className="about-header">
-        <small>portfolio</small>
-        <h1>{t("about.title")}</h1>
-        <p>{t("about.header")}</p>
-      </header>
-
-      <section className="about-summary">
-        <div className="about-summary-copy">
-          <small>{t("about.presentation")}</small>
-          <h2>{t("about.summaryTitle")}</h2>
-          <p>{t("about.summaryFirst")}</p>
-          <p>{t("about.summarySecond")}</p>
-          <Link to="/projects">{t("about.discoverProjects")}</Link>
-        </div>
-
-        <dl className="about-facts">
-          <div>
-            <dt>{t("about.school")}</dt>
-            <dd>ESGI Paris</dd>
-          </div>
-          <div>
-            <dt>Focus</dt>
-            <dd>{t("about.focusValue")}</dd>
-          </div>
-          <div>
-            <dt>{t("about.since")}</dt>
-            <dd>
-              {t("about.days", {
-                count: dayCount,
-                formattedCount: dayCount.toLocaleString(locale),
-              })}
-            </dd>
-          </div>
-          <div>
-            <dt>GitHub</dt>
-            <dd>
-              <a
-                href="https://github.com/FireDroX"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                FireDroX
-                <FaGithub aria-hidden="true" />
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt>LinkedIn</dt>
-            <dd>
-              <a
-                href="https://www.linkedin.com/in/adrien-pourlier/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("about.me")}
-                <FaLinkedin aria-hidden="true" />
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt>Fiverr</dt>
-            <dd>
-              <a
-                href="https://fr.fiverr.com/s/GzV441Z"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("about.services")}
-                <SiFiverr aria-hidden="true" />
-              </a>
-            </dd>
-          </div>
-          <div>
-            <dt>Ko-fi</dt>
-            <dd>
-              <a
-                href="https://ko-fi.com/addrien"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("about.support")}
-                <SiKofi aria-hidden="true" />
-              </a>
-            </dd>
-          </div>
-        </dl>
-      </section>
-
-      <section className="about-stack-section">
-        <div className="about-section-title">
-          <small>stack</small>
-          <h2>{t("about.toolsTitle")}</h2>
-          <p>{t("about.toolsDescription")}</p>
-        </div>
-
-        <div className="about-stack-groups">
-          {Object.entries(stack).map(([category, technologies]) => (
-            <div className="about-stack-group" key={category}>
-              <h3>
-                {category === "Outils" ? t("about.toolsCategory") : category}
-              </h3>
-              <ul>
-                {technologies.map(({ name, Icon }) => (
-                  <li key={name}>
-                    <Icon aria-hidden="true" />
-                    <span>{name}</span>
-                  </li>
-                ))}
-              </ul>
+    <main className="about-page">
+      <section
+        className="hero"
+        data-enter
+        aria-labelledby="about-hero-title"
+      >
+        <div className="wrap">
+          <div className="hero-text grid hero__grid">
+            <div className="hero__text span-8">
+              <p className="hero__kicker">{t("about.title")}</p>
+              <h1 id="about-hero-title">{t("about.intro")}</h1>
+              <p className="hero__lead">{t("about.summaryFirst")}</p>
+              <p className="hero__lead muted">{t("about.summarySecond")}</p>
+              <div className="btn-row">
+                <Button to="/projects">{t("home.projectsButton")}</Button>
+                <CvButton variant="secondary" />
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      <section className="about-github">
-        <div className="about-github-copy">
-          <small>{t("about.activity")}</small>
-          <h2>GitHub</h2>
-          <p>{t("about.githubDescription")}</p>
+      <Section id="parcours">
+        <div className="grid about-split">
+          <div className="span-6">
+            <div className="section-head">
+              <h2>{t("about.pathTitle")}</h2>
+              <p>{t("about.pathText")}</p>
+            </div>
+            <ol className="about-path">
+              <li>
+                <p className="about-path__title">{t("about.pathSchool")}</p>
+                <p>{t("about.pathSchoolText")}</p>
+              </li>
+              <li>
+                <p className="about-path__title">{t("about.pathWork")}</p>
+                <p>{t("about.pathWorkText")}</p>
+              </li>
+            </ol>
+            <p className="about-days">
+              {t("about.since")}{" "}
+              <strong>
+                {t("about.days", {
+                  count: dayCount,
+                  formattedCount: dayCount.toLocaleString(locale),
+                })}
+              </strong>
+            </p>
+          </div>
+
+          <div
+            id="stack"
+            className="about-stack span-6 start-7"
+            data-ui="stack"
+          >
+            {Object.entries(stack).map(([category, tools]) => (
+              <div className="about-stack__group" key={category}>
+                <p className="about-stack__label" id={`stack-${category}`}>
+                  {category === "Outils" ? t("about.toolsCategory") : category}
+                </p>
+                <ul aria-labelledby={`stack-${category}`}>
+                  {tools.map(({ name, icon, extra = "" }) => (
+                    <li key={name}>
+                      <img
+                        className={`ic ic-32 ${extra}`.trim()}
+                        src={`/assets/icons/${icon}.svg`}
+                        alt=""
+                        width="32"
+                        height="32"
+                        loading="lazy"
+                      />
+                      <span>{name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <p className="about-marks">{t("about.marks")}</p>
+          </div>
         </div>
-        <button
-          type="button"
-          className="snake-button"
-          onClick={() => {
-            window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
-          }}
-          aria-label={t("about.githubButtonLabel")}
-        >
-          <picture>
-            <source
-              media="(prefers-color-scheme: dark)"
-              srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-            />
-            <source
-              media="(prefers-color-scheme: light)"
-              srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
-            />
-            <img
-              className="snake-svg"
-              alt={t("about.githubImageAlt")}
-              src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-              loading="lazy"
-            />
-          </picture>
-        </button>
-      </section>
+      </Section>
+
+      <Section id="portfolio">
+        <div className="section-head">
+          <h2>{t("about.portfolioTitle")}</h2>
+          <p>{t("about.portfolioText")}</p>
+        </div>
+        <Card className="about-diagram">
+          <div className="panel">
+            <PortfolioDiagram />
+          </div>
+        </Card>
+      </Section>
+
+      <Section id="liens">
+        <div className="grid about-links">
+          <div className="span-6">
+            <div className="section-head">
+              <h2>{t("about.linksTitle")}</h2>
+              <p>{t("about.linksText")}</p>
+            </div>
+            <ul className="about-links__list">
+              {links.map(({ name, label, labelKey, href, icon, extra = "" }) => (
+                <li key={name}>
+                  <a href={href} target="_blank" rel="noopener noreferrer">
+                    <img
+                      className={`ic ic-28 ${extra}`.trim()}
+                      src={`/assets/icons/${icon}.svg`}
+                      alt=""
+                      width="28"
+                      height="28"
+                      loading="lazy"
+                    />
+                    <span>
+                      <strong>{name}</strong>
+                      <small>{label ?? t(labelKey)}</small>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="about-links__side span-6 start-7">
+            <div className="about-github" data-ui="github">
+              <p>{t("about.githubDescription")}</p>
+              <button
+                type="button"
+                className="snake-button"
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
+                }}
+                aria-label={t("about.githubButtonLabel")}
+              >
+                <picture>
+                  <source
+                    media="(prefers-color-scheme: dark)"
+                    srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+                  />
+                  <source
+                    media="(prefers-color-scheme: light)"
+                    srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
+                  />
+                  <img
+                    className="snake-svg"
+                    alt={t("about.githubImageAlt")}
+                    src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+                    loading="lazy"
+                  />
+                </picture>
+              </button>
+            </div>
+            <div className="btn-row about-links__cta">
+              <Button href="mailto:contact@addrien.fr">
+                {t("home.contactMail")}
+              </Button>
+              <CvButton variant="secondary" />
+            </div>
+          </div>
+        </div>
+      </Section>
     </main>
   );
 };

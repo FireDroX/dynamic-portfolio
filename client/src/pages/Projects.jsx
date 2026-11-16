@@ -193,7 +193,7 @@ const Projects = () => {
           <div className="section-head">
             <h2>{t("projects.listLabel")}</h2>
             <Button to="/about" variant="secondary">
-              {t("home.aboutLink")}
+              {t("projects.aboutLink")}
             </Button>
             {!hasError && (
               <p className="sr-only" aria-live="polite">

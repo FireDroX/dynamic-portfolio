@@ -18,7 +18,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="footer" id="contact">
+    <footer className="footer">
       <div className="wrap">
         <div className="grid">
           <div className="span-6 stack-4">

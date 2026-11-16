@@ -1,13 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router";
 
 const MAX_FRAMES = 60;
 
 const ScrollToHash = () => {
-  const { pathname, hash, key } = useLocation();
+  const { pathname, search, hash, key } = useLocation();
+  const previous = useRef(null);
 
   useEffect(() => {
+    const before = previous.current;
+    previous.current = { pathname, search };
+
     if (!hash) {
+      // Only the query changed on the same page (pagination, filters, search):
+      // the page handles its own scroll, so stay where the visitor is.
+      if (before && before.pathname === pathname && before.search !== search) {
+        return undefined;
+      }
       window.scrollTo(0, 0);
       return undefined;
     }
@@ -29,7 +38,7 @@ const ScrollToHash = () => {
 
     return () => cancelAnimationFrame(raf);
     // `key` changes on every navigation, even to an identical URL.
-  }, [pathname, hash, key]);
+  }, [pathname, search, hash, key]);
 
   return null;
 };

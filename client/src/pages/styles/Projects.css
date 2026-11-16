@@ -243,6 +243,11 @@ main > section#collection {
   min-height: 100svh;
 }
 
+/* changing page scrolls the list back into view with its heading clear of the fixed nav */
+.projects-collection {
+  scroll-margin-top: calc(var(--nav) + var(--s-6));
+}
+
 .projects-collection .section-head {
   display: grid;
   grid-template-columns: 1fr auto;
