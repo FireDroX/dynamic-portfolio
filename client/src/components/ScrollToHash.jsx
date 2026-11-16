@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 const MAX_FRAMES = 60;
 
 const ScrollToHash = () => {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
 
   useEffect(() => {
     if (!hash) {
@@ -28,7 +28,8 @@ const ScrollToHash = () => {
     seek();
 
     return () => cancelAnimationFrame(raf);
-  }, [pathname, hash]);
+    // `key` changes on every navigation, even to an identical URL.
+  }, [pathname, hash, key]);
 
   return null;
 };
