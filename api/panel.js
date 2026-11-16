@@ -7,6 +7,7 @@ const auth = require("../middleware/auth");
 const { parseImageDataUrl } = require("../utils/images");
 const { readStoredContributors } = require("../utils/contributors");
 const { readStoredStack } = require("../utils/stack");
+const { readStoredType } = require("../utils/projectType");
 const { getPreviewUrl, verifyPreviewToken } = require("../utils/previewToken");
 
 const router = express.Router();
@@ -106,6 +107,7 @@ router.get("/", auth, async (req, res) => {
         image: parseImageDataUrl(project.image) ? project.image : "",
         contributors: readStoredContributors(project.contributors),
         stack: readStoredStack(project.stack),
+        type: readStoredType(project.type),
         published: Boolean(project.published),
         previewUrl: getPreviewUrl(project.fileName),
       })),

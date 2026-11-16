@@ -162,6 +162,11 @@
     "label": "Contributeurs",
     "profile": "Profil GitHub de @{{login}}"
   },
+  "projectTypes": {
+    "game": "Jeu",
+    "webapp": "Application web",
+    "tool": "Outil"
+  },
   "stack": {
     "label": "Stack technique"
   },
@@ -368,6 +373,8 @@
     "contributorsInvalid": "« {{login}} » n’est pas un identifiant GitHub valide.",
     "contributorsLimit": "{{count}} contributeurs maximum.",
     "removeContributor": "Retirer @{{login}}",
+    "typeLabel": "Type de projet",
+    "typeNone": "Aucun type",
     "stackLabel": "Stack technique",
     "stackPlaceholder": "Ajouter une technologie puis Entrée",
     "stackHelp": "Tape une technologie puis Entrée ou virgule pour l’ajouter. Des suggestions sont proposées pendant la saisie.",

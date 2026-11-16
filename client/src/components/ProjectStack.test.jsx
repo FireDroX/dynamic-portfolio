@@ -49,3 +49,34 @@ describe("ProjectHero", () => {
     expect(screen.queryByRole("list")).toBeNull();
   });
 });
+
+describe("project type", () => {
+  it("shows the translated type on the card", () => {
+    const { container } = inRouter(<Project p={{ ...base, type: "game" }} />);
+    expect(container.querySelector(".project-card__type").textContent).toBe(
+      "projectTypes.game",
+    );
+  });
+
+  it("shows no type on the card when missing or unknown", () => {
+    for (const type of [null, undefined, "podcast"]) {
+      const { container } = inRouter(<Project p={{ ...base, type }} />);
+      expect(container.querySelector(".project-card__type")).toBeNull();
+      cleanup();
+    }
+  });
+
+  it("shows the type in the hero facts only when set", () => {
+    inRouter(
+      <ProjectHero project={{ ...base, type: "tool" }} formattedDate="" />,
+    );
+    expect(screen.getByText(/^projectTypes\.tool · /)).toBeTruthy();
+    cleanup();
+    const { container } = inRouter(
+      <ProjectHero project={base} formattedDate="" />,
+    );
+    expect(container.querySelector(".project-hero__facts").textContent).toBe(
+      "project.interactive",
+    );
+  });
+});

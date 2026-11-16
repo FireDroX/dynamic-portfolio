@@ -5,11 +5,17 @@ import { FiChevronLeft } from "react-icons/fi";
 import Button from "./ui/Button";
 import { TechStack } from "./TechPill";
 import { getStack } from "../utils/techStack";
+import { getProjectTypeLabelKey } from "../utils/projectTypes";
 import "./styles/ProjectHero.css";
 
 const ProjectHero = ({ project, formattedDate }) => {
   const { t } = useTranslation();
-  const facts = [t("project.interactive"), formattedDate].filter(Boolean);
+  const typeKey = getProjectTypeLabelKey(project.type);
+  const facts = [
+    typeKey ? t(typeKey) : null,
+    t("project.interactive"),
+    formattedDate,
+  ].filter(Boolean);
 
   return (
     <header className="project-hero">

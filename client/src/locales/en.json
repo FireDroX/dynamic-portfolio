@@ -162,6 +162,11 @@
     "label": "Contributors",
     "profile": "@{{login}}'s GitHub profile"
   },
+  "projectTypes": {
+    "game": "Game",
+    "webapp": "Web app",
+    "tool": "Tool"
+  },
   "stack": {
     "label": "Tech stack"
   },
@@ -368,6 +373,8 @@
     "contributorsInvalid": "“{{login}}” is not a valid GitHub username.",
     "contributorsLimit": "{{count}} contributors maximum.",
     "removeContributor": "Remove @{{login}}",
+    "typeLabel": "Project type",
+    "typeNone": "No type",
     "stackLabel": "Tech stack",
     "stackPlaceholder": "Add a technology, then Enter",
     "stackHelp": "Type a technology then press Enter or comma to add it. Suggestions are offered as you type.",

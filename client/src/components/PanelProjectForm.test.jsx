@@ -46,3 +46,17 @@ describe("PanelProjectForm upload status", () => {
     );
   });
 });
+
+describe("PanelProjectForm type field", () => {
+  it("offers no type plus every project type", () => {
+    const { container } = renderForm(() => Promise.resolve(true));
+    const select = container.querySelector('select[name="type"]');
+    expect([...select.options].map((option) => option.value)).toEqual([
+      "",
+      "game",
+      "webapp",
+      "tool",
+    ]);
+    expect(select.value).toBe("");
+  });
+});
