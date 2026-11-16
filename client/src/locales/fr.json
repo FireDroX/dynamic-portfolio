@@ -70,18 +70,6 @@
       "next": "Objectif"
     },
     "path": {
-      "bac": {
-        "title": "Bac STI2D",
-        "place": "Lieusaint",
-        "period": "2020–2022",
-        "text": "Premiers montages électroniques sur Arduino et premières lignes de JavaScript."
-      },
-      "but": {
-        "title": "BUT GEII",
-        "place": "Lieusaint",
-        "period": "2022–2023",
-        "text": "Les bases du langage C et de l’algorithmique."
-      },
       "esgi": {
         "title": "Bachelor Informatique",
         "place": "ESGI Paris 12e",

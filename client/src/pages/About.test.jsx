@@ -14,17 +14,17 @@ import About from "./About";
 
 afterEach(cleanup);
 
-const STEPS = ["bac", "but", "esgi", "internship", "work"];
+const STEPS = ["esgi", "internship", "work"];
 
 describe("About path", () => {
-  it("renders the five steps in order", () => {
+  it("renders the three steps in order", () => {
     const { container } = render(
       <MemoryRouter>
         <About />
       </MemoryRouter>,
     );
     const items = [...container.querySelectorAll(".about-path > li")];
-    expect(items).toHaveLength(5);
+    expect(items).toHaveLength(STEPS.length);
     expect(
       items.map((li) => li.querySelector(".about-path__title").textContent),
     ).toEqual(STEPS.map((id) => `about.path.${id}.title`));

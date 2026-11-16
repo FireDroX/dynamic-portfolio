@@ -65,8 +65,6 @@ const links = [
 ];
 
 const PATH_STEPS = [
-  { id: "bac", kind: "education" },
-  { id: "but", kind: "education" },
   { id: "esgi", kind: "education" },
   { id: "internship", kind: "experience", stack: true },
   { id: "work", kind: "next" },
