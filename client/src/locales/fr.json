@@ -5,11 +5,21 @@
     "projects": "projets",
     "login": "connexion",
     "switchToEnglish": "Passer en anglais",
-    "switchToFrench": "Passer en français"
+    "switchToFrench": "Passer en français",
+    "contact": "contact",
+    "label": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "footer": {
     "rights": "Tous droits réservés.",
-    "legal": "Mentions légales"
+    "legal": "Mentions légales",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "legalTitle": "Légal",
+    "email": "E-mail",
+    "lede": "Développeur web : des projets faits pour être utilisés.",
+    "credits": "Crédits photo :"
   },
   "home": {
     "student": "Étudiant à l’<school>ESGI</school> Paris et développeur web.",

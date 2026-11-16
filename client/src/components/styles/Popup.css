@@ -63,7 +63,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border: 1px solid #7b7b7b38;
+  border: 1px solid var(--legacy-line);
   border-radius: 0.85rem;
   background: color-mix(in srgb, var(--bg) 97%, var(--text));
   transition:
@@ -85,12 +85,12 @@
 }
 
 .achievement.locked {
-  border-color: #7b7b7b28;
+  border-color: var(--legacy-line-soft);
 }
 
 .achievement:hover {
   border-color: var(--secondary);
-  box-shadow: 0 1rem 3rem #00000020;
+  box-shadow: 0 1rem 3rem var(--legacy-shadow-soft);
   transform: translateY(-3px);
 }
 
@@ -126,7 +126,7 @@
 }
 
 .achievement.locked .achievement-icon {
-  border: 1px solid #7b7b7b38;
+  border: 1px solid var(--legacy-line);
   background: transparent;
   color: var(--accent);
   font-family: monospace;
@@ -206,6 +206,31 @@
   100% {
     opacity: 0;
     transform: translate3d(calc(100% + 2rem), 0, 0);
+  }
+}
+
+@keyframes achievement-notification-still {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  5%,
+  95% {
+    opacity: 1;
+  }
+}
+
+/* The kit (system.css) collapses every animation to .001ms under reduced motion;
+   with `forwards` the popup would jump straight to its hidden last frame.
+   Keep it on screen for its 4s life, without the slide. The id raises the
+   specificity above the kit's `:not([data-m-loop], ...)` rule. */
+@media (prefers-reduced-motion: reduce) {
+  #achievement-popup-container .achievement-popup {
+    transform: none;
+    animation-name: achievement-notification-still;
+    animation-duration: 4s !important;
+    animation-timing-function: linear;
   }
 }
 

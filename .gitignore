@@ -13,3 +13,4 @@ deploy.log
 
 .dev/
 .worktrees/
+.taste-skill/

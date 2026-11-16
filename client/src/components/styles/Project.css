@@ -4,7 +4,7 @@
   grid-template-columns: 4.8rem minmax(0, 1fr);
   gap: 1.4rem;
   position: relative;
-  border-bottom: 1px solid #7b7b7b26;
+  border-bottom: 1px solid var(--legacy-line-soft);
   transition:
     background-color 0.3s ease-out,
     border-color 0.3s ease-out;
@@ -25,7 +25,7 @@
   aspect-ratio: 7 / 10;
   align-self: start;
   overflow: hidden;
-  border: 1px solid #7b7b7b35;
+  border: 1px solid var(--legacy-line);
   border-radius: 0.65rem;
   background: color-mix(in srgb, var(--bg) 90%, var(--text));
 }
@@ -95,7 +95,7 @@
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  border: 1px solid #7b7b7b38;
+  border: 1px solid var(--legacy-line);
   border-radius: 50%;
   color: var(--secondary);
   transition:

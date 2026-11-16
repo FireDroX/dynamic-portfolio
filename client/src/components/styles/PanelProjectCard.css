@@ -1,6 +1,6 @@
 .panel-project-card {
   overflow: hidden;
-  border: 1px solid #7b7b7b30;
+  border: 1px solid var(--legacy-line);
   border-radius: 18px;
   background: color-mix(in srgb, var(--bg) 94%, var(--text));
 }
@@ -36,8 +36,8 @@
   right: 0.6rem;
   bottom: 0.6rem;
   border-radius: 999px;
-  background: #0e0e0ed9;
-  color: #e7e5e5;
+  background: var(--overlay-bg);
+  color: var(--overlay-ink);
   font-size: 0.68rem;
   cursor: pointer;
 }
@@ -72,9 +72,9 @@
 
 .panel-project-hint {
   padding: 0.6rem 0.8rem;
-  border: 1px solid #d8a35f55;
+  border: 1px solid var(--warn-line);
   border-radius: 10px;
-  background: #d8a35f14;
+  background: var(--warn-fill);
   color: var(--text);
   font-size: 0.78rem;
 }
@@ -90,7 +90,7 @@
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  border: 1px dashed #7b7b7b55;
+  border: 1px dashed var(--legacy-line-strong);
   border-radius: 10px;
   color: var(--accent);
   font-size: 0.78rem;
@@ -118,7 +118,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border-top: 1px solid #7b7b7b28;
+  border-top: 1px solid var(--legacy-line-soft);
 }
 
 .panel-project-actions button,
@@ -135,7 +135,7 @@
 .panel-project-actions a:hover,
 .panel-preview-button:hover {
   color: var(--text);
-  background: #7b7b7b18;
+  background: var(--legacy-fill);
 }
 
 .panel-view-page-link {
@@ -149,7 +149,7 @@
 }
 
 .panel-delete-button:hover {
-  color: #d8877f;
+  color: var(--legacy-err);
 }
 
 .panel-save-button {
@@ -163,13 +163,13 @@
 }
 
 .panel-save-button:disabled {
-  border-color: #7b7b7b30;
+  border-color: var(--legacy-line);
   opacity: 0.4;
   cursor: not-allowed;
 }
 
 .panel-live-preview {
-  border-top: 1px solid #7b7b7b28;
+  border-top: 1px solid var(--legacy-line-soft);
 }
 
 .panel-live-preview > div {

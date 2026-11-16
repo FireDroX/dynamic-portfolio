@@ -1,10 +1,10 @@
 .home-terminal {
   min-height: 18.75rem;
   overflow: hidden;
-  border: 1px solid #7b7b7b3b;
+  border: 1px solid var(--legacy-line);
   border-radius: 1rem;
   background: color-mix(in srgb, var(--bg) 91%, var(--text));
-  box-shadow: 0 1.25rem 4rem #00000020;
+  box-shadow: 0 1.25rem 4rem var(--legacy-shadow-soft);
 }
 
 .home-terminal-title {
@@ -12,7 +12,7 @@
   align-items: center;
   gap: 0.7rem;
   padding: 0.9rem 1.2rem;
-  border-bottom: 1px solid #7b7b7b30;
+  border-bottom: 1px solid var(--legacy-line);
   color: var(--accent);
   font-family: monospace;
   font-size: 0.75rem;
@@ -31,15 +31,15 @@
 }
 
 .home-terminal-dot-red {
-  background: #ff5f57;
+  background: var(--dot-red);
 }
 
 .home-terminal-dot-yellow {
-  background: #febc2e;
+  background: var(--dot-yellow);
 }
 
 .home-terminal-dot-green {
-  background: #28c840;
+  background: var(--dot-green);
 }
 
 .home-terminal-content {
@@ -65,7 +65,7 @@
 }
 
 .home-terminal-error {
-  color: #c98383;
+  color: var(--legacy-err);
 }
 
 .home-terminal-list {
@@ -190,7 +190,7 @@
 }
 
 .home-terminal-command-error {
-  color: #d66565;
+  color: var(--legacy-err);
 }
 
 .home-terminal-sr-only {

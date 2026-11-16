@@ -1,0 +1,93 @@
+/*
+  Design tokens: the only file allowed to hold literal colours.
+  The --p-* palette feeds /assets/system.css (grounds, --bg, --ink, --accent...).
+  Dark is the default; light follows prefers-color-scheme. Never drawn at random.
+*/
+
+:root {
+  --p-bg: #0e0e0e;
+  --p-surface: #151515;
+  --p-ink: #e7e5e5;
+  --p-muted: #acabaa;
+  --p-accent: #b29a80;
+  --p-accent-ink: #0e0e0e;
+  --p-action: #b29a80;
+  --p-action-ink: #0e0e0e;
+  --p-inv-bg: #e7e5e5;
+  --p-inv-surface: #d5d4d4;
+  --p-inv-ink: #0e0e0e;
+  --p-inv-muted: #565656;
+  --p-inv-accent: #0e0e0e;
+  --p-inv-accent-ink: #e7e5e5;
+  --p-inv-action: #0e0e0e;
+  --p-inv-action-ink: #e7e5e5;
+
+  --font-display: "Urbanist", system-ui, sans-serif;
+  --font-text: "Urbanist", system-ui, sans-serif;
+  --font-mono:
+    "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+
+  /* project tokens */
+  --surface-2: #1a1918;
+  --border: #34312e;
+  --ok: #78ad77;
+  --danger: #e5484d;
+  --dot-red: #ff5f57;
+  --dot-yellow: #febc2e;
+  --dot-green: #28c840;
+
+  /* legacy pages (removed with legacy.css once every page is redone) */
+  --legacy-line-soft: #7b7b7b28;
+  --legacy-line: #7b7b7b38;
+  --legacy-line-strong: #7b7b7b55;
+  --legacy-fill: #7b7b7b18;
+  --legacy-shadow-soft: #00000020;
+  --legacy-shadow-strong: #00000033;
+  --legacy-err: #d8877f;
+  --legacy-err-line: #d8877f66;
+  --legacy-err-fill: #d8877f12;
+  --warn-line: #d8a35f55;
+  --warn-fill: #d8a35f14;
+  --ok-glow: #78ad7745;
+  --ok-clear: #78ad7700;
+  --on-image-line: #ffffff18;
+  --overlay-bg: #0e0e0ed9;
+  --overlay-ink: #e7e5e5;
+  --preview-bg: #090909;
+  --legacy-btn-bg: #cbc6bd;
+  --legacy-btn-ink: #43403a;
+  --legacy-btn-shadow: #43403a55;
+
+  /* legacy aliases (--accent is the kit's, see legacy.css) */
+  --text: var(--p-ink);
+  --secondary: var(--p-accent);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --p-bg: #f2f2f2;
+    --p-surface: #e6e6e6;
+    --p-ink: #1b1818;
+    --p-muted: #555453;
+    --p-accent: #80674d;
+    --p-accent-ink: #f2f2f2;
+    --p-action: #80674d;
+    --p-action-ink: #f2f2f2;
+    --p-inv-bg: #1b1818;
+    --p-inv-surface: #272424;
+    --p-inv-ink: #f2f2f2;
+    --p-inv-muted: #989797;
+    --p-inv-accent: #80674d;
+    --p-inv-accent-ink: #f2f2f2;
+    --p-inv-action: #80674d;
+    --p-inv-action-ink: #f2f2f2;
+
+    --surface-2: #dcdcdc;
+    --border: #cbc6bd;
+    --ok: #3f7a3e;
+    --danger: #c8363b;
+  }
+}

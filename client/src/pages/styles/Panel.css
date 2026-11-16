@@ -32,7 +32,7 @@
 
 .panel-logout {
   padding: 0.7rem 1rem;
-  border: 1px solid #7b7b7b3d;
+  border: 1px solid var(--legacy-line);
   border-radius: 999px;
   background: transparent;
   color: var(--accent);
@@ -62,8 +62,8 @@
 }
 
 .panel-notice--error {
-  border-color: #d8877f66;
-  background: #d8877f12;
+  border-color: var(--legacy-err-line);
+  background: var(--legacy-err-fill);
 }
 
 .panel-notice button {
@@ -126,7 +126,7 @@
 .panel-field textarea,
 .panel-field select {
   padding: 0.85rem 0.9rem;
-  border: 1px solid #7b7b7b3d;
+  border: 1px solid var(--legacy-line);
   border-radius: 10px;
   background: color-mix(in srgb, var(--bg) 84%, transparent);
   color: var(--text);
@@ -172,7 +172,7 @@
 
 .panel-empty {
   padding: 2rem 1rem;
-  border: 1px dashed #7b7b7b55;
+  border: 1px dashed var(--legacy-line-strong);
   border-radius: 18px;
   color: var(--accent);
   text-align: center;
