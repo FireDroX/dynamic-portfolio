@@ -3,15 +3,11 @@ import { useTranslation } from "react-i18next";
 import { FiChevronLeft } from "react-icons/fi";
 
 import Button from "./ui/Button";
-import { getProjectMeta } from "../utils/projectMeta";
 import "./styles/ProjectHero.css";
 
 const ProjectHero = ({ project, formattedDate }) => {
   const { t } = useTranslation();
-  const { stack } = getProjectMeta(project.fileName);
-  const facts = [t("project.interactive"), formattedDate, ...stack].filter(
-    Boolean,
-  );
+  const facts = [t("project.interactive"), formattedDate].filter(Boolean);
 
   return (
     <header className="project-hero">

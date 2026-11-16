@@ -7,7 +7,7 @@ import { getProjectMeta } from "../utils/projectMeta";
 
 const Project = ({ p }) => {
   const { t, i18n } = useTranslation();
-  const { type, stack } = getProjectMeta(p.fileName);
+  const { type } = getProjectMeta(p.fileName);
   const createdAt = new Date(p.createdAt);
   const formattedDate = Number.isNaN(createdAt.getTime())
     ? t("projects.unknownDate")
@@ -46,15 +46,6 @@ const Project = ({ p }) => {
       <div className="project-card__body">
         <h3 className="card__title">{p.name}</h3>
         {type && <p className="project-card__type">{t(type)}</p>}
-        {stack.length > 0 && (
-          <ul className="project-card__stack">
-            {stack.map((tech) => (
-              <li key={tech} className="projects-pill">
-                {tech}
-              </li>
-            ))}
-          </ul>
-        )}
         <div className="project-card__foot">
           <span className="projects-badge">{t("projects.playable")}</span>
           <time dateTime={p.createdAt}>{formattedDate}</time>

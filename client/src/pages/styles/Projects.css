@@ -235,6 +235,14 @@ button.projects-pill:focus-visible,
   }
 }
 
+/* the kit locks a section to one screen from 1280px wide: on a short desktop (1366x768, 1536x864) six
+   cards, the toolbar and the pagination run past it and the pagination lands on the footer */
+main > section#collection {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
 .projects-collection .section-head {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -245,10 +253,6 @@ button.projects-pill:focus-visible,
 
 .projects-collection .section-head > * {
   margin: 0;
-}
-
-.projects-collection .section-head > .projects-count {
-  grid-column: 1 / -1;
 }
 
 @media (max-width: 639px) {

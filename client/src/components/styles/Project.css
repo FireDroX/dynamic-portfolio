@@ -35,15 +35,6 @@
   font-size: var(--t-small);
 }
 
-.project-card__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .project-card__foot {
   display: flex;
   align-items: center;
@@ -63,10 +54,6 @@
   .project-card__body {
     gap: var(--s-2);
     padding: var(--s-3) var(--s-4);
-  }
-
-  .project-card__stack {
-    display: none;
   }
 }
 

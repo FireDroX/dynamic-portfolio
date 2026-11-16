@@ -196,7 +196,7 @@ const Projects = () => {
               {t("home.aboutLink")}
             </Button>
             {!hasError && (
-              <p className="projects-count" aria-live="polite">
+              <p className="sr-only" aria-live="polite">
                 {t("projects.count", { count: total })}
               </p>
             )}
