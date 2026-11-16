@@ -238,3 +238,15 @@ button.projects-pill:focus-visible,
     transition: none;
   }
 }
+
+.projects-collection .section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+}
+
+.projects-collection .section-head > * {
+  margin: 0;
+}

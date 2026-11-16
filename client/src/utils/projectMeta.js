@@ -1,6 +1,6 @@
 import featuredProjects from "./featuredProjects";
 
-// fileName -> i18n key of the project type. À remplir par Adrien, ne pas inventer.
+// fileName -> i18n key of the project type. Intentionally empty: types are content to be supplied by the site owner, not guessed.
 export const PROJECT_TYPES = {};
 
 export const getProjectMeta = (fileName) => ({

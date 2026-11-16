@@ -126,3 +126,10 @@
     transition: none;
   }
 }
+
+@media (max-width: 639px) {
+  .project-frame__btn {
+    width: 44px;
+    height: 44px;
+  }
+}

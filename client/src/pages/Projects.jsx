@@ -142,7 +142,7 @@ const Projects = () => {
   const rangeStart = (page - 1) * pageSize + 1;
   const rangeEnd = Math.min(page * pageSize, total);
 
-  return (
+  return (
     <main className="projects-page">
       <Seo
         title={t("seo.projectsTitle")}
@@ -192,6 +192,11 @@ const Projects = () => {
         <div ref={collectionRef} className="projects-collection">
           <div className="section-head">
             <h2>{t("projects.listLabel")}</h2>
+            {!hasError && (
+              <p className="projects-count" aria-live="polite">
+                {t("projects.count", { count: total })}
+              </p>
+            )}
           </div>
 
           {!hasError && publishedCount > 0 && (

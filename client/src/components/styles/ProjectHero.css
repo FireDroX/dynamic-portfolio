@@ -48,4 +48,8 @@
   .project-hero {
     margin-bottom: var(--s-3);
   }
+
+  .project-hero__back {
+    min-height: 44px;
+  }
 }

@@ -32,7 +32,21 @@ const ProjectDetail = () => {
     );
   }
 
-  if (hasError || !project) {
+  if (hasError) {
+    return (
+      <main className="project-page">
+        <Section className="hero project-notfound" data-enter>
+          <h1>{t("project.loadErrorTitle")}</h1>
+          <p role="alert">{t("project.loadErrorText")}</p>
+          <div>
+            <Button to="/projects">{t("project.back")}</Button>
+          </div>
+        </Section>
+      </main>
+    );
+  }
+
+  if (!project) {
     return (
       <main className="project-page">
         <Seo

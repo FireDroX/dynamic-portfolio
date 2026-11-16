@@ -83,7 +83,7 @@ const ProjectLivePreview = ({ project }) => {
       className={`project-frame${isMobile ? " is-mobile" : ""}${isFullscreen ? " is-fullscreen" : ""}`}
     >
       <AppFrame
-        title=""
+        title={project.name || project.fileName}
         actions={actions}
         bodyClassName="project-frame__body"
       >
