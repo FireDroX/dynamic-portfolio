@@ -12,12 +12,20 @@
 
 /* the kit's footer expects a padded section above it; legacy pages end flush
    on their content, so give the footer a step of room above its top rule */
+/* tighter than the kit's section rhythm: the footer is a closing strip, not a section */
 .footer {
-  margin-top: var(--s-8);
+  margin-top: var(--s-6);
+  padding-block: var(--s-7) var(--s-5);
+}
+
+.footer .grid {
+  row-gap: var(--s-6);
 }
 
 .footer .footer__legal {
   align-items: center;
+  margin-top: var(--s-6);
+  padding-top: var(--s-4);
 }
 
 .footer .credits {

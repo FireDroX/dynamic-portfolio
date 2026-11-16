@@ -19,19 +19,25 @@
 .legal__toc ol {
   display: grid;
   gap: var(--s-2) var(--s-6);
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
   counter-reset: toc;
 }
 
+/* the number and its link share one line: columns are wide enough for the longest label */
 .legal__toc li {
   counter-increment: toc;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  white-space: nowrap;
 }
 
 .legal__toc li::before {
-  content: counter(toc, decimal-leading-zero) " ";
+  content: counter(toc, decimal-leading-zero);
+  flex: none;
   font-family: var(--font-mono);
   font-size: var(--t-small);
   color: var(--p-muted);

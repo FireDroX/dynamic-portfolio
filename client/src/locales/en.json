@@ -358,7 +358,7 @@
     "eyebrow": "legal & privacy",
     "title": "Legal information",
     "intro": "Information about the portfolio’s publisher, hosting and the data used for its operation.",
-    "updated": "Updated July 23, 2026",
+    "updated": "Updated November 16, 2026",
     "navLabel": "Legal information table of contents",
     "nav": {
       "edition": "Publisher",
@@ -410,7 +410,7 @@
       "title": "External services",
       "intro": "Depending on the page viewed, the browser may contact:",
       "cloudflare": "for secure access to the website;",
-      "fonts": "to load the Manrope font;",
+      "fonts": "to load the Urbanist and DM Mono fonts;",
       "github": "to display the contribution animation and contributors' profile pictures;",
       "iframes": "services required by interactive projects embedded in iframes.",
       "links": "Links to GitHub, LinkedIn or Ko-fi open separate websites with their own privacy policies."

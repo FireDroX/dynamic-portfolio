@@ -358,7 +358,7 @@
     "eyebrow": "mentions & confidentialité",
     "title": "Informations légales",
     "intro": "Informations relatives à l’édition du portfolio, à son hébergement et aux données utilisées pour son fonctionnement.",
-    "updated": "Mise à jour le 23 juillet 2026",
+    "updated": "Mise à jour le 16 novembre 2026",
     "navLabel": "Sommaire des mentions légales",
     "nav": {
       "edition": "Édition",
@@ -409,9 +409,9 @@
       "eyebrow": "tiers",
       "title": "Services externes",
       "intro": "Selon la page consultée, le navigateur peut contacter :",
-      "cloudflare": "pour l’accès sécurisé au site ;",
-      "fonts": "pour charger la police Manrope ;",
-      "github": "pour afficher l’animation des contributions et les photos de profil des contributeurs ;",
+      "cloudflare": "pour l’accès sécurisé au site ;",
+      "fonts": "pour charger les polices Urbanist et DM Mono ;",
+      "github": "pour afficher l’animation des contributions et les photos de profil des contributeurs ;",
       "iframes": "les services nécessaires aux projets interactifs intégrés dans les iframes.",
       "links": "Les liens vers GitHub, LinkedIn ou Ko-fi ouvrent des sites distincts disposant de leurs propres politiques de confidentialité."
     },
