@@ -1,10 +1,3 @@
-.projects-hero > .wrap {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: var(--s-4);
-}
-
 .projects-hero small {
   color: var(--muted);
   font: 400 var(--t-label) / 1.4 var(--font-mono);
@@ -12,15 +5,69 @@
   letter-spacing: 0.08em;
 }
 
-.projects-hero h1,
-.projects-hero p {
+.projects-hero__text h1,
+.projects-hero__text p {
   margin: 0;
+}
+
+.projects-hero__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--s-4);
+}
+
+.projects-hero .hero-copy > .btn-row {
+  margin-top: var(--s-6);
+}
+
+.projects-mosaic-frame {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-mosaic-frame > .app-frame__body {
+  flex: 1;
+  min-height: 0;
+}
+
+/* tiles keep to their sources' size: the uploaded thumbnails are about 300px wide */
+.projects-mosaic {
+  height: 100%;
+  margin: 0;
+  padding: var(--s-4);
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+  list-style: none;
+}
+
+.projects-mosaic li {
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  background: var(--surface);
+}
+
+.projects-mosaic li {
+  grid-column: span 2;
+}
+
+.projects-mosaic li.projects-mosaic__wide {
+  grid-column: span 3;
+}
+
+.projects-mosaic img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .projects-lead {
   max-width: 60ch;
-  font-size: var(--t-lead);
-  line-height: 1.5;
 }
 
 .projects-count {
@@ -122,15 +169,17 @@ button.projects-pill:focus-visible,
   flex: 1;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+/* two columns of horizontal cards on desktop (a thumbnail is about 300px wide:
+   it is never shown larger than that), one below */
+@media (max-width: 1023px) {
   .projects-grid > li {
-    grid-column: auto / span 6;
+    grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 767px) {
-  .projects-grid > li {
-    grid-column: 1 / -1;
+  .projects-grid {
+    row-gap: var(--s-3);
   }
 
   .projects-search {
@@ -146,6 +195,10 @@ button.projects-pill:focus-visible,
 
 .projects-error {
   color: var(--danger);
+}
+
+.projects-more {
+  margin-top: var(--s-6);
 }
 
 .projects-pagination {

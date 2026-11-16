@@ -1,8 +1,14 @@
 .project-frame {
   flex: 1 1 0;
-  min-height: min(70vh, 720px);
+  min-height: 0;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: 639px) {
+  .project-frame {
+    min-height: 360px;
+  }
 }
 
 .project-frame > .app-frame {
@@ -44,6 +50,13 @@
   height: 100%;
   border: 0;
   background: var(--card);
+}
+
+/* the iframe hands focus to its document at once, so :focus-visible never
+   matches on it: the ring follows a class set from its focus event */
+.project-frame__viewport iframe.is-focused {
+  outline: 2px solid var(--action);
+  outline-offset: -2px;
 }
 
 .project-frame__loader {

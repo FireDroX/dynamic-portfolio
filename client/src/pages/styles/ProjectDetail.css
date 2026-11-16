@@ -12,9 +12,9 @@
   margin: 0;
 }
 
-/* the kit's hero grid gives its words the whole height: here the header takes
-   its own height and the app window the rest */
-.project-page .project-stage > .wrap {
+/* the hero's words take their own height, the app window the rest of the screen */
+.project-stage__layout {
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -39,7 +39,7 @@
 }
 
 .project-case h2 {
-  margin: 0 0 var(--s-5);
+  margin: 0;
 }
 
 .project-case p {
@@ -60,21 +60,37 @@
   text-decoration-color: currentColor;
 }
 
-.project-aside {
+.project-case {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--s-5);
+}
+
+.project-case__block {
+  display: grid;
+  gap: var(--s-3);
   color: var(--muted);
 }
 
-.project-aside__block {
-  display: grid;
-  gap: var(--s-3);
-}
-
-.project-aside small {
+.project-case__block small {
   font: 400 var(--t-label) / 1.4 var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+/* the thumbnail is shown at its own size, never enlarged */
+.project-about__thumb {
+  display: grid;
+  place-items: center;
+  padding: var(--s-6);
+  background: var(--surface);
+}
+
+.project-about__thumb img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--r-sm);
 }

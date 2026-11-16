@@ -5,11 +5,16 @@ import { useTranslation } from "react-i18next";
 
 import Project from "../components/Project";
 import Seo from "../components/Seo";
+import AppFrame from "../components/ui/AppFrame";
+import Button from "../components/ui/Button";
 import Section from "../components/ui/Section";
+import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
 import { getPageItems } from "../utils/pagination";
 import { PROJECTS_PAGE_SIZE, fetchProjectsPage } from "../utils/projectsApi";
 
 const SEARCH_DEBOUNCE_MS = 300;
+
+const MOSAIC_SIZE = 5;
 
 const INITIAL_REQUEST = { key: null, data: null, hasError: false };
 
@@ -89,11 +94,13 @@ const Projects = () => {
     return (
       <main className="projects-page">
         <Section className="hero projects-hero" data-enter>
-          <small>{t("projects.eyebrow")}</small>
-          <h1>{t("projects.title")}</h1>
-          <div className="projects-loading" aria-live="polite">
-            <div className="spinner" />
-            <p>{t("projects.loading")}</p>
+          <div className="hero-text projects-hero__text">
+            <small>{t("projects.eyebrow")}</small>
+            <h1>{t("projects.heroTitle")}</h1>
+            <div className="projects-loading" aria-live="polite">
+              <div className="spinner" />
+              <p>{t("projects.loading")}</p>
+            </div>
           </div>
         </Section>
       </main>
@@ -119,6 +126,7 @@ const Projects = () => {
   const totalPages = data?.totalPages ?? 0;
   const years = data?.years ?? [];
   const publishedCount = years.reduce((sum, { count }) => sum + count, 0);
+  const mosaic = projects.slice(0, MOSAIC_SIZE);
 
   const yearFilters = [
     { value: "all", label: t("projects.filterAll"), count: publishedCount },
@@ -143,13 +151,44 @@ const Projects = () => {
       />
 
       <Section className="hero projects-hero" data-enter>
-        <small>{t("projects.eyebrow")}</small>
-        <h1>{t("projects.title")}</h1>
-        <p className="projects-lead">{t("projects.description")}</p>
-        <p className="projects-count">{t("projects.count", { count: total })}</p>
+        <div className="hero-text grid hero-split">
+          <div className="hero-copy span-6">
+            <small>{t("projects.eyebrow")}</small>
+            <h1>{t("projects.heroTitle")}</h1>
+            <p className="t-lead projects-lead">{t("projects.description")}</p>
+            <p className="projects-count">
+              {t("projects.count", { count: publishedCount })}
+            </p>
+            <div className="btn-row">
+              <Button href="#collection">{t("projects.browse")}</Button>
+            </div>
+          </div>
+
+          <div className="hero-visual span-6 start-7">
+            <AppFrame title="~/projects" className="projects-mosaic-frame">
+              <ul className="projects-mosaic" aria-hidden="true">
+                {mosaic.map((project, index) => (
+                  <li
+                    key={project.fileName}
+                    className={index < 2 ? "projects-mosaic__wide" : undefined}
+                  >
+                    <img
+                      src={
+                        project.hasImage
+                          ? `/api/projects/${project.fileName}/image`
+                          : DEFAULT_PROJECT_IMAGE
+                      }
+                      alt=""
+                    />
+                  </li>
+                ))}
+              </ul>
+            </AppFrame>
+          </div>
+        </div>
       </Section>
 
-      <Section height={2} id="collection">
+      <Section id="collection">
         <div ref={collectionRef} className="projects-collection">
           <div className="section-head">
             <h2>{t("projects.listLabel")}</h2>
@@ -209,7 +248,7 @@ const Projects = () => {
               aria-busy={isFetching}
             >
               {projects.map((project) => (
-                <li key={project.fileName} className="span-4">
+                <li key={project.fileName} className="span-6">
                   <Project p={project} />
                 </li>
               ))}
@@ -268,6 +307,12 @@ const Projects = () => {
               </div>
             </nav>
           )}
+
+          <div className="projects-more">
+            <Button to="/about" variant="secondary">
+              {t("home.aboutLink")}
+            </Button>
+          </div>
         </div>
       </Section>
     </main>

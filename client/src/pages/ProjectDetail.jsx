@@ -6,9 +6,11 @@ import FormattedDescription from "../components/FormattedDescription";
 import ProjectHero from "../components/ProjectHero";
 import ProjectLivePreview from "../components/ProjectLivePreview";
 import Seo from "../components/Seo";
+import AppFrame from "../components/ui/AppFrame";
 import Button from "../components/ui/Button";
 import Section from "../components/ui/Section";
 import useProjectDetails from "../hooks/useProjectDetails";
+import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
 import { getContributors } from "../utils/contributors";
 import getProjectDescription from "../utils/projectDescription";
 
@@ -71,39 +73,46 @@ const ProjectDetail = () => {
       />
 
       <Section className="hero project-stage" data-enter>
-        <ProjectHero project={project} />
-        <ProjectLivePreview key={project.fileName} project={project} />
+        <div className="hero-text project-stage__layout">
+          <ProjectHero project={project} formattedDate={formattedDate} />
+          <ProjectLivePreview key={project.fileName} project={project} />
+        </div>
       </Section>
 
       <Section id="about">
-        <div className="grid">
-          <div className="span-8 project-case">
+        <div className="grid project-about">
+          <div className="span-6 project-case">
             <h2>{t("project.aboutTitle")}</h2>
             <p>
               <FormattedDescription>{description}</FormattedDescription>
             </p>
-            {/* Future case-study sections (contexte, rôle, difficultés) go
-                here, rendered only when they have content. */}
-          </div>
-
-          <aside className="span-4 project-aside">
             {contributors.length > 0 && (
-              <div className="project-aside__block">
+              <div className="project-case__block">
                 <small>{t("contributors.label")}</small>
                 <ContributorAvatars contributors={contributors} align="start" />
               </div>
             )}
-            {formattedDate && (
-              <time dateTime={project.createdAt}>{formattedDate}</time>
-            )}
-            <Button
-              href={`/api/projects/${project.fileName}`}
-              external
-              variant="secondary"
-            >
-              {t("project.openTab")}
+            <Button to="/projects" variant="secondary">
+              {t("project.back")}
             </Button>
-          </aside>
+            {/* Future case-study sections (contexte, rôle, difficultés) go
+                here, rendered only when they have content. */}
+          </div>
+
+          <div className="span-6 project-about__visual">
+            <AppFrame title={`~/${project.fileName}`}>
+              <div className="project-about__thumb">
+                <img
+                  src={
+                    project.hasImage
+                      ? `/api/projects/${project.fileName}/image`
+                      : DEFAULT_PROJECT_IMAGE
+                  }
+                  alt=""
+                />
+              </div>
+            </AppFrame>
+          </div>
         </div>
       </Section>
     </main>

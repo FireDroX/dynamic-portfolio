@@ -2,10 +2,16 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { FiChevronLeft } from "react-icons/fi";
 
+import Button from "./ui/Button";
+import { getProjectMeta } from "../utils/projectMeta";
 import "./styles/ProjectHero.css";
 
-const ProjectHero = ({ project }) => {
+const ProjectHero = ({ project, formattedDate }) => {
   const { t } = useTranslation();
+  const { stack } = getProjectMeta(project.fileName);
+  const facts = [t("project.interactive"), formattedDate, ...stack].filter(
+    Boolean,
+  );
 
   return (
     <header className="project-hero">
@@ -13,8 +19,15 @@ const ProjectHero = ({ project }) => {
         <FiChevronLeft aria-hidden="true" />
         {t("project.back")}
       </Link>
-      <small>{t("project.interactive")}</small>
-      <h1>{project.name}</h1>
+      <div className="project-hero__main">
+        <div>
+          <h1>{project.name}</h1>
+          <p className="project-hero__facts">{facts.join(" · ")}</p>
+        </div>
+        <Button href={`/api/projects/${project.fileName}`} external>
+          {t("project.openTab")}
+        </Button>
+      </div>
     </header>
   );
 };

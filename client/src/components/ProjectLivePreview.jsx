@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FiMaximize, FiMinimize, FiMonitor, FiRotateCw, FiSmartphone } from "react-icons/fi";
 
@@ -19,7 +19,23 @@ const ProjectLivePreview = ({ project }) => {
     toggleMobile,
   } = useProjectFrame();
   const [loadedKey, setLoadedKey] = useState(null);
+  const [isFocused, setIsFocused] = useState(false);
   const isLoading = loadedKey !== reloadKey;
+
+  // Focus moves into the iframe's document at once, so the iframe element never
+  // matches :focus: the parent window losing focus to it is the only signal
+  useEffect(() => {
+    const iframe = frameRef.current?.querySelector("iframe");
+    if (!iframe) return undefined;
+    const onBlur = () => setIsFocused(document.activeElement === iframe);
+    const onFocus = () => setIsFocused(false);
+    window.addEventListener("blur", onBlur);
+    window.addEventListener("focus", onFocus);
+    return () => {
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("focus", onFocus);
+    };
+  }, [frameRef, reloadKey]);
 
   const fullscreenLabel = t(
     isFullscreen ? "project.exitFullscreen" : "project.enterFullscreen",
@@ -67,7 +83,7 @@ const ProjectLivePreview = ({ project }) => {
       className={`project-frame${isMobile ? " is-mobile" : ""}${isFullscreen ? " is-fullscreen" : ""}`}
     >
       <AppFrame
-        title={project.fileName}
+        title=""
         actions={actions}
         bodyClassName="project-frame__body"
       >
@@ -82,6 +98,7 @@ const ProjectLivePreview = ({ project }) => {
             key={reloadKey}
             src={`/api/projects/${project.fileName}`}
             title={t("project.iframeTitle", { name: project.name })}
+            className={isFocused ? "is-focused" : undefined}
             onLoad={() => setLoadedKey(reloadKey)}
             allow="fullscreen"
           />
