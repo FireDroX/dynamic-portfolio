@@ -423,7 +423,7 @@
       "second": "As with any web service, technical information such as the IP address, connection date, requested resource or browser type may be processed temporarily by the server and network intermediaries to route requests, maintain the service and keep it secure.",
       "cv": {
         "title": "CV download",
-        "intro": "The “Download my CV” button goes through url.addrien.fr, the publisher’s link service, hosted on the same infrastructure as the portfolio (see “Hosting”). A Cloudflare Turnstile anti-bot check runs before the download. For each download, this service records:",
+        "intro": "The “Download my CV” button goes through url.addrien.fr, the publisher’s link service, hosted on the same machine as the portfolio (see “Hosting”). A Cloudflare Turnstile anti-bot check runs before the download (see <policy>Cloudflare’s privacy policy</policy>). For each download, this service records:",
         "data": {
           "ip": "the IP address, only as a fingerprint (SHA-256 hash with a secret), never in clear text;",
           "userAgent": "the browser used (user-agent);",

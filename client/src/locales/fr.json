@@ -423,7 +423,7 @@
       "second": "Comme pour tout service web, des informations techniques telles que l’adresse IP, la date de connexion, la ressource demandée ou le type de navigateur peuvent être traitées temporairement par le serveur et les intermédiaires réseau pour acheminer les requêtes, maintenir le service et assurer sa sécurité.",
       "cv": {
         "title": "Téléchargement du CV",
-        "intro": "Le bouton « Télécharger le CV » passe par url.addrien.fr, le service de liens de l’éditeur, hébergé sur la même infrastructure que le portfolio (voir « Hébergement »). Un contrôle anti-robot Cloudflare Turnstile s’exécute avant le téléchargement. À chaque téléchargement, ce service enregistre :",
+        "intro": "Le bouton « Télécharger le CV » passe par url.addrien.fr, le service de liens de l’éditeur, hébergé sur la même machine que le portfolio (voir « Hébergement »). Un contrôle anti-robot Cloudflare Turnstile s’exécute avant le téléchargement (voir la <policy>politique de confidentialité de Cloudflare</policy>). À chaque téléchargement, ce service enregistre :",
         "data": {
           "ip": "l’adresse IP, uniquement sous forme d’empreinte (hash SHA-256 avec un secret), jamais en clair ;",
           "userAgent": "le navigateur utilisé (user-agent) ;",

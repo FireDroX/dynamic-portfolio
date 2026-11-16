@@ -12,6 +12,15 @@ const storageEntries = [
 
 const cvDataEntries = ["ip", "userAgent", "referer", "country", "date"];
 
+const cloudflarePolicyLink = (
+  <a
+    className="link"
+    href="https://www.cloudflare.com/privacypolicy/"
+    target="_blank"
+    rel="noopener noreferrer"
+  />
+);
+
 const toc = [
   ["edition", "edition"],
   ["hebergement", "hosting"],
@@ -87,7 +96,12 @@ const MentionsLegales = () => {
             <p>{t("legal.privacy.first")}</p>
             <p>{t("legal.privacy.second")}</p>
             <h3>{t("legal.privacy.cv.title")}</h3>
-            <p>{t("legal.privacy.cv.intro")}</p>
+            <p>
+              <Trans
+                i18nKey="legal.privacy.cv.intro"
+                components={{ policy: cloudflarePolicyLink }}
+              />
+            </p>
             <ul>
               {cvDataEntries.map((key) => (
                 <li key={key}>{t(`legal.privacy.cv.data.${key}`)}</li>
@@ -130,16 +144,7 @@ const MentionsLegales = () => {
                 <strong>Cloudflare Turnstile</strong>,{" "}
                 <Trans
                   i18nKey="legal.services.turnstile"
-                  components={{
-                    policy: (
-                      <a
-                        className="link"
-                        href="https://www.cloudflare.com/privacypolicy/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      />
-                    ),
-                  }}
+                  components={{ policy: cloudflarePolicyLink }}
                 />
               </li>
               <li>
