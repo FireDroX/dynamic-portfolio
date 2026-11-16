@@ -29,29 +29,31 @@ const NotFound = () => {
           <h1>{t("notFound.title")}</h1>
           <p className="notfound__lead">{t("notFound.lead")}</p>
 
-          <AppFrame
-            className="notfound__terminal"
-            title={t("notFound.terminalTitle")}
-          >
-            <p className="notfound__line">
-              <span className="notfound__prompt">$</span> cd {pathname}
-            </p>
-            <p className="notfound__line">
-              <span className="notfound__error">command not found:</span>{" "}
-              <span className="notfound__path">{pathname}</span>
-            </p>
-            <p className="notfound__line notfound__suggest">
-              {t("notFound.suggest")}
-            </p>
-            <p className="notfound__line">
-              <span className="notfound__prompt">$</span>{" "}
-              <Link to="/" className="notfound__cmd">cd /</Link>
-            </p>
-            <p className="notfound__line">
-              <span className="notfound__prompt">$</span>{" "}
-              <Link to="/projects" className="notfound__cmd">cd /projects</Link>
-            </p>
-          </AppFrame>
+          <div className="notfound__terminal-wrap" data-ui>
+            <AppFrame
+              className="notfound__terminal"
+              title={t("notFound.terminalTitle")}
+            >
+              <p className="notfound__line">
+                <span className="notfound__prompt">$</span> cd {pathname}
+              </p>
+              <p className="notfound__line">
+                <span className="notfound__error">command not found:</span>{" "}
+                <span className="notfound__path">{pathname}</span>
+              </p>
+              <p className="notfound__line notfound__suggest">
+                {t("notFound.suggest")}
+              </p>
+              <p className="notfound__line">
+                <span className="notfound__prompt">$</span>{" "}
+                <Link to="/" className="notfound__cmd">cd /</Link>
+              </p>
+              <p className="notfound__line">
+                <span className="notfound__prompt">$</span>{" "}
+                <Link to="/projects" className="notfound__cmd">cd /projects</Link>
+              </p>
+            </AppFrame>
+          </div>
 
           <div className="btn-row">
             <Button variant="primary" to="/">

@@ -239,7 +239,7 @@
       "achievement-hunter": {
         "name": "Achievement Hunter",
         "description": "You unlocked all the achievements!",
-        "hint": "Unlock all the achievements."
+        "hint": "Collect every other achievement."
       },
       "lost-page": {
         "name": "Lost Page",
@@ -413,7 +413,7 @@
   },
   "notFound": {
     "eyebrow": "404",
-    "title": "This page does not exist.",
+    "title": "No portfolio page at this address.",
     "lead": "The address you asked for leads nowhere. Here are two places to start over.",
     "terminalTitle": "terminal",
     "suggest": "Try instead:",

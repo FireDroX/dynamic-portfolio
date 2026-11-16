@@ -239,7 +239,7 @@
       "achievement-hunter": {
         "name": "Chasseur d’achievements",
         "description": "Tu as débloqué tous les achievements !",
-        "hint": "Débloque tous les achievements."
+        "hint": "Collectionne tous les autres achievements."
       },
       "lost-page": {
         "name": "Page perdue",
@@ -413,7 +413,7 @@
   },
   "notFound": {
     "eyebrow": "404",
-    "title": "Cette page n’existe pas.",
+    "title": "Aucune page du portfolio à cette adresse.",
     "lead": "L’adresse demandée ne mène nulle part. Voici deux endroits où repartir.",
     "terminalTitle": "terminal",
     "suggest": "Essaie plutôt :",
