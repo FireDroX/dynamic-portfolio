@@ -73,6 +73,8 @@
   },
   "projects": {
     "loading": "Loading projects...",
+    "eyebrow": "portfolio · playable projects",
+    "playable": "Playable",
     "title": "Projects",
     "description": "Applications, games and interactive experiences. Every project can be opened and tested directly from the portfolio.",
     "listLabel": "Project list",
@@ -106,7 +108,16 @@
     "demoLabel": "Demo of {{name}}",
     "live": "Live",
     "opening": "Opening the experience...",
-    "iframeTitle": "Interactive demo — {{name}}"
+    "iframeTitle": "Interactive demo — {{name}}",
+    "notFoundTitle": "Project not found",
+    "notFoundText": "This project doesn’t exist or is no longer published.",
+    "aboutTitle": "About the project",
+    "openTab": "Open in a new tab",
+    "reload": "Reload the project",
+    "enterFullscreen": "Full screen",
+    "exitFullscreen": "Exit full screen",
+    "mobileView": "Mobile view (390 px)",
+    "desktopView": "Desktop view"
   },
   "contributors": {
     "label": "Contributors",

@@ -1,17 +1,13 @@
 import "./styles/Project.css";
-import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 
-import ContributorAvatars from "./ContributorAvatars";
-import FormattedDescription from "./FormattedDescription";
-import { getContributors } from "../utils/contributors";
+import Card from "./ui/Card";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
-import getProjectDescription from "../utils/projectDescription";
+import { getProjectMeta } from "../utils/projectMeta";
 
 const Project = ({ p }) => {
   const { t, i18n } = useTranslation();
-  const projectPath = `/projects/${p.fileName}`;
-  const description = getProjectDescription(p, i18n.resolvedLanguage);
+  const { type, stack } = getProjectMeta(p.fileName);
   const createdAt = new Date(p.createdAt);
   const formattedDate = Number.isNaN(createdAt.getTime())
     ? t("projects.unknownDate")
@@ -26,11 +22,13 @@ const Project = ({ p }) => {
         .format(createdAt)
         .replace(".", "");
 
-  // The title link is stretched over the whole row (see Project.css), so the
-  // entire card opens the project; contributor avatars sit above that layer.
   return (
-    <article className="project-row">
-      <div className="project-row-visual">
+    <Card
+      to={`/projects/${p.fileName}`}
+      className="project-card"
+      aria-label={t("projects.view", { name: p.name })}
+    >
+      <div className="project-card__media m-zoom">
         <img
           src={
             p.hasImage
@@ -45,36 +43,24 @@ const Project = ({ p }) => {
         />
       </div>
 
-      <div className="project-row-body">
-        <div className="project-row-head">
-          <h2>
-            <Link className="project-row-link" to={projectPath}>
-              {p.name}
-            </Link>
-          </h2>
-          <span className="project-row-arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </span>
-        </div>
-
-        <p className="project-row-description">
-          <FormattedDescription>{description}</FormattedDescription>
-        </p>
-
-        <div className="project-row-foot">
-          <div className="project-row-meta" aria-label={t("projects.fileInfo")}>
-            <time dateTime={p.createdAt}>{formattedDate}</time>
-            <code>{p.fileName}/</code>
-          </div>
-          <ContributorAvatars
-            contributors={getContributors(p)}
-            className="project-row-contributors"
-          />
+      <div className="project-card__body">
+        <h3 className="card__title">{p.name}</h3>
+        {type && <p className="project-card__type">{t(type)}</p>}
+        {stack.length > 0 && (
+          <ul className="project-card__stack">
+            {stack.map((tech) => (
+              <li key={tech} className="projects-pill">
+                {tech}
+              </li>
+            ))}
+          </ul>
+        )}
+        <div className="project-card__foot">
+          <span className="projects-badge">{t("projects.playable")}</span>
+          <time dateTime={p.createdAt}>{formattedDate}</time>
         </div>
       </div>
-    </article>
+    </Card>
   );
 };
 

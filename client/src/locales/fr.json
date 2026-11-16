@@ -73,6 +73,8 @@
   },
   "projects": {
     "loading": "Chargement des projets...",
+    "eyebrow": "portfolio · projets jouables",
+    "playable": "Jouable",
     "title": "Projets",
     "description": "Applications, jeux et expériences interactives. Chaque projet peut être ouvert et testé directement depuis le portfolio.",
     "listLabel": "Liste des projets",
@@ -106,7 +108,16 @@
     "demoLabel": "Démo de {{name}}",
     "live": "En direct",
     "opening": "Ouverture de l’expérience...",
-    "iframeTitle": "Démo interactive — {{name}}"
+    "iframeTitle": "Démo interactive — {{name}}",
+    "notFoundTitle": "Projet introuvable",
+    "notFoundText": "Ce projet n’existe pas ou n’est plus publié.",
+    "aboutTitle": "À propos du projet",
+    "openTab": "Ouvrir dans un nouvel onglet",
+    "reload": "Recharger le projet",
+    "enterFullscreen": "Plein écran",
+    "exitFullscreen": "Quitter le plein écran",
+    "mobileView": "Vue mobile (390 px)",
+    "desktopView": "Vue bureau"
   },
   "contributors": {
     "label": "Contributeurs",

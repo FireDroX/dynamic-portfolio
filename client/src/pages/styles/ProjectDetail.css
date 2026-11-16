@@ -1,47 +1,80 @@
-.project-detail-loading {
-  min-height: 65vh;
+.project-loading {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 1rem;
-  color: var(--accent);
+  gap: var(--s-4);
+  min-height: 50vh;
+  color: var(--muted);
 }
 
-.project-detail {
-  padding-top: 3.5rem;
+.project-loading p {
+  margin: 0;
 }
 
-.project-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.65rem 1rem;
-  border: 1px solid var(--legacy-line);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  color: var(--accent);
-  font: inherit;
-  cursor: pointer;
+/* the kit's hero grid gives its words the whole height: here the header takes
+   its own height and the app window the rest */
+.project-page .project-stage > .wrap {
+  display: flex;
+  flex-direction: column;
 }
 
-.project-back svg {
-  width: 1.1rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.project-notfound > .wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--s-4);
 }
 
-.project-back:hover {
-  color: var(--text);
-  border-color: var(--secondary);
-  transform: translateX(-4px);
+.project-notfound small {
+  color: var(--muted);
+  font: 400 var(--t-label) / 1.4 var(--font-mono);
+  letter-spacing: 0.08em;
 }
 
-@media (max-width: 900px) {
-  .project-detail {
-    padding-top: 1.5rem;
-  }
+.project-notfound h1,
+.project-notfound p {
+  margin: 0;
+}
+
+.project-case h2 {
+  margin: 0 0 var(--s-5);
+}
+
+.project-case p {
+  max-width: 65ch;
+  margin: 0;
+  font-size: var(--t-lead);
+  line-height: 1.6;
+}
+
+.project-case a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 3px;
+}
+
+.project-case a:hover {
+  text-decoration-color: currentColor;
+}
+
+.project-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-5);
+  color: var(--muted);
+}
+
+.project-aside__block {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.project-aside small {
+  font: 400 var(--t-label) / 1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }

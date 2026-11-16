@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import Project from "../components/Project";
 import Seo from "../components/Seo";
+import Section from "../components/ui/Section";
 import { getPageItems } from "../utils/pagination";
 import { PROJECTS_PAGE_SIZE, fetchProjectsPage } from "../utils/projectsApi";
 
@@ -86,9 +87,15 @@ const Projects = () => {
 
   if (request.key === null) {
     return (
-      <main className="App projects-loading" aria-live="polite">
-        <div className="spinner" />
-        <p>{t("projects.loading")}</p>
+      <main className="projects-page">
+        <Section className="hero projects-hero" data-enter>
+          <small>{t("projects.eyebrow")}</small>
+          <h1>{t("projects.title")}</h1>
+          <div className="projects-loading" aria-live="polite">
+            <div className="spinner" />
+            <p>{t("projects.loading")}</p>
+          </div>
+        </Section>
       </main>
     );
   }
@@ -127,80 +134,67 @@ const Projects = () => {
   const rangeStart = (page - 1) * pageSize + 1;
   const rangeEnd = Math.min(page * pageSize, total);
 
-  return (
-    <main className="App projects-page">
+  return (
+    <main className="projects-page">
       <Seo
         title={t("seo.projectsTitle")}
         description={t("seo.projectsDescription")}
         path="/projects"
       />
-      <header className="projects-header">
-        <small>portfolio</small>
+
+      <Section className="hero projects-hero" data-enter>
+        <small>{t("projects.eyebrow")}</small>
         <h1>{t("projects.title")}</h1>
-        <p>{t("projects.description")}</p>
-      </header>
+        <p className="projects-lead">{t("projects.description")}</p>
+        <p className="projects-count">{t("projects.count", { count: total })}</p>
+      </Section>
 
-      {!hasError && publishedCount > 0 && (
-        <div className="projects-toolbar">
-          <div
-            className="projects-filters"
-            role="group"
-            aria-label={t("projects.filterByYear")}
-          >
-            {yearFilters.map((filter) => (
-              <button
-                key={filter.value}
-                type="button"
-                aria-pressed={filter.value === activeYear}
-                className={filter.value === activeYear ? "is-active" : ""}
-                onClick={() =>
-                  updateParams({
-                    year: filter.value === "all" ? null : filter.value,
-                    page: null,
-                  })
-                }
+      <Section height={2} id="collection">
+        <div ref={collectionRef} className="projects-collection">
+          <div className="section-head">
+            <h2>{t("projects.listLabel")}</h2>
+          </div>
+
+          {!hasError && publishedCount > 0 && (
+            <div className="projects-toolbar">
+              <div
+                className="projects-filters"
+                role="group"
+                aria-label={t("projects.filterByYear")}
               >
-                {filter.label}
-                <span>{filter.count}</span>
-              </button>
-            ))}
-          </div>
+                {yearFilters.map((filter) => (
+                  <button
+                    key={filter.value}
+                    type="button"
+                    aria-pressed={filter.value === activeYear}
+                    className="projects-pill"
+                    onClick={() =>
+                      updateParams({
+                        year: filter.value === "all" ? null : filter.value,
+                        page: null,
+                      })
+                    }
+                  >
+                    {filter.label}
+                    <span>{filter.count}</span>
+                  </button>
+                ))}
+              </div>
 
-          <label className="projects-search">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" />
-              <path d="M20 20l-3.5-3.5" />
-            </svg>
-            <span className="projects-search-label">
-              {t("projects.searchLabel")}
-            </span>
-            <input
-              type="search"
-              value={search}
-              onChange={handleSearchChange}
-              placeholder={t("projects.searchPlaceholder")}
-            />
-          </label>
-        </div>
-      )}
+              <label className="projects-search">
+                <span className="projects-search-label">
+                  {t("projects.searchLabel")}
+                </span>
+                <input
+                  type="search"
+                  value={search}
+                  onChange={handleSearchChange}
+                  placeholder={t("projects.searchPlaceholder")}
+                />
+              </label>
+            </div>
+          )}
 
-      <section
-        ref={collectionRef}
-        className="projects-collection"
-        aria-label={t("projects.listLabel")}
-      >
-        <div className="projects-collection-title">
-          <div>
-            <small>index</small>
-            <h2>{t("projects.all")}</h2>
-          </div>
-          <span>{t("projects.count", { count: total })}</span>
-        </div>
-
-        <div
-          className={`projects-list${isFetching ? " is-fetching" : ""}`}
-          aria-busy={isFetching}
-        >
           {hasError ? (
             <p className="projects-message projects-error">
               {t("projects.loadError")}
@@ -210,63 +204,72 @@ const Projects = () => {
               {isFiltered ? t("projects.noMatches") : t("projects.empty")}
             </p>
           ) : (
-            projects.map((project) => (
-              <Project key={project.fileName} p={project} />
-            ))
+            <ul
+              className={`projects-grid grid${isFetching ? " is-fetching" : ""}`}
+              aria-busy={isFetching}
+            >
+              {projects.map((project) => (
+                <li key={project.fileName} className="span-4">
+                  <Project p={project} />
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {!hasError && totalPages > 1 && (
+            <nav
+              className="projects-pagination"
+              aria-label={t("projects.pagination")}
+            >
+              <p>
+                {t("projects.range", {
+                  from: rangeStart,
+                  to: rangeEnd,
+                  total,
+                })}
+              </p>
+              <div className="projects-pages">
+                <button
+                  type="button"
+                  className="btn btn--secondary btn--sm"
+                  onClick={() => goToPage(page - 1)}
+                  disabled={page <= 1}
+                  aria-label={t("projects.previousPage")}
+                >
+                  ←
+                </button>
+                {getPageItems(page, totalPages).map((item) =>
+                  typeof item === "string" ? (
+                    <span key={item} aria-hidden="true">
+                      …
+                    </span>
+                  ) : (
+                    <button
+                      key={item}
+                      type="button"
+                      className="btn btn--secondary btn--sm projects-page-btn"
+                      aria-current={item === page ? "page" : undefined}
+                      aria-label={t("projects.goToPage", { page: item })}
+                      onClick={() => goToPage(item)}
+                    >
+                      {item}
+                    </button>
+                  ),
+                )}
+                <button
+                  type="button"
+                  className="btn btn--secondary btn--sm"
+                  onClick={() => goToPage(page + 1)}
+                  disabled={page >= totalPages}
+                  aria-label={t("projects.nextPage")}
+                >
+                  →
+                </button>
+              </div>
+            </nav>
           )}
         </div>
-
-        {!hasError && totalPages > 1 && (
-          <nav
-            className="projects-pagination"
-            aria-label={t("projects.pagination")}
-          >
-            <p>
-              {t("projects.range", {
-                from: rangeStart,
-                to: rangeEnd,
-                total,
-              })}
-            </p>
-            <div className="projects-pages">
-              <button
-                type="button"
-                onClick={() => goToPage(page - 1)}
-                disabled={page <= 1}
-                aria-label={t("projects.previousPage")}
-              >
-                ←
-              </button>
-              {getPageItems(page, totalPages).map((item) =>
-                typeof item === "string" ? (
-                  <span key={item} aria-hidden="true">
-                    …
-                  </span>
-                ) : (
-                  <button
-                    key={item}
-                    type="button"
-                    className={item === page ? "is-active" : ""}
-                    aria-current={item === page ? "page" : undefined}
-                    aria-label={t("projects.goToPage", { page: item })}
-                    onClick={() => goToPage(item)}
-                  >
-                    {item}
-                  </button>
-                ),
-              )}
-              <button
-                type="button"
-                onClick={() => goToPage(page + 1)}
-                disabled={page >= totalPages}
-                aria-label={t("projects.nextPage")}
-              >
-                →
-              </button>
-            </div>
-          </nav>
-        )}
-      </section>
+      </Section>
     </main>
   );
 };
