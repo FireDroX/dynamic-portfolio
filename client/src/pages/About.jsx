@@ -77,13 +77,13 @@ const About = () => {
   return (
     <main className="about-page">
       <section
-        className="hero hero--split"
+        className="hero"
         data-enter
         aria-labelledby="about-hero-title"
       >
         <div className="wrap">
           <div className="hero-text grid hero__grid">
-            <div className="hero__text span-6">
+            <div className="hero__text span-8">
               <p className="hero__kicker">{t("about.title")}</p>
               <h1 id="about-hero-title">{t("about.intro")}</h1>
               <p className="hero__lead">{t("about.summaryFirst")}</p>
@@ -92,15 +92,6 @@ const About = () => {
                 <Button to="/projects">{t("home.projectsButton")}</Button>
                 <CvButton variant="secondary" />
               </div>
-            </div>
-            <div className="hero__media about-portrait span-6 start-7">
-              <img
-                src="/images/portrait.webp"
-                alt={t("about.portraitAlt")}
-                width="960"
-                height="1280"
-                fetchPriority="high"
-              />
             </div>
           </div>
         </div>

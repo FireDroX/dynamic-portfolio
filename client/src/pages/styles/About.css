@@ -1,12 +1,4 @@
 /* hero */
-.about-portrait {
-  margin: 0;
-}
-
-.about-portrait > img {
-  border-radius: inherit;
-}
-
 .about-page .hero__lead + .hero__lead {
   margin-top: var(--s-3);
 }
@@ -220,12 +212,6 @@
 .snake-svg {
   display: block;
   width: 100%;
-}
-
-@media (max-width: 1023px) {
-  .about-page .hero--split .hero__media {
-    min-height: 160px;
-  }
 }
 
 @media (max-width: 639px) {
