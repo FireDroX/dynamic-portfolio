@@ -1,11 +1,12 @@
 .login-page {
   width: min(100%, 420px);
   margin: 0 auto;
-  padding: var(--s-8) var(--s-4);
+  padding: calc(var(--nav) + var(--s-8)) var(--s-4) var(--s-8);
 }
 
 .login-card {
   display: grid;
+  align-content: start;
   gap: var(--s-6);
   min-width: 0;
 }

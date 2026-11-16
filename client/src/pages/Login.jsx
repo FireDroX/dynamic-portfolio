@@ -41,7 +41,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <main className="login-page">
-      <section className="login-card">
+      <div className="login-card">
         <div className="login-intro">
           <p className="t-label">{t("login.privateArea")}</p>
           <h1>{t("login.title")}</h1>
@@ -86,7 +86,7 @@ const Login = ({ onLogin }) => {
             </Button>
           </form>
         </AppFrame>
-      </section>
+      </div>
     </main>
   );
 };
