@@ -99,6 +99,7 @@
     "browse": "Browse the projects",
     "description": "Applications, games and interactive experiences. Every project can be opened and tested directly from the portfolio.",
     "listLabel": "Project list",
+    "aboutLink": "Learn more about me →",
     "count_one": "{{count}} project",
     "count_other": "{{count}} projects",
     "loadError": "Unable to load projects right now.",

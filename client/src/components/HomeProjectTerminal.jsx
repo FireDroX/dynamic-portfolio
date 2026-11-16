@@ -18,6 +18,13 @@ const formatProjectDate = (value, locale, unknownDate) => {
     .replace(".", "");
 };
 
+// The listing shows the latest projects only, so the terminal never needs a scrollbar;
+// `run` still completes and opens any published project.
+export const TERMINAL_ROWS = 8;
+
+const byNewest = (first, second) =>
+  (Date.parse(second.createdAt) || 0) - (Date.parse(first.createdAt) || 0);
+
 const HomeProjectTerminal = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -50,6 +57,7 @@ const HomeProjectTerminal = () => {
     return () => controller.abort();
   }, []);
 
+  const latestProjects = [...projects].sort(byNewest).slice(0, TERMINAL_ROWS);
   const normalizedProjectName = projectName.toLocaleLowerCase();
   const suggestedProject = projects.find(({ fileName }) =>
     fileName.toLocaleLowerCase().startsWith(normalizedProjectName),
@@ -144,7 +152,7 @@ const HomeProjectTerminal = () => {
             <p className="home-terminal__total">
               {t("home.terminalTotal", { count: projects.length })}
             </p>
-            {projects.map((project) => (
+            {latestProjects.map((project) => (
               <Link
                 className="home-terminal__row"
                 to={`/projects/${project.fileName}`}

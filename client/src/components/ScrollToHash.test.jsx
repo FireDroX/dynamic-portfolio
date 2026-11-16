@@ -48,4 +48,21 @@ describe("ScrollToHash", () => {
     fireEvent.click(getByText("about"));
     expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
   });
+
+  it("stays in place when only the query of the same page changes", () => {
+    const { getByText } = render(
+      <MemoryRouter initialEntries={["/projects"]}>
+        <ScrollToHash />
+        <Link to="/projects?page=2">page 2</Link>
+        <Link to="/about">about</Link>
+      </MemoryRouter>,
+    );
+    window.scrollTo.mockClear();
+
+    fireEvent.click(getByText("page 2"));
+    expect(window.scrollTo).not.toHaveBeenCalled();
+
+    fireEvent.click(getByText("about"));
+    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+  });
 });

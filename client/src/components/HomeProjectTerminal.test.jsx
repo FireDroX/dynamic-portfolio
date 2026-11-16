@@ -12,7 +12,7 @@ vi.mock("react-i18next", () => ({
 const fetchAllProjects = vi.hoisted(() => vi.fn());
 vi.mock("../utils/projectsApi", () => ({ fetchAllProjects }));
 
-import HomeProjectTerminal from "./HomeProjectTerminal";
+import HomeProjectTerminal, { TERMINAL_ROWS } from "./HomeProjectTerminal";
 
 afterEach(() => {
   cleanup();
@@ -41,13 +41,46 @@ const renderTerminal = async () => {
 const type = (input, value) => fireEvent.change(input, { target: { value } });
 
 describe("HomeProjectTerminal", () => {
-  it("lists the projects as links to their page, sorted by slug", async () => {
+  it("lists the projects as links to their page, newest first", async () => {
     await renderTerminal();
     const links = screen.getAllByRole("link");
     expect(links.map((link) => link.getAttribute("href"))).toEqual([
       "/projects/nestwiki",
       "/projects/pokeflip",
     ]);
+  });
+
+  it("lists only the latest projects but still runs an older one", async () => {
+    fetchAllProjects.mockResolvedValue(
+      Array.from({ length: TERMINAL_ROWS + 2 }, (_, index) => ({
+        name: `Project ${index}`,
+        fileName: `project-${index}`,
+        createdAt: `2025-01-${String(index + 1).padStart(2, "0")}`,
+      })),
+    );
+    render(
+      <MemoryRouter>
+        <Routes>
+          <Route path="/" element={<HomeProjectTerminal />} />
+          <Route path="*" element={<Location />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    await screen.findByRole("link", { name: /Project 9/ });
+
+    const hrefs = screen
+      .getAllByRole("link")
+      .map((link) => link.getAttribute("href"));
+    expect(hrefs).toHaveLength(TERMINAL_ROWS);
+    expect(hrefs[0]).toBe("/projects/project-9");
+    expect(hrefs).not.toContain("/projects/project-0");
+
+    const input = screen.getByRole("textbox");
+    type(input, "project-0");
+    fireEvent.submit(input.closest("form"));
+    expect(screen.getByTestId("location").textContent).toBe(
+      "/projects/project-0",
+    );
   });
 
   it("completes the typed prefix with Tab", async () => {
