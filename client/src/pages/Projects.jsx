@@ -192,6 +192,9 @@ const Projects = () => {
         <div ref={collectionRef} className="projects-collection">
           <div className="section-head">
             <h2>{t("projects.listLabel")}</h2>
+            <Button to="/about" variant="secondary">
+              {t("home.aboutLink")}
+            </Button>
             {!hasError && (
               <p className="projects-count" aria-live="polite">
                 {t("projects.count", { count: total })}

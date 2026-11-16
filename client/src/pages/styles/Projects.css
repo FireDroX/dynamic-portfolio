@@ -236,14 +236,26 @@ button.projects-pill:focus-visible,
 }
 
 .projects-collection .section-head {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--s-2);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: var(--s-4);
+  row-gap: var(--s-2);
 }
 
 .projects-collection .section-head > * {
   margin: 0;
+}
+
+.projects-collection .section-head > .projects-count {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 639px) {
+  .projects-collection .section-head {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
 }
 
 @media (max-width: 639px) {
