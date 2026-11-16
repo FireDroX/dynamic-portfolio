@@ -47,11 +47,18 @@ const Project = ({ p }) => {
 
       <div className="project-card__body">
         <h3 className="card__title">{p.name}</h3>
-        {typeKey && <p className="project-card__type">{t(typeKey)}</p>}
         <TechStack stack={getStack(p)} label={t("stack.label")} />
         <div className="project-card__foot">
           <span className="projects-badge">{t("projects.playable")}</span>
-          <time dateTime={p.createdAt}>{formattedDate}</time>
+          <span className="project-card__meta">
+            {typeKey && (
+              <>
+                <span className="project-card__type">{t(typeKey)}</span>
+                <span aria-hidden="true"> · </span>
+              </>
+            )}
+            <time dateTime={p.createdAt}>{formattedDate}</time>
+          </span>
         </div>
       </div>
     </Card>
