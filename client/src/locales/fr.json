@@ -63,11 +63,33 @@
     "summaryFirst": "J’étudie l’informatique à l’ESGI Paris et je code surtout du web avec React et Node.js.",
     "summarySecond": "Ce portfolio est mon terrain d’essai : chaque projet s’essaie en direct. Je cherche une alternance dès septembre 2027.",
     "pathTitle": "Parcours et boîte à outils web",
-    "pathText": "Où j’étudie, ce que je cherche ensuite et les outils que j’utilise.",
-    "pathSchool": "ESGI Paris",
-    "pathSchoolText": "Formation en développement web.",
-    "pathWork": "Alternance recherchée",
-    "pathWorkText": "Dès septembre 2027, à raison d’une semaine d’école pour trois en entreprise.",
+    "pathText": "D’où je viens, ce que j’ai déjà fait, ce que je cherche ensuite et les outils que j’utilise.",
+    "pathKinds": {
+      "education": "Formation",
+      "experience": "Expérience",
+      "next": "Objectif"
+    },
+    "path": {
+      "esgi": {
+        "title": "Bachelor Informatique",
+        "place": "ESGI Paris 12e",
+        "period": "Depuis 2025",
+        "text": "Programmation en C, développement web en HTML/CSS et PHP, algorithmique."
+      },
+      "internship": {
+        "title": "Stage développeur fullstack",
+        "place": "CHASSOCIES · Ctrl-Alt-Debt, Paris",
+        "period": "Août 2026",
+        "text": "Une application web de comptabilité qui garde chaque justificatif au bon endroit : gestion et stockage des pièces (MinIO / S3), et un schéma de base de données qui évolue par migrations versionnées sans casser les données (PostgreSQL / TypeORM). Travail en équipe avec Jira et un workflow Git/GitHub.",
+        "stack": "NestJS · React · TypeScript · shadcn/ui"
+      },
+      "work": {
+        "title": "Alternance recherchée",
+        "place": "Paris",
+        "period": "Dès septembre 2027",
+        "text": "Dès septembre 2027, à raison d’une semaine d’école pour trois en entreprise."
+      }
+    },
     "since": "Depuis",
     "days_one": "{{formattedCount}} jour",
     "days_other": "{{formattedCount}} jours",

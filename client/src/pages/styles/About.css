@@ -42,10 +42,43 @@
   font-weight: 560;
 }
 
-.about-path li > p:not(.about-path__title) {
+.about-path li > p:not(.about-path__title, .about-path__meta) {
   margin-top: var(--s-2);
   max-width: 40ch;
   color: var(--muted);
+}
+
+.about-path__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  margin: 0 0 var(--s-1);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  overflow-wrap: anywhere;
+}
+
+.about-path__kind {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.about-path__step--experience .about-path__kind {
+  color: var(--accent);
+}
+
+.about-path li > .about-path__stack {
+  margin-top: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+}
+
+/* the path may not fit one short desktop screen: the section grows with its content, like #collection */
+main > section#parcours {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
 }
 
 .about-days {
@@ -218,12 +251,6 @@
 }
 
 @media (max-width: 639px) {
-  /* two phone screens, filled by roomier rows instead of an empty band before the next section */
-  #parcours {
-    --hm: 2;
-  }
-
-  .about-path,
   .about-stack {
     gap: var(--s-7);
   }

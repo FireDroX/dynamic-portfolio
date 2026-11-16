@@ -63,11 +63,33 @@
     "summaryFirst": "I study computer science at ESGI Paris and mostly write web code with React and Node.js.",
     "summarySecond": "This portfolio is my testing ground: every project can be tried live. I am looking for a work-study placement from September 2027.",
     "pathTitle": "Path and web toolbox",
-    "pathText": "Where I study, what I am looking for next and the tools I use.",
-    "pathSchool": "ESGI Paris",
-    "pathSchoolText": "Web development training.",
-    "pathWork": "Work-study wanted",
-    "pathWorkText": "From September 2027, with one week at school for three at the company.",
+    "pathText": "Where I come from, what I have done so far, what I am looking for next and the tools I use.",
+    "pathKinds": {
+      "education": "Education",
+      "experience": "Experience",
+      "next": "Next step"
+    },
+    "path": {
+      "esgi": {
+        "title": "Bachelor in Computer Science",
+        "place": "ESGI Paris 12e",
+        "period": "Since 2025",
+        "text": "C programming, web development with HTML/CSS and PHP, algorithms."
+      },
+      "internship": {
+        "title": "Full-stack developer internship",
+        "place": "CHASSOCIES · Ctrl-Alt-Debt, Paris",
+        "period": "August 2026",
+        "text": "A web accounting app that keeps every receipt in the right place: managing and storing documents (MinIO / S3), and a database schema that evolves through versioned migrations without breaking data (PostgreSQL / TypeORM). Teamwork with Jira and a Git/GitHub workflow.",
+        "stack": "NestJS · React · TypeScript · shadcn/ui"
+      },
+      "work": {
+        "title": "Work-study wanted",
+        "place": "Paris",
+        "period": "From September 2027",
+        "text": "From September 2027, with one week at school for three at the company."
+      }
+    },
     "since": "Since",
     "days_one": "{{formattedCount}} day",
     "days_other": "{{formattedCount}} days",
