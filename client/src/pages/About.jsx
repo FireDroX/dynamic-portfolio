@@ -196,40 +196,42 @@ const About = () => {
                 </li>
               ))}
             </ul>
+          </div>
+          <div className="about-links__side span-6 start-7">
+            <div className="about-github" data-ui="github">
+              <p>{t("about.githubDescription")}</p>
+              <button
+                type="button"
+                className="snake-button"
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
+                }}
+                aria-label={t("about.githubButtonLabel")}
+              >
+                <picture>
+                  <source
+                    media="(prefers-color-scheme: dark)"
+                    srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+                  />
+                  <source
+                    media="(prefers-color-scheme: light)"
+                    srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
+                  />
+                  <img
+                    className="snake-svg"
+                    alt={t("about.githubImageAlt")}
+                    src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
+                    loading="lazy"
+                  />
+                </picture>
+              </button>
+            </div>
             <div className="btn-row about-links__cta">
               <Button href="mailto:contact@addrien.fr">
                 {t("home.contactMail")}
               </Button>
               <CvButton variant="secondary" />
             </div>
-          </div>
-          <div className="about-github span-6 start-7" data-ui="github">
-            <p>{t("about.githubDescription")}</p>
-            <button
-              type="button"
-              className="snake-button"
-              onClick={() => {
-                window.dispatchEvent(new CustomEvent("portfolio:snake-git"));
-              }}
-              aria-label={t("about.githubButtonLabel")}
-            >
-              <picture>
-                <source
-                  media="(prefers-color-scheme: dark)"
-                  srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-                />
-                <source
-                  media="(prefers-color-scheme: light)"
-                  srcSet="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake.svg"
-                />
-                <img
-                  className="snake-svg"
-                  alt={t("about.githubImageAlt")}
-                  src="https://raw.githubusercontent.com/FireDroX/FireDroX/refs/heads/output/github-snake-dark.svg"
-                  loading="lazy"
-                />
-              </picture>
-            </button>
           </div>
         </div>
       </Section>

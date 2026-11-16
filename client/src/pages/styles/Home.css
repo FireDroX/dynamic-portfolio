@@ -149,20 +149,32 @@
   }
 }
 
-/* contact */
+/* the kit locks a section to one screen from 1280px wide: on a 1366x768 screen the three cards run
+   past it, so the section grows with them instead */
+main > section#selection {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* contact: the button sits right under the line and the card keeps its content's height, so both
+   columns end level */
 @media (min-width: 1024px) {
-  .home-contact__grid {
-    min-height: calc(var(--ly-fit) * 0.8);
+  .home-contact > .wrap {
+    justify-content: center;
   }
 
-  .home-contact .closing__cta {
-    justify-content: space-between;
+  .home-contact__grid {
+    align-items: center;
   }
+}
+
+.home-contact .closing__cta > .btn {
+  align-self: flex-start;
 }
 
 .home-contact__card ul {
   display: grid;
-  flex: 1;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -181,7 +193,7 @@
   flex: 1;
   align-items: center;
   gap: var(--s-4);
-  padding: var(--s-5) 0;
+  padding: var(--s-3) 0;
   transition: color 160ms ease;
 }
 

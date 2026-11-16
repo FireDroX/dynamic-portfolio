@@ -175,14 +175,17 @@
   background: var(--card);
 }
 
-@media (min-width: 1024px) {
-  .about-github {
-    min-height: calc(var(--ly-fit) * 0.6);
-  }
+/* the snake card keeps its content's height and the contact buttons sit under it */
+.about-links__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
 }
 
-.about-links__cta {
-  margin-top: var(--s-6);
+@media (min-width: 1024px) {
+  .about-links {
+    align-items: end;
+  }
 }
 
 .about-github > p {
