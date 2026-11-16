@@ -1,6 +1,6 @@
 /* shim legacy — à supprimer quand plus aucune page n'utilise `.App` */
 
-:where(.App, #achievement-popup-container) * {
+:where(.App) * {
   margin: 0;
   padding: 0;
   border: 0;
@@ -9,8 +9,7 @@
 }
 
 /* the kit's --accent is the brand colour; legacy pages used it as the muted grey */
-.App,
-#achievement-popup-container {
+.App {
   --accent: var(--p-muted);
 }
 
@@ -103,10 +102,6 @@ main.App.App > section {
   height: auto;
   min-height: 0;
   padding: 0;
-}
-
-main.App.App > section.achievements-progress {
-  padding: 1.25rem 1.5rem;
 }
 
 /* zero weight like the kit's own display rules, so the page classes keep their flex/grid */

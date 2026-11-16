@@ -11,6 +11,7 @@ const Login = lazy(() => import("../pages/Login"));
 const About = lazy(() => import("../pages/About"));
 const MentionsLegales = lazy(() => import("../pages/MentionsLegales"));
 const Achievements = lazy(() => import("../pages/Achievements"));
+const NotFound = lazy(() => import("../pages/NotFound"));
 
 const AuthLoader = () => {
   const { t } = useTranslation();
@@ -59,7 +60,7 @@ const AppRoutes = ({ location, isAuthenticated, onLogin, onLogout }) => (
     <Route path="/about" element={Loadable(About)} />
     <Route path="/mentions-legales" element={Loadable(MentionsLegales)} />
     <Route path="/achievements" element={Loadable(Achievements)} />
-    <Route path="*" element={<Navigate to="/" replace />} />
+    <Route path="*" element={Loadable(NotFound)} />
   </Routes>
 );
 
