@@ -197,10 +197,6 @@ button.projects-pill:focus-visible,
   color: var(--danger);
 }
 
-.projects-more {
-  margin-top: var(--s-6);
-}
-
 .projects-pagination {
   display: flex;
   flex-wrap: wrap;
@@ -241,12 +237,22 @@ button.projects-pill:focus-visible,
 
 .projects-collection .section-head {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--s-2) var(--s-4);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-2);
 }
 
 .projects-collection .section-head > * {
   margin: 0;
+}
+
+@media (max-width: 639px) {
+  button.projects-pill,
+  .projects-pages .btn--sm {
+    min-height: 44px;
+  }
+
+  .projects-pages .btn--sm {
+    min-width: 44px;
+  }
 }

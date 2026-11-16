@@ -312,12 +312,6 @@ const Projects = () => {
               </div>
             </nav>
           )}
-
-          <div className="projects-more">
-            <Button to="/about" variant="secondary">
-              {t("home.aboutLink")}
-            </Button>
-          </div>
         </div>
       </Section>
     </main>
