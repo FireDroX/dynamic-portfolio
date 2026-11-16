@@ -136,15 +136,17 @@ const About = () => {
                 </p>
                 <ul aria-labelledby={`stack-${category}`}>
                   {tools.map((name) => {
-                    const { Icon, color } = getTechIcon(name);
+                    const icon = getTechIcon(name);
                     return (
                       <li key={name}>
-                        <Icon
-                          className="ic"
-                          size={32}
-                          color={color}
-                          aria-hidden="true"
-                        />
+                        {icon && (
+                          <icon.Icon
+                            className="ic"
+                            size={32}
+                            color={icon.color}
+                            aria-hidden="true"
+                          />
+                        )}
                         <span>{name}</span>
                       </li>
                     );
