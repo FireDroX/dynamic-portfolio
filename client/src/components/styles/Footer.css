@@ -10,9 +10,10 @@
   text-underline-offset: 3px;
 }
 
-/* a step of breathing room under the legal row, so the page doesn't end flush on the copyright */
+/* the kit's footer expects a padded section above it; legacy pages end flush
+   on their content, so give the footer a step of room above its top rule */
 .footer {
-  padding-bottom: calc(var(--s-8) + env(safe-area-inset-bottom, 0px));
+  margin-top: var(--s-8);
 }
 
 .footer .footer__legal {
