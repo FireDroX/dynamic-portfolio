@@ -70,7 +70,7 @@
 
 const NS = 'http://www.w3.org/2000/svg';
 const HERE = import.meta.url;
-const ICON_BASE = new URL('../icons/', HERE).href;
+const ICON_BASE = new URL('./icons/', HERE).href;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const ease = u => 0.5 - 0.5 * Math.cos(Math.PI * clamp(u, 0, 1));
 const unease = y => Math.acos(1 - 2 * clamp(y, 0, 1)) / Math.PI;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { fetchAllProjects } from "../utils/projectsApi";
+import { FiTerminal } from "react-icons/fi";
 import AppFrame from "./ui/AppFrame";
 import "./styles/HomeProjectTerminal.css";
 
@@ -127,13 +128,7 @@ const HomeProjectTerminal = () => {
       <AppFrame
         title="adrien@portfolio: ~/projects"
         actions={
-          <img
-            className="ic ic-ink ic-16"
-            src="/assets/icons/ui-terminal.svg"
-            alt=""
-            width="16"
-            height="16"
-          />
+          <FiTerminal size={16} aria-hidden="true" />
         }
         bodyClassName="home-terminal__body"
       >

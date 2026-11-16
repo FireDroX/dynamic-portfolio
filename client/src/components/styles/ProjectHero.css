@@ -53,3 +53,7 @@
     min-height: 44px;
   }
 }
+
+.project-hero__stack {
+  margin-top: var(--s-3);
+}

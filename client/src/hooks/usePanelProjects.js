@@ -95,6 +95,10 @@ const usePanelProjects = (onLogout) => {
       JSON.stringify(updated.contributors ?? project.contributors ?? []),
     );
     formData.append(
+      "stack",
+      JSON.stringify(updated.stack ?? project.stack ?? []),
+    );
+    formData.append(
       "published",
       (updated.published ?? project.published) ? "1" : "0",
     );

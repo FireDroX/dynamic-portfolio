@@ -1,4 +1,0 @@
-/* black marks vanish on the dark tone: the kit only flips them on .ground-inverse */
-:root[data-tone="dark"] .ic-ink {
-  filter: invert(1);
-}

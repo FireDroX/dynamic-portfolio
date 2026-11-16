@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { FiChevronLeft } from "react-icons/fi";
 
 import Button from "./ui/Button";
+import { TechStack } from "./TechPill";
+import { getStack } from "../utils/techStack";
 import "./styles/ProjectHero.css";
 
 const ProjectHero = ({ project, formattedDate }) => {
@@ -19,6 +21,11 @@ const ProjectHero = ({ project, formattedDate }) => {
         <div>
           <h1>{project.name}</h1>
           <p className="project-hero__facts">{facts.join(" · ")}</p>
+          <TechStack
+            className="project-hero__stack"
+            stack={getStack(project)}
+            label={t("stack.label")}
+          />
         </div>
         <Button href={`/api/projects/${project.fileName}`} external>
           {t("project.openTab")}

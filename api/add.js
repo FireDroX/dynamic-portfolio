@@ -3,6 +3,7 @@ const auth = require("../middleware/auth");
 const { getPool } = require("../utils/functions");
 const { parseProjectUpload } = require("../services/projectUpload");
 const { parseContributors } = require("../utils/contributors");
+const { parseStack } = require("../utils/stack");
 const { parsePublished } = require("../utils/publication");
 const {
   getProjectSlug,
@@ -22,11 +23,16 @@ router.post("/", auth, async (req, res) => {
 
     const contributors = parseContributors(fields.contributors);
 
+    const stack = fields.stack === undefined ? [] : parseStack(fields.stack);
+
     if (!name || !descriptionFr || !descriptionEn || !zip) {
       return res.status(400).json({ error: "Champs manquants." });
     }
     if (!contributors) {
       return res.status(400).json({ error: "Contributeurs invalides." });
+    }
+    if (!stack) {
+      return res.status(400).json({ error: "Stack invalide." });
     }
     // New projects are published unless the form says otherwise.
     const published = parsePublished(fields.published);
@@ -40,8 +46,8 @@ router.post("/", auth, async (req, res) => {
     const pool = await getPool();
     await pool.query(
       `INSERT INTO projects
-        (name, descriptionFr, descriptionEn, fileName, image, contributors, published)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        (name, descriptionFr, descriptionEn, fileName, image, contributors, stack, published)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         name,
         descriptionFr,
@@ -49,6 +55,7 @@ router.post("/", auth, async (req, res) => {
         projectSlug,
         image || "",
         JSON.stringify(contributors),
+        JSON.stringify(stack),
         published ?? 1,
       ],
     );
