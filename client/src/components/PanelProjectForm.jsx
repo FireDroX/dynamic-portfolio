@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ContributorsInput from "./ContributorsInput";
+import StackInput from "./StackInput";
 import PanelUploadIcon from "./PanelUploadIcon";
 import Button from "./ui/Button";
 import "./styles/PanelProjectForm.css";
@@ -17,6 +18,7 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
   const [imagePreview, setImagePreview] = useState("");
   const [files, setFiles] = useState(EMPTY_FILES);
   const [contributors, setContributors] = useState([]);
+  const [stack, setStack] = useState([]);
   const [submitState, setSubmitState] = useState("idle");
 
   useEffect(
@@ -45,6 +47,7 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
     setImagePreview("");
     setFiles(EMPTY_FILES);
     setContributors([]);
+    setStack([]);
   };
 
   const handleImageChange = (event) => {
@@ -111,6 +114,7 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
             value={contributors}
             onChange={setContributors}
           />
+          <StackInput name="stack" value={stack} onChange={setStack} />
           <label className="panel-field">
             {t("panel.status")}
             <select name="published" defaultValue="1">

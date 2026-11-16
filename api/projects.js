@@ -4,6 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { parseImageDataUrl } = require("../utils/images");
 const { readStoredContributors } = require("../utils/contributors");
+const { readStoredStack } = require("../utils/stack");
 const {
   PUBLIC_PROJECT_COLUMNS,
   listPublishedProjects,
@@ -12,6 +13,7 @@ const {
 const withContributors = (project) => ({
   ...project,
   contributors: readStoredContributors(project.contributors),
+  stack: readStoredStack(project.stack),
 });
 
 const router = express.Router();

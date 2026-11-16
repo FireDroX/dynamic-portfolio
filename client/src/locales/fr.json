@@ -162,6 +162,9 @@
     "label": "Contributeurs",
     "profile": "Profil GitHub de @{{login}}"
   },
+  "stack": {
+    "label": "Stack technique"
+  },
   "preview": {
     "technologies": "Technologies utilisées",
     "playable": "Jouable"
@@ -365,6 +368,12 @@
     "contributorsInvalid": "« {{login}} » n’est pas un identifiant GitHub valide.",
     "contributorsLimit": "{{count}} contributeurs maximum.",
     "removeContributor": "Retirer @{{login}}",
+    "stackLabel": "Stack technique",
+    "stackPlaceholder": "Ajouter une technologie puis Entrée",
+    "stackHelp": "Tape une technologie puis Entrée ou virgule pour l’ajouter. Des suggestions sont proposées pendant la saisie.",
+    "stackInvalid": "« {{tech}} » n’est pas un nom de technologie valide.",
+    "stackLimit": "{{count}} technologies maximum.",
+    "removeTech": "Retirer {{tech}}",
     "pickProject": "Projet à modifier",
     "latestProject": "dernier ajouté",
     "unpublishedOption": "non publié",

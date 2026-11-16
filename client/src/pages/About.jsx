@@ -6,32 +6,12 @@ import Card from "../components/ui/Card";
 import Section from "../components/ui/Section";
 import CvButton from "../components/CvButton";
 import PortfolioDiagram from "../components/PortfolioDiagram";
+import { getTechIcon } from "../utils/techStack";
 
 const stack = {
-  Frontend: [
-    { name: "React", icon: "react" },
-    { name: "JavaScript", icon: "javascript" },
-    { name: "TypeScript", icon: "typescript" },
-    { name: "HTML", icon: "html-5", extra: "ic-tall" },
-    { name: "CSS", icon: "css" },
-    { name: "Tailwind", icon: "tailwindcss", extra: "ic-land" },
-  ],
-  Backend: [
-    { name: "Node", icon: "nodejs" },
-    { name: "Express", icon: "si-express", extra: "ic-land ic-ink" },
-    { name: "Nest", icon: "nestjs" },
-    { name: "PHP", icon: "php", extra: "ic-wide" },
-    { name: "MySQL", icon: "si-mysql", extra: "ic-land" },
-    { name: "PostgreSQL", icon: "postgres" },
-  ],
-  Outils: [
-    { name: "VS Code", icon: "visual-studio-code" },
-    { name: "Docker", icon: "docker", extra: "ic-land" },
-    { name: "Git", icon: "git" },
-    { name: "GitHub", icon: "github", extra: "ic-ink" },
-    { name: "Cloudflare", icon: "cloudflare", extra: "ic-wide" },
-    { name: "WebStorm", icon: "webstorm" },
-  ],
+  Frontend: ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind"],
+  Backend: ["Node", "Express", "Nest", "PHP", "MySQL", "PostgreSQL"],
+  Outils: ["VS Code", "Docker", "Git", "GitHub", "Cloudflare", "WebStorm"],
 };
 
 const links = [
@@ -154,19 +134,22 @@ const About = () => {
                   {category === "Outils" ? t("about.toolsCategory") : category}
                 </p>
                 <ul aria-labelledby={`stack-${category}`}>
-                  {tools.map(({ name, icon, extra = "" }) => (
-                    <li key={name}>
-                      <img
-                        className={`ic ic-32 ${extra}`.trim()}
-                        src={`/assets/icons/${icon}.svg`}
-                        alt=""
-                        width="32"
-                        height="32"
-                        loading="lazy"
-                      />
-                      <span>{name}</span>
-                    </li>
-                  ))}
+                  {tools.map((name) => {
+                    const { src, className } = getTechIcon(name);
+                    return (
+                      <li key={name}>
+                        <img
+                          className={`ic ic-32 ${className}`.trim()}
+                          src={src}
+                          alt=""
+                          width="32"
+                          height="32"
+                          loading="lazy"
+                        />
+                        <span>{name}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}

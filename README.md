@@ -177,9 +177,10 @@ depuis lequel le site est consulté.
 | image         | TEXT    | Image Base64          |
 | createdAt     | DATE    | Date                  |
 | contributors  | TEXT    | Logins GitHub (JSON)  |
+| stack         | TEXT    | Technologies (JSON)   |
 | published     | TINYINT | 1 = visible sur le site, 0 = masqué |
 
-> Les colonnes `contributors` et `published` (défaut `1`) sont ajoutées automatiquement au démarrage du serveur si elles n'existent pas.
+> Les colonnes `contributors`, `stack` et `published` (défaut `1`) sont ajoutées automatiquement au démarrage du serveur si elles n'existent pas. Migration manuelle équivalente : `ALTER TABLE projects ADD COLUMN stack TEXT NULL;`
 > Un projet non publié reste modifiable dans le panel, mais disparaît de `/projects`, de la console de l'accueil, du sitemap, et ses URL (`/projects/:project`, `/api/projects/:project/...`) répondent 404.
 
 ---

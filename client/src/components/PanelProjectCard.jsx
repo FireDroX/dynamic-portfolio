@@ -1,4 +1,5 @@
 import ContributorsInput from "./ContributorsInput";
+import StackInput from "./StackInput";
 import PanelUploadIcon from "./PanelUploadIcon";
 import { useTranslation } from "react-i18next";
 import { FiArrowUpRight } from "react-icons/fi";
@@ -23,6 +24,7 @@ const PanelProjectCard = ({
   const descriptionFr = edited.descriptionFr ?? project.descriptionFr ?? "";
   const descriptionEn = edited.descriptionEn ?? project.descriptionEn ?? "";
   const contributors = edited.contributors ?? project.contributors ?? [];
+  const stack = edited.stack ?? project.stack ?? [];
   const published = edited.published ?? project.published;
   const hasRequiredFields = [projectName, descriptionFr, descriptionEn].every(
     (value) => value.trim(),
@@ -126,6 +128,10 @@ const PanelProjectCard = ({
               onChange={(list) =>
                 onChange(project.fileName, "contributors", list)
               }
+            />
+            <StackInput
+              value={stack}
+              onChange={(list) => onChange(project.fileName, "stack", list)}
             />
             <label className={edited.zip ? "has-file" : ""}>
               <PanelUploadIcon />

@@ -162,6 +162,9 @@
     "label": "Contributors",
     "profile": "@{{login}}'s GitHub profile"
   },
+  "stack": {
+    "label": "Tech stack"
+  },
   "preview": {
     "technologies": "Technologies used",
     "playable": "Playable"
@@ -365,6 +368,12 @@
     "contributorsInvalid": "“{{login}}” is not a valid GitHub username.",
     "contributorsLimit": "{{count}} contributors maximum.",
     "removeContributor": "Remove @{{login}}",
+    "stackLabel": "Tech stack",
+    "stackPlaceholder": "Add a technology, then Enter",
+    "stackHelp": "Type a technology then press Enter or comma to add it. Suggestions are offered as you type.",
+    "stackInvalid": "“{{tech}}” is not a valid technology name.",
+    "stackLimit": "{{count}} technologies maximum.",
+    "removeTech": "Remove {{tech}}",
     "pickProject": "Project to edit",
     "latestProject": "latest",
     "unpublishedOption": "unpublished",

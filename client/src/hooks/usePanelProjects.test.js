@@ -94,6 +94,23 @@ describe("usePanelProjects", () => {
     expect(options.body.get("contributors")).toBe('["FireDroX"]');
   });
 
+  it("sends the edited stack, or the stored one, as a JSON list", async () => {
+    routes["/api/panel/modify"] = () => json(200, { success: true });
+    const { result } = await renderPanel();
+
+    act(() => result.current.changeProject("probe_one", "name", "Renamed"));
+    await act(() =>
+      result.current.saveProject({ ...PROJECT, stack: ["Git"] }),
+    );
+    const calls = () =>
+      fetch.mock.calls.filter(([url]) => url === "/api/panel/modify");
+    expect(calls()[0][1].body.get("stack")).toBe('["Git"]');
+
+    act(() => result.current.changeProject("probe_one", "stack", ["React"]));
+    await act(() => result.current.saveProject(PROJECT));
+    expect(calls()[1][1].body.get("stack")).toBe('["React"]');
+  });
+
   it("sends the publication status, edited or stored", async () => {
     routes["/api/panel/modify"] = () => json(200, { success: true });
     const { result } = await renderPanel();

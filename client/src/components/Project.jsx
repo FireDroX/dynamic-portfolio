@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import Card from "./ui/Card";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
 import { getProjectMeta } from "../utils/projectMeta";
+import { getStack } from "../utils/techStack";
+import { TechStack } from "./TechPill";
 
 const Project = ({ p }) => {
   const { t, i18n } = useTranslation();
@@ -46,6 +48,7 @@ const Project = ({ p }) => {
       <div className="project-card__body">
         <h3 className="card__title">{p.name}</h3>
         {type && <p className="project-card__type">{t(type)}</p>}
+        <TechStack stack={getStack(p)} label={t("stack.label")} />
         <div className="project-card__foot">
           <span className="projects-badge">{t("projects.playable")}</span>
           <time dateTime={p.createdAt}>{formattedDate}</time>

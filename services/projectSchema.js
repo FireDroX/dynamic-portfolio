@@ -2,6 +2,7 @@
 // existing deployments pick up new columns without a manual migration.
 const PROJECT_COLUMNS = {
   contributors: "TEXT NULL",
+  stack: "TEXT NULL",
   // Unpublished projects stay in the panel but disappear from the public site.
   published: "TINYINT(1) NOT NULL DEFAULT 1",
 };
