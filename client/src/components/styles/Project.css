@@ -29,15 +29,17 @@
   padding: var(--s-5);
 }
 
-.project-card__meta {
+.project-card__type,
+.project-card__meta time {
   white-space: nowrap;
 }
 
 .project-card__foot {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--s-3);
+  gap: var(--s-2) var(--s-3);
   margin-top: auto;
   padding-top: var(--s-2);
   color: var(--muted);
