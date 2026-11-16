@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import Popup from "../components/Popup";
+import Section from "../components/ui/Section";
+import useCountUp from "../hooks/useCountUp";
 import { formatAchievementName } from "../utils/achievements/config";
 import { readArray } from "../utils/storage";
 
@@ -28,84 +30,72 @@ const Achievements = () => {
     }
   }, [userAchievements]);
 
+  const total = achievementsList.length;
   const unlockedCount = achievementsList.filter((achievement) =>
     userAchievements.includes(formatAchievementName(achievement.name)),
   ).length;
-  const completion = Math.round(
-    (unlockedCount / achievementsList.length) * 100,
-  );
+  const completion = Math.round((unlockedCount / total) * 100);
+  const animated = useCountUp(unlockedCount);
 
   return (
-    <main className="App achievements-page">
-      <header className="achievements-header">
-        <small>achievements</small>
-        <h1>Secrets</h1>
-        <p>{t("achievements.header")}</p>
-      </header>
+    <main className="achv">
+      <Section className="hero achv__hero" data-enter>
+        <div className="hero-text hero-copy">
+          <p className="achv__eyebrow">{t("achievements.eyebrow")}</p>
+          <h1>{t("achievements.secretsLabel")}</h1>
+          <p className="achv__lead">{t("achievements.header")}</p>
 
-      <section
-        className="achievements-progress"
-        aria-label={t("achievements.progressLabel")}
-      >
-        <div className="achievements-progress-copy">
-          <small>{t("achievements.progress")}</small>
-          <p>
-            {t("achievements.unlockedCount", {
-              unlocked: unlockedCount,
-              total: achievementsList.length,
-            })}
-          </p>
-        </div>
-
-        <div className="achievements-progress-track">
-          <div className="achievements-progress-label">
-            <span>
+          <div className="achv__progress">
+            <p
+              className="achv__count"
+              aria-label={t("achievements.unlockedCount", {
+                unlocked: unlockedCount,
+                total,
+              })}
+            >
+              <span className="achv__count-num" aria-hidden="true">
+                {animated}
+              </span>
+              <span aria-hidden="true"> / {total}</span>
+            </p>
+            <div
+              className="achv__bar"
+              role="progressbar"
+              aria-label={t("achievements.progressLabel")}
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow={completion}
+            >
+              <span style={{ width: `${completion}%` }} />
+            </div>
+            <p className="achv__status">
               {t(
                 completion === 100
                   ? "achievements.complete"
                   : "achievements.inProgress",
               )}
-            </span>
-            <span>{completion}%</span>
-          </div>
-          <div
-            className="achievements-progress-bar"
-            role="progressbar"
-            aria-label={t("achievements.unlockedLabel")}
-            aria-valuemin="0"
-            aria-valuemax="100"
-            aria-valuenow={completion}
-          >
-            <span style={{ width: `${completion}%` }} />
+            </p>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <section className="achievements-collection">
-        <div className="achievements-collection-title">
-          <div>
-            <small>{t("achievements.collection")}</small>
-            <h2>{t("achievements.findThem")}</h2>
-          </div>
-          <p>{t("achievements.hintExplanation")}</p>
-        </div>
-
-        <div className="achievements-list">
+      <Section className="achv__collection">
+        <h2>{t("achievements.findThem")}</h2>
+        <p className="achv__note">{t("achievements.hintExplanation")}</p>
+        <ul className="achv__grid">
           {achievementsList.map((achievement) => {
             const unlocked = userAchievements.includes(
               formatAchievementName(achievement.name),
             );
 
             return (
-              <Popup
-                key={achievement.name}
-                achievement={achievement}
-                unlocked={unlocked}
-              />
+              <li key={achievement.name}>
+                <Popup achievement={achievement} unlocked={unlocked} />
+              </li>
             );
           })}
-        </div>
-      </section>
+        </ul>
+      </Section>
     </main>
   );
 };

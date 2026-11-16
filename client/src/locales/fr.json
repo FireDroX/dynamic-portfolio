@@ -126,6 +126,8 @@
     "monstersEnergy": "Une plateforme communautaire autour de Monster Energy avec catalogue, classements, messagerie et achievements."
   },
   "achievements": {
+    "eyebrow": "achievements",
+    "secretsLabel": "Secrets",
     "header": "Des détails sont cachés un peu partout dans le portfolio. Explore, expérimente et garde l’œil ouvert.",
     "progress": "progression",
     "progressLabel": "Progression des achievements",
@@ -237,7 +239,12 @@
       "achievement-hunter": {
         "name": "Chasseur d’achievements",
         "description": "Tu as débloqué tous les achievements !",
-        "hint": "Débloque tous les achievements."
+        "hint": "Collectionne tous les autres achievements."
+      },
+      "lost-page": {
+        "name": "Page perdue",
+        "description": "Tu t’es aventuré sur une page qui n’existe pas.",
+        "hint": "Certains chemins ne mènent nulle part."
       }
     }
   },
@@ -336,6 +343,8 @@
       "privacy": "Confidentialité",
       "storage": "Stockage local",
       "services": "Services externes",
+      "ownership": "Propriété intellectuelle",
+      "liability": "Responsabilité",
       "rights": "Vos droits"
     },
     "edition": {
@@ -402,6 +411,15 @@
       "cnil": "Informations de la CNIL sur les traceurs ↗"
     }
   },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Aucune page du portfolio à cette adresse.",
+    "lead": "L’adresse demandée ne mène nulle part. Voici deux endroits où repartir.",
+    "terminalTitle": "terminal",
+    "suggest": "Essaie plutôt :",
+    "home": "Retour à l’accueil",
+    "projects": "Voir les projets"
+  },
   "seo": {
     "homeTitle": "Adrien | Développeur React & Node.js",
     "homeDescription": "Développeur React & Node.js, je crée des apps web, des jeux et des expériences interactives. Essayez mes projets en un clic, sans rien installer.",
@@ -413,6 +431,8 @@
     "legalDescription": "Mentions légales et politique de confidentialité du portfolio d’Adrien.",
     "achievementsTitle": "Secrets et achievements | Portfolio Adrien",
     "achievementsDescription": "Les secrets cachés dans le portfolio d’Adrien.",
+    "notFoundTitle": "Page introuvable | Portfolio Adrien",
+    "notFoundDescription": "Cette page n’existe pas.",
     "panelTitle": "Administration | Portfolio Adrien",
     "panelDescription": "Espace d’administration du portfolio.",
     "jobTitle": "Développeur Web"

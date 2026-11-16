@@ -126,6 +126,8 @@
     "monstersEnergy": "A Monster Energy community platform featuring a catalogue, rankings, messaging and achievements."
   },
   "achievements": {
+    "eyebrow": "achievements",
+    "secretsLabel": "Secrets",
     "header": "Details are hidden throughout the portfolio. Explore, experiment and keep your eyes open.",
     "progress": "progress",
     "progressLabel": "Achievement progress",
@@ -237,7 +239,12 @@
       "achievement-hunter": {
         "name": "Achievement Hunter",
         "description": "You unlocked all the achievements!",
-        "hint": "Unlock all the achievements."
+        "hint": "Collect every other achievement."
+      },
+      "lost-page": {
+        "name": "Lost Page",
+        "description": "You wandered onto a page that does not exist.",
+        "hint": "Some paths lead nowhere."
       }
     }
   },
@@ -336,6 +343,8 @@
       "privacy": "Privacy",
       "storage": "Local storage",
       "services": "External services",
+      "ownership": "Intellectual property",
+      "liability": "Liability",
       "rights": "Your rights"
     },
     "edition": {
@@ -402,6 +411,15 @@
       "cnil": "CNIL information about trackers ↗"
     }
   },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "No portfolio page at this address.",
+    "lead": "The address you asked for leads nowhere. Here are two places to start over.",
+    "terminalTitle": "terminal",
+    "suggest": "Try instead:",
+    "home": "Back to home",
+    "projects": "See the projects"
+  },
   "seo": {
     "homeTitle": "Adrien | React & Node.js Developer",
     "homeDescription": "React & Node.js developer, I build web apps, games and interactive experiences. Try my projects in one click, nothing to install.",
@@ -413,6 +431,8 @@
     "legalDescription": "Legal notice and privacy policy for Adrien’s portfolio.",
     "achievementsTitle": "Secrets and achievements | Adrien’s Portfolio",
     "achievementsDescription": "The secrets hidden in Adrien’s portfolio.",
+    "notFoundTitle": "Page not found | Adrien’s Portfolio",
+    "notFoundDescription": "This page does not exist.",
     "panelTitle": "Administration | Adrien’s Portfolio",
     "panelDescription": "Portfolio administration area.",
     "jobTitle": "Web Developer"
