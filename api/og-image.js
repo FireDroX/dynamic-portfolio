@@ -37,13 +37,13 @@ router.get("/:slug", async (req, res) => {
 
     const projectImage = parseImageDataUrl(project?.image);
 
-    if (!project || !projectImage) {
+    if (!project) {
       return res.redirect("/preview.png");
     }
 
     res.set("Content-Type", "image/png");
     res.set("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
-    res.send(await renderProjectOg(project, projectImage.buffer));
+    res.send(await renderProjectOg(project, projectImage?.buffer ?? null));
   } catch (err) {
     console.error(err);
     res.redirect("/preview.png");
