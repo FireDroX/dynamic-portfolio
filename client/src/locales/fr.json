@@ -419,8 +419,20 @@
     "privacy": {
       "eyebrow": "données",
       "title": "Confidentialité",
-      "first": "Le portfolio ne propose pas de compte visiteur, de formulaire de contact, de publicité ou d’outil de mesure d’audience. Aucune donnée n’est vendue ni utilisée pour établir un profil publicitaire.",
+      "first": "Le portfolio ne propose pas de compte visiteur, de formulaire de contact ni de publicité, et n’utilise aucun outil de mesure d’audience sur ses pages. Seuls les téléchargements du CV sont comptabilisés, comme décrit ci-dessous. Aucune donnée n’est vendue ni utilisée pour établir un profil publicitaire.",
       "second": "Comme pour tout service web, des informations techniques telles que l’adresse IP, la date de connexion, la ressource demandée ou le type de navigateur peuvent être traitées temporairement par le serveur et les intermédiaires réseau pour acheminer les requêtes, maintenir le service et assurer sa sécurité.",
+      "cv": {
+        "title": "Téléchargement du CV",
+        "intro": "Le bouton « Télécharger le CV » passe par url.addrien.fr, le service de liens de l’éditeur, hébergé sur la même infrastructure que le portfolio (voir « Hébergement »). Un contrôle anti-robot Cloudflare Turnstile s’exécute avant le téléchargement. À chaque téléchargement, ce service enregistre :",
+        "data": {
+          "ip": "l’adresse IP, uniquement sous forme d’empreinte (hash SHA-256 avec un secret), jamais en clair ;",
+          "userAgent": "le navigateur utilisé (user-agent) ;",
+          "referer": "la page d’origine (referer) et son domaine ;",
+          "country": "le pays, sous forme de code à deux lettres fourni par Cloudflare ;",
+          "date": "la date et l’heure du téléchargement."
+        },
+        "purpose": "Ces données servent uniquement à établir des statistiques de téléchargement et à protéger le service contre les abus. Elles sont conservées 3 mois, puis supprimées automatiquement."
+      },
       "note": "Les messages envoyés à l’adresse de contact sont traités uniquement afin de répondre à leur auteur."
     },
     "storage": {
@@ -440,8 +452,10 @@
     "services": {
       "eyebrow": "tiers",
       "title": "Services externes",
-      "intro": "Selon la page consultée, le navigateur peut contacter :",
+      "intro": "Selon la page consultée, le navigateur peut contacter :",
       "cloudflare": "pour l’accès sécurisé au site ;",
+      "turnstile": "pour le contrôle anti-robot exécuté avant le téléchargement du CV. Cloudflare traite alors des données techniques du navigateur et l’adresse IP selon sa <policy>politique de confidentialité</policy> ;",
+      "urls": "le service de liens de l’éditeur, par lequel passe le téléchargement du CV (voir « Confidentialité ») ;",
       "fonts": "pour charger les polices Urbanist et DM Mono ;",
       "github": "pour afficher l’animation des contributions et les photos de profil des contributeurs ;",
       "iframes": "les services nécessaires aux projets interactifs intégrés dans les iframes.",
@@ -461,7 +475,7 @@
     "rights": {
       "eyebrow": "contact",
       "title": "Vos droits",
-      "beforeEmail": "Pour toute question relative à ces informations, à une donnée personnelle ou à un contenu publié, vous pouvez écrire à l’adresse suivante :",
+      "beforeEmail": "Pour toute question relative à ces informations, à une donnée personnelle ou à un contenu publié, vous pouvez écrire à l’adresse suivante :",
       "digitalLaw": "Loi pour la confiance dans l’économie numérique ↗",
       "cnil": "Informations de la CNIL sur les traceurs ↗"
     }

@@ -419,8 +419,20 @@
     "privacy": {
       "eyebrow": "data",
       "title": "Privacy",
-      "first": "The portfolio does not provide visitor accounts, a contact form, advertising or audience measurement tools. No data is sold or used to build advertising profiles.",
+      "first": "The portfolio does not provide visitor accounts, a contact form or advertising, and uses no audience measurement tool on its pages. Only CV downloads are counted, as described below. No data is sold or used to build advertising profiles.",
       "second": "As with any web service, technical information such as the IP address, connection date, requested resource or browser type may be processed temporarily by the server and network intermediaries to route requests, maintain the service and keep it secure.",
+      "cv": {
+        "title": "CV download",
+        "intro": "The “Download my CV” button goes through url.addrien.fr, the publisher’s link service, hosted on the same infrastructure as the portfolio (see “Hosting”). A Cloudflare Turnstile anti-bot check runs before the download. For each download, this service records:",
+        "data": {
+          "ip": "the IP address, only as a fingerprint (SHA-256 hash with a secret), never in clear text;",
+          "userAgent": "the browser used (user-agent);",
+          "referer": "the originating page (referer) and its domain;",
+          "country": "the country, as a two-letter code provided by Cloudflare;",
+          "date": "the date and time of the download."
+        },
+        "purpose": "This data is used solely to produce download statistics and to protect the service against abuse. It is kept for 3 months, then deleted automatically."
+      },
       "note": "Messages sent to the contact address are processed solely to reply to their sender."
     },
     "storage": {
@@ -442,6 +454,8 @@
       "title": "External services",
       "intro": "Depending on the page viewed, the browser may contact:",
       "cloudflare": "for secure access to the website;",
+      "turnstile": "for the anti-bot check that runs before the CV download. Cloudflare then processes technical browser data and the IP address under its <policy>privacy policy</policy>;",
+      "urls": "the publisher’s link service, through which the CV download goes (see “Privacy”);",
       "fonts": "to load the Urbanist and DM Mono fonts;",
       "github": "to display the contribution animation and contributors' profile pictures;",
       "iframes": "services required by interactive projects embedded in iframes.",
