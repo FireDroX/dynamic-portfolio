@@ -209,6 +209,31 @@
   }
 }
 
+@keyframes achievement-notification-still {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  5%,
+  95% {
+    opacity: 1;
+  }
+}
+
+/* The kit (system.css) collapses every animation to .001ms under reduced motion;
+   with `forwards` the popup would jump straight to its hidden last frame.
+   Keep it on screen for its 4s life, without the slide. The id raises the
+   specificity above the kit's `:not([data-m-loop], ...)` rule. */
+@media (prefers-reduced-motion: reduce) {
+  #achievement-popup-container .achievement-popup {
+    transform: none;
+    animation-name: achievement-notification-still;
+    animation-duration: 4s !important;
+    animation-timing-function: linear;
+  }
+}
+
 @media (max-width: 480px) {
   .achievement-popup {
     top: 6rem;

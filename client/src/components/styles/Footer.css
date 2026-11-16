@@ -10,6 +10,11 @@
   text-underline-offset: 3px;
 }
 
+/* a step of breathing room under the legal row, so the page doesn't end flush on the copyright */
+.footer {
+  padding-bottom: calc(var(--s-8) + env(safe-area-inset-bottom, 0px));
+}
+
 .footer .footer__legal {
   align-items: center;
 }
