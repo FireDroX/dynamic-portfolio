@@ -102,6 +102,7 @@ const usePanelProjects = (onLogout) => {
       "published",
       (updated.published ?? project.published) ? "1" : "0",
     );
+    formData.append("type", updated.type ?? project.type ?? "");
     if (updated.image) formData.append("image", updated.image);
     if (updated.zip) formData.append("zip", updated.zip);
 

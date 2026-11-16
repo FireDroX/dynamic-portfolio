@@ -3,6 +3,7 @@
 const PROJECT_COLUMNS = {
   contributors: "TEXT NULL",
   stack: "TEXT NULL",
+  type: "VARCHAR(32) NULL",
   // Unpublished projects stay in the panel but disappear from the public site.
   published: "TINYINT(1) NOT NULL DEFAULT 1",
 };

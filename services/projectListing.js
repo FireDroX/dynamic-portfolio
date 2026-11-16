@@ -6,7 +6,7 @@ const MAX_SEARCH_LENGTH = 100;
 
 // Columns safe to expose publicly: the base64 image is replaced by a flag,
 // the image itself is served by `/api/projects/:project/image`.
-const PUBLIC_PROJECT_COLUMNS = `id, name, descriptionFr, descriptionEn, fileName, createdAt, contributors, stack,
+const PUBLIC_PROJECT_COLUMNS = `id, name, descriptionFr, descriptionEn, fileName, createdAt, contributors, stack, type,
   (image LIKE 'data:image/%;base64,%'
     AND MOD(CHAR_LENGTH(SUBSTRING_INDEX(image, ',', -1)), 4) = 0) AS hasImage`;
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ContributorsInput from "./ContributorsInput";
 import StackInput from "./StackInput";
+import { PROJECT_TYPE_IDS } from "../utils/projectTypes";
 import PanelUploadIcon from "./PanelUploadIcon";
 import Button from "./ui/Button";
 import "./styles/PanelProjectForm.css";
@@ -115,6 +116,17 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
             onChange={setContributors}
           />
           <StackInput name="stack" value={stack} onChange={setStack} />
+          <label className="panel-field">
+            {t("panel.typeLabel")}
+            <select name="type" defaultValue="">
+              <option value="">{t("panel.typeNone")}</option>
+              {PROJECT_TYPE_IDS.map((id) => (
+                <option key={id} value={id}>
+                  {t(`projectTypes.${id}`)}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="panel-field">
             {t("panel.status")}
             <select name="published" defaultValue="1">

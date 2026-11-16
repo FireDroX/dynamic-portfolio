@@ -1,6 +1,7 @@
 import ContributorsInput from "./ContributorsInput";
 import StackInput from "./StackInput";
 import PanelUploadIcon from "./PanelUploadIcon";
+import { PROJECT_TYPE_IDS } from "../utils/projectTypes";
 import { useTranslation } from "react-i18next";
 import { FiArrowUpRight } from "react-icons/fi";
 import "./styles/PanelProjectCard.css";
@@ -26,6 +27,7 @@ const PanelProjectCard = ({
   const contributors = edited.contributors ?? project.contributors ?? [];
   const stack = edited.stack ?? project.stack ?? [];
   const published = edited.published ?? project.published;
+  const type = edited.type ?? project.type ?? "";
   const hasRequiredFields = [projectName, descriptionFr, descriptionEn].every(
     (value) => value.trim(),
   );
@@ -77,6 +79,22 @@ const PanelProjectCard = ({
             >
               <option value="1">{t("panel.statusPublished")}</option>
               <option value="0">{t("panel.statusUnpublished")}</option>
+            </select>
+          </label>
+          <label className="panel-field">
+            {t("panel.typeLabel")}
+            <select
+              value={type}
+              onChange={(event) =>
+                onChange(project.fileName, "type", event.target.value)
+              }
+            >
+              <option value="">{t("panel.typeNone")}</option>
+              {PROJECT_TYPE_IDS.map((id) => (
+                <option key={id} value={id}>
+                  {t(`projectTypes.${id}`)}
+                </option>
+              ))}
             </select>
           </label>
           <label className="panel-field panel-project-name">

@@ -21,7 +21,7 @@ function parseProjectUpload(req) {
         limits: {
           fileSize: MAX_FILE_SIZE,
           files: 2,
-          fields: 7,
+          fields: 8,
           fieldSize: 64 * 1024,
         },
       });
