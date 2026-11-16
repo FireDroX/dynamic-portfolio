@@ -1,12 +1,13 @@
 import "./styles/About.css";
-import "../styles/icons.css";
+import { FaLinkedin } from "react-icons/fa";
+import { SiFiverr, SiGithub, SiKofi } from "react-icons/si";
 import { useTranslation } from "react-i18next";
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
 import Section from "../components/ui/Section";
 import CvButton from "../components/CvButton";
 import PortfolioDiagram from "../components/PortfolioDiagram";
-import { getTechIcon } from "../utils/techStack";
+import { INK_COLOR, getTechIcon } from "../utils/techStack";
 
 const stack = {
   Frontend: ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind"],
@@ -19,28 +20,28 @@ const links = [
     name: "GitHub",
     label: "FireDroX",
     href: "https://github.com/FireDroX",
-    icon: "github",
-    extra: "ic-ink",
+    Icon: SiGithub,
   },
   {
     name: "LinkedIn",
     labelKey: "about.me",
     href: "https://www.linkedin.com/in/adrien-pourlier/",
-    icon: "linkedin",
+    Icon: FaLinkedin,
+    color: "#0A66C2",
   },
   {
     name: "Fiverr",
     labelKey: "about.services",
     href: "https://fr.fiverr.com/s/GzV441Z",
-    icon: "fiverr",
-    extra: "ic-wide",
+    Icon: SiFiverr,
+    color: "#1DBF73",
   },
   {
     name: "Ko-fi",
     labelKey: "about.support",
     href: "https://ko-fi.com/addrien",
-    icon: "kofi",
-    extra: "ic-land",
+    Icon: SiKofi,
+    color: "#FF5E5B",
   },
 ];
 
@@ -135,16 +136,14 @@ const About = () => {
                 </p>
                 <ul aria-labelledby={`stack-${category}`}>
                   {tools.map((name) => {
-                    const { src, className } = getTechIcon(name);
+                    const { Icon, color } = getTechIcon(name);
                     return (
                       <li key={name}>
-                        <img
-                          className={`ic ic-32 ${className}`.trim()}
-                          src={src}
-                          alt=""
-                          width="32"
-                          height="32"
-                          loading="lazy"
+                        <Icon
+                          className="ic"
+                          size={32}
+                          color={color}
+                          aria-hidden="true"
                         />
                         <span>{name}</span>
                       </li>
@@ -178,16 +177,14 @@ const About = () => {
               <p>{t("about.linksText")}</p>
             </div>
             <ul className="about-links__list">
-              {links.map(({ name, label, labelKey, href, icon, extra = "" }) => (
+              {links.map(({ name, label, labelKey, href, Icon, color = INK_COLOR }) => (
                 <li key={name}>
                   <a href={href} target="_blank" rel="noopener noreferrer">
-                    <img
-                      className={`ic ic-28 ${extra}`.trim()}
-                      src={`/assets/icons/${icon}.svg`}
-                      alt=""
-                      width="28"
-                      height="28"
-                      loading="lazy"
+                    <Icon
+                      className="ic"
+                      size={28}
+                      color={color}
+                      aria-hidden="true"
                     />
                     <span>
                       <strong>{name}</strong>

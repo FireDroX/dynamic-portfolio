@@ -124,17 +124,7 @@ main > section#parcours {
 }
 
 .about-stack__group li .ic {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
-.about-stack__group li .ic-wide,
-.about-stack__group li .ic-land {
-  width: auto;
-  max-width: 40px;
-  height: auto;
-  max-height: 32px;
+  flex-shrink: 0;
 }
 
 .about-marks {
@@ -178,16 +168,7 @@ main > section#parcours {
 }
 
 .about-links__list .ic {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
-.about-links__list .ic-wide,
-.about-links__list .ic-land {
-  width: auto;
-  max-width: 28px;
-  height: auto;
+  flex-shrink: 0;
 }
 
 .about-links__list span {

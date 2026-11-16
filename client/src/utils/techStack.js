@@ -1,5 +1,28 @@
-// Single source of truth linking a technology name to its design-system icon
-// (client/public/assets/icons). `extra` carries the icon-kit modifier classes.
+import {
+  SiCloudflare,
+  SiCss,
+  SiDocker,
+  SiExpress,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiMysql,
+  SiNestjs,
+  SiNodedotjs,
+  SiPhp,
+  SiPostgresql,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+  SiWebstorm,
+} from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
+
+// Single source of truth linking a technology name to its react-icons glyph.
+// Marks without a `color` are black/white logos and follow the theme ink.
+export const INK_COLOR = "var(--p-ink)";
+
 export const MAX_STACK = 12;
 export const MAX_TECH_LENGTH = 30;
 
@@ -17,38 +40,39 @@ export const isValidTech = (value) => {
 };
 
 export const TECH_CATALOG = [
-  { name: "React", icon: "react" },
-  { name: "JavaScript", icon: "javascript", aliases: ["js"] },
-  { name: "TypeScript", icon: "typescript", aliases: ["ts"] },
-  { name: "HTML", icon: "html-5", extra: "ic-tall", aliases: ["html5"] },
-  { name: "CSS", icon: "css", aliases: ["css3"] },
+  { name: "React", Icon: SiReact, color: "#61DAFB" },
+  { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E", aliases: ["js"] },
+  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6", aliases: ["ts"] },
+  { name: "HTML", Icon: SiHtml5, color: "#E34F26", aliases: ["html5"] },
+  { name: "CSS", Icon: SiCss, color: "#1572B6", aliases: ["css3"] },
   {
     name: "Tailwind CSS",
-    icon: "tailwindcss",
-    extra: "ic-land",
+    Icon: SiTailwindcss,
+    color: "#06B6D4",
     aliases: ["tailwind"],
   },
-  { name: "Node.js", icon: "nodejs", aliases: ["node"] },
+  { name: "Node.js", Icon: SiNodedotjs, color: "#5FA04E", aliases: ["node"] },
+  { name: "Express", Icon: SiExpress, aliases: ["express.js"] },
+  { name: "NestJS", Icon: SiNestjs, color: "#E0234E", aliases: ["nest"] },
+  { name: "PHP", Icon: SiPhp, color: "#777BB4" },
+  { name: "MySQL", Icon: SiMysql, color: "#4479A1" },
   {
-    name: "Express",
-    icon: "si-express",
-    extra: "ic-land ic-ink",
-    aliases: ["express.js"],
+    name: "PostgreSQL",
+    Icon: SiPostgresql,
+    color: "#4169E1",
+    aliases: ["postgres"],
   },
-  { name: "NestJS", icon: "nestjs", aliases: ["nest"] },
-  { name: "PHP", icon: "php", extra: "ic-wide" },
-  { name: "MySQL", icon: "si-mysql", extra: "ic-land" },
-  { name: "PostgreSQL", icon: "postgres", aliases: ["postgres"] },
   {
     name: "VS Code",
-    icon: "visual-studio-code",
+    Icon: VscVscode,
+    color: "#007ACC",
     aliases: ["vscode", "visual studio code"],
   },
-  { name: "Docker", icon: "docker", extra: "ic-land" },
-  { name: "Git", icon: "git" },
-  { name: "GitHub", icon: "github", extra: "ic-ink" },
-  { name: "Cloudflare", icon: "cloudflare", extra: "ic-wide" },
-  { name: "WebStorm", icon: "webstorm" },
+  { name: "Docker", Icon: SiDocker, color: "#2496ED" },
+  { name: "Git", Icon: SiGit, color: "#F05032" },
+  { name: "GitHub", Icon: SiGithub },
+  { name: "Cloudflare", Icon: SiCloudflare, color: "#F38020" },
+  { name: "WebStorm", Icon: SiWebstorm, color: "#07C3F2" },
 ];
 
 export const TECH_SUGGESTIONS = TECH_CATALOG.map(({ name }) => name);
@@ -68,7 +92,7 @@ export const getTech = (name) => BY_KEY.get(toKey(name)) ?? null;
 export const getTechIcon = (name) => {
   const tech = getTech(name);
   if (!tech) return null;
-  return { src: `/assets/icons/${tech.icon}.svg`, className: tech.extra ?? "" };
+  return { Icon: tech.Icon, color: tech.color ?? INK_COLOR };
 };
 
 export const getStack = (project) =>

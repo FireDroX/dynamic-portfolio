@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
+import { SiGithub, SiMysql, SiReact } from "react-icons/si";
 import {
+  INK_COLOR,
   TECH_CATALOG,
   TECH_SUGGESTIONS,
   getStack,
@@ -11,14 +13,13 @@ import {
 
 describe("getTechIcon", () => {
   it("resolves canonical names", () => {
-    expect(getTechIcon("React")).toEqual({
-      src: "/assets/icons/react.svg",
-      className: "",
-    });
-    expect(getTechIcon("MySQL")).toEqual({
-      src: "/assets/icons/si-mysql.svg",
-      className: "ic-land",
-    });
+    expect(getTechIcon("React")).toEqual({ Icon: SiReact, color: "#61DAFB" });
+    expect(getTechIcon("MySQL")).toEqual({ Icon: SiMysql, color: "#4479A1" });
+  });
+
+  it("falls back to the theme ink for black marks", () => {
+    expect(getTechIcon("GitHub")).toEqual({ Icon: SiGithub, color: INK_COLOR });
+    expect(getTechIcon("Express").color).toBe(INK_COLOR);
   });
 
   it("resolves aliases regardless of case and spacing", () => {
@@ -37,32 +38,12 @@ describe("getTechIcon", () => {
 });
 
 describe("About stack names", () => {
-  const expected = {
-    React: ["react", ""],
-    JavaScript: ["javascript", ""],
-    TypeScript: ["typescript", ""],
-    HTML: ["html-5", "ic-tall"],
-    CSS: ["css", ""],
-    Tailwind: ["tailwindcss", "ic-land"],
-    Node: ["nodejs", ""],
-    Express: ["si-express", "ic-land ic-ink"],
-    Nest: ["nestjs", ""],
-    PHP: ["php", "ic-wide"],
-    MySQL: ["si-mysql", "ic-land"],
-    PostgreSQL: ["postgres", ""],
-    "VS Code": ["visual-studio-code", ""],
-    Docker: ["docker", "ic-land"],
-    Git: ["git", ""],
-    GitHub: ["github", "ic-ink"],
-    Cloudflare: ["cloudflare", "ic-wide"],
-    WebStorm: ["webstorm", ""],
-  };
-
-  it.each(Object.entries(expected))("%s keeps its icon", (name, [icon, extra]) => {
-    expect(getTechIcon(name)).toEqual({
-      src: `/assets/icons/${icon}.svg`,
-      className: extra,
-    });
+  it.each([
+    "React", "JavaScript", "TypeScript", "HTML", "CSS", "Tailwind", "Node",
+    "Express", "Nest", "PHP", "MySQL", "PostgreSQL", "VS Code", "Docker",
+    "Git", "GitHub", "Cloudflare", "WebStorm",
+  ])("%s has an icon", (name) => {
+    expect(typeof getTechIcon(name).Icon).toBe("function");
   });
 });
 

@@ -7,13 +7,11 @@ const TechPill = ({ name }) => {
   return (
     <span className="tech-pill">
       {icon && (
-        <img
-          className={`ic ic-16 ${icon.className}`.trim()}
-          src={icon.src}
-          alt=""
-          width="16"
-          height="16"
-          loading="lazy"
+        <icon.Icon
+          className="tech-pill__icon"
+          size={16}
+          color={icon.color}
+          aria-hidden="true"
         />
       )}
       {name}

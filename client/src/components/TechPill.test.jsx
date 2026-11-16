@@ -8,15 +8,16 @@ describe("TechPill", () => {
   it("shows the icon of a known technology", () => {
     const { container } = render(<TechPill name="React" />);
     expect(screen.getByText("React")).toBeTruthy();
-    expect(container.querySelector("img").getAttribute("src")).toBe(
-      "/assets/icons/react.svg",
-    );
+    const svg = container.querySelector("svg.tech-pill__icon");
+    expect(svg).toBeTruthy();
+    expect(svg.getAttribute("aria-hidden")).toBe("true");
+    expect(svg.getAttribute("color")).toBe("#61DAFB");
   });
 
   it("falls back to text only for an unknown technology", () => {
     const { container } = render(<TechPill name="Brainfuck" />);
     expect(screen.getByText("Brainfuck")).toBeTruthy();
-    expect(container.querySelector("img")).toBeNull();
+    expect(container.querySelector("svg")).toBeNull();
   });
 });
 

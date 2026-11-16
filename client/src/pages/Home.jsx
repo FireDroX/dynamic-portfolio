@@ -1,6 +1,8 @@
 import "./styles/Home.css";
-import "../styles/icons.css";
 import { useRef } from "react";
+import { FiDownload } from "react-icons/fi";
+import { FaLinkedin } from "react-icons/fa";
+import { SiGithub } from "react-icons/si";
 import { useTranslation } from "react-i18next";
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
@@ -10,6 +12,7 @@ import HomeProjectTerminal from "../components/HomeProjectTerminal";
 import Preview from "../components/Preview";
 import useHeroEffect from "../hooks/useHeroEffect";
 import { getCvUrl } from "../utils/cv";
+import { INK_COLOR } from "../utils/techStack";
 import featuredProjects from "../utils/featuredProjects";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/adrien-pourlier/";
@@ -27,22 +30,21 @@ const Home = () => {
       name: "LinkedIn",
       detail: "adrien-pourlier",
       href: LINKEDIN_URL,
-      icon: "linkedin",
+      Icon: FaLinkedin,
+      color: "#0A66C2",
     },
     {
       key: "github",
       name: "GitHub",
       detail: "FireDroX",
       href: GITHUB_URL,
-      icon: "github",
-      extra: "ic-ink",
+      Icon: SiGithub,
     },
     {
       key: "cv",
       name: t("home.cvButton"),
       href: getCvUrl(i18n.resolvedLanguage),
-      icon: "ui-download",
-      extra: "ic-ink",
+      Icon: FiDownload,
     },
   ];
   const heroRef = useRef(null);
@@ -133,16 +135,14 @@ const Home = () => {
           </div>
           <Card className="home-contact__card span-6 start-7">
             <ul>
-              {contactLinks.map(({ key, name, detail, href, icon, extra = "" }) => (
+              {contactLinks.map(({ key, name, detail, href, Icon, color = INK_COLOR }) => (
                 <li key={key}>
                   <a href={href} {...EXTERNAL}>
-                    <img
-                      className={`ic ic-28 ${extra}`.trim()}
-                      src={`/assets/icons/${icon}.svg`}
-                      alt=""
-                      width="28"
-                      height="28"
-                      loading="lazy"
+                    <Icon
+                      className="ic"
+                      size={28}
+                      color={color}
+                      aria-hidden="true"
                     />
                     <span>
                       <strong>{name}</strong>

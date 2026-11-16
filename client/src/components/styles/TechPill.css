@@ -20,6 +20,10 @@
   overflow-wrap: anywhere;
 }
 
+.tech-pill__icon {
+  flex-shrink: 0;
+}
+
 .contributor-tag .tech-pill {
   padding: 0 0 0 var(--s-2);
   border: 0;

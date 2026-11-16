@@ -203,9 +203,7 @@ main > section#selection {
 }
 
 .home-contact__card .ic {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .home-contact__card span {
