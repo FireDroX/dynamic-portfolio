@@ -10,6 +10,17 @@ const storageEntries = [
   { key: "portfolio_visit_days", purpose: "days" },
 ];
 
+const cvDataEntries = ["ip", "userAgent", "referer", "country", "date"];
+
+const cloudflarePolicyLink = (
+  <a
+    className="link"
+    href="https://www.cloudflare.com/privacypolicy/"
+    target="_blank"
+    rel="noopener noreferrer"
+  />
+);
+
 const toc = [
   ["edition", "edition"],
   ["hebergement", "hosting"],
@@ -31,7 +42,7 @@ const MentionsLegales = () => {
           <p className="legal__eyebrow">{t("legal.eyebrow")}</p>
           <h1>{t("legal.title")}</h1>
           <p className="legal__intro">{t("legal.intro")}</p>
-          <time className="legal__updated" dateTime="2026-07-23">
+          <time className="legal__updated" dateTime="2026-11-16">
             {t("legal.updated")}
           </time>
 
@@ -84,6 +95,19 @@ const MentionsLegales = () => {
             <h2>{t("legal.privacy.title")}</h2>
             <p>{t("legal.privacy.first")}</p>
             <p>{t("legal.privacy.second")}</p>
+            <h3>{t("legal.privacy.cv.title")}</h3>
+            <p>
+              <Trans
+                i18nKey="legal.privacy.cv.intro"
+                components={{ policy: cloudflarePolicyLink }}
+              />
+            </p>
+            <ul>
+              {cvDataEntries.map((key) => (
+                <li key={key}>{t(`legal.privacy.cv.data.${key}`)}</li>
+              ))}
+            </ul>
+            <p>{t("legal.privacy.cv.purpose")}</p>
             <p className="legal__note">{t("legal.privacy.note")}</p>
           </article>
 
@@ -115,6 +139,16 @@ const MentionsLegales = () => {
             <ul>
               <li>
                 <strong>Cloudflare</strong>, {t("legal.services.cloudflare")}
+              </li>
+              <li>
+                <strong>Cloudflare Turnstile</strong>,{" "}
+                <Trans
+                  i18nKey="legal.services.turnstile"
+                  components={{ policy: cloudflarePolicyLink }}
+                />
+              </li>
+              <li>
+                <strong>url.addrien.fr</strong>, {t("legal.services.urls")}
               </li>
               <li>
                 <strong>Google Fonts</strong>, {t("legal.services.fonts")}
