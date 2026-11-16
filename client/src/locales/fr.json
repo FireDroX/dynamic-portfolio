@@ -258,6 +258,11 @@
     "submit": "Entrer dans le panel"
   },
   "panel": {
+    "title": "Panel d'administration",
+    "imageFormats": "PNG, JPG, WEBP",
+    "uploadLoading": "Envoi du projet en cours…",
+    "uploadSuccess": "Projet publié.",
+    "uploadError": "Échec de l'envoi : vérifie le message ci-dessus et tes fichiers.",
     "privateArea": "espace privé",
     "description": "Publie et maintiens les expériences visibles sur le portfolio.",
     "logout": "Déconnexion",

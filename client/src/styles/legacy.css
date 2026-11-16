@@ -105,10 +105,6 @@ main.App.App > section {
   padding: 0;
 }
 
-main.App.App > section.login-card {
-  min-height: 31rem;
-}
-
 main.App.App > section.achievements-progress {
   padding: 1.25rem 1.5rem;
 }

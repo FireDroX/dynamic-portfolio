@@ -258,6 +258,11 @@
     "submit": "Enter the panel"
   },
   "panel": {
+    "title": "Admin panel",
+    "imageFormats": "PNG, JPG, WEBP",
+    "uploadLoading": "Uploading the project…",
+    "uploadSuccess": "Project published.",
+    "uploadError": "Upload failed: check the message above and your files.",
     "privateArea": "private area",
     "description": "Publish and maintain the experiences shown on the portfolio.",
     "logout": "Log out",
