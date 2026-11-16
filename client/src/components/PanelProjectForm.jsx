@@ -2,15 +2,22 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ContributorsInput from "./ContributorsInput";
 import PanelUploadIcon from "./PanelUploadIcon";
+import Button from "./ui/Button";
 import "./styles/PanelProjectForm.css";
 
 const EMPTY_FILES = { image: "", zip: "" };
+const STATUS_KEYS = {
+  loading: "panel.uploadLoading",
+  success: "panel.uploadSuccess",
+  error: "panel.uploadError",
+};
 
 const PanelProjectForm = ({ isSaving, onSubmit }) => {
   const { t } = useTranslation();
   const [imagePreview, setImagePreview] = useState("");
   const [files, setFiles] = useState(EMPTY_FILES);
   const [contributors, setContributors] = useState([]);
+  const [submitState, setSubmitState] = useState("idle");
 
   useEffect(
     () => () => {
@@ -19,12 +26,20 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
     [imagePreview],
   );
 
+  const isBusy = isSaving || submitState === "loading";
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const form = event.currentTarget;
+    setSubmitState("loading");
     const wasAdded = await onSubmit(new FormData(form));
-    if (!wasAdded) return;
+    if (!wasAdded) {
+      setSubmitState("error");
+      return;
+    }
+
+    setSubmitState("success");
 
     form.reset();
     setImagePreview("");
@@ -106,14 +121,16 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
         </div>
 
         <div className="panel-new-assets">
-          <label className="panel-upload panel-upload--image">
+          <label
+            className={`panel-upload panel-upload--image${files.image ? " has-file" : ""}`}
+          >
             {imagePreview ? (
               <img src={imagePreview} alt={t("panel.newPreview")} />
             ) : (
               <PanelUploadIcon />
             )}
             <strong>{files.image || t("panel.chooseImage")}</strong>
-            <span>PNG, JPG, WEBP</span>
+            <span>{t("panel.imageFormats")}</span>
             <input
               type="file"
               name="image"
@@ -122,7 +139,7 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
             />
           </label>
 
-          <label className="panel-upload">
+          <label className={`panel-upload${files.zip ? " has-file" : ""}`}>
             <PanelUploadIcon />
             <strong>{files.zip || t("panel.chooseFiles")}</strong>
             <span>{t("panel.zipHelp")}</span>
@@ -136,10 +153,21 @@ const PanelProjectForm = ({ isSaving, onSubmit }) => {
           </label>
         </div>
 
-        <button className="panel-primary-button" disabled={isSaving}>
-          {t(isSaving ? "panel.publishing" : "panel.publish")}
-          <span>→</span>
-        </button>
+        <Button
+          type="submit"
+          variant="primary"
+          disabled={isBusy}
+          aria-busy={isBusy}
+        >
+          {t(isBusy ? "panel.publishing" : "panel.publish")}
+        </Button>
+        <p
+          className={`panel-form-status panel-form-status--${submitState}`}
+          role="status"
+          aria-live="polite"
+        >
+          {STATUS_KEYS[submitState] && t(STATUS_KEYS[submitState])}
+        </p>
       </form>
     </section>
   );

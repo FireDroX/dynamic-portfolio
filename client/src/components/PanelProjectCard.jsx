@@ -143,13 +143,16 @@ const PanelProjectCard = ({
       </div>
 
       <div className="panel-project-actions">
-        <button className="panel-preview-button" onClick={onTogglePreview}>
+        <button
+          className="btn btn--secondary btn--sm"
+          onClick={onTogglePreview}
+        >
           {t(isPreviewOpen ? "panel.closePreview" : "panel.previewFiles")}
         </button>
         {/* Unpublished pages answer 404: no link until it is published. */}
         {project.published && (
           <a
-            className="panel-view-page-link"
+            className="btn btn--secondary btn--sm panel-view-page-link"
             href={`/projects/${project.fileName}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -159,6 +162,7 @@ const PanelProjectCard = ({
           </a>
         )}
         <a
+          className="btn btn--secondary btn--sm"
           href={`/api/panel/download/${encodeURIComponent(project.fileName)}`}
           download={`${project.fileName}.zip`}
         >
@@ -166,13 +170,13 @@ const PanelProjectCard = ({
         </a>
         <div className="panel-project-actions-spacer" />
         <button
-          className="panel-delete-button"
+          className="btn btn--sm panel-delete-button"
           onClick={() => onDelete(project)}
         >
           {t("panel.delete")}
         </button>
         <button
-          className="panel-save-button"
+          className="btn btn--primary btn--sm panel-save-button"
           disabled={!isModified || !hasRequiredFields || isSaving}
           onClick={() => onSave(project)}
         >

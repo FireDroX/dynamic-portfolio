@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PanelProjectCard from "../components/PanelProjectCard";
 import PanelProjectForm from "../components/PanelProjectForm";
+import Button from "../components/ui/Button";
 import usePanelProjects from "../hooks/usePanelProjects";
 
 const Panel = ({ onLogout }) => {
@@ -72,16 +73,20 @@ const Panel = ({ onLogout }) => {
   };
 
   return (
-    <main className="App panel-page">
+    <main className="panel-page">
       <header className="panel-header">
         <div>
-          <small>{t("panel.privateArea")}</small>
-          <h1>Panel</h1>
+          <p className="t-label">{t("panel.privateArea")}</p>
+          <h1>{t("panel.title")}</h1>
           <p>{t("panel.description")}</p>
         </div>
-        <button className="panel-logout" onClick={handleLogout}>
+        <Button
+          variant="secondary"
+          className="btn--sm"
+          onClick={handleLogout}
+        >
           {t("panel.logout")}
-        </button>
+        </Button>
       </header>
 
       {notice && (
