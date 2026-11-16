@@ -39,31 +39,9 @@
   --dot-yellow: #febc2e;
   --dot-green: #28c840;
 
-  /* legacy pages (removed with legacy.css once every page is redone) */
-  --legacy-line-soft: #7b7b7b28;
-  --legacy-line: #7b7b7b38;
-  --legacy-line-strong: #7b7b7b55;
-  --legacy-fill: #7b7b7b18;
-  --legacy-shadow-soft: #00000020;
-  --legacy-shadow-strong: #00000033;
-  --legacy-err: #d8877f;
-  --legacy-err-line: #d8877f66;
-  --legacy-err-fill: #d8877f12;
-  --warn-line: #d8a35f55;
-  --warn-fill: #d8a35f14;
+  /* status: "available" badge pulse (Home) */
   --ok-glow: #78ad7745;
   --ok-clear: #78ad7700;
-  --on-image-line: #ffffff18;
-  --overlay-bg: #0e0e0ed9;
-  --overlay-ink: #e7e5e5;
-  --preview-bg: #090909;
-  --legacy-btn-bg: #cbc6bd;
-  --legacy-btn-ink: #43403a;
-  --legacy-btn-shadow: #43403a55;
-
-  /* legacy aliases (--accent is the kit's, see legacy.css) */
-  --text: var(--p-ink);
-  --secondary: var(--p-accent);
 }
 
 @media (prefers-color-scheme: light) {
