@@ -74,7 +74,7 @@
   font-size: var(--t-label);
 }
 
-/* five steps do not fit one short desktop screen: the section grows with its content, like #collection */
+/* the path may not fit one short desktop screen: the section grows with its content, like #collection */
 main > section#parcours {
   height: auto;
   min-height: 100vh;
