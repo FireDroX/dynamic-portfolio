@@ -229,8 +229,14 @@
 }
 
 @media (max-width: 639px) {
+  /* two phone screens, filled by roomier rows instead of an empty band before the next section */
   #parcours {
     --hm: 2;
+  }
+
+  .about-path,
+  .about-stack {
+    gap: var(--s-7);
   }
 
   .about-diagram > .panel {
@@ -239,6 +245,11 @@
 
   .about-stack__group ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-4);
+  }
+
+  .about-stack__group li {
+    padding: var(--s-5) var(--s-4);
   }
 }
 
