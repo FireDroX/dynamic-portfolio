@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 router.use("/api/projects", require("./projects"));
+router.use("/api/tech-icons", require("./techIcons"));
 router.use("/api/panel", require("./panel"));
 router.use("/api/panel/login", require("./login"));
 router.use("/api/panel/add", require("./add"));

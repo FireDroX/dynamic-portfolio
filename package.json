@@ -23,6 +23,7 @@
     "express-rate-limit": "^8.7.3",
     "express-session": "^1.19.0",
     "mysql2": "^3.24.6",
+    "simple-icons": "^16.38.0",
     "unzipper": "^0.12.5"
   },
   "devDependencies": {
