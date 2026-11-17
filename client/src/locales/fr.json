@@ -397,7 +397,7 @@
     "eyebrow": "mentions & confidentialité",
     "title": "Informations légales",
     "intro": "Informations relatives à l’édition du portfolio, à son hébergement et aux données utilisées pour son fonctionnement.",
-    "updated": "Mise à jour le 16 novembre 2026",
+    "updated": "Mise à jour le 17 novembre 2026",
     "navLabel": "Sommaire des mentions légales",
     "nav": {
       "edition": "Édition",
@@ -463,7 +463,6 @@
       "cloudflare": "pour l’accès sécurisé au site ;",
       "turnstile": "pour le contrôle anti-robot exécuté avant le téléchargement du CV. Cloudflare traite alors des données techniques du navigateur et l’adresse IP selon sa <policy>politique de confidentialité</policy> ;",
       "urls": "le service de liens de l’éditeur, par lequel passe le téléchargement du CV (voir « Confidentialité ») ;",
-      "fonts": "pour charger les polices Urbanist et DM Mono ;",
       "github": "pour afficher l’animation des contributions et les photos de profil des contributeurs ;",
       "iframes": "les services nécessaires aux projets interactifs intégrés dans les iframes.",
       "links": "Les liens vers GitHub, LinkedIn ou Ko-fi ouvrent des sites distincts disposant de leurs propres politiques de confidentialité."

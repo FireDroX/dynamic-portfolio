@@ -11,6 +11,7 @@ import Button from "../components/ui/Button";
 import Section from "../components/ui/Section";
 import useProjectDetails from "../hooks/useProjectDetails";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
+import formatProjectDate from "../utils/formatProjectDate";
 import { getContributors } from "../utils/contributors";
 import getProjectDescription from "../utils/projectDescription";
 
@@ -69,13 +70,11 @@ const ProjectDetail = () => {
 
   const description = getProjectDescription(project, i18n.resolvedLanguage);
   const contributors = getContributors(project);
-  const createdAt = new Date(project.createdAt);
-  const formattedDate = Number.isNaN(createdAt.getTime())
-    ? null
-    : new Intl.DateTimeFormat(
-        i18n.resolvedLanguage === "en" ? "en-GB" : "fr-FR",
-        { day: "2-digit", month: "long", year: "numeric" },
-      ).format(createdAt);
+  const formattedDate = formatProjectDate(
+    project.createdAt,
+    i18n.resolvedLanguage,
+    { month: "long" },
+  );
 
   return (
     <main className="project-page">

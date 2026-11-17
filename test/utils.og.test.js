@@ -85,6 +85,18 @@ describe("renderPortfolioOg", () => {
     }));
     expectPng(renderPortfolioOg(projects));
   });
+
+  it("reuses the last image while the project list is unchanged", () => {
+    const list = () => [{ fileName: "demo", createdAt: new Date("2025-01-02") }];
+    const first = renderPortfolioOg(list());
+    expect(renderPortfolioOg(list())).toBe(first);
+
+    const changed = renderPortfolioOg([
+      { fileName: "demo-2", createdAt: new Date("2025-01-02") },
+    ]);
+    expect(changed).not.toBe(first);
+    expectPng(changed);
+  });
 });
 
 describe("renderProjectOg", () => {

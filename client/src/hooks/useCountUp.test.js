@@ -24,6 +24,8 @@ describe("useCountUp", () => {
     vi.stubGlobal("cancelAnimationFrame", () => {});
     const { result } = renderHook(() => useCountUp(10, { duration: 100 }));
 
+    // No flash of the final value before the first frame.
+    expect(result.current).toBe(0);
     act(() => frames.shift()(0));
     expect(result.current).toBe(0);
     act(() => frames.shift()(100));

@@ -42,7 +42,7 @@ const MentionsLegales = () => {
           <p className="legal__eyebrow">{t("legal.eyebrow")}</p>
           <h1>{t("legal.title")}</h1>
           <p className="legal__intro">{t("legal.intro")}</p>
-          <time className="legal__updated" dateTime="2026-11-16">
+          <time className="legal__updated" dateTime="2026-11-17">
             {t("legal.updated")}
           </time>
 
@@ -149,9 +149,6 @@ const MentionsLegales = () => {
               </li>
               <li>
                 <strong>url.addrien.fr</strong>, {t("legal.services.urls")}
-              </li>
-              <li>
-                <strong>Google Fonts</strong>, {t("legal.services.fonts")}
               </li>
               <li>
                 <strong>GitHub</strong>, {t("legal.services.github")}

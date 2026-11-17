@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import Card from "./ui/Card";
 import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
+import formatProjectDate from "../utils/formatProjectDate";
 import { getProjectTypeLabelKey } from "../utils/projectTypes";
 import { getStack } from "../utils/techStack";
 import { TechStack } from "./TechPill";
@@ -10,19 +11,9 @@ import { TechStack } from "./TechPill";
 const Project = ({ p }) => {
   const { t, i18n } = useTranslation();
   const typeKey = getProjectTypeLabelKey(p.type);
-  const createdAt = new Date(p.createdAt);
-  const formattedDate = Number.isNaN(createdAt.getTime())
-    ? t("projects.unknownDate")
-    : new Intl.DateTimeFormat(
-        i18n.resolvedLanguage === "en" ? "en-GB" : "fr-FR",
-        {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        },
-      )
-        .format(createdAt)
-        .replace(".", "");
+  const formattedDate =
+    formatProjectDate(p.createdAt, i18n.resolvedLanguage) ??
+    t("projects.unknownDate");
 
   return (
     <Card

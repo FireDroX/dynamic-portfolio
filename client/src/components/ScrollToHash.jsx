@@ -1,10 +1,21 @@
 import { useEffect, useRef } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigationType } from "react-router";
 
 const MAX_FRAMES = 60;
 
+// A stray "%" in a shared link must not crash the app: fall back to the raw id.
+const decodeHash = (hash) => {
+  const raw = hash.slice(1);
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+};
+
 const ScrollToHash = () => {
   const { pathname, search, hash, key } = useLocation();
+  const navigationType = useNavigationType();
   const previous = useRef(null);
 
   useEffect(() => {
@@ -12,6 +23,9 @@ const ScrollToHash = () => {
     previous.current = { pathname, search };
 
     if (!hash) {
+      // First load, reload, back and forward (all "POP"): the browser restores
+      // the scroll position itself, so leave it alone.
+      if (navigationType === "POP") return undefined;
       // Only the query changed on the same page (pagination, filters, search):
       // the page handles its own scroll, so stay where the visitor is.
       if (before && before.pathname === pathname && before.search !== search) {
@@ -21,7 +35,7 @@ const ScrollToHash = () => {
       return undefined;
     }
 
-    const id = decodeURIComponent(hash.slice(1));
+    const id = decodeHash(hash);
     let frame = 0;
     let raf;
 
@@ -38,7 +52,7 @@ const ScrollToHash = () => {
 
     return () => cancelAnimationFrame(raf);
     // `key` changes on every navigation, even to an identical URL.
-  }, [pathname, search, hash, key]);
+  }, [pathname, search, hash, key, navigationType]);
 
   return null;
 };

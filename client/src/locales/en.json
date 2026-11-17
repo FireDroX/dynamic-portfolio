@@ -397,7 +397,7 @@
     "eyebrow": "legal & privacy",
     "title": "Legal information",
     "intro": "Information about the portfolio’s publisher, hosting and the data used for its operation.",
-    "updated": "Updated November 16, 2026",
+    "updated": "Updated November 17, 2026",
     "navLabel": "Legal information table of contents",
     "nav": {
       "edition": "Publisher",
@@ -463,7 +463,6 @@
       "cloudflare": "for secure access to the website;",
       "turnstile": "for the anti-bot check that runs before the CV download. Cloudflare then processes technical browser data and the IP address under its <policy>privacy policy</policy>;",
       "urls": "the publisher’s link service, through which the CV download goes (see “Privacy”);",
-      "fonts": "to load the Urbanist and DM Mono fonts;",
       "github": "to display the contribution animation and contributors' profile pictures;",
       "iframes": "services required by interactive projects embedded in iframes.",
       "links": "Links to GitHub, LinkedIn or Ko-fi open separate websites with their own privacy policies."
