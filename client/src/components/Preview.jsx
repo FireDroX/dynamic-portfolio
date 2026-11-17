@@ -1,102 +1,47 @@
 import "./styles/Preview.css";
-import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import {
-  SiBootstrap,
-  SiCss,
-  SiDocker,
-  SiExpress,
-  SiHtml5,
-  SiMysql,
-  SiNestjs,
-  SiPhp,
-  SiReact,
-  SiSocketdotio,
-  SiTypescript,
-} from "react-icons/si";
+import Card from "./ui/Card";
 
-import preview1 from "../assets/preview1.mp4";
-import preview1Poster from "../assets/preview1_loader.png";
-import preview2 from "../assets/preview2.mp4";
-import preview2Poster from "../assets/preview2_loader.png";
-import preview4 from "../assets/preview4.mp4";
-import preview4Poster from "../assets/preview4_loader.png";
+import preview1 from "../assets/preview1.webp";
+import preview2 from "../assets/preview2.webp";
+import preview4 from "../assets/preview4.webp";
 
-const previews = {
-  preview1: { video: preview1, poster: preview1Poster },
-  preview2: { video: preview2, poster: preview2Poster },
-  preview4: { video: preview4, poster: preview4Poster },
-};
+const thumbnails = { preview1, preview2, preview4 };
 
-const stackIcons = {
-  React: SiReact,
-  Express: SiExpress,
-  "Socket.io": SiSocketdotio,
-  Docker: SiDocker,
-  HTML: SiHtml5,
-  CSS: SiCss,
-  PHP: SiPhp,
-  Bootstrap: SiBootstrap,
-  NestJS: SiNestjs,
-  TypeScript: SiTypescript,
-  MySQL: SiMysql,
-};
-
-const Preview = ({ project, variant }) => {
-  const navigate = useNavigate();
+const Preview = ({ project }) => {
   const { t } = useTranslation();
-  const preview = previews[project.image];
-  if (!preview || !["1", "2", "3"].includes(variant)) return null;
+  const thumbnail = thumbnails[project.image];
 
   return (
-    <article className={`preview-container preview-var${variant}`}>
-      <div className="preview-copy">
-        <div className="preview-meta">
-          <span>{t("preview.selected")}</span>
+    <Card
+      to={`/projects/${encodeURIComponent(project.fileName)}`}
+      className="preview"
+    >
+      {thumbnail && (
+        <div className="panel panel--top">
+          <img
+            className="frame__img"
+            src={thumbnail}
+            width="1280"
+            height="720"
+            loading="lazy"
+            decoding="async"
+            alt=""
+          />
         </div>
-        <h3>{project.name}</h3>
-        <p>{t(project.descriptionKey)}</p>
-        <ul className="preview-stack" aria-label={t("preview.technologies")}>
-          {project.stack.map((tech) => {
-            const Icon = stackIcons[tech];
-
-            return (
-              <li key={tech}>
-                {Icon && <Icon aria-hidden="true" />}
-                <span>{tech}</span>
-              </li>
-            );
-          })}
-        </ul>
-        <button
-          type="button"
-          onClick={() => navigate(`/projects/${project.fileName}`)}
-          aria-label={t("preview.discoverLabel", { name: project.name })}
-        >
-          {t("preview.discover")}
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </button>
-      </div>
-
-      <div className="preview-media">
-        <video
-          src={preview.video}
-          poster={preview.poster}
-          autoPlay
-          loop
-          muted
-          preload="auto"
-          disablePictureInPicture
-          disableRemotePlayback
-          x-webkit-airplay="deny"
-          playsInline
-          title={t("preview.videoTitle", { name: project.name })}
-        />
-        <span className="preview-media-label">{t("preview.live")}</span>
-      </div>
-    </article>
+      )}
+      <h3>{project.name}</h3>
+      <p>{t(project.descriptionKey)}</p>
+      <ul className="preview__stack" aria-label={t("preview.technologies")}>
+        {project.stack.map((tech) => (
+          <li key={tech}>{tech}</li>
+        ))}
+      </ul>
+      <span className="preview__badge">
+        <i aria-hidden="true" />
+        {t("preview.playable")}
+      </span>
+    </Card>
   );
 };
 

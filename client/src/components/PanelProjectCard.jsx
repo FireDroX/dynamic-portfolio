@@ -1,5 +1,7 @@
 import ContributorsInput from "./ContributorsInput";
+import StackInput from "./StackInput";
 import PanelUploadIcon from "./PanelUploadIcon";
+import { PROJECT_TYPE_IDS } from "../utils/projectTypes";
 import { useTranslation } from "react-i18next";
 import { FiArrowUpRight } from "react-icons/fi";
 import "./styles/PanelProjectCard.css";
@@ -23,7 +25,9 @@ const PanelProjectCard = ({
   const descriptionFr = edited.descriptionFr ?? project.descriptionFr ?? "";
   const descriptionEn = edited.descriptionEn ?? project.descriptionEn ?? "";
   const contributors = edited.contributors ?? project.contributors ?? [];
+  const stack = edited.stack ?? project.stack ?? [];
   const published = edited.published ?? project.published;
+  const type = edited.type ?? project.type ?? "";
   const hasRequiredFields = [projectName, descriptionFr, descriptionEn].every(
     (value) => value.trim(),
   );
@@ -77,6 +81,22 @@ const PanelProjectCard = ({
               <option value="0">{t("panel.statusUnpublished")}</option>
             </select>
           </label>
+          <label className="panel-field">
+            {t("panel.typeLabel")}
+            <select
+              value={type}
+              onChange={(event) =>
+                onChange(project.fileName, "type", event.target.value)
+              }
+            >
+              <option value="">{t("panel.typeNone")}</option>
+              {PROJECT_TYPE_IDS.map((id) => (
+                <option key={id} value={id}>
+                  {t(`projectTypes.${id}`)}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="panel-field panel-project-name">
             {t("panel.name")}
             <input
@@ -127,6 +147,10 @@ const PanelProjectCard = ({
                 onChange(project.fileName, "contributors", list)
               }
             />
+            <StackInput
+              value={stack}
+              onChange={(list) => onChange(project.fileName, "stack", list)}
+            />
             <label className={edited.zip ? "has-file" : ""}>
               <PanelUploadIcon />
               <span>{edited.zip?.name || t("panel.replaceZip")}</span>
@@ -143,13 +167,16 @@ const PanelProjectCard = ({
       </div>
 
       <div className="panel-project-actions">
-        <button className="panel-preview-button" onClick={onTogglePreview}>
+        <button
+          className="btn btn--secondary btn--sm"
+          onClick={onTogglePreview}
+        >
           {t(isPreviewOpen ? "panel.closePreview" : "panel.previewFiles")}
         </button>
         {/* Unpublished pages answer 404: no link until it is published. */}
         {project.published && (
           <a
-            className="panel-view-page-link"
+            className="btn btn--secondary btn--sm panel-view-page-link"
             href={`/projects/${project.fileName}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -159,6 +186,7 @@ const PanelProjectCard = ({
           </a>
         )}
         <a
+          className="btn btn--secondary btn--sm"
           href={`/api/panel/download/${encodeURIComponent(project.fileName)}`}
           download={`${project.fileName}.zip`}
         >
@@ -166,13 +194,13 @@ const PanelProjectCard = ({
         </a>
         <div className="panel-project-actions-spacer" />
         <button
-          className="panel-delete-button"
+          className="btn btn--sm panel-delete-button"
           onClick={() => onDelete(project)}
         >
           {t("panel.delete")}
         </button>
         <button
-          className="panel-save-button"
+          className="btn btn--primary btn--sm panel-save-button"
           disabled={!isModified || !hasRequiredFields || isSaving}
           onClick={() => onSave(project)}
         >

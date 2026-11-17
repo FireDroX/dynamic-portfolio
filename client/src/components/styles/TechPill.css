@@ -1,0 +1,31 @@
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech-pill {
+  max-width: 100%;
+  padding: 2px var(--s-3);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: var(--t-small);
+  overflow-wrap: anywhere;
+}
+
+.tech-pill__icon {
+  flex-shrink: 0;
+}
+
+.contributor-tag .tech-pill {
+  padding: 0 0 0 var(--s-2);
+  border: 0;
+  color: var(--p-ink);
+}

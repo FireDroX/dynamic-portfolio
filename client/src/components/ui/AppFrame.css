@@ -1,0 +1,63 @@
+.app-frame {
+  min-width: 0;
+  overflow: clip;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.app-frame__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+
+.app-frame__dots {
+  display: inline-flex;
+  gap: var(--s-2);
+  flex: none;
+}
+
+.app-frame__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.app-frame__dot--red {
+  background: var(--dot-red);
+}
+
+.app-frame__dot--yellow {
+  background: var(--dot-yellow);
+}
+
+.app-frame__dot--green {
+  background: var(--dot-green);
+}
+
+.app-frame__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 400 var(--t-label) / 1.4 var(--font-mono);
+  color: var(--muted);
+}
+
+.app-frame__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: none;
+}
+
+.app-frame__body {
+  min-width: 0;
+}

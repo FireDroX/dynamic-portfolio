@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-type="software" data-radius="soft" data-buttons="pill" data-motion>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,12 +29,28 @@
     <meta name="robots" content="__ROBOTS__" />
     <meta name="googlebot" content="__ROBOTS__" />
     <meta name="google" content="notranslate" />
-    <meta name="theme-color" content="#b29a80" />
+    <meta name="theme-color" content="#0e0e0e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f2f2f2" media="(prefers-color-scheme: light)" />
+    <meta name="page-type" content="software" />
+    <meta name="site-kind" content="software" />
 
     <link rel="icon" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="canonical" href="__URL__" />
+
+    <link rel="stylesheet" href="/assets/system.css" />
+    <link rel="stylesheet" href="/assets/ui/cards.css" />
+    <link rel="stylesheet" href="/assets/layout/layout.css" />
+    <link rel="stylesheet" href="/assets/motion/motion.css" />
+    <link rel="stylesheet" href="/assets/diagrams/diagram.css" />
+    <script>
+      document.documentElement.classList.add("m-enter");
+      setTimeout(
+        () => document.documentElement.classList.add("m-enter-done"),
+        700,
+      );
+    </script>
 
     <script id="discord:component-embed" type="application/vnd.discord.component-embed+json">
       __DISCORD_EMBED__

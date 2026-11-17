@@ -2,20 +2,18 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { fetchAllProjects } from "../utils/projectsApi";
+import { FiTerminal } from "react-icons/fi";
+import AppFrame from "./ui/AppFrame";
+import formatProjectDate from "../utils/formatProjectDate";
 import "./styles/HomeProjectTerminal.css";
 
-const formatProjectDate = (value, locale, unknownDate) => {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return unknownDate;
 
-  return new Intl.DateTimeFormat(locale, {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  })
-    .format(date)
-    .replace(".", "");
-};
+// The listing shows the latest projects only, so the terminal never needs a scrollbar;
+// `run` still completes and opens any published project.
+export const TERMINAL_ROWS = 8;
+
+const byNewest = (first, second) =>
+  (Date.parse(second.createdAt) || 0) - (Date.parse(first.createdAt) || 0);
 
 const HomeProjectTerminal = () => {
   const { t, i18n } = useTranslation();
@@ -49,6 +47,7 @@ const HomeProjectTerminal = () => {
     return () => controller.abort();
   }, []);
 
+  const latestProjects = [...projects].sort(byNewest).slice(0, TERMINAL_ROWS);
   const normalizedProjectName = projectName.toLocaleLowerCase();
   const suggestedProject = projects.find(({ fileName }) =>
     fileName.toLocaleLowerCase().startsWith(normalizedProjectName),
@@ -109,34 +108,37 @@ const HomeProjectTerminal = () => {
   };
 
   return (
-    <div className="home-terminal" aria-label={t("home.terminalLabel")}>
-      <div className="home-terminal-title">
-        <span className="home-terminal-dots" aria-hidden="true">
-          <span className="home-terminal-dot home-terminal-dot-red" />
-          <span className="home-terminal-dot home-terminal-dot-yellow" />
-          <span className="home-terminal-dot home-terminal-dot-green" />
-        </span>
-        adrien@portfolio: ~/projects
-      </div>
-      <div className="home-terminal-content">
-        <p className="home-terminal-command">
-          <span>$</span>ls -lah
+    <div
+      className="home-terminal fill"
+      data-ui="terminal"
+      role="group"
+      aria-label={t("home.terminalLabel")}
+    >
+      <AppFrame
+        title="adrien@portfolio: ~/projects"
+        actions={
+          <FiTerminal size={16} aria-hidden="true" />
+        }
+        bodyClassName="home-terminal__body"
+      >
+        <p className="home-terminal__command">
+          <span aria-hidden="true">$</span>ls -lah
         </p>
 
         {isLoading ? (
-          <p className="home-terminal-message">{t("home.terminalReading")}</p>
+          <p className="home-terminal__message">{t("home.terminalReading")}</p>
         ) : hasError ? (
-          <p className="home-terminal-message home-terminal-error">
+          <p className="home-terminal__message home-terminal__message--error">
             {t("home.terminalError")}
           </p>
         ) : (
-          <div className="home-terminal-list">
-            <p className="home-terminal-total">
+          <div className="home-terminal__list">
+            <p className="home-terminal__total">
               {t("home.terminalTotal", { count: projects.length })}
             </p>
-            {projects.map((project) => (
+            {latestProjects.map((project) => (
               <Link
-                className="home-terminal-row"
+                className="home-terminal__row"
                 to={`/projects/${project.fileName}`}
                 key={project.fileName}
                 aria-label={t("home.terminalOpenProject", {
@@ -148,11 +150,8 @@ const HomeProjectTerminal = () => {
                 <span>adrien</span>
                 <span>4.0K</span>
                 <time dateTime={project.createdAt}>
-                  {formatProjectDate(
-                    project.createdAt,
-                    i18n.resolvedLanguage === "en" ? "en-GB" : "fr-FR",
-                    t("home.terminalUnknownDate"),
-                  )}
+                  {formatProjectDate(project.createdAt, i18n.resolvedLanguage) ??
+                    t("home.terminalUnknownDate")}
                 </time>
                 <strong>{project.fileName}/</strong>
               </Link>
@@ -161,24 +160,24 @@ const HomeProjectTerminal = () => {
         )}
 
         <form
-          className="home-terminal-command home-terminal-runner"
+          className="home-terminal__command home-terminal__runner"
           onSubmit={handleCommandSubmit}
         >
           <span aria-hidden="true">$</span>
-          <span className="home-terminal-run-prefix" aria-hidden="true">
+          <span className="home-terminal__run" aria-hidden="true">
             run
           </span>
-          <label className="home-terminal-sr-only" htmlFor="project-command">
+          <label className="home-terminal__sr-only" htmlFor="project-command">
             {t("home.terminalCommandLabel")}
           </label>
-          <span className="home-terminal-command-field">
-            <span className="home-terminal-prediction" aria-hidden="true">
+          <span className="home-terminal__field">
+            <span className="home-terminal__prediction" aria-hidden="true">
               {projectName}
               <strong>{completion}</strong>
             </span>
             <input
               id="project-command"
-              className="home-terminal-input"
+              className="home-terminal__input"
               value={projectName}
               onChange={(event) => {
                 setProjectName(event.target.value);
@@ -202,7 +201,7 @@ const HomeProjectTerminal = () => {
               aria-invalid={Boolean(commandErrorMessage)}
             />
             <i
-              className="home-terminal-cursor"
+              className="home-terminal__cursor"
               style={{ "--terminal-cursor-position": cursorPosition }}
               aria-hidden="true"
             />
@@ -210,14 +209,14 @@ const HomeProjectTerminal = () => {
         </form>
         <p
           id="project-command-feedback"
-          className={`home-terminal-command-feedback${
-            commandErrorMessage ? " home-terminal-command-error" : ""
+          className={`home-terminal__feedback${
+            commandErrorMessage ? " home-terminal__feedback--error" : ""
           }`}
           role={commandErrorMessage ? "alert" : undefined}
         >
           {commandErrorMessage || t("home.terminalCommandHint")}
         </p>
-      </div>
+      </AppFrame>
     </div>
   );
 };

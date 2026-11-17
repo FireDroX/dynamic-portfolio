@@ -5,25 +5,39 @@
     "projects": "projets",
     "login": "connexion",
     "switchToEnglish": "Passer en anglais",
-    "switchToFrench": "Passer en français"
+    "switchToFrench": "Passer en français",
+    "contact": "contact",
+    "label": "Navigation principale",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
   },
   "footer": {
     "rights": "Tous droits réservés.",
-    "legal": "Mentions légales"
+    "legal": "Mentions légales",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "legalTitle": "Légal",
+    "email": "E-mail",
+    "lede": "Développeur web : des projets faits pour être utilisés.",
+    "credits": "Crédits photo :"
   },
   "home": {
-    "student": "Étudiant à l’<school>ESGI</school> Paris et développeur web.",
     "online": "Disponible en ligne",
-    "introLabel": "Introduction",
-    "whatIDo": "Ce que je fais",
-    "title": "Des projets faits pour être utilisés.",
-    "description": "J’aime transformer une idée en quelque chose de concret : une interface, un jeu ou un outil que l’on peut directement essayer.",
-    "aboutLink": "En savoir plus sur moi →",
-    "selection": "sélection",
-    "projectsTitle": "Quelques projets",
-    "projectsDescription": "Trois projets, trois univers, tous accessibles directement en ligne.",
-    "selectedProjectsLabel": "Projets sélectionnés",
-    "allProjects": "Voir tous les projets →",
+    "role": "Développeur web, je cherche une alternance",
+    "lead": "Étudiant à l’ESGI Paris, je construis en React et Node.js. Mes projets tournent en ligne : essayez-les.",
+    "projectsButton": "Voir mes projets",
+    "cvButton": "Télécharger le CV",
+    "factsLabel": "En bref",
+    "factSchool": "École",
+    "factSchoolValue": "ESGI Paris",
+    "factStack": "Stack",
+    "factStackValue": "React, Node.js",
+    "factDate": "Alternance",
+    "factDateValue": "Dès septembre 2027",
+    "factRhythm": "Rythme",
+    "factRhythmValue": "1 semaine d’école, 3 en entreprise",
+    "terminalTitle": "Terminal des projets web",
+    "terminalText": "Listez les projets, tapez run suivi d’un nom, et le projet s’ouvre en direct.",
     "terminalLabel": "Terminal des projets",
     "terminalUnknownDate": "date inconnue",
     "terminalReading": "lecture du dossier...",
@@ -34,39 +48,80 @@
     "terminalCommandLabel": "Nom du projet à exécuter",
     "terminalCommandHint": "Tab ou → pour compléter, Entrée pour ouvrir.",
     "terminalProjectRequired": "Saisissez le nom d’un projet.",
-    "terminalProjectNotFound": "run : le projet « {{name}} » n’existe pas."
+    "terminalProjectNotFound": "run : le projet « {{name}} » n’existe pas.",
+    "selectionTitle": "Projets web sélectionnés",
+    "selectionText": "Trois projets, chacun en ligne et sans rien à installer.",
+    "selectedProjectsLabel": "Projets sélectionnés",
+    "allProjects": "Voir tous les projets",
+    "contactTitle": "Un alternant pour septembre 2027 ?",
+    "contactText": "Un e-mail suffit. Mon CV est à un clic.",
+    "contactMail": "Écrire un e-mail"
   },
   "about": {
     "title": "À propos",
-    "header": "Quelques mots sur mon parcours et ce que j’utilise pour créer.",
-    "presentation": "présentation",
-    "summaryTitle": "Je construis pour comprendre.",
-    "summaryFirst": "Je m’appelle Adrien, je suis étudiant en informatique à l’ESGI Paris. Je développe principalement des projets web avec React et Node.js, mais j’aime aussi sortir de cette stack pour découvrir d’autres manières de programmer.",
-    "summarySecond": "Ce portfolio est mon espace d’expérimentation : les projets ne sont pas seulement présentés, ils peuvent être testés directement.",
-    "discoverProjects": "Découvrir les projets →",
-    "school": "École",
-    "focus": "Focus",
-    "focusValue": "Web et projets interactifs",
+    "intro": "Adrien, développeur web : je construis pour comprendre.",
+    "summaryFirst": "J’étudie l’informatique à l’ESGI Paris et je code surtout du web avec React et Node.js.",
+    "summarySecond": "Ce portfolio est mon terrain d’essai : chaque projet s’essaie en direct. Je cherche une alternance dès septembre 2027.",
+    "pathTitle": "Parcours et boîte à outils web",
+    "pathText": "D’où je viens, ce que j’ai déjà fait, ce que je cherche ensuite et les outils que j’utilise.",
+    "pathKinds": {
+      "education": "Formation",
+      "experience": "Expérience",
+      "next": "Objectif"
+    },
+    "path": {
+      "esgi": {
+        "title": "Bachelor Informatique",
+        "place": "ESGI Paris 12e",
+        "period": "Depuis 2025",
+        "text": "Programmation en C, développement web en HTML/CSS et PHP, algorithmique."
+      },
+      "internship": {
+        "title": "Stage développeur fullstack",
+        "place": "CHASSOCIES · Ctrl-Alt-Debt, Paris",
+        "period": "Août 2026",
+        "text": "Une application web de comptabilité qui garde chaque justificatif au bon endroit : gestion et stockage des pièces (MinIO / S3), et un schéma de base de données qui évolue par migrations versionnées sans casser les données (PostgreSQL / TypeORM). Travail en équipe avec Jira et un workflow Git/GitHub.",
+        "stack": "NestJS · React · TypeScript · shadcn/ui"
+      },
+      "work": {
+        "title": "Alternance recherchée",
+        "place": "Paris",
+        "period": "Dès septembre 2027",
+        "text": "Dès septembre 2027, à raison d’une semaine d’école pour trois en entreprise."
+      }
+    },
     "since": "Depuis",
     "days_one": "{{formattedCount}} jour",
     "days_other": "{{formattedCount}} jours",
+    "toolsCategory": "Outils",
+    "marks": "Les noms et logos sont des marques de leurs propriétaires.",
+    "portfolioTitle": "Ce portfolio est lui-même un projet",
+    "portfolioText": "Un ZIP envoyé depuis le panel devient un projet jouable : Express le range sur le disque, MySQL garde ses fiches, la page l’ouvre dans une iframe et les succès se débloquent.",
+    "diagramAlt": "Un ZIP importé passe par Express, qui l’écrit sur le disque et dans MySQL, puis le projet s’affiche dans une iframe et débloque un succès.",
+    "diagramZip": "Import ZIP",
+    "diagramExpress": "Express",
+    "diagramMysql": "MySQL",
+    "diagramDisk": "Disque",
+    "diagramIframe": "Iframe",
+    "diagramAchievement": "Succès",
+    "linksTitle": "Me contacter",
+    "linksText": "Mon code, mon profil, mes services et un coup de pouce.",
     "me": "Moi",
     "services": "Mes services",
     "support": "Me soutenir",
-    "toolsTitle": "Ma boîte à outils",
-    "toolsDescription": "Les technologies que j’utilise le plus souvent dans mes projets.",
-    "toolsCategory": "Outils",
-    "activity": "activité",
     "githubDescription": "Un aperçu de mon activité — et peut-être un secret à trouver.",
     "githubButtonLabel": "Afficher l’animation des contributions GitHub et découvrir un secret",
     "githubImageAlt": "Animation des contributions GitHub d’Adrien"
   },
   "projects": {
     "loading": "Chargement des projets...",
-    "title": "Projets",
+    "eyebrow": "portfolio · projets jouables",
+    "playable": "Jouable",
+    "heroTitle": "Projets web jouables en direct",
+    "browse": "Parcourir les projets",
     "description": "Applications, jeux et expériences interactives. Chaque projet peut être ouvert et testé directement depuis le portfolio.",
     "listLabel": "Liste des projets",
-    "all": "Tous les projets",
+    "aboutLink": "En savoir plus sur moi →",
     "count_one": "{{count}} projet",
     "count_other": "{{count}} projets",
     "loadError": "Impossible de charger les projets pour le moment.",
@@ -75,7 +130,6 @@
     "unknownDate": "date inconnue",
     "view": "Voir le projet {{name}}",
     "open": "Ouvrir le projet {{name}}",
-    "fileInfo": "Informations du fichier",
     "filterByYear": "Filtrer par année",
     "filterAll": "Tous",
     "searchLabel": "Rechercher un projet",
@@ -90,25 +144,35 @@
     "loading": "Chargement du projet...",
     "back": "Tous les projets",
     "interactive": "Projet interactif",
-    "fullscreen": "Ouvrir en plein écran",
-    "previewAlt": "Aperçu de {{name}}",
-    "previewCaption": "aperçu / {{fileName}}",
-    "demoLabel": "Démo de {{name}}",
-    "live": "En direct",
     "opening": "Ouverture de l’expérience...",
-    "iframeTitle": "Démo interactive — {{name}}"
+    "iframeTitle": "Démo interactive — {{name}}",
+    "notFoundTitle": "Projet introuvable",
+    "notFoundText": "Ce projet n’existe pas ou n’est plus publié.",
+    "loadErrorTitle": "Impossible de charger le projet",
+    "loadErrorText": "Une erreur est survenue lors du chargement de ce projet. Réessayez dans un instant.",
+    "aboutTitle": "À propos du projet",
+    "openTab": "Ouvrir dans un nouvel onglet",
+    "reload": "Recharger le projet",
+    "enterFullscreen": "Plein écran",
+    "exitFullscreen": "Quitter le plein écran",
+    "mobileView": "Vue mobile (390 px)",
+    "desktopView": "Vue bureau"
   },
   "contributors": {
     "label": "Contributeurs",
     "profile": "Profil GitHub de @{{login}}"
   },
+  "projectTypes": {
+    "game": "Jeu",
+    "webapp": "Application web",
+    "tool": "Outil"
+  },
+  "stack": {
+    "label": "Stack technique"
+  },
   "preview": {
-    "selected": "Projet sélectionné",
     "technologies": "Technologies utilisées",
-    "discover": "Découvrir le projet",
-    "discoverLabel": "Découvrir le projet {{name}}",
-    "videoTitle": "Aperçu vidéo du projet {{name}}",
-    "live": "Aperçu en direct"
+    "playable": "Jouable"
   },
   "featured": {
     "nestwiki": "Un wiki collaboratif auto-hébergé avec arborescence de pages, historique des versions, permissions fines et un serveur MCP pour les assistants IA.",
@@ -116,6 +180,8 @@
     "monstersEnergy": "Une plateforme communautaire autour de Monster Energy avec catalogue, classements, messagerie et achievements."
   },
   "achievements": {
+    "eyebrow": "achievements",
+    "secretsLabel": "Secrets",
     "header": "Des détails sont cachés un peu partout dans le portfolio. Explore, expérimente et garde l’œil ouvert.",
     "progress": "progression",
     "progressLabel": "Progression des achievements",
@@ -227,7 +293,12 @@
       "achievement-hunter": {
         "name": "Chasseur d’achievements",
         "description": "Tu as débloqué tous les achievements !",
-        "hint": "Débloque tous les achievements."
+        "hint": "Collectionne tous les autres achievements."
+      },
+      "lost-page": {
+        "name": "Page perdue",
+        "description": "Tu t’es aventuré sur une page qui n’existe pas.",
+        "hint": "Certains chemins ne mènent nulle part."
       }
     }
   },
@@ -248,6 +319,11 @@
     "submit": "Entrer dans le panel"
   },
   "panel": {
+    "title": "Panel d'administration",
+    "imageFormats": "PNG, JPG, WEBP",
+    "uploadLoading": "Envoi du projet en cours…",
+    "uploadSuccess": "Projet publié.",
+    "uploadError": "Échec de l'envoi : vérifie le message ci-dessus et tes fichiers.",
     "privateArea": "espace privé",
     "description": "Publie et maintiens les expériences visibles sur le portfolio.",
     "logout": "Déconnexion",
@@ -297,6 +373,14 @@
     "contributorsInvalid": "« {{login}} » n’est pas un identifiant GitHub valide.",
     "contributorsLimit": "{{count}} contributeurs maximum.",
     "removeContributor": "Retirer @{{login}}",
+    "typeLabel": "Type de projet",
+    "typeNone": "Aucun type",
+    "stackLabel": "Stack technique",
+    "stackPlaceholder": "Ajouter une technologie puis Entrée",
+    "stackHelp": "Tape une technologie puis Entrée ou virgule pour l’ajouter. Des suggestions sont proposées pendant la saisie.",
+    "stackInvalid": "« {{tech}} » n’est pas un nom de technologie valide.",
+    "stackLimit": "{{count}} technologies maximum.",
+    "removeTech": "Retirer {{tech}}",
     "pickProject": "Projet à modifier",
     "latestProject": "dernier ajouté",
     "unpublishedOption": "non publié",
@@ -313,7 +397,7 @@
     "eyebrow": "mentions & confidentialité",
     "title": "Informations légales",
     "intro": "Informations relatives à l’édition du portfolio, à son hébergement et aux données utilisées pour son fonctionnement.",
-    "updated": "Mise à jour le 23 juillet 2026",
+    "updated": "Mise à jour le 17 novembre 2026",
     "navLabel": "Sommaire des mentions légales",
     "nav": {
       "edition": "Édition",
@@ -321,6 +405,8 @@
       "privacy": "Confidentialité",
       "storage": "Stockage local",
       "services": "Services externes",
+      "ownership": "Propriété intellectuelle",
+      "liability": "Responsabilité",
       "rights": "Vos droits"
     },
     "edition": {
@@ -340,8 +426,20 @@
     "privacy": {
       "eyebrow": "données",
       "title": "Confidentialité",
-      "first": "Le portfolio ne propose pas de compte visiteur, de formulaire de contact, de publicité ou d’outil de mesure d’audience. Aucune donnée n’est vendue ni utilisée pour établir un profil publicitaire.",
+      "first": "Le portfolio ne propose pas de compte visiteur, de formulaire de contact ni de publicité, et n’utilise aucun outil de mesure d’audience sur ses pages. Seuls les téléchargements du CV sont comptabilisés, comme décrit ci-dessous. Aucune donnée n’est vendue ni utilisée pour établir un profil publicitaire.",
       "second": "Comme pour tout service web, des informations techniques telles que l’adresse IP, la date de connexion, la ressource demandée ou le type de navigateur peuvent être traitées temporairement par le serveur et les intermédiaires réseau pour acheminer les requêtes, maintenir le service et assurer sa sécurité.",
+      "cv": {
+        "title": "Téléchargement du CV",
+        "intro": "Le bouton « Télécharger le CV » passe par url.addrien.fr, le service de liens de l’éditeur, hébergé sur la même machine que le portfolio (voir « Hébergement »). Un contrôle anti-robot Cloudflare Turnstile s’exécute avant le téléchargement (voir la <policy>politique de confidentialité de Cloudflare</policy>). À chaque téléchargement, ce service enregistre :",
+        "data": {
+          "ip": "l’adresse IP, uniquement sous forme d’empreinte (hash SHA-256 avec un secret), jamais en clair ;",
+          "userAgent": "le navigateur utilisé (user-agent) ;",
+          "referer": "la page d’origine (referer) et son domaine ;",
+          "country": "le pays, sous forme de code à deux lettres fourni par Cloudflare ;",
+          "date": "la date et l’heure du téléchargement."
+        },
+        "purpose": "Ces données servent uniquement à établir des statistiques de téléchargement et à protéger le service contre les abus. Elles sont conservées 3 mois, puis supprimées automatiquement."
+      },
       "note": "Les messages envoyés à l’adresse de contact sont traités uniquement afin de répondre à leur auteur."
     },
     "storage": {
@@ -361,10 +459,11 @@
     "services": {
       "eyebrow": "tiers",
       "title": "Services externes",
-      "intro": "Selon la page consultée, le navigateur peut contacter :",
-      "cloudflare": "pour l’accès sécurisé au site ;",
-      "fonts": "pour charger la police Manrope ;",
-      "github": "pour afficher l’animation des contributions et les photos de profil des contributeurs ;",
+      "intro": "Selon la page consultée, le navigateur peut contacter :",
+      "cloudflare": "pour l’accès sécurisé au site ;",
+      "turnstile": "pour le contrôle anti-robot exécuté avant le téléchargement du CV. Cloudflare traite alors des données techniques du navigateur et l’adresse IP selon sa <policy>politique de confidentialité</policy> ;",
+      "urls": "le service de liens de l’éditeur, par lequel passe le téléchargement du CV (voir « Confidentialité ») ;",
+      "github": "pour afficher l’animation des contributions et les photos de profil des contributeurs ;",
       "iframes": "les services nécessaires aux projets interactifs intégrés dans les iframes.",
       "links": "Les liens vers GitHub, LinkedIn ou Ko-fi ouvrent des sites distincts disposant de leurs propres politiques de confidentialité."
     },
@@ -382,10 +481,19 @@
     "rights": {
       "eyebrow": "contact",
       "title": "Vos droits",
-      "beforeEmail": "Pour toute question relative à ces informations, à une donnée personnelle ou à un contenu publié, vous pouvez écrire à l’adresse suivante :",
+      "beforeEmail": "Pour toute question relative à ces informations, à une donnée personnelle ou à un contenu publié, vous pouvez écrire à l’adresse suivante :",
       "digitalLaw": "Loi pour la confiance dans l’économie numérique ↗",
       "cnil": "Informations de la CNIL sur les traceurs ↗"
     }
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Aucune page du portfolio à cette adresse.",
+    "lead": "L’adresse demandée ne mène nulle part. Voici deux endroits où repartir.",
+    "terminalTitle": "terminal",
+    "suggest": "Essaie plutôt :",
+    "home": "Retour à l’accueil",
+    "projects": "Voir les projets"
   },
   "seo": {
     "homeTitle": "Adrien | Développeur React & Node.js",
@@ -398,6 +506,8 @@
     "legalDescription": "Mentions légales et politique de confidentialité du portfolio d’Adrien.",
     "achievementsTitle": "Secrets et achievements | Portfolio Adrien",
     "achievementsDescription": "Les secrets cachés dans le portfolio d’Adrien.",
+    "notFoundTitle": "Page introuvable | Portfolio Adrien",
+    "notFoundDescription": "Cette page n’existe pas.",
     "panelTitle": "Administration | Portfolio Adrien",
     "panelDescription": "Espace d’administration du portfolio.",
     "jobTitle": "Développeur Web"

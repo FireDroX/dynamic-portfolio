@@ -1,100 +1,135 @@
-.project-preview {
-  overflow: hidden;
-  border: 1px solid #34312e;
-  border-radius: 1rem;
-  background: transparent;
-  box-shadow: 0 14px 40px #0000001f;
-}
-
-.project-preview-bar {
-  height: 3rem;
-  padding: 0 1.25rem;
+.project-frame {
+  flex: 1 1 0;
+  min-height: 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  border-bottom: 1px solid #34312e;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--bg) 90%, var(--text));
+  flex-direction: column;
 }
 
-.project-preview-bar > p {
-  max-width: 100%;
-  overflow: hidden;
-  font-family: monospace;
-  font-size: 0.75rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+@media (max-width: 639px) {
+  .project-frame {
+    min-height: 360px;
+  }
 }
 
-.project-preview-bar > p > span {
-  color: var(--text);
+.project-frame > .app-frame {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.project-preview-bar > p > strong {
-  color: var(--secondary);
-  font-weight: 400;
+.project-frame .app-frame__bar {
+  flex: none;
 }
 
-.project-preview-status {
-  flex: 0 0 auto;
-  color: var(--secondary);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+.project-frame__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  background: var(--card);
 }
 
-.project-preview-status::before {
-  content: "";
-  width: 0.45rem;
-  height: 0.45rem;
-  margin-right: 0.45rem;
-  display: inline-block;
-  border-radius: 50%;
-  background: var(--secondary);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--secondary) 15%, transparent);
-}
-
-.project-preview-frame {
-  min-height: 78vh;
+.project-frame__viewport {
   position: relative;
-  background: transparent;
+  flex: 1;
+  min-width: 0;
+  transition: width var(--dur) var(--ease);
 }
 
-.project-preview-frame iframe {
-  width: 100%;
-  height: 78vh;
-  min-height: 36rem;
-  display: block;
-  background: transparent;
-  color-scheme: normal;
+.project-frame.is-mobile .project-frame__viewport {
+  flex: none;
+  width: 390px;
+  max-width: 100%;
+  margin-inline: auto;
+  border-inline: 1px solid var(--border);
 }
 
-.project-preview-loader {
+.project-frame__viewport iframe {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
-  background: var(--bg);
-  color: var(--accent);
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--card);
 }
 
-@media (max-width: 600px) {
-  .project-preview {
-    border-radius: 0.85rem;
-  }
+/* the iframe hands focus to its document at once, so :focus-visible never
+   matches on it: the ring follows a class set from its focus event */
+.project-frame__viewport iframe.is-focused {
+  outline: 2px solid var(--action);
+  outline-offset: -2px;
+}
 
-  .project-preview-bar {
-    padding: 0 0.8rem;
-  }
+.project-frame__loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-4);
+  color: var(--muted);
+}
 
-  .project-preview-frame,
-  .project-preview-frame iframe {
-    min-height: 32rem;
-    height: 70vh;
+.project-frame__loader p {
+  margin: 0;
+}
+
+.project-frame__btn {
+  width: 32px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.project-frame__btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.project-frame__btn:hover:not(:disabled),
+.project-frame__btn[aria-pressed="true"] {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.project-frame__btn:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 2px;
+}
+
+.project-frame__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.project-frame:fullscreen,
+.project-frame.is-fullscreen {
+  height: 100vh;
+  min-height: 0;
+  background: var(--card);
+}
+
+.project-frame:fullscreen > .app-frame,
+.project-frame.is-fullscreen > .app-frame {
+  border: 0;
+  border-radius: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-frame__viewport {
+    transition: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .project-frame__btn {
+    width: 44px;
+    height: 44px;
   }
 }

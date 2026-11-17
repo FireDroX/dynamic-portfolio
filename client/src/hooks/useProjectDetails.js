@@ -21,6 +21,10 @@ const useProjectDetails = (projectSlug) => {
             signal: controller.signal,
           },
         );
+        if (response.status === 404) {
+          setRequest({ slug: projectSlug, project: null, hasError: false });
+          return;
+        }
         if (!response.ok) throw new Error(String(response.status));
 
         setRequest({

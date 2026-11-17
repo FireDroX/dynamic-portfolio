@@ -54,6 +54,7 @@ COPY --chown=node:node server.js config.js db.js ./
 COPY --chown=node:node api ./api
 COPY --chown=node:node middleware ./middleware
 COPY --chown=node:node utils ./utils
+COPY --chown=node:node fonts ./fonts
 COPY --chown=node:node services ./services
 
 USER node

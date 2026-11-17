@@ -10,3 +10,7 @@ CLAUDE.md
 .idea
 deploy.log
 .deploy-exit
+
+.dev/
+.worktrees/
+.taste-skill/

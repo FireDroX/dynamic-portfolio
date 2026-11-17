@@ -1,5 +1,6 @@
 import "./styles/MentionsLegales.css";
 import { Trans, useTranslation } from "react-i18next";
+import Section from "../components/ui/Section";
 
 const storageEntries = [
   { key: "portfolio_achievements", purpose: "achievements" },
@@ -9,36 +10,62 @@ const storageEntries = [
   { key: "portfolio_visit_days", purpose: "days" },
 ];
 
+const cvDataEntries = ["ip", "userAgent", "referer", "country", "date"];
+
+const cloudflarePolicyLink = (
+  <a
+    className="link"
+    href="https://www.cloudflare.com/privacypolicy/"
+    target="_blank"
+    rel="noopener noreferrer"
+  />
+);
+
+const toc = [
+  ["edition", "edition"],
+  ["hebergement", "hosting"],
+  ["confidentialite", "privacy"],
+  ["stockage", "storage"],
+  ["services", "services"],
+  ["propriete", "ownership"],
+  ["responsabilite", "liability"],
+  ["droits", "rights"],
+];
+
 const MentionsLegales = () => {
   const { t } = useTranslation();
 
   return (
-    <main className="App legal-page">
-      <header className="legal-header">
-        <small>{t("legal.eyebrow")}</small>
-        <h1>{t("legal.title")}</h1>
-        <p>{t("legal.intro")}</p>
-        <time dateTime="2026-07-23">{t("legal.updated")}</time>
-      </header>
+    <main className="legal">
+      <Section className="hero legal__hero" data-enter>
+        <div className="hero-text hero-copy">
+          <p className="legal__eyebrow">{t("legal.eyebrow")}</p>
+          <h1>{t("legal.title")}</h1>
+          <p className="legal__intro">{t("legal.intro")}</p>
+          <time className="legal__updated" dateTime="2026-11-17">
+            {t("legal.updated")}
+          </time>
 
-      <nav className="legal-nav" aria-label={t("legal.navLabel")}>
-        <a href="#edition">{t("legal.nav.edition")}</a>
-        <a href="#hebergement">{t("legal.nav.hosting")}</a>
-        <a href="#confidentialite">{t("legal.nav.privacy")}</a>
-        <a href="#stockage">{t("legal.nav.storage")}</a>
-        <a href="#services">{t("legal.nav.services")}</a>
-        <a href="#droits">{t("legal.nav.rights")}</a>
-      </nav>
+          <nav className="legal__toc" aria-label={t("legal.navLabel")}>
+            <ol>
+              {toc.map(([id, key]) => (
+                <li key={id}>
+                  <a className="link" href={`#${id}`}>
+                    {t(`legal.nav.${key}`)}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </div>
+      </Section>
 
-      <div className="legal-content">
-        <section className="legal-section" id="edition">
-          <div className="legal-section-title">
-            <small>{t("legal.edition.eyebrow")}</small>
+      <Section className="legal__body">
+        <div className="legal__column">
+          <article id="edition">
             <h2>{t("legal.edition.title")}</h2>
-          </div>
-          <div className="legal-section-body">
             <p>{t("legal.edition.text")}</p>
-            <dl className="legal-details">
+            <dl className="legal__details">
               <div>
                 <dt>{t("legal.edition.publisher")}</dt>
                 <dd>Adrien POURLIER</dd>
@@ -46,7 +73,9 @@ const MentionsLegales = () => {
               <div>
                 <dt>{t("legal.edition.contact")}</dt>
                 <dd>
-                  <a href="mailto:contact@addrien.fr">contact@addrien.fr</a>
+                  <a className="link" href="mailto:contact@addrien.fr">
+                    contact@addrien.fr
+                  </a>
                 </dd>
               </div>
               <div>
@@ -54,70 +83,72 @@ const MentionsLegales = () => {
                 <dd>addrien.fr · portfolio.addrien.fr</dd>
               </div>
             </dl>
-          </div>
-        </section>
+          </article>
 
-        <section className="legal-section" id="hebergement">
-          <div className="legal-section-title">
-            <small>{t("legal.hosting.eyebrow")}</small>
+          <article id="hebergement">
             <h2>{t("legal.hosting.title")}</h2>
-          </div>
-          <div className="legal-section-body">
             <p>{t("legal.hosting.first")}</p>
             <p>{t("legal.hosting.second")}</p>
-          </div>
-        </section>
+          </article>
 
-        <section className="legal-section" id="confidentialite">
-          <div className="legal-section-title">
-            <small>{t("legal.privacy.eyebrow")}</small>
+          <article id="confidentialite">
             <h2>{t("legal.privacy.title")}</h2>
-          </div>
-          <div className="legal-section-body">
             <p>{t("legal.privacy.first")}</p>
             <p>{t("legal.privacy.second")}</p>
-            <aside className="legal-note">{t("legal.privacy.note")}</aside>
-          </div>
-        </section>
+            <h3>{t("legal.privacy.cv.title")}</h3>
+            <p>
+              <Trans
+                i18nKey="legal.privacy.cv.intro"
+                components={{ policy: cloudflarePolicyLink }}
+              />
+            </p>
+            <ul>
+              {cvDataEntries.map((key) => (
+                <li key={key}>{t(`legal.privacy.cv.data.${key}`)}</li>
+              ))}
+            </ul>
+            <p>{t("legal.privacy.cv.purpose")}</p>
+            <p className="legal__note">{t("legal.privacy.note")}</p>
+          </article>
 
-        <section className="legal-section" id="stockage">
-          <div className="legal-section-title">
-            <small>{t("legal.storage.eyebrow")}</small>
+          <article id="stockage">
             <h2>{t("legal.storage.title")}</h2>
-          </div>
-          <div className="legal-section-body">
             <p>
               <Trans
                 i18nKey="legal.storage.first"
                 components={{ storage: <code /> }}
               />
             </p>
-            <div className="legal-storage-list">
+            <dl className="legal__details">
               {storageEntries.map((entry) => (
                 <div key={entry.key}>
-                  <code>{entry.key}</code>
-                  <p>{t(`legal.storage.entries.${entry.purpose}`)}</p>
+                  <dt>
+                    <code>{entry.key}</code>
+                  </dt>
+                  <dd>{t(`legal.storage.entries.${entry.purpose}`)}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
             <p>{t("legal.storage.retention")}</p>
             <p>{t("legal.storage.session")}</p>
-          </div>
-        </section>
+          </article>
 
-        <section className="legal-section" id="services">
-          <div className="legal-section-title">
-            <small>{t("legal.services.eyebrow")}</small>
+          <article id="services">
             <h2>{t("legal.services.title")}</h2>
-          </div>
-          <div className="legal-section-body">
             <p>{t("legal.services.intro")}</p>
-            <ul className="legal-list">
+            <ul>
               <li>
                 <strong>Cloudflare</strong>, {t("legal.services.cloudflare")}
               </li>
               <li>
-                <strong>Google Fonts</strong>, {t("legal.services.fonts")}
+                <strong>Cloudflare Turnstile</strong>,{" "}
+                <Trans
+                  i18nKey="legal.services.turnstile"
+                  components={{ policy: cloudflarePolicyLink }}
+                />
+              </li>
+              <li>
+                <strong>url.addrien.fr</strong>, {t("legal.services.urls")}
               </li>
               <li>
                 <strong>GitHub</strong>, {t("legal.services.github")}
@@ -125,59 +156,53 @@ const MentionsLegales = () => {
               <li>{t("legal.services.iframes")}</li>
             </ul>
             <p>{t("legal.services.links")}</p>
-          </div>
-        </section>
+          </article>
 
-        <section className="legal-section" id="propriete">
-          <div className="legal-section-title">
-            <small>{t("legal.property.eyebrow")}</small>
+          <article id="propriete">
             <h2>{t("legal.property.title")}</h2>
-          </div>
-          <div className="legal-section-body">
             <p>{t("legal.property.first")}</p>
             <p>{t("legal.property.second")}</p>
-          </div>
-        </section>
+          </article>
 
-        <section className="legal-section" id="responsabilite">
-          <div className="legal-section-title">
-            <small>{t("legal.liability.eyebrow")}</small>
+          <article id="responsabilite">
             <h2>{t("legal.liability.title")}</h2>
-          </div>
-          <div className="legal-section-body">
             <p>{t("legal.liability.text")}</p>
-          </div>
-        </section>
+          </article>
 
-        <section className="legal-section" id="droits">
-          <div className="legal-section-title">
-            <small>{t("legal.rights.eyebrow")}</small>
+          <article id="droits">
             <h2>{t("legal.rights.title")}</h2>
-          </div>
-          <div className="legal-section-body">
             <p>
               {t("legal.rights.beforeEmail")}{" "}
-              <a href="mailto:contact@addrien.fr">contact@addrien.fr</a>.
+              <a className="link" href="mailto:contact@addrien.fr">
+                contact@addrien.fr
+              </a>
+              .
             </p>
-            <div className="legal-references">
-              <a
-                href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000801164"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("legal.rights.digitalLaw")}
-              </a>
-              <a
-                href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/que-dit-la-loi"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("legal.rights.cnil")}
-              </a>
-            </div>
-          </div>
-        </section>
-      </div>
+            <ul>
+              <li>
+                <a
+                  className="link"
+                  href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000801164"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t("legal.rights.digitalLaw")}
+                </a>
+              </li>
+              <li>
+                <a
+                  className="link"
+                  href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/que-dit-la-loi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t("legal.rights.cnil")}
+                </a>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </Section>
     </main>
   );
 };

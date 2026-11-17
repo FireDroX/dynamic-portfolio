@@ -1,59 +1,43 @@
-import ContributorAvatars from "./ContributorAvatars";
-import FormattedDescription from "./FormattedDescription";
-import { getContributors } from "../utils/contributors";
-import DEFAULT_PROJECT_IMAGE from "../utils/defaultProjectImage";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import getProjectDescription from "../utils/projectDescription";
+import { FiChevronLeft } from "react-icons/fi";
+
+import Button from "./ui/Button";
+import { TechStack } from "./TechPill";
+import { getStack } from "../utils/techStack";
+import { getProjectTypeLabelKey } from "../utils/projectTypes";
 import "./styles/ProjectHero.css";
 
-const ProjectHero = ({ project }) => {
-  const { t, i18n } = useTranslation();
-  const hasImage = Boolean(project.hasImage);
-  const description = getProjectDescription(project, i18n.resolvedLanguage);
+const ProjectHero = ({ project, formattedDate }) => {
+  const { t } = useTranslation();
+  const typeKey = getProjectTypeLabelKey(project.type);
+  const facts = [
+    typeKey ? t(typeKey) : null,
+    t("project.interactive"),
+    formattedDate,
+  ].filter(Boolean);
 
   return (
-    <section className="project-hero">
-      <div className="project-hero-copy">
-        <small>{t("project.interactive")}</small>
-        <h1>{project.name}</h1>
-        <p>
-          <FormattedDescription>{description}</FormattedDescription>
-        </p>
-        <a
-          className="project-open"
-          href={`/api/projects/${project.fileName}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t("project.fullscreen")}
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5M13.5 3H21m0 0v7.5M21 3l-9.75 9.75" />
-          </svg>
-        </a>
-        <ContributorAvatars
-          contributors={getContributors(project)}
-          align="start"
-          className="project-hero-contributors"
-        />
+    <header className="project-hero">
+      <Link to="/projects" className="project-hero__back">
+        <FiChevronLeft aria-hidden="true" />
+        {t("project.back")}
+      </Link>
+      <div className="project-hero__main">
+        <div>
+          <h1>{project.name}</h1>
+          <p className="project-hero__facts">{facts.join(" · ")}</p>
+          <TechStack
+            className="project-hero__stack"
+            stack={getStack(project)}
+            label={t("stack.label")}
+          />
+        </div>
+        <Button href={`/api/projects/${project.fileName}`} external>
+          {t("project.openTab")}
+        </Button>
       </div>
-
-      <figure className="project-hero-visual">
-        <img
-          src={
-            hasImage
-              ? `/api/projects/${project.fileName}/image`
-              : DEFAULT_PROJECT_IMAGE
-          }
-          alt={t("project.previewAlt", { name: project.name })}
-          onError={(event) => {
-            event.currentTarget.src = DEFAULT_PROJECT_IMAGE;
-          }}
-        />
-        <figcaption>
-          {t("project.previewCaption", { fileName: project.fileName })}
-        </figcaption>
-      </figure>
-    </section>
+    </header>
   );
 };
 

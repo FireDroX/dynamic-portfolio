@@ -16,7 +16,7 @@ describe("projectsApi", () => {
     await fetchProjectsPage({ page: 2, year: 2025, q: "poke" });
 
     expect(fetch.mock.calls[0][0]).toBe(
-      "/api/projects?page=2&size=10&year=2025&q=poke",
+      "/api/projects?page=2&size=6&year=2025&q=poke",
     );
   });
 

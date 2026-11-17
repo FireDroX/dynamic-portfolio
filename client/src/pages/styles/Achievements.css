@@ -1,141 +1,89 @@
-.achievements-header > p {
-  max-width: 42rem;
-  line-height: 1.7;
+.achv__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  letter-spacing: 0.08em;
+  color: var(--p-muted);
 }
 
-.achievements-progress,
-.achievements-collection {
-  max-width: 78rem;
-  margin-right: auto;
-  margin-left: auto;
+.achv__lead,
+.achv__note {
+  max-width: 52ch;
+  color: var(--p-muted);
 }
 
-.achievements-progress {
-  padding: 1.25rem 1.5rem;
+.achv__progress {
+  display: grid;
+  gap: var(--s-3);
+  max-width: 28rem;
+}
+
+.achv__count {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  border: 1px solid #7b7b7b38;
-  border-radius: 0.85rem;
-}
-
-.achievements-progress-copy > small,
-.achievements-collection-title small {
-  color: var(--secondary);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.achievements-progress-copy > p {
-  margin-top: 0.25rem;
-  color: var(--accent);
-}
-
-.achievements-progress-copy strong {
-  color: var(--text);
-  font-size: 1.65rem;
+  align-items: baseline;
+  font-family: var(--font-display);
+  font-size: var(--t-h1);
+  font-weight: var(--display-weight);
   line-height: 1;
+  letter-spacing: var(--display-tracking);
+  font-variant-numeric: tabular-nums;
+  color: var(--p-ink);
 }
 
-.achievements-progress-track {
-  width: min(100%, 34rem);
+.achv__count-num {
+  min-width: 2ch;
+  text-align: right;
+  color: var(--p-accent);
 }
 
-.achievements-progress-label {
-  margin-bottom: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  color: var(--accent);
-  font-size: 0.65rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.achievements-progress-bar {
-  height: 0.35rem;
+.achv__bar {
+  height: 6px;
   overflow: hidden;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  background: var(--surface-2);
 }
 
-.achievements-progress-bar > span {
-  height: 100%;
-  min-width: 0.25rem;
+.achv__bar > span {
   display: block;
+  height: 100%;
   border-radius: inherit;
-  background: var(--secondary);
+  background: var(--p-accent);
   transition: width 0.6s ease-out;
 }
 
-.achievements-collection {
-  margin-top: 5rem;
+.achv__status {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  color: var(--p-muted);
 }
 
-.achievements-collection-title {
-  margin-bottom: 1.75rem;
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 3rem;
+/* the kit sizes sections to whole screens; the grid grows with its content */
+main.achv > section.achv__collection {
+  height: auto;
+  min-height: 0;
 }
 
-.achievements-collection-title h2 {
-  margin-top: 0.35rem;
-  color: var(--text);
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-}
-
-.achievements-collection-title > p {
-  max-width: 28rem;
-  padding-bottom: 0.25rem;
-  color: var(--accent);
-  font-size: 0.78rem;
-  line-height: 1.6;
-  text-align: right;
-}
-
-.achievements-list {
+.achv__collection > .wrap {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: var(--s-4);
+  height: auto;
 }
 
-@media (max-width: 1100px) {
-  .achievements-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+.achv__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--card-gap);
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-@media (max-width: 800px) {
-  .achievements-progress {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .achievements-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .achievements-collection-title {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .achievements-collection-title > p {
-    text-align: left;
-  }
+.achv__grid > li {
+  display: flex;
+  min-width: 0;
 }
 
-@media (max-width: 560px) {
-  .achievements-progress {
-    padding: 1rem;
-  }
-
-  .achievements-list {
-    grid-template-columns: 1fr;
+@media (prefers-reduced-motion: reduce) {
+  .achv__bar > span {
+    transition: none;
   }
 }

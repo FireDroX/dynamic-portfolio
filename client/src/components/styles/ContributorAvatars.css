@@ -1,5 +1,5 @@
 .contributor-avatars {
-  --avatar-size: 1.9rem;
+  --avatar-size: 36px;
   margin: 0;
   padding: 0;
   display: flex;
@@ -20,7 +20,6 @@
   flex: 0 0 auto;
 }
 
-/* 30% overlap between neighbours. */
 .contributor-avatars li + li {
   margin-left: calc(var(--avatar-size) * -0.3);
 }
@@ -31,18 +30,35 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  border: 2px solid var(--bg);
   border-radius: 50%;
-  background: color-mix(in srgb, var(--bg) 80%, var(--text));
-  color: var(--secondary);
+  box-shadow: 0 0 0 2px var(--bg);
+  background: var(--surface);
+  color: var(--ink);
   font-size: calc(var(--avatar-size) * 0.42);
-  font-weight: 700;
-  transition: transform 0.2s ease-out;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease);
 }
 
 .contributor-avatars a:hover,
 .contributor-avatars a:focus-visible {
   transform: translateY(-3px);
+}
+
+.contributor-avatars a:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contributor-avatars a {
+    transition: none;
+  }
+
+  .contributor-avatars a:hover,
+  .contributor-avatars a:focus-visible {
+    transform: none;
+  }
 }
 
 .contributor-avatars img {

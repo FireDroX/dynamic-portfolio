@@ -1,138 +1,60 @@
-.preview-container {
-  width: min(100%, 72rem);
-  min-height: 27rem;
-  display: grid;
-  grid-template-columns: minmax(20rem, 0.8fr) minmax(0, 1.2fr);
-  overflow: hidden;
-  border: 1px solid #7b7b7b35;
-  border-radius: 1.25rem;
-  background: color-mix(in srgb, var(--bg) 94%, var(--text));
+.preview {
+  flex: 1;
 }
 
-.preview-var2 {
-  grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.8fr);
+.preview > .panel {
+  aspect-ratio: 16 / 9;
 }
 
-.preview-var2 .preview-copy {
-  order: 2;
+.preview > p {
+  max-width: none;
 }
 
-.preview-copy {
-  padding: 2.5rem;
+.preview__stack {
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.preview-meta {
-  color: var(--secondary);
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.preview-copy h3 {
-  margin-top: 1.25rem;
-  color: var(--text);
-  font-size: clamp(1.9rem, 3vw, 2.8rem);
-  line-height: 1.05;
-}
-
-.preview-copy > p {
-  margin-top: 1.25rem;
-  color: var(--accent);
-  line-height: 1.7;
-}
-
-.preview-stack {
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+  padding: 0;
+  list-style: none;
 }
 
-.preview-stack li {
-  padding: 0.4rem 0.65rem;
+.preview__stack li {
+  padding: 2px var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: var(--t-small);
+}
+
+.preview__badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  border: 1px solid #7b7b7b38;
-  border-radius: 999px;
-  color: var(--accent);
-  font-size: 0.68rem;
+  gap: var(--s-2);
+  width: fit-content;
+  margin-top: auto;
+  padding-top: var(--s-5);
+  color: var(--ink);
+  font-size: var(--t-small);
 }
 
-.preview-stack li svg {
-  flex: 0 0 auto;
-  color: currentColor;
-  font-size: 0.9rem;
+.preview__badge i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
 }
 
-.preview-copy button {
-  margin-top: 2rem;
-  padding: 0.75rem 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  border-radius: 999px;
-  background: var(--secondary);
-  color: var(--bg);
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.preview-copy button svg {
-  width: 1.1rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.preview-copy button:hover {
-  background: var(--text);
-  transform: translateY(-2px);
-}
-
-.preview-media {
-  min-width: 0;
-  margin: 0.65rem;
-  align-self: center;
-  overflow: hidden;
-  border-radius: 0.9rem;
-  background: #090909;
-}
-
-.preview-media video {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
-
-.preview-media-label {
-  display: none;
-}
-
-@media (max-width: 800px) {
-  .preview-container {
-    grid-template-columns: 1fr;
+/* three stacked cards must fit two phone screens */
+@media (max-width: 639px) {
+  .preview > .panel {
+    aspect-ratio: 2 / 1;
   }
 
-  .preview-var2 .preview-copy {
-    order: initial;
-  }
-}
-
-@media (max-width: 520px) {
-  .preview-container {
-    min-height: auto;
-  }
-
-  .preview-copy {
-    padding: 2rem 1.5rem;
+  .preview > p {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
   }
 }

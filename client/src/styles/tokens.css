@@ -1,0 +1,71 @@
+/*
+  Design tokens: the only file allowed to hold literal colours.
+  The --p-* palette feeds /assets/system.css (grounds, --bg, --ink, --accent...).
+  Dark is the default; light follows prefers-color-scheme. Never drawn at random.
+*/
+
+:root {
+  --p-bg: #0e0e0e;
+  --p-surface: #151515;
+  --p-ink: #e7e5e5;
+  --p-muted: #acabaa;
+  --p-accent: #b29a80;
+  --p-accent-ink: #0e0e0e;
+  --p-action: #b29a80;
+  --p-action-ink: #0e0e0e;
+  --p-inv-bg: #e7e5e5;
+  --p-inv-surface: #d5d4d4;
+  --p-inv-ink: #0e0e0e;
+  --p-inv-muted: #565656;
+  --p-inv-accent: #0e0e0e;
+  --p-inv-accent-ink: #e7e5e5;
+  --p-inv-action: #0e0e0e;
+  --p-inv-action-ink: #e7e5e5;
+
+  --font-display: "Urbanist Variable", "Urbanist", system-ui, sans-serif;
+  --font-text: "Urbanist Variable", "Urbanist", system-ui, sans-serif;
+  --font-mono:
+    "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+
+  /* project tokens */
+  --surface-2: #1a1918;
+  --border: #34312e;
+  --ok: #78ad77;
+  --danger: #e5484d;
+  --dot-red: #ff5f57;
+  --dot-yellow: #febc2e;
+  --dot-green: #28c840;
+
+  /* status: "available" badge pulse (Home) */
+  --ok-glow: #78ad7745;
+  --ok-clear: #78ad7700;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --p-bg: #f2f2f2;
+    --p-surface: #e6e6e6;
+    --p-ink: #1b1818;
+    --p-muted: #555453;
+    --p-accent: #80674d;
+    --p-accent-ink: #f2f2f2;
+    --p-action: #80674d;
+    --p-action-ink: #f2f2f2;
+    --p-inv-bg: #1b1818;
+    --p-inv-surface: #272424;
+    --p-inv-ink: #f2f2f2;
+    --p-inv-muted: #989797;
+    --p-inv-accent: #80674d;
+    --p-inv-accent-ink: #f2f2f2;
+    --p-inv-action: #80674d;
+    --p-inv-action-ink: #f2f2f2;
+
+    --surface-2: #dcdcdc;
+    --border: #cbc6bd;
+    --ok: #3f7a3e;
+    --danger: #c8363b;
+  }
+}

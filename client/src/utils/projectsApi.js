@@ -1,5 +1,5 @@
 // Client for the paginated public listing (`GET /api/projects`).
-export const PROJECTS_PAGE_SIZE = 10;
+export const PROJECTS_PAGE_SIZE = 6;
 const MAX_PAGE_SIZE = 100;
 
 export async function fetchProjectsPage(

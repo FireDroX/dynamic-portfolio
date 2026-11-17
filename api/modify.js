@@ -4,6 +4,8 @@ const { getPool } = require("../utils/functions");
 const { parseProjectUpload } = require("../services/projectUpload");
 const { replaceProjectArchive } = require("../services/projectArchive");
 const { parseContributors } = require("../utils/contributors");
+const { parseStack } = require("../utils/stack");
+const { parseProjectType } = require("../utils/projectType");
 const { parsePublished } = require("../utils/publication");
 
 const router = express.Router();
@@ -27,11 +29,25 @@ router.post("/", auth, async (req, res) => {
         ? undefined
         : parseContributors(fields.contributors);
 
+    // Same for the stack: absent keeps it, an empty list clears it.
+    const stack =
+      fields.stack === undefined ? undefined : parseStack(fields.stack);
+
+    // Same for the type: absent keeps it, an empty value clears it.
+    const type =
+      fields.type === undefined ? undefined : parseProjectType(fields.type);
+
     if (!originalFileName || !name || !descriptionFr || !descriptionEn) {
       return res.status(400).json({ error: "Champs manquants." });
     }
     if (contributors === null) {
       return res.status(400).json({ error: "Contributeurs invalides." });
+    }
+    if (type === null) {
+      return res.status(400).json({ error: "Type invalide." });
+    }
+    if (stack === null) {
+      return res.status(400).json({ error: "Stack invalide." });
     }
     // Optional too: absent keeps the current visibility.
     const published = parsePublished(fields.published);
@@ -58,6 +74,8 @@ router.post("/", auth, async (req, res) => {
     const updates = { name, descriptionFr, descriptionEn };
     if (image) updates.image = image;
     if (contributors) updates.contributors = JSON.stringify(contributors);
+    if (stack) updates.stack = JSON.stringify(stack);
+    if (type !== undefined) updates.type = type || null;
     if (published !== undefined) updates.published = published;
 
     const columns = Object.keys(updates);
