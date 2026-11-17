@@ -127,7 +127,7 @@ function roundedRect(ctx, x, y, width, height, radius) {
   ctx.closePath();
 }
 
-function drawBackground(ctx) {
+function paintBackground(ctx) {
   ctx.fillStyle = COLORS.bg;
   ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
@@ -145,6 +145,18 @@ function drawBackground(ctx) {
       ctx.fill();
     }
   }
+}
+
+// The dotted background (~2,300 arcs) never changes: paint it once and copy
+// it into each image, since rendering runs on the server's only thread.
+let backgroundCanvas = null;
+
+function drawBackground(ctx) {
+  if (!backgroundCanvas) {
+    backgroundCanvas = createCanvas(WIDTH, HEIGHT);
+    paintBackground(backgroundCanvas.getContext("2d"));
+  }
+  ctx.drawImage(backgroundCanvas, 0, 0);
 }
 
 function drawEyebrow(ctx, label, x, y) {
@@ -273,7 +285,20 @@ function drawTerminal(ctx, projects = []) {
   ctx.fillRect(x + 49, y + 358, 8, 18);
 }
 
+// The portfolio image only depends on the project list: keep the last PNG
+// and render again only when that list changes.
+let lastPortfolioOg = { key: null, png: null };
+
 function renderPortfolioOg(projects = []) {
+  const key = JSON.stringify(projects);
+  if (lastPortfolioOg.key === key) return lastPortfolioOg.png;
+
+  const png = paintPortfolioOg(projects);
+  lastPortfolioOg = { key, png };
+  return png;
+}
+
+function paintPortfolioOg(projects) {
   const canvas = createCanvas(WIDTH, HEIGHT);
   const ctx = canvas.getContext("2d");
 

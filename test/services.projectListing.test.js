@@ -45,7 +45,22 @@ describe("buildProjectFilters", () => {
     });
     expect(where).toContain("YEAR(createdAt) = ?");
     expect(params[0]).toBe(2024);
-    expect(params.slice(1)).toEqual(Array(4).fill("%100\\%\\_ok%"));
+    expect(params.slice(1)).toEqual(Array(5).fill("%100\\%\\_ok%"));
+  });
+
+  it("searches the technology stack", () => {
+    const { where, params } = buildProjectFilters({ year: null, search: "React" });
+    expect(where).toContain("stack LIKE ?");
+    expect(params).toEqual(Array(5).fill("%React%"));
+  });
+
+  it("searches the type through its displayed labels", () => {
+    const { where, params } = buildProjectFilters({ year: null, search: "jeu" });
+    expect(where).toContain("type IN (?)");
+    expect(params.at(-1)).toBe("game");
+
+    const web = buildProjectFilters({ year: null, search: "web" });
+    expect(web.params.at(-1)).toBe("webapp");
   });
 });
 

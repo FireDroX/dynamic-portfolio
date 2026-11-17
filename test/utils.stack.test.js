@@ -1,10 +1,29 @@
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
 import {
   MAX_STACK,
   MAX_TECH_LENGTH,
+  TECH_PATTERN,
   parseStack,
   readStoredStack,
 } from "../utils/stack.js";
+
+// The panel validates the stack with a copy of these rules
+// (client/src/utils/techStack.js): keep both sides in sync.
+describe("client mirror", () => {
+  const client = readFileSync(
+    new URL("../client/src/utils/techStack.js", import.meta.url),
+    "utf8",
+  );
+
+  it("uses the same limits and pattern as the server", () => {
+    expect(client).toContain(`export const MAX_STACK = ${MAX_STACK};`);
+    expect(client).toContain(`export const MAX_TECH_LENGTH = ${MAX_TECH_LENGTH};`);
+    expect(client).toContain(
+      `const TECH_PATTERN = /${TECH_PATTERN.source}/${TECH_PATTERN.flags};`,
+    );
+  });
+});
 
 describe("parseStack", () => {
   it("parses arrays and JSON strings", () => {
@@ -33,16 +52,22 @@ describe("parseStack", () => {
     expect(parseStack(["React", "react", "REACT"])).toEqual(["React"]);
   });
 
-  it("drops invalid, non-string and too long entries", () => {
-    expect(
-      parseStack(["<b>", "", 3, null, "x".repeat(MAX_TECH_LENGTH + 1), "Vue"]),
-    ).toEqual(["Vue"]);
+  it("rejects the whole list when one entry is invalid", () => {
+    for (const bad of ["<b>", "", 3, null, "x".repeat(MAX_TECH_LENGTH + 1)]) {
+      expect(parseStack([bad, "Vue"])).toBeNull();
+    }
     expect(parseStack(["x".repeat(MAX_TECH_LENGTH)])).toHaveLength(1);
   });
 
-  it("caps the list", () => {
-    const many = Array.from({ length: 30 }, (_, i) => `Tech${i}`);
-    expect(parseStack(many)).toHaveLength(MAX_STACK);
+  it("rejects more than MAX_STACK technologies instead of truncating", () => {
+    const tech = (count) => Array.from({ length: count }, (_, i) => `Tech${i}`);
+    expect(parseStack(tech(MAX_STACK))).toHaveLength(MAX_STACK);
+    expect(parseStack(tech(MAX_STACK + 1))).toBeNull();
+  });
+
+  it("counts the limit after deduplication", () => {
+    const list = [...Array.from({ length: MAX_STACK }, (_, i) => `T${i}`), "t0"];
+    expect(parseStack(list)).toHaveLength(MAX_STACK);
   });
 });
 
@@ -52,5 +77,11 @@ describe("readStoredStack", () => {
     expect(readStoredStack("garbage")).toEqual([]);
     expect(readStoredStack('["React"]')).toEqual(["React"]);
     expect(readStoredStack(["React"])).toEqual(["React"]);
+  });
+
+  it("drops bad entries and caps the list without failing", () => {
+    expect(readStoredStack(["<b>", "Vue", "vue"])).toEqual(["Vue"]);
+    const many = Array.from({ length: 30 }, (_, i) => `Tech${i}`);
+    expect(readStoredStack(many)).toHaveLength(MAX_STACK);
   });
 });

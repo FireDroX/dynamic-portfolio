@@ -4,20 +4,9 @@ import { useTranslation } from "react-i18next";
 import { fetchAllProjects } from "../utils/projectsApi";
 import { FiTerminal } from "react-icons/fi";
 import AppFrame from "./ui/AppFrame";
+import formatProjectDate from "../utils/formatProjectDate";
 import "./styles/HomeProjectTerminal.css";
 
-const formatProjectDate = (value, locale, unknownDate) => {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return unknownDate;
-
-  return new Intl.DateTimeFormat(locale, {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  })
-    .format(date)
-    .replace(".", "");
-};
 
 // The listing shows the latest projects only, so the terminal never needs a scrollbar;
 // `run` still completes and opens any published project.
@@ -161,11 +150,8 @@ const HomeProjectTerminal = () => {
                 <span>adrien</span>
                 <span>4.0K</span>
                 <time dateTime={project.createdAt}>
-                  {formatProjectDate(
-                    project.createdAt,
-                    i18n.resolvedLanguage === "en" ? "en-GB" : "fr-FR",
-                    t("home.terminalUnknownDate"),
-                  )}
+                  {formatProjectDate(project.createdAt, i18n.resolvedLanguage) ??
+                    t("home.terminalUnknownDate")}
                 </time>
                 <strong>{project.fileName}/</strong>
               </Link>

@@ -3,6 +3,22 @@ const { parseImageDataUrl } = require("../utils/images");
 
 const MAX_FILE_SIZE = 100 * 1024 * 1024;
 
+// Text fields read by /api/panel/add and /api/panel/modify. Anything else is
+// ignored, and the busboy limit keeps a margin so adding a field here never
+// makes every upload fail with "too many fields".
+const PROJECT_FIELDS = Object.freeze([
+  "originalFileName",
+  "name",
+  "descriptionFr",
+  "descriptionEn",
+  "contributors",
+  "stack",
+  "type",
+  "published",
+]);
+const FIELD_MARGIN = 4;
+const MAX_FIELDS = PROJECT_FIELDS.length + FIELD_MARGIN;
+
 class ProjectUploadError extends Error {
   constructor(message) {
     super(message);
@@ -21,7 +37,7 @@ function parseProjectUpload(req) {
         limits: {
           fileSize: MAX_FILE_SIZE,
           files: 2,
-          fields: 8,
+          fields: MAX_FIELDS,
           fieldSize: 64 * 1024,
         },
       });
@@ -36,7 +52,7 @@ function parseProjectUpload(req) {
     let uploadError = null;
 
     parser.on("field", (name, value) => {
-      fields[name] = value;
+      if (PROJECT_FIELDS.includes(name)) fields[name] = value;
     });
 
     parser.on("file", (name, file, info) => {
@@ -108,5 +124,7 @@ function parseProjectUpload(req) {
 }
 
 module.exports = {
+  MAX_FIELDS,
+  PROJECT_FIELDS,
   parseProjectUpload,
 };

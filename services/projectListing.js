@@ -1,4 +1,5 @@
 // Public, paginated listing of published projects (`GET /api/projects`).
+const { findMatchingTypes } = require("../utils/projectType");
 
 const DEFAULT_PAGE_SIZE = 10;
 const MAX_PAGE_SIZE = 100;
@@ -46,10 +47,24 @@ function buildProjectFilters({ year, search }) {
   }
   if (search) {
     const pattern = `%${escapeLike(search)}%`;
-    conditions.push(
-      "(name LIKE ? OR fileName LIKE ? OR descriptionFr LIKE ? OR descriptionEn LIKE ?)",
-    );
-    params.push(pattern, pattern, pattern, pattern);
+    // `stack` holds a JSON array of names: a LIKE on it matches a technology.
+    const matches = [
+      "name LIKE ?",
+      "fileName LIKE ?",
+      "descriptionFr LIKE ?",
+      "descriptionEn LIKE ?",
+      "stack LIKE ?",
+    ];
+    params.push(pattern, pattern, pattern, pattern, pattern);
+
+    // The type is stored as an id: match it through its displayed labels.
+    const types = findMatchingTypes(search);
+    if (types.length) {
+      matches.push(`type IN (${types.map(() => "?").join(", ")})`);
+      params.push(...types);
+    }
+
+    conditions.push(`(${matches.join(" OR ")})`);
   }
 
   return { where: conditions.join(" AND "), params };

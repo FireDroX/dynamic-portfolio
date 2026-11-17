@@ -22,8 +22,8 @@
   --p-inv-action: #0e0e0e;
   --p-inv-action-ink: #e7e5e5;
 
-  --font-display: "Urbanist", system-ui, sans-serif;
-  --font-text: "Urbanist", system-ui, sans-serif;
+  --font-display: "Urbanist Variable", "Urbanist", system-ui, sans-serif;
+  --font-text: "Urbanist Variable", "Urbanist", system-ui, sans-serif;
   --font-mono:
     "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --display-weight: 500;
