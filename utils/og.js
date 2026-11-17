@@ -349,7 +349,7 @@ function paintPortfolioOg(projects) {
   ctx.font = mono(400, 15);
   ctx.fillText("React · Node.js · PHP · C · Docker", 70, 588);
   ctx.textAlign = "right";
-  ctx.fillText("portfolio.addrien.fr", WIDTH - 70, 588);
+  ctx.fillText("addrien.fr", WIDTH - 70, 588);
   ctx.textAlign = "left";
 
   return canvas.toBuffer("image/png");
@@ -452,7 +452,7 @@ async function renderProjectOg(project, imageBuffer) {
   ctx.font = mono(400, 16);
   const urlText = truncateLine(
     ctx,
-    `portfolio.addrien.fr/projects/${slug}`,
+    `addrien.fr/projects/${slug}`,
     580,
   );
   const urlY = Math.min(descBottom + 24, 480);
