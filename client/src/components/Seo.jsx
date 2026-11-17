@@ -57,7 +57,6 @@ const Seo = ({
         jobTitle: t("seo.jobTitle"),
         sameAs: [
           "https://addrien.fr",
-          "https://portfolio.addrien.fr",
           "https://github.com/FireDroX",
           "https://www.linkedin.com/in/adrien-pourlier/",
         ],

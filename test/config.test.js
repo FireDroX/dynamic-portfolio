@@ -16,9 +16,15 @@ describe("getSiteUrl", () => {
   });
 
   it("returns https for an allowed non-local hostname", () => {
-    const req = makeReq({ host: "portfolio.addrien.fr" }, "http");
+    const req = makeReq({ host: "addrien.fr" }, "http");
 
-    expect(getSiteUrl(req)).toBe("https://portfolio.addrien.fr");
+    expect(getSiteUrl(req)).toBe("https://addrien.fr");
+  });
+
+  it("no longer recognizes the old portfolio.addrien.fr host", () => {
+    const req = makeReq({ host: "portfolio.addrien.fr" });
+
+    expect(getSiteUrl(req)).toBe(SITE_URL);
   });
 
   it("keeps http and the port for localhost", () => {
