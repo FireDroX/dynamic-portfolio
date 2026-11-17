@@ -30,7 +30,7 @@ for (const name of ["PANEL_PASSWORD", "SESSION_SECRET"]) {
 }
 
 const routes = require("./api");
-const { getSiteUrl, getCanonicalRedirectUrl } = require("./config");
+const { getSiteUrl } = require("./config");
 const { globalLimiter } = require("./middleware/rateLimit");
 
 const sessionStore = new MySQLStore(
@@ -46,12 +46,6 @@ const sessionStore = new MySQLStore(
 if (isProduction) {
   app.set("trust proxy", 1);
 }
-
-app.use((req, res, next) => {
-  const redirectUrl = getCanonicalRedirectUrl(req);
-  if (redirectUrl) return res.redirect(301, redirectUrl);
-  next();
-});
 
 // Before the session, so a blocked request never reaches MySQL.
 app.use(globalLimiter);

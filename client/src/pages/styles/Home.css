@@ -73,6 +73,52 @@
   margin-top: var(--s-5);
 }
 
+/* the hero is one screen tall: on a short desktop or laptop screen
+   (1366x768, 1536x864 with the browser bars) the name and role also follow
+   the screen height, so the facts docked at the foot stay in view */
+@media (min-width: 640px) {
+  .home-hero__name {
+    font-size: clamp(64px, min(11vw + 20px, 19svh), 176px);
+  }
+
+  .home-hero__role {
+    font-size: min(var(--ly-h1-quiet), max(28px, 6svh));
+  }
+}
+
+@media (min-width: 640px) and (max-height: 820px) {
+  .home-online {
+    margin-bottom: var(--s-3);
+  }
+
+  .home-hero h1 {
+    gap: var(--s-2);
+  }
+
+  .home-hero .hero__lead {
+    margin-top: var(--s-3);
+  }
+
+  .home-hero .btn-row {
+    margin-top: var(--s-4);
+  }
+
+  .home-hero .hero__facts {
+    margin-top: var(--s-5);
+    padding-top: var(--s-4);
+  }
+}
+
+/* below that (a zoomed-in window), the hero grows instead of letting the
+   facts run over the next section */
+@media (min-width: 640px) and (max-height: 640px) {
+  main > section.home-hero {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+}
+
 /* the facts stay on a phone: the first screen must carry date and rhythm */
 @media (max-width: 639px) {
   .home-hero__fx {

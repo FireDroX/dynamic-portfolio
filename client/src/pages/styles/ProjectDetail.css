@@ -79,7 +79,16 @@
   letter-spacing: 0.08em;
 }
 
-/* the thumbnail is shown at its own size, never enlarged */
+/* the kit locks a section to one screen from 1280px wide: a long description
+   would still run onto the footer, so this one grows with its content */
+.project-page > section#about {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* the thumbnail is shown at its own size, never enlarged, and a tall one is
+   scaled down to stay inside the screen instead of running onto the footer */
 .project-about__thumb {
   display: grid;
   place-items: center;
@@ -92,5 +101,8 @@
   width: auto;
   max-width: 100%;
   height: auto;
+  max-height: min(480px, 55vh);
+  max-height: min(480px, 55svh);
+  object-fit: contain;
   border-radius: var(--r-sm);
 }

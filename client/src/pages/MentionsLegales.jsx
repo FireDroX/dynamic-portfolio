@@ -80,7 +80,7 @@ const MentionsLegales = () => {
               </div>
               <div>
                 <dt>{t("legal.edition.sites")}</dt>
-                <dd>addrien.fr · portfolio.addrien.fr</dd>
+                <dd>addrien.fr</dd>
               </div>
             </dl>
           </article>
