@@ -18,7 +18,10 @@ export function registerAchievementUnlocks() {
       unlockedAchievements.push(achievementName);
       writeJson(STORAGE_KEYS.unlocked, unlockedAchievements);
       window.dispatchEvent(new CustomEvent("portfolio:update"));
-      showAchievementPopup(achievement);
+      showAchievementPopup(achievement, {
+        count: unlockedAchievements.length,
+        total: achievements.length,
+      });
     });
   });
 }

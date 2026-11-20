@@ -197,7 +197,8 @@
     "achievement": "Achievement",
     "hint": "Hint",
     "unknown": "Unknown secret",
-    "popupLabel": "🥚 Easter egg found!",
+    "popupLabel": "Easter egg found!",
+    "popupNumber": "No. {{count}}/{{total}}",
     "cheaterAlert": "You cheater!\nAll your progress has been deleted.",
     "items": {
       "hidden-page": {
