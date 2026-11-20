@@ -79,79 +79,189 @@
 
 /* ------------------------------------------------ toast (utils/achievements/popup.js) */
 
+/* Small on purpose: 264px wide and a few lines tall, in the bottom-right corner
+   on every screen. Sized in px, not rem: the root is 80% on desktop and 100% on
+   phones (base.css), which would make the toast bigger on the smaller screen. */
 #achievement-popup-container {
   position: fixed;
-  right: max(1rem, env(safe-area-inset-right));
-  bottom: max(1rem, env(safe-area-inset-bottom));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  width: min(22rem, calc(100vw - 2rem));
+  gap: 20px;
+  width: min(264px, calc(100vw - 24px));
   pointer-events: none;
 }
 
+@media (min-width: 48rem) {
+  #achievement-popup-container {
+    right: max(20px, env(safe-area-inset-right));
+    bottom: max(20px, env(safe-area-inset-bottom));
+  }
+}
+
+/* 0s: the locked card rises; 0.7s: it flips; 1.2s: the emoji sticker lands */
 #achievement-popup-container .achievement-popup {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+  perspective: 800px;
+  opacity: 0;
+  animation: achievement-toast 5s ease-out forwards;
+}
+
+.achievement-popup__flip {
+  display: grid;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+  animation: achievement-flip 0.6s cubic-bezier(0.5, 0, 0.2, 1.25) 0.7s both;
+}
+
+.achievement-popup__face {
+  grid-area: 1 / 1;
+  position: relative;
   box-sizing: border-box;
-  padding: 0.875rem 1rem;
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--p-accent);
   border-radius: var(--r-md);
   background: var(--p-surface);
   color: var(--p-ink);
-  opacity: 0;
-  animation: achievement-toast 4s ease-out forwards;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.achievement-popup__face--front {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px dashed var(--border);
 }
 
 .achievement-popup__icon {
   display: grid;
   place-items: center;
   flex: none;
-  width: 3rem;
-  height: 3rem;
+  width: 40px;
+  height: 40px;
+  border: 1px dashed var(--border);
   border-radius: var(--r-md);
   background: var(--surface-2);
-  font-size: 1.5rem;
+  font-size: 20px;
   line-height: 1;
 }
 
-.achievement-popup__body {
+/* same silhouette as a locked trophy */
+.achievement-popup__silhouette {
+  filter: grayscale(1) brightness(0) invert(1);
+  opacity: 0.3;
+}
+
+@media (prefers-color-scheme: light) {
+  .achievement-popup__silhouette {
+    filter: grayscale(1) brightness(0);
+    opacity: 0.55;
+  }
+}
+
+.achievement-popup__locked {
   display: grid;
-  gap: 0.125rem;
-  min-width: 0;
+  flex: 1;
+  gap: 6px;
+}
+
+.achievement-popup__bar {
+  display: block;
+  width: 70%;
+  height: 9px;
+  border-radius: 3px;
+  background: var(--border);
+}
+
+.achievement-popup__bar--short {
+  width: 45%;
+  opacity: 0.6;
+}
+
+.achievement-popup__face--back {
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px 8px 52px;
+  border: 1px solid var(--p-accent);
+  box-shadow: 0 12px 32px -12px var(--popup-shadow);
+  transform: rotateY(180deg);
+}
+
+/* die-cut look: four hard drop-shadows draw the white edge around the glyph */
+.achievement-popup__sticker {
+  position: absolute;
+  top: -10px;
+  left: -6px;
+  font-size: 40px;
+  line-height: 1;
+  transform: rotate(-12deg);
+  filter: drop-shadow(2px 0 0 var(--sticker-paper))
+    drop-shadow(-2px 0 0 var(--sticker-paper))
+    drop-shadow(0 2px 0 var(--sticker-paper))
+    drop-shadow(0 -2px 0 var(--sticker-paper))
+    drop-shadow(0 4px 5px var(--popup-shadow));
+  animation: achievement-sticker 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) 1.2s both;
 }
 
 .achievement-popup__label {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--p-accent);
+  color: var(--p-muted);
+}
+
+.achievement-popup__label--ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--p-ink);
+}
+
+.achievement-popup__label--ok::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ok);
 }
 
 .achievement-popup__name {
-  font-size: 1.0625rem;
+  font-size: 15px;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.25;
 }
 
 .achievement-popup__desc {
-  font-size: 0.875rem;
+  font-size: 13px;
   line-height: 1.35;
+  color: var(--p-muted);
+  overflow-wrap: anywhere;
+}
+
+.achievement-popup__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 5px;
+  padding-top: 5px;
+  border-top: 1px dashed var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
   color: var(--p-muted);
 }
 
 @keyframes achievement-toast {
   0% {
     opacity: 0;
-    transform: translate3d(0, 1rem, 0);
+    transform: translate3d(0, 16px, 0);
   }
 
-  7.5%,
-  90% {
+  6%,
+  92% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
@@ -159,6 +269,19 @@
   100% {
     opacity: 0;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes achievement-flip {
+  from {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes achievement-sticker {
+  from {
+    opacity: 0;
+    transform: scale(2.2) rotate(-45deg);
   }
 }
 
@@ -176,13 +299,20 @@
 
 /* The kit (system.css) collapses every animation to .001ms under reduced motion;
    with `forwards` the toast would jump straight to its hidden last frame.
-   Keep it on screen for its 4s life, without the slide. The id raises the
-   specificity above the kit's `:not([data-m-loop], ...)` rule. */
+   Keep it on screen for its 5s life, without the slide. The flip and the sticker
+   are dropped (their delays would survive the kit's rule), so the card shows
+   unlocked from the start. The id raises the specificity above the kit's
+   `:not([data-m-loop], ...)` rule. */
 @media (prefers-reduced-motion: reduce) {
   #achievement-popup-container .achievement-popup {
     transform: none;
     animation-name: achievement-toast-still;
-    animation-duration: 4s !important;
+    animation-duration: 5s !important;
     animation-timing-function: linear;
+  }
+
+  #achievement-popup-container .achievement-popup__flip,
+  #achievement-popup-container .achievement-popup__sticker {
+    animation: none;
   }
 }
