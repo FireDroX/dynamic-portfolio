@@ -197,7 +197,8 @@
     "achievement": "Achievement",
     "hint": "Indice",
     "unknown": "Secret inconnu",
-    "popupLabel": "🥚 Easter Egg trouvé !",
+    "popupLabel": "Easter egg trouvé !",
+    "popupNumber": "N° {{count}}/{{total}}",
     "cheaterAlert": "Tricheur !\nToute ta progression a été supprimée.",
     "items": {
       "hidden-page": {

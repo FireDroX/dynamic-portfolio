@@ -42,6 +42,11 @@
   /* status: "available" badge pulse (Home) */
   --ok-glow: #78ad7745;
   --ok-clear: #78ad7700;
+
+  /* achievement toast: drop shadow, and the white edge of the emoji sticker
+     (same in both themes, sticker paper stays white) */
+  --popup-shadow: #0000008c;
+  --sticker-paper: #f3f1ee;
 }
 
 @media (prefers-color-scheme: light) {
@@ -67,5 +72,6 @@
     --border: #cbc6bd;
     --ok: #3f7a3e;
     --danger: #c8363b;
+    --popup-shadow: #28201440;
   }
 }
