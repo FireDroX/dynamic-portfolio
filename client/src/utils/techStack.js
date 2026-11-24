@@ -12,6 +12,7 @@ import {
   SiNodedotjs,
   SiPhp,
   SiPostgresql,
+  SiProxmox,
   SiReact,
   SiTailwindcss,
   SiTypescript,
@@ -72,6 +73,12 @@ export const TECH_CATALOG = [
   { name: "Git", Icon: SiGit, color: "#F05032" },
   { name: "GitHub", Icon: SiGithub },
   { name: "Cloudflare", Icon: SiCloudflare, color: "#F38020" },
+  {
+    name: "Proxmox",
+    Icon: SiProxmox,
+    color: "#E57000",
+    aliases: ["proxmox ve"],
+  },
   { name: "WebStorm", Icon: SiWebstorm, color: "#07C3F2" },
 ];
 

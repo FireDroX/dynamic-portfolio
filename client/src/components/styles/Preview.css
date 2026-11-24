@@ -10,21 +10,9 @@
   max-width: none;
 }
 
-.preview__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
+/* The pills themselves come from TechPill.css (.tech-stack / .tech-pill). */
+.preview > .preview__stack {
   margin-top: var(--s-4);
-  padding: 0;
-  list-style: none;
-}
-
-.preview__stack li {
-  padding: 2px var(--s-3);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--muted);
-  font-size: var(--t-small);
 }
 
 .preview__badge {

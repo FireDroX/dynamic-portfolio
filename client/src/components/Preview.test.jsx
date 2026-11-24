@@ -40,6 +40,15 @@ describe("Preview", () => {
     expect(screen.getByText("preview.playable")).toBeTruthy();
   });
 
+  it("shows a logo next to each technology of the catalog", () => {
+    const { container } = renderPreview();
+    const pills = container.querySelectorAll(".preview__stack .tech-pill");
+    expect(pills).toHaveLength(2);
+    pills.forEach((pill) =>
+      expect(pill.querySelector("svg.tech-pill__icon")).toBeTruthy(),
+    );
+  });
+
   it("has no caption under the thumbnail", () => {
     const { container } = renderPreview();
     expect(container.querySelector("figcaption")).toBeNull();

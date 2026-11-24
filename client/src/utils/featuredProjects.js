@@ -14,11 +14,11 @@ const featuredProjects = [
     image: "preview1",
   },
   {
-    name: "Monsters Energy",
-    descriptionKey: "featured.monstersEnergy",
-    stack: ["HTML", "CSS", "PHP", "Bootstrap"],
-    fileName: "monster_energy",
-    image: "preview2",
+    name: "Homelab",
+    descriptionKey: "featured.homelab",
+    stack: ["Proxmox", "Cloudflare", "Docker"],
+    fileName: "homelab",
+    image: "homelab",
   },
 ];
 
