@@ -2,23 +2,23 @@ const featuredProjects = [
   {
     name: "NestWiki",
     descriptionKey: "featured.nestwiki",
-    stack: ["NestJS", "React", "TypeScript", "MySQL"],
+    stack: ["NestJS", "React", "TypeScript"],
     fileName: "nestwiki",
     image: "preview4",
   },
   {
     name: "PokeFlip V2",
     descriptionKey: "featured.pokeflip",
-    stack: ["React", "Express", "Socket.io", "Docker"],
+    stack: ["React", "Express", "Socket.io"],
     fileName: "pokeflip_v2",
     image: "preview1",
   },
   {
-    name: "Monsters Energy",
-    descriptionKey: "featured.monstersEnergy",
-    stack: ["HTML", "CSS", "PHP", "Bootstrap"],
-    fileName: "monster_energy",
-    image: "preview2",
+    name: "Homelab",
+    descriptionKey: "featured.homelab",
+    stack: ["Proxmox", "Cloudflare", "Docker"],
+    fileName: "homelab",
+    image: "homelab",
   },
 ];
 

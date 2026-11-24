@@ -1,12 +1,13 @@
 import "./styles/Preview.css";
 import { useTranslation } from "react-i18next";
 import Card from "./ui/Card";
+import { TechStack } from "./TechPill";
 
 import preview1 from "../assets/preview1.webp";
-import preview2 from "../assets/preview2.webp";
 import preview4 from "../assets/preview4.webp";
+import homelab from "../assets/homelab.webp";
 
-const thumbnails = { preview1, preview2, preview4 };
+const thumbnails = { preview1, preview4, homelab };
 
 const Preview = ({ project }) => {
   const { t } = useTranslation();
@@ -32,11 +33,11 @@ const Preview = ({ project }) => {
       )}
       <h3>{project.name}</h3>
       <p>{t(project.descriptionKey)}</p>
-      <ul className="preview__stack" aria-label={t("preview.technologies")}>
-        {project.stack.map((tech) => (
-          <li key={tech}>{tech}</li>
-        ))}
-      </ul>
+      <TechStack
+        stack={project.stack}
+        label={t("preview.technologies")}
+        className="preview__stack"
+      />
       <span className="preview__badge">
         <i aria-hidden="true" />
         {t("preview.playable")}

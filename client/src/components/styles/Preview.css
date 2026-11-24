@@ -10,21 +10,12 @@
   max-width: none;
 }
 
-.preview__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-  margin-top: var(--s-4);
-  padding: 0;
-  list-style: none;
-}
-
-.preview__stack li {
-  padding: 2px var(--s-3);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--muted);
-  font-size: var(--t-small);
+/* The pills themselves come from TechPill.css (.tech-stack / .tech-pill).
+   The auto margin pins the stack and the badge to the bottom of the card,
+   so the stacks line up across the row whatever the description length. */
+.preview > .preview__stack {
+  margin-top: auto;
+  padding-top: var(--s-4);
 }
 
 .preview__badge {
@@ -32,7 +23,6 @@
   align-items: center;
   gap: var(--s-2);
   width: fit-content;
-  margin-top: auto;
   padding-top: var(--s-5);
   color: var(--ink);
   font-size: var(--t-small);
