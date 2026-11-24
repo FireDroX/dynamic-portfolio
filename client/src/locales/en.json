@@ -177,7 +177,7 @@
   "featured": {
     "nestwiki": "A self-hosted collaborative wiki with a page tree, full version history, granular permissions and an MCP server for AI assistants.",
     "pokeflip": "A new version of PokeFlip with a responsive interface, real-time multiplayer and customizable profiles.",
-    "monstersEnergy": "A Monster Energy community platform featuring a catalogue, rankings, messaging and achievements."
+    "homelab": "An interactive map of the Proxmox homelab behind this site: follow a request from Cloudflare down to its container, through an encrypted tunnel, with no port open at home."
   },
   "achievements": {
     "eyebrow": "achievements",

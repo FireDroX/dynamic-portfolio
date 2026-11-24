@@ -47,6 +47,15 @@ describe("About stack names", () => {
   });
 });
 
+describe("Homelab stack names", () => {
+  it.each(["Proxmox", "proxmox ve", "Cloudflare", "Docker"])(
+    "%s has a bundled icon",
+    (name) => {
+      expect(typeof getTechIcon(name).Icon).toBe("function");
+    },
+  );
+});
+
 describe("catalog", () => {
   it("suggests every canonical name once", () => {
     expect(TECH_SUGGESTIONS).toHaveLength(TECH_CATALOG.length);

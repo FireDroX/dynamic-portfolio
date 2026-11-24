@@ -177,7 +177,7 @@
   "featured": {
     "nestwiki": "Un wiki collaboratif auto-hébergé avec arborescence de pages, historique des versions, permissions fines et un serveur MCP pour les assistants IA.",
     "pokeflip": "Une nouvelle version de PokeFlip avec une interface responsive, du multijoueur en temps réel et des profils personnalisables.",
-    "monstersEnergy": "Une plateforme communautaire autour de Monster Energy avec catalogue, classements, messagerie et achievements."
+    "homelab": "Le schéma interactif du homelab Proxmox qui héberge ce site : suis une requête de Cloudflare jusqu'au conteneur, par un tunnel chiffré, sans aucun port ouvert à la maison."
   },
   "achievements": {
     "eyebrow": "achievements",
