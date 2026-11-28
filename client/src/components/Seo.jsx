@@ -52,7 +52,9 @@ const Seo = ({
       schema.textContent = JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Person",
-        name: "Adrien",
+        name: "Adrien Pourlier",
+        givenName: "Adrien",
+        familyName: "Pourlier",
         url: window.location.origin,
         jobTitle: t("seo.jobTitle"),
         sameAs: [
