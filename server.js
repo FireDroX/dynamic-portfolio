@@ -103,9 +103,9 @@ app.use(async (req, res) => {
           "Découvrez les projets web d’Adrien : applications React, expériences interactives et créations full-stack testables en ligne.",
       },
       "/about": {
-        title: "À propos d’Adrien | Développeur web",
+        title: "Adrien, développeur React & Node.js · Alternance 2027",
         description:
-          "Découvrez le parcours, la façon de travailler et la boîte à outils d’Adrien, étudiant à l’ESGI Paris et développeur web.",
+          "Étudiant à l’ESGI Paris, stage fullstack en NestJS et React. Mon parcours, mes outils et l’alternance que je cherche à Paris dès septembre 2027.",
       },
       "/mentions-legales": {
         title: "Mentions légales | Portfolio Adrien",
