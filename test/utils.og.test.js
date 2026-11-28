@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
-const { createCanvas } = require("canvas");
+const { createCanvas, loadImage } = require("canvas");
 const {
   renderPortfolioOg,
   renderProjectOg,
@@ -117,5 +117,43 @@ describe("renderProjectOg", () => {
 
   it("falls back to the placeholder on a corrupt image", async () => {
     expectPng(await renderProjectOg(project, Buffer.from("nope")));
+  });
+
+  // 80x50 solid red WebP (lossy), the format node-canvas cannot decode.
+  const RED_LANDSCAPE_WEBP = Buffer.from(
+    "UklGRlQAAABXRUJQVlA4IEgAAAAwBACdASpQADIAPjEYi0QiIaEQ1AAgAwS0gDsAfgAADuXDhw4cOHDhrgAA/va+B//8/M7txf1W///Z5f2eX9nl/9jyAAAAAAA=",
+    "base64",
+  );
+
+  const pixelAt = async (png, x, y) => {
+    const image = await loadImage(png);
+    const ctx = createCanvas(image.width, image.height).getContext("2d");
+    ctx.drawImage(image, 0, 0);
+    return Array.from(ctx.getImageData(x, y, 1, 1).data);
+  };
+
+  const isRed = ([r, g, b]) => r > 180 && g < 70 && b < 70;
+
+  it("draws a WebP image in a landscape panel", async () => {
+    const out = await renderProjectOg(
+      { ...project, name: "Demo" },
+      RED_LANDSCAPE_WEBP,
+    );
+    expectPng(out);
+    // Centre of the panel, and a point left of the old 300px portrait
+    // panel (x >= 820) that only a landscape panel reaches.
+    expect(isRed(await pixelAt(out, 900, 319))).toBe(true);
+    expect(isRed(await pixelAt(out, 720, 240))).toBe(true);
+  });
+
+  it("falls back to the placeholder on a corrupt WebP", async () => {
+    const corrupt = Buffer.concat([
+      Buffer.from("RIFF"),
+      Buffer.alloc(4),
+      Buffer.from("WEBPVP8 garbage"),
+    ]);
+    const out = await renderProjectOg({ ...project, name: "Demo" }, corrupt);
+    expectPng(out);
+    expect(isRed(await pixelAt(out, 900, 319))).toBe(false);
   });
 });

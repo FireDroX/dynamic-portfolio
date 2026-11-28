@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 const { createCanvas, loadImage, registerFont } = require("canvas");
 const { getProjectDescription } = require("./projectDescription");
@@ -355,10 +356,81 @@ function paintPortfolioOg(projects) {
   return canvas.toBuffer("image/png");
 }
 
-const PANEL = { x: 820, y: 104, width: 300, height: 430 };
+// The image panel is anchored to the right edge and vertically centred; its
+// shape follows the image's aspect ratio (portrait, square or landscape)
+// within these bounds, so a thumbnail is shown whole instead of shrunk into a
+// fixed portrait frame.
+const PANEL_RIGHT = 1120;
+const PANEL_CENTER_Y = 319;
+const PANEL_MIN = { width: 240, height: 200 };
+const PANEL_MAX = { width: 440, height: 430 };
+const PLACEHOLDER_PANEL = { width: 300, height: 430 };
+const TEXT_X = 70;
+const TEXT_GAP = 70;
 
-function drawImagePanel(ctx, image) {
-  const { x, y, width, height } = PANEL;
+function getPanel(image) {
+  let { width, height } = PLACEHOLDER_PANEL;
+  if (image?.width > 0 && image?.height > 0) {
+    const scale = Math.min(
+      PANEL_MAX.width / image.width,
+      PANEL_MAX.height / image.height,
+    );
+    width = clamp(Math.round(image.width * scale), PANEL_MIN.width, PANEL_MAX.width);
+    height = clamp(Math.round(image.height * scale), PANEL_MIN.height, PANEL_MAX.height);
+  }
+  return {
+    x: PANEL_RIGHT - width,
+    y: Math.round(PANEL_CENTER_Y - height / 2),
+    width,
+    height,
+  };
+}
+
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+const isWebp = (buffer) =>
+  buffer.length >= 12 &&
+  buffer.subarray(0, 4).toString("ascii") === "RIFF" &&
+  buffer.subarray(8, 12).toString("ascii") === "WEBP";
+
+// node-canvas cannot decode WebP, so WebP thumbnails go through the WASM
+// decoder of @jsquash/webp (ESM only, loaded once on first use).
+let webpDecoder = null;
+function getWebpDecoder() {
+  webpDecoder ??= (async () => {
+    const { init, default: decode } = await import("@jsquash/webp/decode.js");
+    const wasmPath = path.join(
+      path.dirname(require.resolve("@jsquash/webp/package.json")),
+      "codec",
+      "dec",
+      "webp_dec.wasm",
+    );
+    await init(await WebAssembly.compile(await fs.promises.readFile(wasmPath)));
+    return decode;
+  })().catch((err) => {
+    webpDecoder = null;
+    throw err;
+  });
+  return webpDecoder;
+}
+
+async function loadProjectImage(buffer) {
+  if (!isWebp(buffer)) return loadImage(buffer);
+
+  const decode = await getWebpDecoder();
+  const { width, height, data } = await decode(buffer);
+  const canvas = createCanvas(width, height);
+  const ctx = canvas.getContext("2d");
+  const imageData = ctx.createImageData(width, height);
+  imageData.data.set(data);
+  ctx.putImageData(imageData, 0, 0);
+  return canvas;
+}
+
+function drawImagePanel(ctx, image, panel) {
+  const { x, y, width, height } = panel;
   ctx.save();
   roundedRect(ctx, x, y, width, height, RADIUS);
   ctx.clip();
@@ -376,8 +448,8 @@ function drawImagePanel(ctx, image) {
   ctx.stroke();
 }
 
-function drawPlaceholderPanel(ctx, name, slug) {
-  const { x, y, width, height } = PANEL;
+function drawPlaceholderPanel(ctx, name, slug, panel) {
+  const { x, y, width, height } = panel;
   roundedRect(ctx, x, y, width, height, RADIUS);
   ctx.fillStyle = COLORS.surface2;
   ctx.fill();
@@ -414,17 +486,20 @@ async function renderProjectOg(project, imageBuffer) {
   let image = null;
   if (imageBuffer) {
     try {
-      image = await loadImage(imageBuffer);
-    } catch {
+      image = await loadProjectImage(imageBuffer);
+    } catch (err) {
+      console.warn("OG project image could not be decoded:", err.message);
       image = null;
     }
   }
+
+  const panel = getPanel(image);
+  const maxWidth = Math.min(650, panel.x - TEXT_X - TEXT_GAP);
 
   drawBackground(ctx);
   drawBrand(ctx, "PROJET · ADRIEN PORTFOLIO");
   drawEyebrow(ctx, "Aperçu interactif", 70, 137);
 
-  const maxWidth = 650;
   let titleSize = 70;
   let titleLines;
   for (const size of [70, 58, 48]) {
@@ -444,7 +519,7 @@ async function renderProjectOg(project, imageBuffer) {
   const descLines = wrapText(
     ctx,
     description,
-    630,
+    maxWidth - 20,
     titleLines.length > 1 ? 3 : 4,
   );
   const descBottom = drawLines(ctx, descLines, 70, titleBottom + 5, 35);
@@ -453,15 +528,15 @@ async function renderProjectOg(project, imageBuffer) {
   const urlText = truncateLine(
     ctx,
     `addrien.fr/projects/${slug}`,
-    580,
+    Math.min(580, maxWidth - 70),
   );
   const urlY = Math.min(descBottom + 24, 480);
   drawPill(ctx, 70, urlY, ctx.measureText(urlText).width + 50, 48);
   ctx.fillStyle = COLORS.accent;
   ctx.fillText(urlText, 94, urlY + 29);
 
-  if (image) drawImagePanel(ctx, image);
-  else drawPlaceholderPanel(ctx, name, slug);
+  if (image) drawImagePanel(ctx, image, panel);
+  else drawPlaceholderPanel(ctx, name, slug, panel);
 
   return canvas.toBuffer("image/png");
 }
